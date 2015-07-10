@@ -1,0 +1,505 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		4DF94236657B40DD58D03286 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EB23EE8F0907A83F0AE0437 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		DB16251F1B5043B000EC0004 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB16251E1B5043B000EC0004 /* AppDelegate.swift */; };
+		DB1625211B5043B000EC0004 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB1625201B5043B000EC0004 /* ViewController.swift */; };
+		DB1625241B5043B000EC0004 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB1625221B5043B000EC0004 /* Main.storyboard */; };
+		DB1625261B5043B000EC0004 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB1625251B5043B000EC0004 /* Images.xcassets */; };
+		DB1625291B5043B000EC0004 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = DB1625271B5043B000EC0004 /* LaunchScreen.xib */; };
+		DB1625351B5043B000EC0004 /* PhotoZapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB1625341B5043B000EC0004 /* PhotoZapTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		DB16252F1B5043B000EC0004 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DB1625111B5043B000EC0004 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DB1625181B5043B000EC0004;
+			remoteInfo = PhotoZap;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		7EB23EE8F0907A83F0AE0437 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A800476FFE3279A54458090B /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		C28908C0763EB2D17CFE748D /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		DB1625191B5043B000EC0004 /* PhotoZap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoZap.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DB16251D1B5043B000EC0004 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DB16251E1B5043B000EC0004 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		DB1625201B5043B000EC0004 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		DB1625231B5043B000EC0004 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		DB1625251B5043B000EC0004 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		DB1625281B5043B000EC0004 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		DB16252E1B5043B000EC0004 /* PhotoZapTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PhotoZapTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DB1625331B5043B000EC0004 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DB1625341B5043B000EC0004 /* PhotoZapTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoZapTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		DB1625161B5043B000EC0004 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4DF94236657B40DD58D03286 /* Pods.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DB16252B1B5043B000EC0004 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A5F4747479943C56A5D7FD2A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7EB23EE8F0907A83F0AE0437 /* Pods.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A7178394B58A45FD03EFF516 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A800476FFE3279A54458090B /* Pods.debug.xcconfig */,
+				C28908C0763EB2D17CFE748D /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		DB1625101B5043B000EC0004 = {
+			isa = PBXGroup;
+			children = (
+				DB16251B1B5043B000EC0004 /* PhotoZap */,
+				DB1625311B5043B000EC0004 /* PhotoZapTests */,
+				DB16251A1B5043B000EC0004 /* Products */,
+				A7178394B58A45FD03EFF516 /* Pods */,
+				A5F4747479943C56A5D7FD2A /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		DB16251A1B5043B000EC0004 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DB1625191B5043B000EC0004 /* PhotoZap.app */,
+				DB16252E1B5043B000EC0004 /* PhotoZapTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DB16251B1B5043B000EC0004 /* PhotoZap */ = {
+			isa = PBXGroup;
+			children = (
+				DB16251E1B5043B000EC0004 /* AppDelegate.swift */,
+				DB1625201B5043B000EC0004 /* ViewController.swift */,
+				DB1625221B5043B000EC0004 /* Main.storyboard */,
+				DB1625251B5043B000EC0004 /* Images.xcassets */,
+				DB1625271B5043B000EC0004 /* LaunchScreen.xib */,
+				DB16251C1B5043B000EC0004 /* Supporting Files */,
+			);
+			path = PhotoZap;
+			sourceTree = "<group>";
+		};
+		DB16251C1B5043B000EC0004 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				DB16251D1B5043B000EC0004 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		DB1625311B5043B000EC0004 /* PhotoZapTests */ = {
+			isa = PBXGroup;
+			children = (
+				DB1625341B5043B000EC0004 /* PhotoZapTests.swift */,
+				DB1625321B5043B000EC0004 /* Supporting Files */,
+			);
+			path = PhotoZapTests;
+			sourceTree = "<group>";
+		};
+		DB1625321B5043B000EC0004 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				DB1625331B5043B000EC0004 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		DB1625181B5043B000EC0004 /* PhotoZap */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DB1625381B5043B000EC0004 /* Build configuration list for PBXNativeTarget "PhotoZap" */;
+			buildPhases = (
+				B84E74306096165CCF66390F /* Check Pods Manifest.lock */,
+				DB1625151B5043B000EC0004 /* Sources */,
+				DB1625161B5043B000EC0004 /* Frameworks */,
+				DB1625171B5043B000EC0004 /* Resources */,
+				18B5E821369D4ADBFC8D2EFC /* Embed Pods Frameworks */,
+				BC184D0DCA09CB8D6558351C /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PhotoZap;
+			productName = PhotoZap;
+			productReference = DB1625191B5043B000EC0004 /* PhotoZap.app */;
+			productType = "com.apple.product-type.application";
+		};
+		DB16252D1B5043B000EC0004 /* PhotoZapTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DB16253B1B5043B000EC0004 /* Build configuration list for PBXNativeTarget "PhotoZapTests" */;
+			buildPhases = (
+				DB16252A1B5043B000EC0004 /* Sources */,
+				DB16252B1B5043B000EC0004 /* Frameworks */,
+				DB16252C1B5043B000EC0004 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DB1625301B5043B000EC0004 /* PBXTargetDependency */,
+			);
+			name = PhotoZapTests;
+			productName = PhotoZapTests;
+			productReference = DB16252E1B5043B000EC0004 /* PhotoZapTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		DB1625111B5043B000EC0004 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0630;
+				ORGANIZATIONNAME = "Kimberly Zai";
+				TargetAttributes = {
+					DB1625181B5043B000EC0004 = {
+						CreatedOnToolsVersion = 6.3.2;
+					};
+					DB16252D1B5043B000EC0004 = {
+						CreatedOnToolsVersion = 6.3.2;
+						TestTargetID = DB1625181B5043B000EC0004;
+					};
+				};
+			};
+			buildConfigurationList = DB1625141B5043B000EC0004 /* Build configuration list for PBXProject "PhotoZap" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = DB1625101B5043B000EC0004;
+			productRefGroup = DB16251A1B5043B000EC0004 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				DB1625181B5043B000EC0004 /* PhotoZap */,
+				DB16252D1B5043B000EC0004 /* PhotoZapTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		DB1625171B5043B000EC0004 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DB1625241B5043B000EC0004 /* Main.storyboard in Resources */,
+				DB1625291B5043B000EC0004 /* LaunchScreen.xib in Resources */,
+				DB1625261B5043B000EC0004 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DB16252C1B5043B000EC0004 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		18B5E821369D4ADBFC8D2EFC /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B84E74306096165CCF66390F /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		BC184D0DCA09CB8D6558351C /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		DB1625151B5043B000EC0004 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DB1625211B5043B000EC0004 /* ViewController.swift in Sources */,
+				DB16251F1B5043B000EC0004 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DB16252A1B5043B000EC0004 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DB1625351B5043B000EC0004 /* PhotoZapTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		DB1625301B5043B000EC0004 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DB1625181B5043B000EC0004 /* PhotoZap */;
+			targetProxy = DB16252F1B5043B000EC0004 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		DB1625221B5043B000EC0004 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DB1625231B5043B000EC0004 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		DB1625271B5043B000EC0004 /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DB1625281B5043B000EC0004 /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		DB1625361B5043B000EC0004 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		DB1625371B5043B000EC0004 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		DB1625391B5043B000EC0004 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A800476FFE3279A54458090B /* Pods.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = PhotoZap/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		DB16253A1B5043B000EC0004 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C28908C0763EB2D17CFE748D /* Pods.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = PhotoZap/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		DB16253C1B5043B000EC0004 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = PhotoZapTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PhotoZap.app/PhotoZap";
+			};
+			name = Debug;
+		};
+		DB16253D1B5043B000EC0004 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = PhotoZapTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PhotoZap.app/PhotoZap";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		DB1625141B5043B000EC0004 /* Build configuration list for PBXProject "PhotoZap" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DB1625361B5043B000EC0004 /* Debug */,
+				DB1625371B5043B000EC0004 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DB1625381B5043B000EC0004 /* Build configuration list for PBXNativeTarget "PhotoZap" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DB1625391B5043B000EC0004 /* Debug */,
+				DB16253A1B5043B000EC0004 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DB16253B1B5043B000EC0004 /* Build configuration list for PBXNativeTarget "PhotoZapTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DB16253C1B5043B000EC0004 /* Debug */,
+				DB16253D1B5043B000EC0004 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = DB1625111B5043B000EC0004 /* Project object */;
+}
