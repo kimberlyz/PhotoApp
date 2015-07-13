@@ -7,15 +7,29 @@
 //
 
 import UIKit
+import Parse
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        // Set up Parse SDK
+        Parse.setApplicationId("nynNgfGlqdxWbUSTVOQWpssFFHumyGd3lOKfpOgU", clientKey: "coum5Edl90uh0ARRSbRRiDYd5g02noZkNk5JKxLs")
+        
+        // Done in the background
+        PFAnalytics.trackAppOpenedWithLaunchOptionsInBackground(launchOptions, block: nil)
+        
+        PFUser.logInWithUsername("test", password: "test")
+        
+        if let user = PFUser.currentUser() {
+            println("Log in successful")
+        } else {
+            println("No logged in user :(")
+        }
+        
         return true
     }
 

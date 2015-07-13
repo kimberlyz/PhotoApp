@@ -1,25 +1,113 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="kJg-8p-u7B">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="tne-QT-ifu">
+        <!--Camera-->
+        <scene sceneID="cFL-JF-7nl">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Qfk-28-HbZ" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
-                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                        <viewControllerLayoutGuide type="top" id="d8b-So-8sf"/>
+                        <viewControllerLayoutGuide type="bottom" id="n2m-pl-inx"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                    <view key="view" contentMode="scaleToFill" id="o9F-ci-BsS">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Camera" image="Camera" id="oZC-Jj-1hG"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dQN-QA-6ve" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="935" y="1002"/>
+        </scene>
+        <!--Friends-->
+        <scene sceneID="ThD-8y-nf0">
+            <objects>
+                <viewController id="cFk-TI-iTf" customClass="FriendListViewController" customModule="PhotoZap" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="qFu-82-Ext"/>
+                        <viewControllerLayoutGuide type="bottom" id="19a-uU-oIK"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="JMN-Ot-Rdy">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Friends" image="Friends" id="5hL-jx-WTp"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ohf-fY-tqA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="213" y="1746"/>
+        </scene>
+        <!--Notifications-->
+        <scene sceneID="ISn-95-3SU">
+            <objects>
+                <viewController id="wDP-Q2-zJQ" customClass="NotificationViewController" customModule="PhotoZap" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="YS7-fW-Irx"/>
+                        <viewControllerLayoutGuide type="bottom" id="vbU-ge-fed"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="MRS-Yz-kBt">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Notifications" image="Notifications" id="jZP-cm-pMw">
+                        <inset key="imageInsets" minX="10" minY="10" maxX="10" maxY="15"/>
+                    </tabBarItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WuQ-li-vVJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="933" y="1742"/>
+        </scene>
+        <!--Album-->
+        <scene sceneID="xIY-eX-EhH">
+            <objects>
+                <viewController id="StI-Ir-0gR" customClass="AlbumViewController" customModule="PhotoZap" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="uKJ-HA-JGv"/>
+                        <viewControllerLayoutGuide type="bottom" id="lwg-Bt-7fe"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="NDO-8t-qaJ">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Album" image="Album" id="OUe-e8-is0"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wq6-uh-y66" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="935" y="340"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="O3A-iC-x94">
+            <objects>
+                <tabBarController id="kJg-8p-u7B" sceneMemberID="viewController">
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="IfT-mD-63Z">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="StI-Ir-0gR" kind="relationship" relationship="viewControllers" id="2MX-95-JSW"/>
+                        <segue destination="Qfk-28-HbZ" kind="relationship" relationship="viewControllers" id="u96-LA-Drl"/>
+                        <segue destination="wDP-Q2-zJQ" kind="relationship" relationship="viewControllers" id="miI-Hz-B5u"/>
+                        <segue destination="cFk-TI-iTf" kind="relationship" relationship="viewControllers" id="dXa-ZJ-wdS"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MP5-us-lxk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="115" y="672"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Album" width="26" height="17"/>
+        <image name="Camera" width="40" height="30"/>
+        <image name="Friends" width="42" height="42"/>
+        <image name="Notifications" width="75" height="85"/>
+    </resources>
 </document>

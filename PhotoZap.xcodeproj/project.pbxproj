@@ -9,11 +9,14 @@
 /* Begin PBXBuildFile section */
 		4DF94236657B40DD58D03286 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EB23EE8F0907A83F0AE0437 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		DB16251F1B5043B000EC0004 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB16251E1B5043B000EC0004 /* AppDelegate.swift */; };
-		DB1625211B5043B000EC0004 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB1625201B5043B000EC0004 /* ViewController.swift */; };
 		DB1625241B5043B000EC0004 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB1625221B5043B000EC0004 /* Main.storyboard */; };
 		DB1625261B5043B000EC0004 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB1625251B5043B000EC0004 /* Images.xcassets */; };
 		DB1625291B5043B000EC0004 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = DB1625271B5043B000EC0004 /* LaunchScreen.xib */; };
 		DB1625351B5043B000EC0004 /* PhotoZapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB1625341B5043B000EC0004 /* PhotoZapTests.swift */; };
+		DB6AC4631B54304D0019C46E /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6AC4621B54304D0019C46E /* CameraViewController.swift */; };
+		DB6AC4651B54306B0019C46E /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6AC4641B54306B0019C46E /* NotificationViewController.swift */; };
+		DB6AC4671B54307B0019C46E /* AlbumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6AC4661B54307B0019C46E /* AlbumViewController.swift */; };
+		DB6AC4691B5431430019C46E /* FriendListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6AC4681B5431430019C46E /* FriendListViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,13 +36,16 @@
 		DB1625191B5043B000EC0004 /* PhotoZap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoZap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB16251D1B5043B000EC0004 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DB16251E1B5043B000EC0004 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		DB1625201B5043B000EC0004 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		DB1625231B5043B000EC0004 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		DB1625251B5043B000EC0004 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		DB1625281B5043B000EC0004 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		DB16252E1B5043B000EC0004 /* PhotoZapTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PhotoZapTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB1625331B5043B000EC0004 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DB1625341B5043B000EC0004 /* PhotoZapTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoZapTests.swift; sourceTree = "<group>"; };
+		DB6AC4621B54304D0019C46E /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
+		DB6AC4641B54306B0019C46E /* NotificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
+		DB6AC4661B54307B0019C46E /* AlbumViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumViewController.swift; sourceTree = "<group>"; };
+		DB6AC4681B5431430019C46E /* FriendListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendListViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,8 +107,8 @@
 		DB16251B1B5043B000EC0004 /* PhotoZap */ = {
 			isa = PBXGroup;
 			children = (
+				DB6AC45F1B542FA20019C46E /* ViewControllers */,
 				DB16251E1B5043B000EC0004 /* AppDelegate.swift */,
-				DB1625201B5043B000EC0004 /* ViewController.swift */,
 				DB1625221B5043B000EC0004 /* Main.storyboard */,
 				DB1625251B5043B000EC0004 /* Images.xcassets */,
 				DB1625271B5043B000EC0004 /* LaunchScreen.xib */,
@@ -134,6 +140,17 @@
 				DB1625331B5043B000EC0004 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		DB6AC45F1B542FA20019C46E /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				DB6AC4661B54307B0019C46E /* AlbumViewController.swift */,
+				DB6AC4621B54304D0019C46E /* CameraViewController.swift */,
+				DB6AC4641B54306B0019C46E /* NotificationViewController.swift */,
+				DB6AC4681B5431430019C46E /* FriendListViewController.swift */,
+			);
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -287,8 +304,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DB1625211B5043B000EC0004 /* ViewController.swift in Sources */,
+				DB6AC4691B5431430019C46E /* FriendListViewController.swift in Sources */,
+				DB6AC4671B54307B0019C46E /* AlbumViewController.swift in Sources */,
 				DB16251F1B5043B000EC0004 /* AppDelegate.swift in Sources */,
+				DB6AC4651B54306B0019C46E /* NotificationViewController.swift in Sources */,
+				DB6AC4631B54304D0019C46E /* CameraViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
