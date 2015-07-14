@@ -2,12 +2,13 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="kJg-8p-u7B">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Camera-->
         <scene sceneID="cFL-JF-7nl">
             <objects>
-                <viewController id="Qfk-28-HbZ" sceneMemberID="viewController">
+                <viewController id="Qfk-28-HbZ" customClass="CameraViewController" customModule="PhotoZap" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="d8b-So-8sf"/>
                         <viewControllerLayoutGuide type="bottom" id="n2m-pl-inx"/>
@@ -34,7 +35,26 @@
                     <view key="view" contentMode="scaleToFill" id="JMN-Ot-Rdy">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ml8-Z9-xui">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                <items>
+                                    <navigationItem title="Friends" id="AED-bN-Bw7">
+                                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="Ifc-tt-tYT"/>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Chz-VX-GWR">
+                                <rect key="frame" x="0.0" y="44" width="600" height="600"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Ml8-Z9-xui" firstAttribute="leading" secondItem="JMN-Ot-Rdy" secondAttribute="leadingMargin" constant="-16" id="1kk-Me-v5h"/>
+                            <constraint firstItem="Ml8-Z9-xui" firstAttribute="top" secondItem="JMN-Ot-Rdy" secondAttribute="topMargin" id="2ea-Yw-FeC"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Ml8-Z9-xui" secondAttribute="trailing" constant="-16" id="YIf-lR-z28"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Friends" image="Friends" id="5hL-jx-WTp"/>
                 </viewController>

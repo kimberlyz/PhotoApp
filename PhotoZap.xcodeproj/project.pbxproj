@@ -17,6 +17,8 @@
 		DB6AC4651B54306B0019C46E /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6AC4641B54306B0019C46E /* NotificationViewController.swift */; };
 		DB6AC4671B54307B0019C46E /* AlbumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6AC4661B54307B0019C46E /* AlbumViewController.swift */; };
 		DB6AC4691B5431430019C46E /* FriendListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6AC4681B5431430019C46E /* FriendListViewController.swift */; };
+		DB6AC46E1B5467A90019C46E /* PhotoTakingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6AC46D1B5467A90019C46E /* PhotoTakingHelper.swift */; };
+		DB6AC4731B547B8B0019C46E /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6AC4721B547B8B0019C46E /* Photo.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +48,8 @@
 		DB6AC4641B54306B0019C46E /* NotificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
 		DB6AC4661B54307B0019C46E /* AlbumViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumViewController.swift; sourceTree = "<group>"; };
 		DB6AC4681B5431430019C46E /* FriendListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendListViewController.swift; sourceTree = "<group>"; };
+		DB6AC46D1B5467A90019C46E /* PhotoTakingHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoTakingHelper.swift; sourceTree = "<group>"; };
+		DB6AC4721B547B8B0019C46E /* Photo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +111,8 @@
 		DB16251B1B5043B000EC0004 /* PhotoZap */ = {
 			isa = PBXGroup;
 			children = (
+				DB6AC4711B547B6A0019C46E /* Models */,
+				DB6AC46C1B54677E0019C46E /* PhotoTaking */,
 				DB6AC45F1B542FA20019C46E /* ViewControllers */,
 				DB16251E1B5043B000EC0004 /* AppDelegate.swift */,
 				DB1625221B5043B000EC0004 /* Main.storyboard */,
@@ -151,6 +157,22 @@
 				DB6AC4681B5431430019C46E /* FriendListViewController.swift */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		DB6AC46C1B54677E0019C46E /* PhotoTaking */ = {
+			isa = PBXGroup;
+			children = (
+				DB6AC46D1B5467A90019C46E /* PhotoTakingHelper.swift */,
+			);
+			path = PhotoTaking;
+			sourceTree = "<group>";
+		};
+		DB6AC4711B547B6A0019C46E /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				DB6AC4721B547B8B0019C46E /* Photo.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -304,6 +326,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DB6AC4731B547B8B0019C46E /* Photo.swift in Sources */,
+				DB6AC46E1B5467A90019C46E /* PhotoTakingHelper.swift in Sources */,
 				DB6AC4691B5431430019C46E /* FriendListViewController.swift in Sources */,
 				DB6AC4671B54307B0019C46E /* AlbumViewController.swift in Sources */,
 				DB16251F1B5043B000EC0004 /* AppDelegate.swift in Sources */,
