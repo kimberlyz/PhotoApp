@@ -103,7 +103,6 @@ class AddFriendViewController: UIViewController {
             }
             */
         }
-        //Error here?
     }
     
 
@@ -174,17 +173,5 @@ extension AddFriendViewController: AddFriendTableViewCellDelegate {
         }
     }
 }
-/*
-public func removeObjectFromArray<T : Equatable>(object: T, inout array: [T])
-{
-    var index = find(array, object)
-    array.removeAtIndex(index!)
-}
 
-public func removeObject(object: T) {
-    removeObjectFromArray(object, &self.content)
-    currentRange.endIndex = self.currentRange.endIndex - 1
-    target?.tableView.reloadData()
-}
-*/
 

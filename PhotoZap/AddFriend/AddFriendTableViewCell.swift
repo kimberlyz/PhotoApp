@@ -51,7 +51,7 @@ class AddFriendTableViewCell: UITableViewCell {
         }
     }
     
-    
+    /*
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -63,5 +63,6 @@ class AddFriendTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+*/
 
 }

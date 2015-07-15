@@ -17,17 +17,28 @@ class AlbumViewController: UIViewController {
         super.viewDidLoad()
 
         self.tabBarController?.delegate = self
+        
     }
     
-    func takePhoto() {
+    func takePhoto(sourceViewController: UIViewController) {
         // instantiate photo taking class, provide callback for when photo is selected
-        photoTakingHelper = PhotoTakingHelper(viewController: self.tabBarController!) { (image: UIImage?) in
+        photoTakingHelper = PhotoTakingHelper(viewController: self.tabBarController!, sourceViewController: sourceViewController) { (image: UIImage?) in
             println("Received a callback")
 
             let photo = Photo()
             photo.image = image
             photo.uploadPhoto()
             
+        }
+    }
+    
+    func viewAlbum() {
+        photoTakingHelper = PhotoTakingHelper(viewController: self.tabBarController!, sourceViewController: self) { (image: UIImage?) in
+            println("Received a callback. ALBUM")
+            
+            let photo = Photo()
+            photo.image = image
+            photo.uploadPhoto()
         }
     }
     
@@ -40,7 +51,10 @@ extension AlbumViewController: UITabBarControllerDelegate {
 
     func tabBarController(tabBarController: UITabBarController, shouldSelectViewController viewController: UIViewController) -> Bool {
         if (viewController is CameraViewController) {
-            takePhoto()
+            takePhoto(viewController)
+            return false
+        } else if (viewController is AlbumViewController) {
+            viewAlbum()
             return false
         } else {
             return true

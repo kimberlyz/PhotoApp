@@ -14,16 +14,25 @@ class PhotoTakingHelper: NSObject {
     
     /** View controller on which AlertViewController and UIImagePickerController are presented */
     weak var viewController: UIViewController!
+    weak var sourceViewController: UIViewController!
     var callback: PhotoTakingHelperCallback
     var imagePickerController: UIImagePickerController?
     
-    init(viewController: UIViewController, callback: PhotoTakingHelperCallback) {
+    init(viewController: UIViewController, sourceViewController: UIViewController, callback: PhotoTakingHelperCallback) {
         self.viewController = viewController
+        self.sourceViewController = sourceViewController
         self.callback = callback
         
         super.init()
         
-        showPhotoSourceSelection()
+        if (sourceViewController is CameraViewController) {
+            showPhotoSourceSelection()
+        } else if (sourceViewController is AlbumViewController) {
+            self.showImagePickerController(.PhotoLibrary)
+        } else {
+            println("Source View Controller is not Camera or Album")
+        }
+
     }
     
     func showPhotoSourceSelection() {
@@ -40,6 +49,8 @@ class PhotoTakingHelper: NSObject {
     func showImagePickerController(sourceType: UIImagePickerControllerSourceType) {
         imagePickerController = UIImagePickerController()
         imagePickerController!.sourceType = sourceType
+        imagePickerController!.delegate = self
+        
         self.viewController.presentViewController(imagePickerController!, animated: true, completion: nil)
     }
 
@@ -61,3 +72,4 @@ extension PhotoTakingHelper: UIImagePickerControllerDelegate, UINavigationContro
     }
     
 }
+
