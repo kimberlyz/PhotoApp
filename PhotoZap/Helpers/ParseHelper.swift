@@ -17,7 +17,7 @@ class ParseHelper {
     static let ParseFriendToUser = "toUser"
     
     // User Relation
-    static let ParseUserUsername      = "username"
+    static let ParseUserUsername = "username"
     
     /** 
         Fetches all users that the provided user is friends with.
@@ -27,10 +27,12 @@ class ParseHelper {
     */
     
     static func getFriendUsersForUser(user: PFUser, completionBlock: PFArrayResultBlock) {
-        let query = PFQuery(className: "Follow")
+        let query = PFQuery(className: "Friends")
         
         query.whereKey("fromUser", equalTo:user)
         query.findObjectsInBackgroundWithBlock(completionBlock)
+        
+        // Error?
     }
     
     /** 
@@ -48,6 +50,7 @@ class ParseHelper {
         friendObject.saveInBackgroundWithBlock(nil)
     }
     
+    
     /** 
         Deletes a friend relationship between two users
             
@@ -63,6 +66,7 @@ class ParseHelper {
         
         query.findObjectsInBackgroundWithBlock {
             (results: [AnyObject]?, error: NSError?) -> Void in
+            
             let results = results as? [PFObject] ?? []
             
             for friend in results {

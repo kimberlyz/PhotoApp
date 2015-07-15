@@ -15,6 +15,8 @@
 		DB1625351B5043B000EC0004 /* PhotoZapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB1625341B5043B000EC0004 /* PhotoZapTests.swift */; };
 		DB6168D51B5576D800305D2E /* FriendListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6168D41B5576D800305D2E /* FriendListTableViewCell.swift */; };
 		DB6168D81B55879400305D2E /* ParseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6168D71B55879400305D2E /* ParseHelper.swift */; };
+		DB6168DA1B55B88E00305D2E /* AddFriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6168D91B55B88E00305D2E /* AddFriendViewController.swift */; };
+		DB6168DD1B55BF6D00305D2E /* AddFriendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6168DC1B55BF6D00305D2E /* AddFriendTableViewCell.swift */; };
 		DB6AC4631B54304D0019C46E /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6AC4621B54304D0019C46E /* CameraViewController.swift */; };
 		DB6AC4651B54306B0019C46E /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6AC4641B54306B0019C46E /* NotificationViewController.swift */; };
 		DB6AC4671B54307B0019C46E /* AlbumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6AC4661B54307B0019C46E /* AlbumViewController.swift */; };
@@ -48,6 +50,8 @@
 		DB1625341B5043B000EC0004 /* PhotoZapTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoZapTests.swift; sourceTree = "<group>"; };
 		DB6168D41B5576D800305D2E /* FriendListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendListTableViewCell.swift; sourceTree = "<group>"; };
 		DB6168D71B55879400305D2E /* ParseHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseHelper.swift; sourceTree = "<group>"; };
+		DB6168D91B55B88E00305D2E /* AddFriendViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFriendViewController.swift; sourceTree = "<group>"; };
+		DB6168DC1B55BF6D00305D2E /* AddFriendTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFriendTableViewCell.swift; sourceTree = "<group>"; };
 		DB6AC4621B54304D0019C46E /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		DB6AC4641B54306B0019C46E /* NotificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
 		DB6AC4661B54307B0019C46E /* AlbumViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumViewController.swift; sourceTree = "<group>"; };
@@ -115,6 +119,7 @@
 		DB16251B1B5043B000EC0004 /* PhotoZap */ = {
 			isa = PBXGroup;
 			children = (
+				DB6168DB1B55BF5A00305D2E /* AddFriend */,
 				DB6168D61B55877400305D2E /* Helpers */,
 				DB6168D31B55746F00305D2E /* FriendList */,
 				DB6AC4711B547B6A0019C46E /* Models */,
@@ -170,6 +175,14 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
+		DB6168DB1B55BF5A00305D2E /* AddFriend */ = {
+			isa = PBXGroup;
+			children = (
+				DB6168DC1B55BF6D00305D2E /* AddFriendTableViewCell.swift */,
+			);
+			path = AddFriend;
+			sourceTree = "<group>";
+		};
 		DB6AC45F1B542FA20019C46E /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -177,6 +190,7 @@
 				DB6AC4621B54304D0019C46E /* CameraViewController.swift */,
 				DB6AC4641B54306B0019C46E /* NotificationViewController.swift */,
 				DB6AC4681B5431430019C46E /* FriendListViewController.swift */,
+				DB6168D91B55B88E00305D2E /* AddFriendViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -350,6 +364,8 @@
 			files = (
 				DB6AC4731B547B8B0019C46E /* Photo.swift in Sources */,
 				DB6AC46E1B5467A90019C46E /* PhotoTakingHelper.swift in Sources */,
+				DB6168DD1B55BF6D00305D2E /* AddFriendTableViewCell.swift in Sources */,
+				DB6168DA1B55B88E00305D2E /* AddFriendViewController.swift in Sources */,
 				DB6AC4691B5431430019C46E /* FriendListViewController.swift in Sources */,
 				DB6AC4671B54307B0019C46E /* AlbumViewController.swift in Sources */,
 				DB16251F1B5043B000EC0004 /* AppDelegate.swift in Sources */,

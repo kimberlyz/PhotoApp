@@ -11,8 +11,9 @@ import Parse
 
 class FriendListTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var usernameLabel: UILabel!
 
+    /*
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -23,5 +24,5 @@ class FriendListTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
+ */
 }

@@ -57,7 +57,7 @@ extension FriendListViewController: UITableViewDataSource {
         
         return cell
     */
-        cell.nameLabel!.text = "Friend"
+        cell.usernameLabel!.text = "Friend"
         return cell
     }
 }
