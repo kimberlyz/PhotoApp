@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		4DF94236657B40DD58D03286 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EB23EE8F0907A83F0AE0437 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		DB0A32411B56F94A009D332C /* WiFiDirectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0A32401B56F94A009D332C /* WiFiDirectViewController.swift */; };
+		DB0A32441B581137009D332C /* ReceivedPhotoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0A32431B581137009D332C /* ReceivedPhotoTableViewCell.swift */; };
 		DB16251F1B5043B000EC0004 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB16251E1B5043B000EC0004 /* AppDelegate.swift */; };
 		DB1625241B5043B000EC0004 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB1625221B5043B000EC0004 /* Main.storyboard */; };
 		DB1625261B5043B000EC0004 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB1625251B5043B000EC0004 /* Images.xcassets */; };
@@ -41,6 +42,7 @@
 		A800476FFE3279A54458090B /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		C28908C0763EB2D17CFE748D /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		DB0A32401B56F94A009D332C /* WiFiDirectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WiFiDirectViewController.swift; sourceTree = "<group>"; };
+		DB0A32431B581137009D332C /* ReceivedPhotoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReceivedPhotoTableViewCell.swift; sourceTree = "<group>"; };
 		DB1625191B5043B000EC0004 /* PhotoZap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoZap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB16251D1B5043B000EC0004 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DB16251E1B5043B000EC0004 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -98,6 +100,14 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		DB0A32421B572DAE009D332C /* WiFiDirect */ = {
+			isa = PBXGroup;
+			children = (
+				DB0A32431B581137009D332C /* ReceivedPhotoTableViewCell.swift */,
+			);
+			path = WiFiDirect;
+			sourceTree = "<group>";
+		};
 		DB1625101B5043B000EC0004 = {
 			isa = PBXGroup;
 			children = (
@@ -121,6 +131,7 @@
 		DB16251B1B5043B000EC0004 /* PhotoZap */ = {
 			isa = PBXGroup;
 			children = (
+				DB0A32421B572DAE009D332C /* WiFiDirect */,
 				DB6168DB1B55BF5A00305D2E /* AddFriend */,
 				DB6168D61B55877400305D2E /* Helpers */,
 				DB6168D31B55746F00305D2E /* FriendList */,
@@ -374,6 +385,7 @@
 				DB6AC4671B54307B0019C46E /* AlbumViewController.swift in Sources */,
 				DB0A32411B56F94A009D332C /* WiFiDirectViewController.swift in Sources */,
 				DB16251F1B5043B000EC0004 /* AppDelegate.swift in Sources */,
+				DB0A32441B581137009D332C /* ReceivedPhotoTableViewCell.swift in Sources */,
 				DB6168D81B55879400305D2E /* ParseHelper.swift in Sources */,
 				DB6AC4651B54306B0019C46E /* NotificationViewController.swift in Sources */,
 				DB6AC4631B54304D0019C46E /* CameraViewController.swift in Sources */,
