@@ -9,7 +9,7 @@
 import UIKit
 import MultipeerConnectivity
 
-class WiFiDirectViewController: UIViewController,/* UICollectionViewDataSource, UICollectionViewDelegate, */UINavigationControllerDelegate, UIImagePickerControllerDelegate, MCSessionDelegate, MCBrowserViewControllerDelegate, ReceivedPhotoTableViewCellDelegate {
+class WiFiDirectViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, MCSessionDelegate, MCBrowserViewControllerDelegate, ReceivedPhotoTableViewCellDelegate {
 
   //  @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var tableView: UITableView!
@@ -18,6 +18,7 @@ class WiFiDirectViewController: UIViewController,/* UICollectionViewDataSource, 
     var mcSession: MCSession!
     var mcAdvertiserAssistant: MCAdvertiserAssistant!
     var friendPeerID : MCPeerID?
+    var mcBrowser : MCBrowserViewController?
     
     var images = [UIImage]()
     
@@ -31,32 +32,17 @@ class WiFiDirectViewController: UIViewController,/* UICollectionViewDataSource, 
         peerID = MCPeerID(displayName: UIDevice.currentDevice().name)
         mcSession = MCSession(peer: peerID, securityIdentity: nil, encryptionPreference: .Required)
         mcSession.delegate = self
+    
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    /*
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return images.count
-    }
-    
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("ImageView", forIndexPath: indexPath) as!UICollectionViewCell
-            * IMAGE VIEW STUFF HERE
-        
-        if let imageView = cell.viewWithTag(1000) as? UIImageView {
-            imageView.image = images[indexPath.item]
-        }
-        
-        return cell
-    }
-*/
     
     func importPicture() {
         let picker = UIImagePickerController()
-        picker.allowsEditing = true
+       // picker.allowsEditing = true
         picker.delegate = self
         presentViewController(picker, animated: true, completion: nil)
     }
@@ -74,8 +60,8 @@ class WiFiDirectViewController: UIViewController,/* UICollectionViewDataSource, 
         
         dismissViewControllerAnimated(true, completion: nil)
         
-        images.insert(newImage, atIndex: 0)
-        self.tableView.reloadData()
+    //    images.insert(newImage, atIndex: 0)
+    //    self.tableView.reloadData()
     //    collectionView.reloadData()
         
         
@@ -87,6 +73,7 @@ class WiFiDirectViewController: UIViewController,/* UICollectionViewDataSource, 
             // Send it to all peers, ensuring it gets delivered.
             var error: NSError?
             mcSession.sendData(imageData, toPeers: mcSession.connectedPeers, withMode: .Reliable, error: &error)
+            sendNotification()
             
             // Show an error message if there's a problem.
             if error != nil {
@@ -116,10 +103,23 @@ class WiFiDirectViewController: UIViewController,/* UICollectionViewDataSource, 
     }
     
     func joinSession(action: UIAlertAction!) {
-        let mcBrowser = MCBrowserViewController(serviceType: "hws-project25", session: mcSession)
-        mcBrowser.delegate = self
-        presentViewController(mcBrowser, animated: true, completion: nil)
+        mcBrowser = MCBrowserViewController(serviceType: "hws-project25", session: mcSession)
+        mcBrowser!.delegate = self
+        presentViewController(mcBrowser!, animated: true, completion: nil)
     }
+    
+    func sendNotification() {
+        
+        var localNotification:UILocalNotification = UILocalNotification()
+        localNotification.alertBody = "Photo successfully sent :)"
+        localNotification.fireDate = NSDate(timeIntervalSinceNow: 5)
+        localNotification.timeZone = NSTimeZone.defaultTimeZone()
+     //   localNotification.applicationIconBadgeNumber = UIApplication.sharedApplication().applicationIconBadgeNumber + 1
+        UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
+        
+        println("Notification officially sent!!!")
+    }
+
 }
 
 extension WiFiDirectViewController: MCSessionDelegate {
@@ -128,17 +128,32 @@ extension WiFiDirectViewController: MCSessionDelegate {
     Is someone connecting, are they now connected, or have they just disconnected?
     */
     func session(session: MCSession!, peer peerID: MCPeerID!, didChangeState state: MCSessionState) {
+        
         switch state {
         case MCSessionState.Connected:
             println("Connected: \(peerID.displayName)")
+            
+     //       if (mcBrowser!.isViewLoaded && mcBrowser!.view.window) {
+                let alertController = UIAlertController(title: "Connected", message: "", preferredStyle: UIAlertControllerStyle.Alert)
+                let dismissAction = UIAlertAction(title: "Ok", style: .Cancel, handler: nil)
+                alertController.addAction(dismissAction)
+                self.presentViewController(alertController, animated: true, completion: nil)
+       //     } 
             
         case MCSessionState.Connecting:
             println("Connecting: \(peerID.displayName)")
             
         case MCSessionState.NotConnected:
             println("Not Connected: \(peerID.displayName)")
+
+            let alertController = UIAlertController(title: "Lost connection", message: "", preferredStyle: UIAlertControllerStyle.Alert)
+            let dismissAction = UIAlertAction(title: "Dismiss", style: .Cancel, handler: nil)
+            alertController.addAction(dismissAction)
+            self.presentViewController(alertController, animated: true, completion: nil)
         }
+
     }
+    
     
     func session(session: MCSession!, didReceiveData data: NSData!, fromPeer peerID: MCPeerID!) {
         if let image = UIImage(data: data) {
@@ -146,9 +161,11 @@ extension WiFiDirectViewController: MCSessionDelegate {
                 self.friendPeerID = peerID
                 self.images.insert(image, atIndex: 0)
                 self.tableView.reloadData()
-                //  self.collectionView.reloadData()
+             //   println("Notifaction sent")
+              //  self.sendNotification()
                 //UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
             }
+           
         }
     }
     
@@ -189,24 +206,39 @@ extension WiFiDirectViewController: UITableViewDataSource {
         
         let cell = tableView.dequeueReusableCellWithIdentifier("ReceivedPhoto") as! ReceivedPhotoTableViewCell
         
-        // UMMM
         cell.receivedPhotoImageView.image = self.images[indexPath.row]
-        /*
+        
         if let friendPeerID = self.friendPeerID {
             cell.nameLabel.text = friendPeerID.displayName
-            println("Name label should display")
         }
-        */
+
         cell.delegate = self
         
         return cell
     }
+    
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if editingStyle == UITableViewCellEditingStyle.Delete {
+            self.images.removeAtIndex(indexPath.row)
+            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+        }
+    }
 }
+
 
 extension WiFiDirectViewController: ReceivedPhotoTableViewCellDelegate {
     func didSelectPhoto(cell: ReceivedPhotoTableViewCell) {
         UIImageWriteToSavedPhotosAlbum(self.images[0], nil, nil, nil)
         println("Image Saved")
+        
+        let alertController = UIAlertController(title: "Image Saved", message: "Cell Deleted", preferredStyle: UIAlertControllerStyle.Alert)
+        let dismissAction = UIAlertAction(title: "Ok", style: .Cancel, handler: nil)
+        alertController.addAction(dismissAction)
+        self.presentViewController(alertController, animated: true, completion: nil)
+        
+        let cellIndexPath = self.tableView.indexPathForCell(cell)
+        self.images.removeAtIndex(cellIndexPath!.row)
+        self.tableView.deleteRowsAtIndexPaths([cellIndexPath!], withRowAnimation: UITableViewRowAnimation.Automatic)
     }
 }
 

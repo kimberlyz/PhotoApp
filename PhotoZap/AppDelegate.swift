@@ -16,6 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
+        /*
         // Set up Parse SDK
         Parse.setApplicationId("nynNgfGlqdxWbUSTVOQWpssFFHumyGd3lOKfpOgU", clientKey: "coum5Edl90uh0ARRSbRRiDYd5g02noZkNk5JKxLs")
         
@@ -29,8 +30,51 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } else {
             println("No logged in user :(")
         }
+
+        */
+
+        let notificationType = UIUserNotificationType.Alert | UIUserNotificationType.Badge
+        let settings = UIUserNotificationSettings(forTypes: notificationType, categories: nil)
+        application.registerUserNotificationSettings(settings)
         
+       // application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: UIUserNotificationType.Alert | UIUserNotificationType.Badge, categories: nil))
+    
+        // Override point for customization after application launch.
         return true
+    }
+    
+
+    
+    func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification) {
+       // application.applicationIconBadgeNumber = 0 
+        /*
+        - (void)showAlarm:(NSString *)text {
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Alarm"
+            message:text delegate:nil
+            cancelButtonTitle:@"OK"
+            otherButtonTitles:nil];
+            [alertView show];
+        } */
+        println("WHattt?")
+
+        let alertView = UIAlertView(title:"", message: "Photo Successfully Sent :D", delegate: nil, cancelButtonTitle: "Ok")
+        alertView.show()
+        
+        /*
+        if (alertView) {
+            alertView.release()
+        } */
+        
+        /*
+        initWithTitle:@"MyAlertView"
+        message:notification.alertBody
+        delegate:self cancelButtonTitle:@"OK"
+        otherButtonTitles:nil];
+        [alertView show];
+        if (alertView) {
+            [alertView release];
+        } */
+       
     }
 
     func applicationWillResignActive(application: UIApplication) {
