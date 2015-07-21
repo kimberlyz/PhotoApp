@@ -98,6 +98,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view alpha="0.49999999999999961" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ocJ-Ms-HNw">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="20"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="mQm-8D-5xP"/>
+                                </constraints>
+                            </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="126" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="23i-VD-0Gi">
                                 <rect key="frame" x="0.0" y="64" width="600" height="487"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -174,8 +181,11 @@
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="23i-VD-0Gi" secondAttribute="trailing" id="5EK-Gf-gdQ"/>
                             <constraint firstItem="bxU-2B-Moc" firstAttribute="top" secondItem="23i-VD-0Gi" secondAttribute="bottom" id="ADt-He-geZ"/>
+                            <constraint firstAttribute="trailing" secondItem="ocJ-Ms-HNw" secondAttribute="trailing" id="CfZ-Ig-ed8"/>
+                            <constraint firstItem="ocJ-Ms-HNw" firstAttribute="top" secondItem="blk-y1-dg2" secondAttribute="topMargin" id="E3m-nU-7Ws"/>
                             <constraint firstItem="23i-VD-0Gi" firstAttribute="leading" secondItem="blk-y1-dg2" secondAttribute="leading" id="HIN-yi-r9b"/>
                             <constraint firstItem="23i-VD-0Gi" firstAttribute="top" secondItem="Wqf-tK-gh3" secondAttribute="bottom" id="I57-wS-2Po"/>
+                            <constraint firstItem="ocJ-Ms-HNw" firstAttribute="leading" secondItem="blk-y1-dg2" secondAttribute="leading" id="m0w-G5-ZMo"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="BL6-CT-NtH">
@@ -184,12 +194,13 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="camera" id="lNq-Pp-u7i"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="notificationView" destination="ocJ-Ms-HNw" id="EZx-md-fv7"/>
                         <outlet property="tableView" destination="23i-VD-0Gi" id="Fl6-kW-Web"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wmA-jM-NEJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1985" y="744"/>
+            <point key="canvasLocation" x="2025" y="699"/>
         </scene>
         <!--Friends-->
         <scene sceneID="Cmz-0e-PZg">

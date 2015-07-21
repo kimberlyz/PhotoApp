@@ -47,34 +47,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification) {
        // application.applicationIconBadgeNumber = 0 
-        /*
-        - (void)showAlarm:(NSString *)text {
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Alarm"
-            message:text delegate:nil
-            cancelButtonTitle:@"OK"
-            otherButtonTitles:nil];
-            [alertView show];
-        } */
-        println("WHattt?")
+        
+        if application.applicationState == UIApplicationState.Active {
+            let alertView = UIAlertView(title:"", message: "Photo Successfully Sent :D", delegate: nil, cancelButtonTitle: "Ok")
+            alertView.show()
+            
+            println("Whattt?")
+            
+            
 
-        let alertView = UIAlertView(title:"", message: "Photo Successfully Sent :D", delegate: nil, cancelButtonTitle: "Ok")
-        alertView.show()
-        
-        /*
-        if (alertView) {
-            alertView.release()
-        } */
-        
-        /*
-        initWithTitle:@"MyAlertView"
-        message:notification.alertBody
-        delegate:self cancelButtonTitle:@"OK"
-        otherButtonTitles:nil];
-        [alertView show];
-        if (alertView) {
-            [alertView release];
-        } */
-       
+        }
     }
 
     func applicationWillResignActive(application: UIApplication) {
