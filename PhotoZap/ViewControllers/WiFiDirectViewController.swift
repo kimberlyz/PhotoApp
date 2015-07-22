@@ -14,7 +14,6 @@ class WiFiDirectViewController: UIViewController, UINavigationControllerDelegate
   //  @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var tableView: UITableView!
     
-    @IBOutlet weak var notificationView: UIView!
     var peerID: MCPeerID!
     var mcSession: MCSession!
     var mcAdvertiserAssistant: MCAdvertiserAssistant!
@@ -33,32 +32,7 @@ class WiFiDirectViewController: UIViewController, UINavigationControllerDelegate
         peerID = MCPeerID(displayName: UIDevice.currentDevice().name)
         mcSession = MCSession(peer: peerID, securityIdentity: nil, encryptionPreference: .Required)
         mcSession.delegate = self
-        /*
-        let UIView()
-        
-        UIView *darkOverlay = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height)];
-        darkOverlay.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.5];
-        [self.view insertSubview:darkOverlay behindSubview:self.view]; */
-  /*
-        let popupNotification = UIView(frame: CGRectMake(0, 0, 50, 50))
-        popupNotification.backgroundColor = UIColor(white: 0.0, alpha: 0.5)
-        // popupNotification.backgroundColor = UIColor.blackColor()
-        // popupNotification.alpha = 0.5
-        
-        let currentWindow = UIApplication.sharedApplication().keyWindow
-        currentWindow?.addSubview(popupNotification)
-     //   currentWindow?.makeKeyAndVisible()
-        */
     
-    }
-    
-    override func viewDidAppear(animated: Bool) {
-        let currentWindow = UIApplication.sharedApplication().keyWindow
-        currentWindow?.addSubview(notificationView)
-    }
-    
-    override func viewDidDisappear(animated: Bool) {
-        notificationView.removeFromSuperview()
     }
 
     override func didReceiveMemoryWarning() {
@@ -135,7 +109,7 @@ class WiFiDirectViewController: UIViewController, UINavigationControllerDelegate
     }
     
     func sendNotification() {
-        /*
+        
         var localNotification:UILocalNotification = UILocalNotification()
         localNotification.alertBody = "Photo successfully sent :)"
         localNotification.fireDate = NSDate(timeIntervalSinceNow: 5)
@@ -143,26 +117,7 @@ class WiFiDirectViewController: UIViewController, UINavigationControllerDelegate
      //   localNotification.applicationIconBadgeNumber = UIApplication.sharedApplication().applicationIconBadgeNumber + 1
         UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
         
-        println("Notification officially sent!!!") */
-        
-      /*
-        UIView.animateWithDuration(1.0) {
-            // changes made in here will be animated
-            self.square.transform = CGAffineTransformMakeRotation(CGFloat(M_PI))
-            self.square.alpha = 0.2
-            self.square.backgroundColor = UIColor.blueColor()
-            self.square.transform = CGAffineTransformMakeScale(3, 3)
-        }
-        
-        self.square.transform = CGAffineTransformMakeRotation(CGFloat(M_PI))
-        self.square.alpha = 0.2
-        self.square.backgroundColor = UIColor.blueColor()
-        self.square.transform = CGAffineTransformMakeScale(3, 3)
-        
-        self.widthConstraint.constant = 400
-        // changes made in here will be animated
-        self.view.layoutIfNeeded() */
-
+        println("Notification officially sent!!!")
     }
 
 }
@@ -178,26 +133,12 @@ extension WiFiDirectViewController: MCSessionDelegate {
         case MCSessionState.Connected:
             println("Connected: \(peerID.displayName)")
             
-            //if mcBrowser == nil {
+     //       if (mcBrowser!.isViewLoaded && mcBrowser!.view.window) {
                 let alertController = UIAlertController(title: "Connected", message: "", preferredStyle: UIAlertControllerStyle.Alert)
                 let dismissAction = UIAlertAction(title: "Ok", style: .Cancel, handler: nil)
                 alertController.addAction(dismissAction)
                 self.presentViewController(alertController, animated: true, completion: nil)
-              //  println( "Nil Browser. Shows up anyways")
-            //} 
-            /*
-            if mcBrowser != nil {
-                if !mcBrowser!.isViewLoaded() && mcBrowser!.view.window == nil {
-                    let alertController = UIAlertController(title: "Connected", message: "", preferredStyle: UIAlertControllerStyle.Alert)
-                    let dismissAction = UIAlertAction(title: "Ok", style: .Cancel, handler: nil)
-                    alertController.addAction(dismissAction)
-                    self.presentViewController(alertController, animated: true, completion: nil)
-                    println(" Browser exists. But only alert when it's not showing")
-                }
-            } */
-
-            
-            
+       //     } 
             
         case MCSessionState.Connecting:
             println("Connecting: \(peerID.displayName)")
