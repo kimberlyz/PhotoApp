@@ -98,18 +98,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view alpha="0.75" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ocJ-Ms-HNw">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="50"/>
+                            <view alpha="0.49999999999999961" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ocJ-Ms-HNw">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="20"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="axX-t5-TDc"/>
-                                    <constraint firstAttribute="height" id="mQm-8D-5xP"/>
+                                    <constraint firstAttribute="height" constant="20" id="mQm-8D-5xP"/>
                                 </constraints>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="mQm-8D-5xP"/>
-                                    </mask>
-                                </variation>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="126" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="23i-VD-0Gi">
                                 <rect key="frame" x="0.0" y="64" width="600" height="487"/>
@@ -202,12 +196,6 @@
                     <connections>
                         <outlet property="notificationView" destination="ocJ-Ms-HNw" id="EZx-md-fv7"/>
                         <outlet property="tableView" destination="23i-VD-0Gi" id="Fl6-kW-Web"/>
-                        <outletCollection property="finalConstraints" destination="axX-t5-TDc" collectionClass="NSMutableArray" id="U0L-Hd-Esa"/>
-                        <outletCollection property="finalConstraints" destination="CfZ-Ig-ed8" collectionClass="NSMutableArray" id="ezU-c0-Jl0"/>
-                        <outletCollection property="finalConstraints" destination="m0w-G5-ZMo" collectionClass="NSMutableArray" id="8F5-xF-fqM"/>
-                        <outletCollection property="initialConstraints" destination="mQm-8D-5xP" collectionClass="NSMutableArray" id="arf-AW-Ybv"/>
-                        <outletCollection property="initialConstraints" destination="CfZ-Ig-ed8" collectionClass="NSMutableArray" id="q2b-aq-4Vj"/>
-                        <outletCollection property="initialConstraints" destination="m0w-G5-ZMo" collectionClass="NSMutableArray" id="tYA-1O-wsI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wmA-jM-NEJ" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -15,19 +15,11 @@ class WiFiDirectViewController: UIViewController, UINavigationControllerDelegate
     @IBOutlet weak var tableView: UITableView!
     
     @IBOutlet weak var notificationView: UIView!
-
-    
-
-    
-    @IBOutlet var initialConstraints: [NSLayoutConstraint]!
-    @IBOutlet var finalConstraints: [NSLayoutConstraint]!
-    
-    
     var peerID: MCPeerID!
     var mcSession: MCSession!
     var mcAdvertiserAssistant: MCAdvertiserAssistant!
     var friendPeerID : MCPeerID?
-    //var mcBrowser : MCBrowserViewController?
+    var mcBrowser : MCBrowserViewController?
     
     var images = [UIImage]()
     
@@ -41,52 +33,33 @@ class WiFiDirectViewController: UIViewController, UINavigationControllerDelegate
         peerID = MCPeerID(displayName: UIDevice.currentDevice().name)
         mcSession = MCSession(peer: peerID, securityIdentity: nil, encryptionPreference: .Required)
         mcSession.delegate = self
-        
-        
-
-    }
-
-    override func viewDidAppear(animated: Bool) {
-        
-        super.viewDidAppear(animated)
-        
-        self.navigationController!.view.addSubview(notificationView)
-        println("Inital: \(notificationView)")
-        
-        
-        for constraint in initialConstraints {
-            constraint.active = true
-        }
-        
-        self.notificationView.layoutIfNeeded()
-        
-        println("Final: \(notificationView)")
-        
-        
         /*
-        println(notificationView)
+        let UIView()
         
-        for constraint in initialConstraints {
-            constraint.active = false
-        }
+        UIView *darkOverlay = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height)];
+        darkOverlay.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.5];
+        [self.view insertSubview:darkOverlay behindSubview:self.view]; */
+  /*
+        let popupNotification = UIView(frame: CGRectMake(0, 0, 50, 50))
+        popupNotification.backgroundColor = UIColor(white: 0.0, alpha: 0.5)
+        // popupNotification.backgroundColor = UIColor.blackColor()
+        // popupNotification.alpha = 0.5
         
-        for constraint in finalConstraints {
-            constraint.active = true
-        }
-        
-        UIView.animateWithDuration(1.0) {
-            self.view.layoutIfNeeded()
-        }
-*/
-        
-    }
- 
+        let currentWindow = UIApplication.sharedApplication().keyWindow
+        currentWindow?.addSubview(popupNotification)
+     //   currentWindow?.makeKeyAndVisible()
+        */
     
-    /*
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        let currentWindow = UIApplication.sharedApplication().keyWindow
+        currentWindow?.addSubview(notificationView)
+    }
+    
     override func viewDidDisappear(animated: Bool) {
-        self.navigationController!.view.sendSubviewToBack(notificationView)
-    } */
-
+        notificationView.removeFromSuperview()
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -112,7 +85,12 @@ class WiFiDirectViewController: UIViewController, UINavigationControllerDelegate
         }
         
         dismissViewControllerAnimated(true, completion: nil)
-    
+        
+    //    images.insert(newImage, atIndex: 0)
+    //    self.tableView.reloadData()
+    //    collectionView.reloadData()
+        
+        
         // Check if there are any peers to send to.
         if mcSession.connectedPeers.count > 0 {
             // Convert the new image to an NSData object.
@@ -137,58 +115,11 @@ class WiFiDirectViewController: UIViewController, UINavigationControllerDelegate
     }
     
     func showConnectionPrompt() {
-        
-        for constraint in initialConstraints{
-            constraint.active = false
-        }
-        
-        for constraint in finalConstraints {
-            constraint.active = true
-        }
-     /*
-        UIView.animateWithDuration(1.0) {
-            self.view.layoutIfNeeded()
-        }
-         */
-        
-        UIView.animateWithDuration(0.5,
-            delay: 0.5,
-            options: .LayoutSubviews | .CurveLinear,
-            animations: {
-                // self.bug.transform = CGAffineTransformMakeRotation(0.0)
-                self.notificationView.layoutIfNeeded()
-            },
-            completion: { finished in
-                self.hideNotificationBar()
-        })
-        
-        /*
         let ac = UIAlertController(title: "Connect to others", message: nil, preferredStyle: .ActionSheet)
         ac.addAction(UIAlertAction(title: "Host a session", style: .Default, handler: startHosting))
         ac.addAction(UIAlertAction(title: "Join a session", style: .Default, handler: joinSession))
         ac.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
-        presentViewController(ac, animated: true, completion: nil) */
-        
-    }
-    
-    func hideNotificationBar() {
-        for constraint in finalConstraints {
-            constraint.active = false
-        }
-        
-        for constraint in initialConstraints {
-            constraint.active = true
-        }
-        
-        UIView.animateWithDuration(0.5,
-            delay: 2.0,
-            options: .LayoutSubviews | .CurveLinear,
-            animations: {
-                self.notificationView.layoutIfNeeded()
-            },
-            completion: { finished in
-                println("Notification Hidden.")
-        })
+        presentViewController(ac, animated: true, completion: nil)
     }
     
     
@@ -198,9 +129,9 @@ class WiFiDirectViewController: UIViewController, UINavigationControllerDelegate
     }
     
     func joinSession(action: UIAlertAction!) {
-        let mcBrowser = MCBrowserViewController(serviceType: "hws-project25", session: mcSession)
-        mcBrowser.delegate = self
-        presentViewController(mcBrowser, animated: true, completion: nil)
+        mcBrowser = MCBrowserViewController(serviceType: "hws-project25", session: mcSession)
+        mcBrowser!.delegate = self
+        presentViewController(mcBrowser!, animated: true, completion: nil)
     }
     
     func sendNotification() {
@@ -213,8 +144,24 @@ class WiFiDirectViewController: UIViewController, UINavigationControllerDelegate
         UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
         
         println("Notification officially sent!!!") */
-    
-
+        
+      /*
+        UIView.animateWithDuration(1.0) {
+            // changes made in here will be animated
+            self.square.transform = CGAffineTransformMakeRotation(CGFloat(M_PI))
+            self.square.alpha = 0.2
+            self.square.backgroundColor = UIColor.blueColor()
+            self.square.transform = CGAffineTransformMakeScale(3, 3)
+        }
+        
+        self.square.transform = CGAffineTransformMakeRotation(CGFloat(M_PI))
+        self.square.alpha = 0.2
+        self.square.backgroundColor = UIColor.blueColor()
+        self.square.transform = CGAffineTransformMakeScale(3, 3)
+        
+        self.widthConstraint.constant = 400
+        // changes made in here will be animated
+        self.view.layoutIfNeeded() */
 
     }
 
