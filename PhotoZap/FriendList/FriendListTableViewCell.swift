@@ -13,6 +13,13 @@ class FriendListTableViewCell: UITableViewCell {
 
     @IBOutlet weak var usernameLabel: UILabel!
 
+    
+    var user: PFUser? {
+        didSet {
+            usernameLabel.text = user?.username
+        }
+    }
+    
     /*
     override func awakeFromNib() {
         super.awakeFromNib()
