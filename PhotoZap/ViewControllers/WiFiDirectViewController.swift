@@ -130,6 +130,8 @@ extension WiFiDirectViewController: MCSessionDelegate {
     func session(session: MCSession!, peer peerID: MCPeerID!, didChangeState state: MCSessionState) {
         
         switch state {
+            
+        // TODO: Stop alert view from popping up if the browser is showing
         case MCSessionState.Connected:
             println("Connected: \(peerID.displayName)")
             
