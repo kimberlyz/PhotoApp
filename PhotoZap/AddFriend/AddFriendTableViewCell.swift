@@ -29,10 +29,9 @@ class AddFriendTableViewCell: UITableViewCell {
     var canFriend: Bool? = true {
         didSet {
             /*
-            Change the state of the friend button based on whether or not
-            it is possible to friend a user.
+            Change the state of the follow button based on whether or not
+            it is possible to follow a user.
             */
-            
             if let canFriend = canFriend {
                 friendButton.selected = !canFriend
             }
@@ -43,7 +42,7 @@ class AddFriendTableViewCell: UITableViewCell {
     @IBAction func friendButtonTapped(sender: AnyObject) {
         
         if let canFriend = canFriend where canFriend == true {
-            delegate?.cell(self,didSelectFriendUser: user!)
+            delegate?.cell(self, didSelectFriendUser: user!)
             self.canFriend = false
         } else {
             delegate?.cell(self, didSelectUnfriendUser: user!)

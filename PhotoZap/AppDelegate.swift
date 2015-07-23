@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
-        /*
+        
         // Set up Parse SDK
         Parse.setApplicationId("nynNgfGlqdxWbUSTVOQWpssFFHumyGd3lOKfpOgU", clientKey: "coum5Edl90uh0ARRSbRRiDYd5g02noZkNk5JKxLs")
         
@@ -31,7 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             println("No logged in user :(")
         }
 
-        */
+        
 
         let notificationType = UIUserNotificationType.Alert | UIUserNotificationType.Badge
         let settings = UIUserNotificationSettings(forTypes: notificationType, categories: nil)
