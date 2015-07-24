@@ -14,36 +14,16 @@ class PhotoTakingHelper: NSObject {
     
     /** View controller on which AlertViewController and UIImagePickerController are presented */
     weak var viewController: UIViewController!
-    weak var sourceViewController: UIViewController!
     var callback: PhotoTakingHelperCallback
     var imagePickerController: UIImagePickerController?
     
-    init(viewController: UIViewController, sourceViewController: UIViewController, callback: PhotoTakingHelperCallback) {
+    init(viewController: UIViewController, callback: PhotoTakingHelperCallback) {
         self.viewController = viewController
-        self.sourceViewController = sourceViewController
         self.callback = callback
         
         super.init()
-        
-        if (sourceViewController is CameraViewController) {
-            showPhotoSourceSelection()
-        } else if (sourceViewController is AlbumViewController) {
-            self.showImagePickerController(.PhotoLibrary)
-        } else {
-            println("Source View Controller is not Camera or Album")
-        }
 
-    }
-    
-    func showPhotoSourceSelection() {
-        
-        // Only show camera option if rear camera is available
-        if (UIImagePickerController.isCameraDeviceAvailable(.Rear)) {
-            self.showImagePickerController(.Camera)
-        } else {
-            println("Rear Camera cannot be found.")
-        }
-        
+        self.showImagePickerController(.PhotoLibrary)
     }
     
     func showImagePickerController(sourceType: UIImagePickerControllerSourceType) {

@@ -5,46 +5,6 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Camera-->
-        <scene sceneID="cFL-JF-7nl">
-            <objects>
-                <viewController id="Qfk-28-HbZ" customClass="CameraViewController" customModule="PhotoZap" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="d8b-So-8sf"/>
-                        <viewControllerLayoutGuide type="bottom" id="n2m-pl-inx"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="o9F-ci-BsS">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Camera" image="Camera" id="oZC-Jj-1hG"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dQN-QA-6ve" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-505" y="1692"/>
-        </scene>
-        <!--Notifications-->
-        <scene sceneID="ISn-95-3SU">
-            <objects>
-                <viewController id="wDP-Q2-zJQ" customClass="NotificationViewController" customModule="PhotoZap" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="YS7-fW-Irx"/>
-                        <viewControllerLayoutGuide type="bottom" id="vbU-ge-fed"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="MRS-Yz-kBt">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Notifications" image="Notifications" id="jZP-cm-pMw">
-                        <inset key="imageInsets" minX="10" minY="10" maxX="10" maxY="15"/>
-                    </tabBarItem>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="WuQ-li-vVJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1375" y="1692"/>
-        </scene>
         <!--Album-->
         <scene sceneID="xIY-eX-EhH">
             <objects>
@@ -62,7 +22,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wq6-uh-y66" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1641" y="1692"/>
+            <point key="canvasLocation" x="-191" y="1692"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="O3A-iC-x94">
@@ -76,15 +36,14 @@
                     </tabBar>
                     <connections>
                         <segue destination="StI-Ir-0gR" kind="relationship" relationship="viewControllers" id="2MX-95-JSW"/>
-                        <segue destination="Qfk-28-HbZ" kind="relationship" relationship="viewControllers" id="u96-LA-Drl"/>
-                        <segue destination="wDP-Q2-zJQ" kind="relationship" relationship="viewControllers" id="miI-Hz-B5u"/>
+                        <segue destination="1Nq-mg-DUW" kind="relationship" relationship="viewControllers" id="gZJ-ba-Ph6"/>
                         <segue destination="TUf-Br-kU1" kind="relationship" relationship="viewControllers" id="oh3-qR-FVF"/>
                         <segue destination="yvR-dN-MUW" kind="relationship" relationship="viewControllers" id="anZ-ko-LcO"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MP5-us-lxk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="115" y="672"/>
+            <point key="canvasLocation" x="283" y="688"/>
         </scene>
         <!--Wi Fi Direct View Controller-->
         <scene sceneID="4R3-ln-EXT">
@@ -118,7 +77,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rpf-Zy-262">
                                                     <rect key="frame" x="125" y="53" width="43" height="20"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eB0-CB-qBW">
@@ -207,7 +166,23 @@
                                 <rect key="frame" x="0.0" y="64" width="600" height="487"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="FriendListCell" textLabel="Twb-ED-XNh" style="IBUITableViewCellStyleDefault" id="vci-8u-F0Z" customClass="FriendListTableViewCell" customModule="PhotoZap" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="FriendRequestHeader" textLabel="cgs-Nl-yeR" rowHeight="30" style="IBUITableViewCellStyleDefault" id="bny-bu-05X">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bny-bu-05X" id="LAT-M6-PHt">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Friend Requests" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="cgs-Nl-yeR">
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.87389520202020199" green="0.87389520202020199" blue="0.87389520202020199" alpha="0.51000000000000001" colorSpace="calibratedRGB"/>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="FriendListCell" textLabel="Twb-ED-XNh" style="IBUITableViewCellStyleDefault" id="vci-8u-F0Z" customClass="FriendListTableViewCell" customModule="PhotoZap" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="vci-8u-F0Z" id="hxd-If-cGA">
@@ -216,7 +191,7 @@
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Twb-ED-XNh">
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -280,7 +255,7 @@
                                 <rect key="frame" x="0.0" y="108" width="600" height="443"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="AddFriendCell" id="DR4-gu-O1N" customClass="AddFriendTableViewCell" customModule="PhotoZap" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="AddFriendCell" id="DR4-gu-O1N" customClass="AddFriendTableViewCell" customModule="PhotoZap" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DR4-gu-O1N" id="D3g-s1-V7F">
@@ -292,7 +267,7 @@
                                                         <constraint firstAttribute="height" constant="21" id="LBK-Lb-eTq"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KCS-rz-TiA">
@@ -351,6 +326,25 @@
             </objects>
             <point key="canvasLocation" x="485" y="3164"/>
         </scene>
+        <!--Zap-->
+        <scene sceneID="HEd-4x-6h6">
+            <objects>
+                <viewController id="1Nq-mg-DUW" customClass="ZapViewController" customModule="PhotoZap" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="cyA-d4-bV5"/>
+                        <viewControllerLayoutGuide type="bottom" id="E16-5i-DkJ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ubX-0R-mMA">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Zap" image="Camera" id="LZ6-4d-idu"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4df-eW-MVl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1231" y="1596"/>
+        </scene>
         <!--Friends-->
         <scene sceneID="IHl-SH-aTN">
             <objects>
@@ -397,6 +391,5 @@
         <image name="Check" width="42" height="42"/>
         <image name="Friends" width="42" height="42"/>
         <image name="Home" width="38" height="36"/>
-        <image name="Notifications" width="75" height="85"/>
     </resources>
 </document>
