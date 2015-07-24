@@ -166,13 +166,13 @@
                                 <rect key="frame" x="0.0" y="64" width="600" height="487"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="FriendRequestHeader" textLabel="cgs-Nl-yeR" rowHeight="30" style="IBUITableViewCellStyleDefault" id="bny-bu-05X">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="FriendHeader" textLabel="0oZ-bs-WpH" rowHeight="40" style="IBUITableViewCellStyleDefault" id="bny-bu-05X" customClass="FriendHeaderView" customModule="PhotoZap" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bny-bu-05X" id="LAT-M6-PHt">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Friend Requests" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="cgs-Nl-yeR">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Header Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="0oZ-bs-WpH">
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -180,7 +180,10 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" red="0.87389520202020199" green="0.87389520202020199" blue="0.87389520202020199" alpha="0.51000000000000001" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.87389520202020199" green="0.87389520202020199" blue="0.87389520202020199" alpha="1" colorSpace="calibratedRGB"/>
+                                        <connections>
+                                            <outlet property="headerLabel" destination="0oZ-bs-WpH" id="UEw-xO-XL2"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="FriendListCell" textLabel="Twb-ED-XNh" style="IBUITableViewCellStyleDefault" id="vci-8u-F0Z" customClass="FriendListTableViewCell" customModule="PhotoZap" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
@@ -203,6 +206,7 @@
                                 </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="67W-aE-nXU" id="1Ga-3q-RVh"/>
+                                    <outlet property="delegate" destination="67W-aE-nXU" id="lBb-gb-pY9"/>
                                 </connections>
                             </tableView>
                         </subviews>

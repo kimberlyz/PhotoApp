@@ -41,18 +41,17 @@ class FriendListViewController: UIViewController {
     }
     
     // MARK: View Lifecycle
-    
+    /*
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
         // fill the cache of a user's friends
-        ParseHelper.getFriendUsersForUser(PFUser.currentUser()!) {
+        ParseHelper.getFriendshipForUser(PFUser.currentUser()!) {
             (results: [AnyObject]?, error: NSError?) -> Void in
             let relations = results as? [PFObject] ?? []
-            // use map to extract the User from a Friend Object
-            self.friendUsers = relations.map {
-                $0.objectForKey(ParseHelper.ParseFriendToUser) as! PFUser
-            }
+            
+            // Does this work?
+            self.friendUsers = relations as? [PFUser] ?? []
             
             /*
             if let error = error {
@@ -61,48 +60,73 @@ class FriendListViewController: UIViewController {
             }
             */
         }
-    }
+    } */
 
 }
 
 extension FriendListViewController: UITableViewDataSource {
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
+        return 3
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.friendUsers?.count ?? 0
+       // return self.friendUsers?.count ?? 0
+        return 3
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("FriendListCell") as! FriendListTableViewCell
+     //   let cell = tableView.dequeueReusableCellWithIdentifier("FriendListCell") as! FriendListTableViewCell
         
+       // let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! UITableViewCell
+        /*
         if let friendUsers = self.friendUsers {
             let friendUser = friendUsers[indexPath.row]
             cell.user = friendUser
+        } */
+     //   cell.usernameLabel.text = "Friend"
+        if indexPath.section == 0 {
+            let cell = tableView.dequeueReusableCellWithIdentifier("FriendListCell") as! FriendListTableViewCell
+            cell.usernameLabel.text = "Friend Requests Here"
+            return cell
+        } else if indexPath.section == 1{
+            let cell = tableView.dequeueReusableCellWithIdentifier("FriendListCell") as! FriendListTableViewCell
+            cell.usernameLabel.text = "Pending Friends Here"
+            return cell
+        } else {
+            let cell = tableView.dequeueReusableCellWithIdentifier("FriendListCell") as! FriendListTableViewCell
+            cell.usernameLabel.text = "All Friends Here"
+            return cell
         }
-        return cell
     }
 }
-/*
+
 extension FriendListViewController: UITableViewDelegate {
-    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        timelineComponent.targetWillDisplayEntry(indexPath.section)
-    }
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerCell = tableView.dequeueReusableCellWithIdentifier("PostHeader") as! PostSectionHeaderView
-        
-        let post = self.timelineComponent.content[section]
-        headerCell.post = post
+        let headerCell = tableView.dequeueReusableCellWithIdentifier("FriendHeader") as! FriendHeaderView
+
+        if section == 0 {
+            headerCell.headerLabel.text = "Requests"
+        } else if section == 1 {
+            headerCell.headerLabel.text = "Pending"
+        } else {
+            headerCell.headerLabel.text = "All Friends"
+        }
         
         return headerCell
     }
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 40
+        return 20
     }
+    
+
+    /*
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        timelineComponent.targetWillDisplayEntry(indexPath.row)
+    } */
+
 }
-*/
+

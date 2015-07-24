@@ -19,13 +19,20 @@ class ParseHelper {
     // User Relation
     static let ParseUserUsername = "username"
     
-    /** 
+    // Friendship Relation
+    static let ParseFriendshipClass = "Friendship"
+    static let ParseFriendshipUserA = "userA"
+    static let ParseFriendshipUserB = "userB"
+    static let ParseFriendshipEstablishFriendship = "establishFriendship"
+
+    
+    /**
         Fetches all users that the provided user is friends with.
 
         :param: user The user whose followees you want to retrieve
         :param: completionBlock The completion block that is called when the query completes
     */
-    
+  
     static func getFriendUsersForUser(user: PFUser, completionBlock: PFArrayResultBlock) {
         let query = PFQuery(className: "Friends")
         
@@ -35,12 +42,46 @@ class ParseHelper {
         // Error?
     }
     
+    
+    // Not sure this works
+    static func getFriendshipForUser(user: PFUser, completionBlock: PFArrayResultBlock) {
+        
+        // Gets all friendship objects where the user is UserA
+        let queryUserA = PFQuery(className: ParseFriendshipClass)
+        
+        queryUserA.whereKey(ParseFriendshipUserA, equalTo:user) 
+        queryUserA.whereKey(ParseFriendshipEstablishFriendship, equalTo: true)
+        queryUserA.findObjectsInBackgroundWithBlock(completionBlock)
+        
+        // Get all users in the friendship objects where the friends are userB
+        let queryFriendIsUserB = PFUser.query()
+        queryFriendIsUserB!.whereKey("user", matchesKey: ParseFriendshipUserB, inQuery: queryUserA)
+        
+        
+        // Gets all friendship objects where the user is UserB
+        let queryUserB = PFQuery(className: ParseFriendshipClass)
+        
+        queryUserB.whereKey(ParseFriendshipUserB, equalTo:user)
+        queryUserB.whereKey(ParseFriendshipEstablishFriendship, equalTo: true)
+        queryUserB.findObjectsInBackgroundWithBlock(completionBlock)
+        
+        // Get all users in the friendship objects where the friends are userA
+        let queryFriendIsUserA = PFUser.query()
+        queryFriendIsUserA!.whereKey("user", matchesKey: ParseFriendshipUserA, inQuery: queryUserB)
+        
+        // Combine all friend users into one query
+        let allFriendUsers = PFQuery.orQueryWithSubqueries([queryFriendIsUserA!, queryFriendIsUserB!])
+        
+        allFriendUsers.findObjectsInBackgroundWithBlock(completionBlock)
+    }
+    
     /** 
         Establishes a friend relationship between two users
     
         :param: user The user that is friending another
         :param: toUser The user that is being friended
     */
+    
     
     static func addFriendRelationshipFromUser(user: PFUser, toUser: PFUser) {
         let friendObject = PFObject(className: "Friends")
@@ -49,6 +90,66 @@ class ParseHelper {
         
         friendObject.saveInBackgroundWithBlock(nil)
     }
+
+    
+    /*
+    static func initiatefriendRequest(userA: PFUser, userB: PFUser) {
+        let friendshipObject = PFObject(className: ParseFriendshipClass)
+        friendshipObject.setObject(userA, forKey: ParseFriendshipUserA)
+        friendshipObject.setObject(userB, forKey: ParseFriendshipUserB)
+        friendshipObject.setObject(false, forKey: ParseFriendshipEstablishFriendship)
+    
+    }*/
+    
+    /*
+    static func getPendingFriendRequests(userA: PFUser, userB: PFUser) {
+        
+        // Keep track of who is put in as userA. Current user will always be UserB to confirm UserA's request
+        let query = PFQuery(className: ParseFriendshipClass)
+        query.whereKey(ParseFriendshipUserB, equalTo: userB)
+        query.whereKey(ParseFriendshipEstablishFriendship, equalTo: false)
+        query.findObjectsInBackgroundWithBlock(completionBlock)
+        
+    } */
+    
+    /*
+    
+    // Keep track of who is put in as userA. Current user will always be UserB to confirm UserA's request
+    static func confirmfriendRequest(userA: PFUser, userB: PFUser) {
+        let query = PFQuery(className: ParseFriendshipClass)
+        
+        query.whereKey(ParseFriendshipUserA, equalTo: userA)
+        query.whereKey(ParseFriendshipUserB, equalTo: userB)
+        
+        query.findObjectsInBackgroundWithBlock {
+            (results: [AnyObject]?, error: NSError?) -> Void in
+            
+            let results = results as? [PFObject] ?? []
+            
+            for friendship in results {
+                friendship.setObject(true, forKey: self.ParseFriendshipEstablishFriendship)
+            }
+        }
+    } */
+    
+    /*
+    // Keep track of who is put in as userA. Current user will always be UserB to reject UserA's request
+    static func rejectFriendRequest(userA: PFUser, userB: PFUser) {
+        let query = PFQuery(className: ParseFriendshipClass)
+        
+        query.whereKey(ParseFriendshipUserA, equalTo: userA)
+        query.whereKey(ParseFriendshipUserB, equalTo: userB)
+        
+        query.findObjectsInBackgroundWithBlock {
+            (results: [AnyObject]?, error: NSError?) -> Void in
+            
+            let results = results as? [PFObject] ?? []
+            
+            for friendship in results {
+                friendship.deleteInBackgroundWithBlock(nil)
+            }
+        }
+    }*/
     
     
     /** 
