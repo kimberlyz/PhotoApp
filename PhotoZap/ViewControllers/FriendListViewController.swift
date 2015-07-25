@@ -32,6 +32,18 @@ class FriendListViewController: UIViewController {
         }
     }
     
+    var pendingUsers: [PFUser]? {
+        didSet {
+            tableView.reloadData()
+        }
+    }
+    
+    var requestingUsers: [PFUser]? {
+        didSet {
+            tableView.reloadData()
+        }
+    }
+    
     // the current parse query
     var query: PFQuery? {
         didSet {
@@ -41,6 +53,7 @@ class FriendListViewController: UIViewController {
     }
     
     // MARK: View Lifecycle
+    
     /*
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -69,10 +82,17 @@ extension FriendListViewController: UITableViewDataSource {
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 3
     }
-    
+
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
        // return self.friendUsers?.count ?? 0
-        return 3
+        
+        if section == 0 {
+            return self.requestingUsers?.count ?? 0
+        } else if section == 1 {
+            return self.pendingUsers?.count ?? 0
+        } else {
+            return self.friendUsers?.count ?? 0
+        }
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -119,7 +139,16 @@ extension FriendListViewController: UITableViewDelegate {
     }
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 20
+        /*
+        if section == 0 && self.requestingUsers == nil {
+            return 0
+        } else if section == 1 && self.pendingUsers == nil {
+            return 0
+        } else if section == 2 && self.friendUsers == nil {
+            return 0
+        } else { */
+            return 30
+     //   }
     }
     
 
