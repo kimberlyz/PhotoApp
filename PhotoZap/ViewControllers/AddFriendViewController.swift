@@ -25,13 +25,21 @@ class AddFriendViewController: UIViewController {
         for a server response.
     */
     
+    // Keeps track of how many times friendUsers has been accessed
+    var count = 0
+    
     var friendUsers: [PFUser]? {
         didSet {
             /**
             the list of following users may be fetched after the tableView has displayed
             cells. In this case, we reload the data to reflect "following" status
             */
-            tableView.reloadData()
+            if count == 0 {
+                count++
+            } else if count == 1 {
+                tableView.reloadData()
+                count = 0
+            }
         }
     }
     
@@ -113,6 +121,7 @@ class AddFriendViewController: UIViewController {
     }
     
     func getFriendshipForUser() {
+        
         // fill the cache of a user's friends
         ParseHelper.getFriendshipAsUserA(PFUser.currentUser()!) {
             (results: [AnyObject]?, error: NSError?) -> Void in
@@ -135,7 +144,7 @@ class AddFriendViewController: UIViewController {
             
             // use map to extract the User from a Follow object
             self.friendUsers?.extend(relations.map {
-                $0.objectForKey(ParseHelper.ParseFriendshipUserB) as! PFUser
+                $0.objectForKey(ParseHelper.ParseFriendshipUserA) as! PFUser
                 })
             
             /*

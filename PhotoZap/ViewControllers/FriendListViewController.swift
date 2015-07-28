@@ -23,13 +23,23 @@ class FriendListViewController: UIViewController {
     for a server response.
     */
     
+    // Keeps track of how many times friendUsers has been accessed
+    var count = 0
+    
     var friendUsers: [PFUser]? {
         didSet {
+            
+            if count == 0 {
+                count++
+            } else if count == 1 {
+                tableView.reloadData()
+                count = 0
+            }
             /**
             the list of following users may be fetched after the tableView has displayed
             cells. In this case, we reload the data to reflect "following" status
             */
-            tableView.reloadData()
+          //  tableView.reloadData()
         }
     }
     
@@ -59,15 +69,50 @@ class FriendListViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        getFriendshipForUser()
-
+        /*
+        ParseHelper.getFriendshipForUser(PFUser.currentUser()!) {
+            (results: [AnyObject]?, error: NSError?) -> Void in
+            let relations = results as? [PFUser] ?? []
+            
+            self.friendUsers = relations
+        } */
         
+        getFriendshipForUser()
+        getPendingFriendsForUser()
+        getFriendRequests()
+        //tableView.reloadData()
         println(self.friendUsers)
         
         
     }
     
+    func getFriendRequests() {
+        // fill the cache of friend requests directed toward the user
+        ParseHelper.getFriendRequests(PFUser.currentUser()!) {
+            (results: [AnyObject]?, error: NSError?) -> Void in
+            let relations = results as? [PFObject] ?? []
+            
+            self.requestingUsers = relations.map {
+                $0.objectForKey(ParseHelper.ParseFriendshipUserA) as! PFUser
+            }
+        }
+    }
+    
+    func getPendingFriendsForUser() {
+        // fill the cache of a user's pending friends
+        ParseHelper.getPendingFriendRequests(PFUser.currentUser()!) {
+            (results: [AnyObject]?, error: NSError?) -> Void in
+            let relations = results as? [PFObject] ?? []
+            
+            // use map to extract the User from a Friendship object
+            self.pendingUsers = relations.map {
+                $0.objectForKey(ParseHelper.ParseFriendshipUserB) as! PFUser
+            }
+        }
+    }
+    
     func getFriendshipForUser() {
+        
         // fill the cache of a user's friends
         ParseHelper.getFriendshipAsUserA(PFUser.currentUser()!) {
             (results: [AnyObject]?, error: NSError?) -> Void in
@@ -90,7 +135,7 @@ class FriendListViewController: UIViewController {
             
             // use map to extract the User from a Follow object
             self.friendUsers?.extend(relations.map {
-                $0.objectForKey(ParseHelper.ParseFriendshipUserB) as! PFUser
+                $0.objectForKey(ParseHelper.ParseFriendshipUserA) as! PFUser
                 })
             
             /*

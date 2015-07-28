@@ -19,6 +19,8 @@ class ParseHelper {
     static let ParseFriendshipUserA = "userA"
     static let ParseFriendshipUserB = "userB"
     static let ParseFriendshipEstablishFriendship = "establishFriendship"
+    static let ParseFriendshipUsernameA = "usernameA"
+    static let ParseFriendshipUsernameB = "usernameB"
 
     
     /**
@@ -27,7 +29,7 @@ class ParseHelper {
         :param: user The user whose followees you want to retrieve
         :param: completionBlock The completion block that is called when the query completes
     */
-
+    
     static func getFriendshipAsUserA(user: PFUser, completionBlock: PFArrayResultBlock) {
         let query = PFQuery(className: ParseFriendshipClass)
         
@@ -62,17 +64,30 @@ class ParseHelper {
         queryUserB.whereKey(ParseFriendshipUserB, equalTo:user)
         queryUserB.whereKey(ParseFriendshipEstablishFriendship, equalTo: true)
         
-
-       let test =  queryUserA.findObjects()
+        /*
+        let test =  queryUserA.findObjects()
         for one in test! {
             println((one as! PFObject) )
         }
-        let new = 3
+        let new = 3 */
+    
+        let query1 = PFUser.query()
+        query1!.whereKey("userA", containedIn: [queryUserB])
+        query1!.whereKey("userB", containedIn: [queryUserA])
+        
+        
+        let test =  query1?.findObjects()
+        
+        if let test = test {
+            for one in test {
+                println((one as! PFObject) )
+            }
+            let new = 3
+        }
 
-        let queryAllFriendUsers = PFUser.query()
-        queryAllFriendUsers!.whereKey("username", matchesKey: "UserNameA" /*ParseFriendshipUserA*/, inQuery: queryUserB)
-        queryAllFriendUsers!.whereKey("username", matchesKey: "UserNameB"/*ParseFriendshipUserB*/, inQuery: queryUserA)
-        queryAllFriendUsers?.findObjectsInBackgroundWithBlock(completionBlock)
+        
+        query1?.findObjectsInBackgroundWithBlock(completionBlock)
+    
     } */
     
     /** 
@@ -92,9 +107,17 @@ class ParseHelper {
         
         friendObject.saveInBackgroundWithBlock(nil)
     }
+    
+    static func getFriendRequests(user: PFUser, completionBlock: PFArrayResultBlock) {
+        
+        // Keep track of who is put in as userA. Current user will always be UserB to confirm UserA's request
+        let query = PFQuery(className: ParseFriendshipClass)
+        query.whereKey(ParseFriendshipUserB, equalTo: user)
+        query.whereKey(ParseFriendshipEstablishFriendship, equalTo: false)
+        
+        query.findObjectsInBackgroundWithBlock(completionBlock)
+    }
 
-    
-    
     static func initiateFriendRequest(userA: PFUser, userB: PFUser) {
         let friendshipObject = PFObject(className: ParseFriendshipClass)
         friendshipObject.setObject(userA, forKey: ParseFriendshipUserA)
@@ -105,18 +128,16 @@ class ParseHelper {
     }
 
     
-    static func getPendingFriendRequests(userA: PFUser, completionBlock: PFArrayResultBlock) {
+    static func getPendingFriendRequests(user: PFUser, completionBlock: PFArrayResultBlock) {
         
-        // Keep track of who is put in as userA. Current user will always be UserB to confirm UserA's request
+        // Keep track of who is put in as userA. Current user will always be userA that sent the pending request.
         let query = PFQuery(className: ParseFriendshipClass)
-        query.whereKey(ParseFriendshipUserA, equalTo: userA)
+        query.whereKey(ParseFriendshipUserA, equalTo: user)
         query.whereKey(ParseFriendshipEstablishFriendship, equalTo: false)
         
         query.findObjectsInBackgroundWithBlock(completionBlock)
         
     }
-    
-    
     
     // Keep track of who is put in as userA. Current user will always be UserB to confirm UserA's request
     static func confirmFriendRequest(userA: PFUser, userB: PFUser) {
