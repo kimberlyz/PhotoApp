@@ -35,6 +35,12 @@ class AddFriendViewController: UIViewController {
         }
     }
     
+    var pendingUsers: [PFUser]? {
+        didSet {
+            tableView.reloadData()
+        }
+    }
+
     // the current parse query
     var query: PFQuery? {
         didSet {
@@ -88,20 +94,55 @@ class AddFriendViewController: UIViewController {
         state = .DefaultMode
         
         // fill the cache of a user's friends
-        ParseHelper.getFriendUsersForUser(PFUser.currentUser()!) {
+        getFriendshipForUser()
+        getPendingFriendsForUser()
+
+    }
+    
+    func getPendingFriendsForUser() {
+        // fill the cache of a user's pending friends
+        ParseHelper.getPendingFriendRequests(PFUser.currentUser()!) {
             (results: [AnyObject]?, error: NSError?) -> Void in
             let relations = results as? [PFObject] ?? []
-            // use map to extract the User from a Friend Object
-            self.friendUsers = relations.map {
-                $0.objectForKey(ParseHelper.ParseFriendToUser) as! PFUser
+            
+            // use map to extract the User from a Friendship object
+            self.pendingUsers = relations.map {
+                $0.objectForKey(ParseHelper.ParseFriendshipUserB) as! PFUser
             }
+        }
+    }
+    
+    func getFriendshipForUser() {
+        // fill the cache of a user's friends
+        ParseHelper.getFriendshipAsUserA(PFUser.currentUser()!) {
+            (results: [AnyObject]?, error: NSError?) -> Void in
+            let relations = results as? [PFObject] ?? []
+            
+            // use map to extract the User from a Friendship object
+            self.friendUsers = relations.map {
+                $0.objectForKey(ParseHelper.ParseFriendshipUserB) as! PFUser
+            }
+            /*
+            if let error = error {
+            // Call the default error handler in case of an Error
+            ErrorHandling.defaultErrorHandler(error)
+            } */
+        }
+        
+        ParseHelper.getFriendshipAsUserB(PFUser.currentUser()!) {
+            (results: [AnyObject]?, error: NSError?) -> Void in
+            let relations = results as? [PFObject] ?? []
+            
+            // use map to extract the User from a Follow object
+            self.friendUsers?.extend(relations.map {
+                $0.objectForKey(ParseHelper.ParseFriendshipUserB) as! PFUser
+                })
             
             /*
             if let error = error {
-                // Call the default error handler in case of an error
-                ErrorHandling.defaultErrorHandler(error)
-            }
-            */
+            // Call the default error handler in case of an Error
+            ErrorHandling.defaultErrorHandler(error)
+            } */
         }
     }
     
@@ -121,10 +162,10 @@ extension AddFriendViewController: UITableViewDataSource {
         let user = users![indexPath.row]
         cell.user = user
         
-        if let friendUsers = friendUsers {
+        if let pendingUsers = pendingUsers {
             // check if current user is already friends with displayed user
             // change button appearance based on result
-            cell.canFriend = !contains(friendUsers, user)
+            cell.canFriend = !contains(pendingUsers, user)
         }
         
         cell.delegate = self
@@ -158,18 +199,18 @@ extension AddFriendViewController: UISearchBarDelegate {
 extension AddFriendViewController: AddFriendTableViewCellDelegate {
     
     func cell(cell: AddFriendTableViewCell, didSelectFriendUser user: PFUser) {
-        ParseHelper.addFriendRelationshipFromUser(PFUser.currentUser()!, toUser: user)
+        ParseHelper.initiateFriendRequest(PFUser.currentUser()!, userB: user)
         //update local cache
-        friendUsers?.append(user)
+        pendingUsers?.append(user)
     }
     
     func cell(cell: AddFriendTableViewCell, didSelectUnfriendUser user: PFUser) {
-        if var friendUsers = friendUsers {
-            ParseHelper.removeFriendRelationshipFromUser(PFUser.currentUser()!, toUser: user)
+        if var pendingUsers = pendingUsers {
+            ParseHelper.removeFriendRequest(PFUser.currentUser()!, userB: user)
             //update local cache
-            removeObjectFromArray(user, &friendUsers)
+            removeObjectFromArray(user, &pendingUsers)
         
-            self.friendUsers = friendUsers
+            self.pendingUsers = pendingUsers
         }
     }
 }

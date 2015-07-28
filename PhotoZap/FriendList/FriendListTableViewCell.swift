@@ -12,11 +12,13 @@ import Parse
 class FriendListTableViewCell: UITableViewCell {
 
     @IBOutlet weak var usernameLabel: UILabel!
-
     
     var user: PFUser? {
         didSet {
-            usernameLabel.text = user?.username
+            if let user = user {
+                user.fetchIfNeeded()
+                usernameLabel.text = user["username"] as? String
+            }
         }
     }
     
