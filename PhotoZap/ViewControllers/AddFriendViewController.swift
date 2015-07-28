@@ -163,9 +163,15 @@ extension AddFriendViewController: UITableViewDataSource {
         cell.user = user
         
         if let pendingUsers = pendingUsers {
-            // check if current user is already friends with displayed user
+            // check if current user is already sent a friend request to the displayed user
             // change button appearance based on result
             cell.canFriend = !contains(pendingUsers, user)
+        }
+        
+        if let friendUsers = friendUsers {
+            // check if current user is already friends with the displayed user
+            // change button appearance based on result
+            cell.alreadyFriends = contains(friendUsers, user)
         }
         
         cell.delegate = self

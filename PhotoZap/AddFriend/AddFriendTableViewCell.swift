@@ -29,12 +29,25 @@ class AddFriendTableViewCell: UITableViewCell {
     var canFriend: Bool? = true {
         didSet {
             /*
-            Change the state of the follow button based on whether or not
-            it is possible to follow a user.
+            Change the state of the friend button based on whether or not
+            it is possible to friend request a user.
             */
             if let canFriend = canFriend {
                 friendButton.selected = !canFriend
             }
+        }
+    }
+    
+    var alreadyFriends: Bool? = false {
+        didSet {
+            /*
+            Change the state of the friend button based on whether or not
+            the current user is already friends with the displayed user.
+            */
+            if let alreadyFriends = alreadyFriends {
+                friendButton.enabled = !alreadyFriends
+            }
+            
         }
     }
     

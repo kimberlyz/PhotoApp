@@ -316,6 +316,7 @@
                                                     <state key="normal" image="Add">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
+                                                    <state key="disabled" image="Check"/>
                                                     <state key="selected" image="Album"/>
                                                     <connections>
                                                         <action selector="friendButtonTapped:" destination="DR4-gu-O1N" eventType="touchUpInside" id="dFS-zU-VWQ"/>
