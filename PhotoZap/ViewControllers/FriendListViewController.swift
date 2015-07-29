@@ -77,43 +77,12 @@ class FriendListViewController: UIViewController {
             self.requestingUsers = relations.map {
                 $0.objectForKey(ParseHelper.ParseFriendshipUserA) as! PFUser
             }
-            
-            self.tableView.reloadData()
         }
     }
-    /*
-    func getFriendshipForUser() {
-        let findUserObjectId = PFQuery(className: "Activity")
-        findUserObjectId.whereKey("fromUser", equalTo: userPassed)
-        findUserObjectId.whereKey("type", equalTo: "followingAction")
-        
-        
-        findUserObjectId.findObjectsInBackgroundWithBlock { (objects:[AnyObject]!, error:NSError!) -> Void in
-            if error == nil  {
-                // The find succeeded.
-                println("succesfully loaded the fromUser  in Activity class")
-                // Do something with the found objects
-                for object  in objects   {
-                    
-                    let user : PFUser = object["toUser"] as PFUser
-                    
-                    let queryUsers = PFUser.query()
-                    queryUsers.getObjectInBackgroundWithId(user.objectId, block: { (userGet :PFObject!,error : NSError!) -> Void in
-                        self.followingUserList.addObject(userGet)
-                        self.tableView.reloadData()
-                        
-                    })
-                    
-                    
-                } } else {
-                // Log details of the failure
-                println("error loadind user ")
-                println(error)
-            }
-        }
-    } */
     
     
+    
+
     func getFriendshipForUser() {
         
         ParseHelper.getFriendshipAsUserB(PFUser.currentUser()!) {
@@ -134,6 +103,8 @@ class FriendListViewController: UIViewController {
             // Call the default error handler in case of an Error
             ErrorHandling.defaultErrorHandler(error)
             } */
+            
+            
         }
         
         // fill the cache of a user's friends
