@@ -26,7 +26,6 @@ class AddFriendViewController: UIViewController {
     */
     
     // Keeps track of how many times friendUsers has been accessed
-    var count = 0
     
     var friendUsers: [PFUser]? {
         didSet {
@@ -34,12 +33,6 @@ class AddFriendViewController: UIViewController {
             the list of following users may be fetched after the tableView has displayed
             cells. In this case, we reload the data to reflect "following" status
             */
-            if count == 0 {
-                count++
-            } else if count == 1 {
-                tableView.reloadData()
-                count = 0
-            }
         }
     }
     

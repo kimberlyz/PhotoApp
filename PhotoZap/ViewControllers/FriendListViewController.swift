@@ -24,31 +24,21 @@ class FriendListViewController: UIViewController {
     for a server response.
     */
     
-    // Keeps track of how many times friendUsers has been accessed
-  //  var count = 0
-    
-    var friendUsers: [PFUser]? {
+    var friendUsers: [PFUser]? /*{
         didSet {
-            /*
-            if count == 0 {
-                count++
-            } else if count == 1 {
-                tableView.reloadData()
-                count = 0
-            } */
             /**
             the list of following users may be fetched after the tableView has displayed
             cells. In this case, we reload the data to reflect "following" status
             */
            tableView.reloadData()
         }
-    }
+    } */
     
-    var requestingUsers: [PFUser]? {
+    var requestingUsers: [PFUser]? /* {
         didSet {
             tableView.reloadData()
         }
-    }
+    } */
     
     // the current parse query
     var query: PFQuery? {
@@ -74,8 +64,6 @@ class FriendListViewController: UIViewController {
         
         getFriendshipForUser()
         getFriendRequests()
-        //tableView.reloadData()
-        println(self.friendUsers)
         
         
     }
@@ -89,20 +77,58 @@ class FriendListViewController: UIViewController {
             self.requestingUsers = relations.map {
                 $0.objectForKey(ParseHelper.ParseFriendshipUserA) as! PFUser
             }
+            
+            self.tableView.reloadData()
         }
     }
+    /*
+    func getFriendshipForUser() {
+        let findUserObjectId = PFQuery(className: "Activity")
+        findUserObjectId.whereKey("fromUser", equalTo: userPassed)
+        findUserObjectId.whereKey("type", equalTo: "followingAction")
+        
+        
+        findUserObjectId.findObjectsInBackgroundWithBlock { (objects:[AnyObject]!, error:NSError!) -> Void in
+            if error == nil  {
+                // The find succeeded.
+                println("succesfully loaded the fromUser  in Activity class")
+                // Do something with the found objects
+                for object  in objects   {
+                    
+                    let user : PFUser = object["toUser"] as PFUser
+                    
+                    let queryUsers = PFUser.query()
+                    queryUsers.getObjectInBackgroundWithId(user.objectId, block: { (userGet :PFObject!,error : NSError!) -> Void in
+                        self.followingUserList.addObject(userGet)
+                        self.tableView.reloadData()
+                        
+                    })
+                    
+                    
+                } } else {
+                // Log details of the failure
+                println("error loadind user ")
+                println(error)
+            }
+        }
+    } */
+    
     
     func getFriendshipForUser() {
         
-        // fill the cache of a user's friends
-        ParseHelper.getFriendshipAsUserA(PFUser.currentUser()!) {
+        ParseHelper.getFriendshipAsUserB(PFUser.currentUser()!) {
             (results: [AnyObject]?, error: NSError?) -> Void in
             let relations = results as? [PFObject] ?? []
             
             // use map to extract the User from a Follow object
+         /*   self.friendUsers?.extend(relations.map {
+                $0.objectForKey(ParseHelper.ParseFriendshipUserA) as! PFUser
+                }) */
+            
             self.friendUsers = relations.map {
-                $0.objectForKey(ParseHelper.ParseFriendshipUserB) as! PFUser
+                $0.objectForKey(ParseHelper.ParseFriendshipUserA) as! PFUser
             }
+            
             /*
             if let error = error {
             // Call the default error handler in case of an Error
@@ -110,14 +136,38 @@ class FriendListViewController: UIViewController {
             } */
         }
         
-        ParseHelper.getFriendshipAsUserB(PFUser.currentUser()!) {
+        // fill the cache of a user's friends
+        ParseHelper.getFriendshipAsUserA(PFUser.currentUser()!) {
             (results: [AnyObject]?, error: NSError?) -> Void in
             let relations = results as? [PFObject] ?? []
             
             // use map to extract the User from a Follow object
-            self.friendUsers?.extend(relations.map {
-                $0.objectForKey(ParseHelper.ParseFriendshipUserA) as! PFUser
-                })
+           /* self.friendUsers = relations.map {
+                $0.objectForKey(ParseHelper.ParseFriendshipUserB) as! PFUser
+            } */
+            
+            
+            var friendUsers2 = relations.map {
+                $0.objectForKey(ParseHelper.ParseFriendshipUserB) as! PFUser
+            }
+            
+            if let friendUsers = self.friendUsers {
+      
+                friendUsers2 += friendUsers
+            }
+            
+            self.friendUsers = friendUsers2
+            
+            /*
+            var friendUsers2 = relations.map {
+                $0.objectForKey(ParseHelper.ParseFriendshipUserB) as! PFUser
+            }
+
+            for var i = 0; i < friendUsers2.count; i++ {
+                self.friendUsers?.append(friendUsers2[i])
+            } */
+            
+            println(self.friendUsers)
             
             /*
             if let error = error {
@@ -157,48 +207,25 @@ extension FriendListViewController: UITableViewDataSource {
         
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCellWithIdentifier("FriendRequestCell") as! FriendRequestTableViewCell
-            cell.usernameLabel.text = "Friend Requests Here"
             
             let user = self.requestingUsers![indexPath.row]
             cell.user = user
             
             cell.delegate = self
             return cell
-        } else { /*
-            if self.friendUsers == nil || self.friendUsers?.count == 0 {
-                let cell = tableView.dequeueReusableCellWithIdentifier("FriendListCell") as! FriendListTableViewCell
-                cell.usernameLabel.text = "No friends."
+        } else {
+            let cell = tableView.dequeueReusableCellWithIdentifier("FriendListCell") as! FriendListTableViewCell
                 
-                return cell
-            } else { */
-                let cell = tableView.dequeueReusableCellWithIdentifier("FriendListCell") as! FriendListTableViewCell
-                cell.usernameLabel.text = "All Friends Here"
-                
-                let user = self.friendUsers![indexPath.row]
-                cell.user = user
+            let user = self.friendUsers![indexPath.row]
+            cell.user = user
             
-                return cell
-          //  }
+            return cell
         }
 
     }
 }
 
 extension FriendListViewController: UITableViewDelegate {
-    /*
-    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerCell = tableView.dequeueReusableCellWithIdentifier("FriendHeader") as! FriendHeaderView
-
-        if section == 0 {
-            headerCell.headerLabel.text = "Requests"
-        } else if section == 1 {
-            headerCell.headerLabel.text = "Pending"
-        } else {
-            headerCell.headerLabel.text = "All Friends"
-        }
-        
-        return headerCell
-    } */
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         
@@ -219,7 +246,7 @@ extension FriendListViewController: UITableViewDelegate {
 extension FriendListViewController: FriendRequestTableViewCellDelegate {
     
     func cell(cell: FriendRequestTableViewCell, didSelectConfirmRequest user: PFUser) {
-        ParseHelper.confirmFriendRequest(PFUser.currentUser()!, userB: user)
+        ParseHelper.confirmFriendRequest(user, userB: PFUser.currentUser()!)
         //update local cache
         self.friendUsers?.append(user)
         
@@ -228,7 +255,7 @@ extension FriendListViewController: FriendRequestTableViewCellDelegate {
     
     func cell(cell: FriendRequestTableViewCell, didSelectRejectRequest user: PFUser) {
         if var requestingUsers = requestingUsers {
-            ParseHelper.rejectFriendRequest(PFUser.currentUser()!, userB: user)
+            ParseHelper.rejectFriendRequest(user, userB: PFUser.currentUser()!)
             //update local cache
             removeObjectFromArray(user, &requestingUsers)
             

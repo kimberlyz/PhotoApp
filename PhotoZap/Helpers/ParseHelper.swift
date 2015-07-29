@@ -46,10 +46,11 @@ class ParseHelper {
         
         query.whereKey(ParseFriendshipUserB, equalTo: user)
         query.whereKey(ParseFriendshipEstablishFriendship, equalTo: true)
-        
+    
         query.findObjectsInBackgroundWithBlock(completionBlock)
     }
     
+
     /*
     // Not sure this works
     static func getFriendshipForUser(user: PFUser, completionBlock: PFArrayResultBlock) {
@@ -70,23 +71,31 @@ class ParseHelper {
             println((one as! PFObject) )
         }
         let new = 3 */
-    
+        
+        let queryFriendIsUserB = PFUser.query()
+        queryFriendIsUserB!.whereKey("username", matchesKey: ParseFriendshipUserB, inQuery: queryUserA)
+        
+        let queryFriendIsUserA = PFUser.query()
+        queryFriendIsUserA!.whereKey("username", matchesKey: ParseFriendshipUserA, inQuery: queryUserB)
+        
+    /*
         let query1 = PFUser.query()
-        query1!.whereKey("userA", containedIn: [queryUserB])
-        query1!.whereKey("userB", containedIn: [queryUserA])
+        query1!.whereKey("username", containedIn: [queryFriendIsUserA])
+        query1!.whereKey("username", containedIn: [queryFriendIsUserB]) */
         
         
-        let test =  query1?.findObjects()
+        let test =  queryFriendIsUserB!.findObjects()
         
         if let test = test {
             for one in test {
                 println((one as! PFObject) )
             }
-            let new = 3
         }
+        
+        let new = 3
 
         
-        query1?.findObjectsInBackgroundWithBlock(completionBlock)
+        queryFriendIsUserB!.findObjectsInBackgroundWithBlock(completionBlock)
     
     } */
     
@@ -153,6 +162,7 @@ class ParseHelper {
             
             for friendship in results {
                 friendship.setObject(true, forKey: self.ParseFriendshipEstablishFriendship)
+                friendship.saveInBackgroundWithBlock(nil)
             }
         }
     }
@@ -164,6 +174,12 @@ class ParseHelper {
         
         query.whereKey(ParseFriendshipUserA, equalTo: userA)
         query.whereKey(ParseFriendshipUserB, equalTo: userB)
+        /*
+        let test =  query.findObjects()
+        for one in test! {
+            println((one as! PFObject) )
+        }
+        let new = 3 */
         
         query.findObjectsInBackgroundWithBlock {
             (results: [AnyObject]?, error: NSError?) -> Void in
@@ -175,7 +191,6 @@ class ParseHelper {
             }
         }
     }
-    
     
     /** 
         Deletes a friend relationship between two users
