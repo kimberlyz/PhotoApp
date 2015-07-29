@@ -185,6 +185,7 @@ extension FriendListViewController: UITableViewDataSource {
             let user = self.requestingUsers![indexPath.row]
             cell.user = user
             
+            cell.delegate = self
             return cell
         } else if indexPath.section == 1 {
             let cell = tableView.dequeueReusableCellWithIdentifier("PendingFriendCell") as! PendingFriendTableViewCell
@@ -192,7 +193,7 @@ extension FriendListViewController: UITableViewDataSource {
             
             let user = self.pendingUsers![indexPath.row]
             cell.user = user
-            
+
             return cell
         } else { /*
             if self.friendUsers == nil || self.friendUsers?.count == 0 {
@@ -206,6 +207,7 @@ extension FriendListViewController: UITableViewDataSource {
                 
                 let user = self.friendUsers![indexPath.row]
                 cell.user = user
+            
                 return cell
           //  }
         }

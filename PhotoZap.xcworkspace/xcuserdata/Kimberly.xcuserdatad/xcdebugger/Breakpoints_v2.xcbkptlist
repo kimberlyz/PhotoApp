@@ -57,13 +57,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "PhotoZap/ViewControllers/FriendListViewController.swift"
-            timestampString = "459818057.95505"
+            filePath = "PhotoZap/AddFriend/AddFriendTableViewCell.swift"
+            timestampString = "459881325.301544"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "263"
-            endingLineNumber = "263"
-            landmarkName = "cell(_:didSelectConfirmRequest:)"
+            startingLineNumber = "58"
+            endingLineNumber = "58"
+            landmarkName = "friendButtonTapped(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -73,13 +73,45 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "PhotoZap/ViewControllers/FriendListViewController.swift"
-            timestampString = "459818059.053275"
+            filePath = "PhotoZap/AddFriend/AddFriendTableViewCell.swift"
+            timestampString = "459881326.470049"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "267"
-            endingLineNumber = "267"
-            landmarkName = "cell(_:didSelectRejectRequest:)"
+            startingLineNumber = "62"
+            endingLineNumber = "62"
+            landmarkName = "friendButtonTapped(_:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PhotoZap/ViewControllers/AddFriendViewController.swift"
+            timestampString = "459881332.605592"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "217"
+            endingLineNumber = "217"
+            landmarkName = "cell(_:didSelectFriendUser:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PhotoZap/ViewControllers/AddFriendViewController.swift"
+            timestampString = "459881333.451147"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "224"
+            endingLineNumber = "224"
+            landmarkName = "cell(_:didSelectUnfriendUser:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
