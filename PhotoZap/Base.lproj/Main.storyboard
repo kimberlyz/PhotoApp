@@ -235,38 +235,6 @@
                                             <outlet property="usernameLabel" destination="6eT-Q9-JvJ" id="9TV-EO-l8B"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PendingFriendCell" id="TFT-jn-KVF" customClass="PendingFriendTableViewCell" customModule="PhotoZap" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="TFT-jn-KVF" id="egT-br-lVW">
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pending" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gJv-kb-Vwg">
-                                                    <rect key="frame" x="15" y="11" width="64" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Album" translatesAutoresizingMaskIntoConstraints="NO" id="4SY-Ag-xV5">
-                                                    <rect key="frame" x="548" y="1" width="42" height="42"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="42" id="hZP-K1-8oQ"/>
-                                                        <constraint firstAttribute="width" constant="42" id="pMk-vN-emo"/>
-                                                    </constraints>
-                                                </imageView>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="centerY" secondItem="4SY-Ag-xV5" secondAttribute="centerY" constant="-0.5" id="I6t-yp-bG2"/>
-                                                <constraint firstItem="gJv-kb-Vwg" firstAttribute="leading" secondItem="egT-br-lVW" secondAttribute="leading" constant="15" id="Iq7-QU-jbY"/>
-                                                <constraint firstAttribute="trailing" secondItem="4SY-Ag-xV5" secondAttribute="trailing" constant="10" id="nVb-YJ-WtO"/>
-                                                <constraint firstAttribute="centerY" secondItem="gJv-kb-Vwg" secondAttribute="centerY" id="pB1-H7-H6c"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="pendingImageView" destination="4SY-Ag-xV5" id="uwz-HM-pa2"/>
-                                            <outlet property="usernameLabel" destination="gJv-kb-Vwg" id="NQe-eK-QUR"/>
-                                        </connections>
-                                    </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="gray" indentationWidth="10" reuseIdentifier="FriendListCell" id="vci-8u-F0Z" customClass="FriendListTableViewCell" customModule="PhotoZap" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>

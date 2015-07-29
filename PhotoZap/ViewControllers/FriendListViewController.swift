@@ -13,7 +13,7 @@ import ConvenienceKit
 class FriendListViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
-    var friendSectionTitles : [String] = ["Requests", "Pending", "All Friends"]
+    var friendSectionTitles : [String] = ["Requests", "All Friends"]
     
     // stores all the users that match the current search query
     var users: [PFUser]?
@@ -41,12 +41,6 @@ class FriendListViewController: UIViewController {
             cells. In this case, we reload the data to reflect "following" status
             */
            tableView.reloadData()
-        }
-    }
-    
-    var pendingUsers: [PFUser]? {
-        didSet {
-            tableView.reloadData()
         }
     }
     
@@ -79,7 +73,6 @@ class FriendListViewController: UIViewController {
         } */
         
         getFriendshipForUser()
-        getPendingFriendsForUser()
         getFriendRequests()
         //tableView.reloadData()
         println(self.friendUsers)
@@ -95,19 +88,6 @@ class FriendListViewController: UIViewController {
             
             self.requestingUsers = relations.map {
                 $0.objectForKey(ParseHelper.ParseFriendshipUserA) as! PFUser
-            }
-        }
-    }
-    
-    func getPendingFriendsForUser() {
-        // fill the cache of a user's pending friends
-        ParseHelper.getPendingFriendRequests(PFUser.currentUser()!) {
-            (results: [AnyObject]?, error: NSError?) -> Void in
-            let relations = results as? [PFObject] ?? []
-            
-            // use map to extract the User from a Friendship object
-            self.pendingUsers = relations.map {
-                $0.objectForKey(ParseHelper.ParseFriendshipUserB) as! PFUser
             }
         }
     }
@@ -150,7 +130,6 @@ class FriendListViewController: UIViewController {
 }
 
 
-
 extension FriendListViewController: UITableViewDataSource {
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -164,8 +143,6 @@ extension FriendListViewController: UITableViewDataSource {
         
         if section == 0 {
             return self.requestingUsers?.count ?? 0
-        } else if section == 1 {
-            return self.pendingUsers?.count ?? 0
         } else {
             return self.friendUsers?.count ?? 0
         }
@@ -186,14 +163,6 @@ extension FriendListViewController: UITableViewDataSource {
             cell.user = user
             
             cell.delegate = self
-            return cell
-        } else if indexPath.section == 1 {
-            let cell = tableView.dequeueReusableCellWithIdentifier("PendingFriendCell") as! PendingFriendTableViewCell
-            cell.usernameLabel.text = "Pending Friends Here"
-            
-            let user = self.pendingUsers![indexPath.row]
-            cell.user = user
-
             return cell
         } else { /*
             if self.friendUsers == nil || self.friendUsers?.count == 0 {
@@ -235,20 +204,12 @@ extension FriendListViewController: UITableViewDelegate {
         
         if section == 0 && (self.requestingUsers == nil || self.requestingUsers?.count == 0) {
             return 0
-        } else if section == 1 && (self.pendingUsers == nil || self.pendingUsers?.count == 0) {
-            return 0
         } else if section == 2 && (self.friendUsers == nil || self.friendUsers?.count == 0) {
             return 0}
         else {
             return 30
         }
     }
-    
-
-    /*
-    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        timelineComponent.targetWillDisplayEntry(indexPath.row)
-    } */
 
 }
 
