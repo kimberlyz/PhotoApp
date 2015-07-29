@@ -8,6 +8,7 @@
 
 import UIKit
 import Parse
+import ConvenienceKit
 
 class FriendListViewController: UIViewController {
 
@@ -24,22 +25,22 @@ class FriendListViewController: UIViewController {
     */
     
     // Keeps track of how many times friendUsers has been accessed
-    var count = 0
+  //  var count = 0
     
     var friendUsers: [PFUser]? {
         didSet {
-            
+            /*
             if count == 0 {
                 count++
             } else if count == 1 {
                 tableView.reloadData()
                 count = 0
-            }
+            } */
             /**
             the list of following users may be fetched after the tableView has displayed
             cells. In this case, we reload the data to reflect "following" status
             */
-          //  tableView.reloadData()
+           tableView.reloadData()
         }
     }
     
@@ -178,7 +179,7 @@ extension FriendListViewController: UITableViewDataSource {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         if indexPath.section == 0 {
-            let cell = tableView.dequeueReusableCellWithIdentifier("FriendListCell") as! FriendListTableViewCell
+            let cell = tableView.dequeueReusableCellWithIdentifier("FriendRequestCell") as! FriendRequestTableViewCell
             cell.usernameLabel.text = "Friend Requests Here"
             
             let user = self.requestingUsers![indexPath.row]
@@ -186,7 +187,7 @@ extension FriendListViewController: UITableViewDataSource {
             
             return cell
         } else if indexPath.section == 1 {
-            let cell = tableView.dequeueReusableCellWithIdentifier("FriendListCell") as! FriendListTableViewCell
+            let cell = tableView.dequeueReusableCellWithIdentifier("PendingFriendCell") as! PendingFriendTableViewCell
             cell.usernameLabel.text = "Pending Friends Here"
             
             let user = self.pendingUsers![indexPath.row]
@@ -248,4 +249,29 @@ extension FriendListViewController: UITableViewDelegate {
     } */
 
 }
+
+
+// MARK: AddFriendTableViewCell Delegate
+
+extension FriendListViewController: FriendRequestTableViewCellDelegate {
+    
+    func cell(cell: FriendRequestTableViewCell, didSelectConfirmRequest user: PFUser) {
+        ParseHelper.confirmFriendRequest(PFUser.currentUser()!, userB: user)
+        //update local cache
+        self.friendUsers?.append(user)
+        
+        removeObjectFromArray(user, &self.requestingUsers!)
+    }
+    
+    func cell(cell: FriendRequestTableViewCell, didSelectRejectRequest user: PFUser) {
+        if var requestingUsers = requestingUsers {
+            ParseHelper.rejectFriendRequest(PFUser.currentUser()!, userB: user)
+            //update local cache
+            removeObjectFromArray(user, &requestingUsers)
+            
+            self.requestingUsers = requestingUsers
+        }
+    }
+}
+
 

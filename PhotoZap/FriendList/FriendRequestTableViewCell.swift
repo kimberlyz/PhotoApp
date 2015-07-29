@@ -6,50 +6,40 @@
 //  Copyright (c) 2015 Kimberly Zai. All rights reserved.
 //
 
-/*
+
 import UIKit
 import Parse
 
 protocol FriendRequestTableViewCellDelegate: class {
-    func cell(cell: AddFriendTableViewCell, didSelectFriendUser user: PFUser)
-    func cell(cell: AddFriendTableViewCell, didSelectUnfriendUser user: PFUser)
+    func cell(cell: FriendRequestTableViewCell, didSelectConfirmRequest user: PFUser)
+    func cell(cell: FriendRequestTableViewCell, didSelectRejectRequest user: PFUser)
 }
 
 class FriendRequestTableViewCell: UITableViewCell {
     
+
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var friendButton: UIButton!
-    weak var delegate: AddFriendTableViewCellDelegate?
+    weak var delegate: FriendRequestTableViewCellDelegate?
     
     var user: PFUser? {
         didSet {
-            usernameLabel.text = user?.username
-        }
-    }
-    
-    var canFriend: Bool? = true {
-        didSet {
-            /*
-            Change the state of the follow button based on whether or not
-            it is possible to follow a user.
-            */
-            if let canFriend = canFriend {
-                friendButton.selected = !canFriend
+            if let user = user {
+                user.fetchIfNeeded()
+                usernameLabel.text = user["username"] as? String
             }
         }
     }
     
-    
     @IBAction func friendButtonTapped(sender: AnyObject) {
         
-        if let canFriend = canFriend where canFriend == true {
-            delegate?.cell(self, didSelectFriendUser: user!)
-            self.canFriend = false
-        } else {
-            delegate?.cell(self, didSelectUnfriendUser: user!)
-            self.canFriend = true
-        }
-    } 
+        friendButton.selected = true
+        delegate?.cell(self, didSelectConfirmRequest: user!)
+    }
+    
+    @IBAction func rejectButton(sender: AnyObject) {
+        delegate?.cell(self, didSelectRejectRequest: user!)
+    }
+    
     
 }
-*/

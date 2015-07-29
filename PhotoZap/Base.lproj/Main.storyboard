@@ -185,6 +185,88 @@
                                             <outlet property="headerLabel" destination="0oZ-bs-WpH" id="UEw-xO-XL2"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="FriendRequestCell" id="Z3R-wB-4KF" customClass="FriendRequestTableViewCell" customModule="PhotoZap" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Z3R-wB-4KF" id="03Y-AL-im2">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Friend Requests" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6eT-Q9-JvJ">
+                                                    <rect key="frame" x="15" y="11" width="126" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RWu-RB-nkP" userLabel="Friend Button">
+                                                    <rect key="frame" x="548" y="2" width="42" height="42"/>
+                                                    <state key="normal" image="Add">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <state key="selected" image="Check"/>
+                                                    <connections>
+                                                        <action selector="friendButtonTapped:" destination="Z3R-wB-4KF" eventType="touchUpInside" id="ULB-1W-xwD"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ded-96-oyT" userLabel="Reject Button">
+                                                    <rect key="frame" x="483" y="4" width="35" height="35"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="35" id="LxM-bN-ZQa"/>
+                                                        <constraint firstAttribute="width" constant="35" id="fWa-GK-Gv8"/>
+                                                    </constraints>
+                                                    <state key="normal" image="Reject">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="rejectButton:" destination="Z3R-wB-4KF" eventType="touchUpInside" id="JC9-jG-qjf"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="centerY" secondItem="ded-96-oyT" secondAttribute="centerY" id="9LR-LD-lmf"/>
+                                                <constraint firstAttribute="centerY" secondItem="RWu-RB-nkP" secondAttribute="centerY" constant="-1.5" id="KHO-Ml-TsM"/>
+                                                <constraint firstAttribute="trailing" secondItem="RWu-RB-nkP" secondAttribute="trailing" constant="10" id="Pqc-BW-hx6"/>
+                                                <constraint firstItem="6eT-Q9-JvJ" firstAttribute="leading" secondItem="03Y-AL-im2" secondAttribute="leading" constant="15" id="T4T-AJ-62W"/>
+                                                <constraint firstAttribute="centerY" secondItem="6eT-Q9-JvJ" secondAttribute="centerY" id="Xtc-24-HzI"/>
+                                                <constraint firstItem="RWu-RB-nkP" firstAttribute="leading" secondItem="ded-96-oyT" secondAttribute="trailing" constant="30" id="azy-me-LIE"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="friendButton" destination="RWu-RB-nkP" id="kOa-OD-2C0"/>
+                                            <outlet property="usernameLabel" destination="6eT-Q9-JvJ" id="9TV-EO-l8B"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PendingFriendCell" id="TFT-jn-KVF" customClass="PendingFriendTableViewCell" customModule="PhotoZap" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="TFT-jn-KVF" id="egT-br-lVW">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pending" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gJv-kb-Vwg">
+                                                    <rect key="frame" x="15" y="11" width="64" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Album" translatesAutoresizingMaskIntoConstraints="NO" id="4SY-Ag-xV5">
+                                                    <rect key="frame" x="548" y="1" width="42" height="42"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="42" id="hZP-K1-8oQ"/>
+                                                        <constraint firstAttribute="width" constant="42" id="pMk-vN-emo"/>
+                                                    </constraints>
+                                                </imageView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="centerY" secondItem="4SY-Ag-xV5" secondAttribute="centerY" constant="-0.5" id="I6t-yp-bG2"/>
+                                                <constraint firstItem="gJv-kb-Vwg" firstAttribute="leading" secondItem="egT-br-lVW" secondAttribute="leading" constant="15" id="Iq7-QU-jbY"/>
+                                                <constraint firstAttribute="trailing" secondItem="4SY-Ag-xV5" secondAttribute="trailing" constant="10" id="nVb-YJ-WtO"/>
+                                                <constraint firstAttribute="centerY" secondItem="gJv-kb-Vwg" secondAttribute="centerY" id="pB1-H7-H6c"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="pendingImageView" destination="4SY-Ag-xV5" id="uwz-HM-pa2"/>
+                                            <outlet property="usernameLabel" destination="gJv-kb-Vwg" id="NQe-eK-QUR"/>
+                                        </connections>
+                                    </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="gray" indentationWidth="10" reuseIdentifier="FriendListCell" id="vci-8u-F0Z" customClass="FriendListTableViewCell" customModule="PhotoZap" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
@@ -206,34 +288,6 @@
                                         <connections>
                                             <outlet property="usernameLabel" destination="iiH-jP-ggy" id="w1W-Eq-g2R"/>
                                         </connections>
-                                    </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="FriendRequestCell" id="Z3R-wB-4KF">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Z3R-wB-4KF" id="03Y-AL-im2">
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Friend Requests" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6eT-Q9-JvJ">
-                                                    <rect key="frame" x="15" y="11" width="126" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RWu-RB-nkP">
-                                                    <rect key="frame" x="548" y="2" width="42" height="42"/>
-                                                    <state key="normal" image="Add">
-                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </state>
-                                                    <state key="selected" image="Check"/>
-                                                </button>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="centerY" secondItem="RWu-RB-nkP" secondAttribute="centerY" constant="-1.5" id="KHO-Ml-TsM"/>
-                                                <constraint firstAttribute="trailing" secondItem="RWu-RB-nkP" secondAttribute="trailing" constant="10" id="Pqc-BW-hx6"/>
-                                                <constraint firstItem="6eT-Q9-JvJ" firstAttribute="leading" secondItem="03Y-AL-im2" secondAttribute="leading" constant="15" id="T4T-AJ-62W"/>
-                                                <constraint firstAttribute="centerY" secondItem="6eT-Q9-JvJ" secondAttribute="centerY" id="Xtc-24-HzI"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -428,5 +482,6 @@
         <image name="Check" width="42" height="42"/>
         <image name="Friends" width="42" height="42"/>
         <image name="Home" width="38" height="36"/>
+        <image name="Reject" width="50" height="50"/>
     </resources>
 </document>

@@ -10,6 +10,7 @@
 		4DF94236657B40DD58D03286 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EB23EE8F0907A83F0AE0437 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		DB0A32411B56F94A009D332C /* WiFiDirectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0A32401B56F94A009D332C /* WiFiDirectViewController.swift */; };
 		DB0A32441B581137009D332C /* ReceivedPhotoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0A32431B581137009D332C /* ReceivedPhotoTableViewCell.swift */; };
+		DB0EA40D1B683DFF00A2D476 /* PendingFriendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0EA40C1B683DFF00A2D476 /* PendingFriendTableViewCell.swift */; };
 		DB16251F1B5043B000EC0004 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB16251E1B5043B000EC0004 /* AppDelegate.swift */; };
 		DB1625241B5043B000EC0004 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB1625221B5043B000EC0004 /* Main.storyboard */; };
 		DB1625261B5043B000EC0004 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB1625251B5043B000EC0004 /* Images.xcassets */; };
@@ -44,6 +45,7 @@
 		C28908C0763EB2D17CFE748D /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		DB0A32401B56F94A009D332C /* WiFiDirectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WiFiDirectViewController.swift; sourceTree = "<group>"; };
 		DB0A32431B581137009D332C /* ReceivedPhotoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReceivedPhotoTableViewCell.swift; sourceTree = "<group>"; };
+		DB0EA40C1B683DFF00A2D476 /* PendingFriendTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PendingFriendTableViewCell.swift; sourceTree = "<group>"; };
 		DB1625191B5043B000EC0004 /* PhotoZap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoZap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB16251D1B5043B000EC0004 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DB16251E1B5043B000EC0004 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -180,6 +182,7 @@
 				DBAD5DF01B669E4C0076FE66 /* FriendRequestTableViewCell.swift */,
 				DB6168D41B5576D800305D2E /* FriendListTableViewCell.swift */,
 				DBAD5DEC1B62B6B00076FE66 /* FriendHeaderView.swift */,
+				DB0EA40C1B683DFF00A2D476 /* PendingFriendTableViewCell.swift */,
 			);
 			path = FriendList;
 			sourceTree = "<group>";
@@ -388,6 +391,7 @@
 				DB6AC4691B5431430019C46E /* FriendListViewController.swift in Sources */,
 				DB6AC4671B54307B0019C46E /* AlbumViewController.swift in Sources */,
 				DB0A32411B56F94A009D332C /* WiFiDirectViewController.swift in Sources */,
+				DB0EA40D1B683DFF00A2D476 /* PendingFriendTableViewCell.swift in Sources */,
 				DBAD5DF11B669E4C0076FE66 /* FriendRequestTableViewCell.swift in Sources */,
 				DB16251F1B5043B000EC0004 /* AppDelegate.swift in Sources */,
 				DB0A32441B581137009D332C /* ReceivedPhotoTableViewCell.swift in Sources */,
