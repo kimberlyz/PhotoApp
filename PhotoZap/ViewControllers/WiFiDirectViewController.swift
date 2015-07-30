@@ -119,6 +119,16 @@ class WiFiDirectViewController: UIViewController, UINavigationControllerDelegate
         
         println("Notification officially sent!!!")
     }
+    
+    /*
+    func advertiser(_ advertiser: MCNearbyServiceAdvertiser!,
+        didReceiveInvitationFromPeer peerID: MCPeerID!,
+        withContext context: NSData!,
+        invitationHandler invitationHandler: ((Bool,
+        MCSession!) -> Void)!) {
+            
+    } */
+
 
 }
 

@@ -24,7 +24,14 @@ class AlbumViewController: UIViewController, CTAssetsPickerControllerDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
     }
+  /*
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        nearbyFriends = NearbyFriendsViewController()
+    } */
     
     @IBAction func zapButtonTapped(sender: AnyObject) {
         showAlbum()
@@ -73,6 +80,12 @@ extension AlbumViewController : CTAssetsPickerControllerDelegate {
     func assetsPickerController(picker: CTAssetsPickerController!, didFinishPickingAssets assets: [AnyObject]!) {
         picker.dismissViewControllerAnimated(true, completion: nil)
         self.assets = assets
+        
+        
+        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let nearbyFriends = mainStoryboard.instantiateViewControllerWithIdentifier("NearbyFriendsViewController") as! NearbyFriendsViewController
+
+        self.presentViewController(nearbyFriends, animated: true, completion: nil)
         // tableView.reloadData
     }
     
