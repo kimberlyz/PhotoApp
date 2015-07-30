@@ -46,7 +46,7 @@ class AlbumViewController: UIViewController, CTAssetsPickerControllerDelegate {
 //            self.presentViewController(picker, animated: true, completion: nil)
 //            }
 //        }
-        
+        /*
         PHPhotoLibrary.requestAuthorization() { (status:PHAuthorizationStatus) in
             
             dispatch_async(dispatch_get_main_queue()) {
@@ -54,7 +54,7 @@ class AlbumViewController: UIViewController, CTAssetsPickerControllerDelegate {
                 picker.delegate = self
                 self.presentViewController(picker, animated: true, completion: nil)
             }
-        }
+        } */
 
     }
     

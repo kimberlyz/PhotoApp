@@ -64,10 +64,8 @@ class FriendListViewController: UIViewController {
             self.friendUsers = relations
         } */
         
-        getFriendshipForUser()
         getFriendRequests()
-        
-        
+        getFriendshipForUser()
     }
     
     func getFriendRequests() {
@@ -79,6 +77,8 @@ class FriendListViewController: UIViewController {
             self.requestingUsers = relations.map {
                 $0.objectForKey(ParseHelper.ParseFriendshipUserA) as! PFUser
             }
+            
+            self.tableView.reloadData()
         }
     }
     
@@ -106,33 +106,26 @@ class FriendListViewController: UIViewController {
                     $0.objectForKey(ParseHelper.ParseFriendshipUserB) as! PFUser
                 }
                 
+                // If your list of friends has changed (# of friends has changed),
+                // add the friends to the array and reload the tableView
                 if self.friendUsersCount != self.friendUsers.count {
+                    self.friendUsers = []
                     if let friend1 = friendUsers1 {
                         self.friendUsers += friend1
-                        //println("FriendUsers1: \(self.friendUsers)")
                     }
                     
                     if let friend2 = friendUsers2 {
                         self.friendUsers += friend2
-                        //println("FriendUsers2: \(self.friendUsers)")
                     }
                     
+                    // Keep number of friends up-to-date
                     self.friendUsersCount = self.friendUsers.count
                     
-                    //self.friendUsers.sort({ $0.username > $1.username })
+                    // Sort friends by their usernames alphabetically
                     self.friendUsers.sort({ $0.username < $1.username })
-                    //self.friendUsers = sorted(self.friendUsers, {$0 < $1})
+                    
                     self.tableView.reloadData()
                 }
-
-                
-                /*
-                if self.friendUsersCount != self.friendUsers.count {
-                    self.friendUsersCount = self.friendUsers.count
-                    self.tableView.reloadData()
-                } */
-               // self.tableView.reloadData()
-                
             }
         }
     }
@@ -213,13 +206,28 @@ extension FriendListViewController: FriendRequestTableViewCellDelegate {
     }
     
     func cell(cell: FriendRequestTableViewCell, didSelectRejectRequest user: PFUser) {
-        if var requestingUsers = requestingUsers {
-            ParseHelper.rejectFriendRequest(user, userB: PFUser.currentUser()!)
-            //update local cache
-            removeObjectFromArray(user, &requestingUsers)
-            
-            self.requestingUsers = requestingUsers
+        
+        let alertController = UIAlertController(title: "Reject \(user.username!)'s request?", message: "", preferredStyle: UIAlertControllerStyle.Alert)
+        
+        let dismissAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+        let yesAction = UIAlertAction(title: "Yes", style: .Default) { (action) -> Void in
+            if var requestingUsers = self.requestingUsers {
+                ParseHelper.rejectFriendRequest(user, userB: PFUser.currentUser()!)
+                //update local cache
+                removeObjectFromArray(user, &requestingUsers)
+                
+                self.requestingUsers = requestingUsers
+                
+                self.tableView.reloadData()
+            }
         }
+        
+        alertController.addAction(dismissAction)
+        alertController.addAction(yesAction)
+
+
+        self.presentViewController(alertController, animated: true, completion: nil)
+        
     }
 }
 

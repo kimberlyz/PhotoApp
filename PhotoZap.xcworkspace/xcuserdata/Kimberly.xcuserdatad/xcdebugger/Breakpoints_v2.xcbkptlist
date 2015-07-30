@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PhotoZap/ViewControllers/AddFriendViewController.swift"
-            timestampString = "459886316.692154"
+            timestampString = "459969321.161816"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "210"
-            endingLineNumber = "210"
+            startingLineNumber = "224"
+            endingLineNumber = "224"
             landmarkName = "cell(_:didSelectFriendUser:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -74,11 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PhotoZap/ViewControllers/AddFriendViewController.swift"
-            timestampString = "459886316.692154"
+            timestampString = "459969321.161816"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "217"
-            endingLineNumber = "217"
+            startingLineNumber = "231"
+            endingLineNumber = "231"
             landmarkName = "cell(_:didSelectUnfriendUser:)"
             landmarkType = "5">
          </BreakpointContent>
