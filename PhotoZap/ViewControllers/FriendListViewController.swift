@@ -85,69 +85,40 @@ class FriendListViewController: UIViewController {
 
     func getFriendshipForUser() {
         
-        ParseHelper.getFriendshipAsUserB(PFUser.currentUser()!) {
-            (results: [AnyObject]?, error: NSError?) -> Void in
-            let relations = results as? [PFObject] ?? []
+        dispatch_async(dispatch_get_global_queue(Int(QOS_CLASS_BACKGROUND.value), 0)) { // 1
             
-            // use map to extract the User from a Follow object
-         /*   self.friendUsers?.extend(relations.map {
-                $0.objectForKey(ParseHelper.ParseFriendshipUserA) as! PFUser
-                }) */
+            var friendUsers1 : [PFUser]?
+            var friendUsers2 : [PFUser]?
             
-            self.friendUsers = relations.map {
-                $0.objectForKey(ParseHelper.ParseFriendshipUserA) as! PFUser
+            ParseHelper.getFriendshipAsUserB(PFUser.currentUser()!) {
+                (results: [AnyObject]?, error: NSError?) -> Void in
+                let relations = results as? [PFObject] ?? []
+                
+                friendUsers1 = relations.map {
+                    $0.objectForKey(ParseHelper.ParseFriendshipUserA) as! PFUser
+                }
             }
             
-            /*
-            if let error = error {
-            // Call the default error handler in case of an Error
-            ErrorHandling.defaultErrorHandler(error)
-            } */
+            // fill the cache of a user's friends
+            ParseHelper.getFriendshipAsUserA(PFUser.currentUser()!) {
+                (results: [AnyObject]?, error: NSError?) -> Void in
+                let relations = results as? [PFObject] ?? []
+                
+                friendUsers2 = relations.map {
+                    $0.objectForKey(ParseHelper.ParseFriendshipUserB) as! PFUser
+                }
+            }
             
-            
+            dispatch_async(dispatch_get_main_queue()) { // 2
+                if let friendUsers1 = friendUsers1, let friendUsers2 = friendUsers2 {
+                    friendUsers1 += friendUsers2
+                }
+                self.friendUsers = friendUsers1 + friendUsers2
+                self.tableView.reloadData()
+            }
         }
         
-        // fill the cache of a user's friends
-        ParseHelper.getFriendshipAsUserA(PFUser.currentUser()!) {
-            (results: [AnyObject]?, error: NSError?) -> Void in
-            let relations = results as? [PFObject] ?? []
-            
-            // use map to extract the User from a Follow object
-           /* self.friendUsers = relations.map {
-                $0.objectForKey(ParseHelper.ParseFriendshipUserB) as! PFUser
-            } */
-            
-            
-            var friendUsers2 = relations.map {
-                $0.objectForKey(ParseHelper.ParseFriendshipUserB) as! PFUser
-            }
-            
-            if let friendUsers = self.friendUsers {
-      
-                friendUsers2 += friendUsers
-            }
-            
-            self.friendUsers = friendUsers2
-            
-            /*
-            var friendUsers2 = relations.map {
-                $0.objectForKey(ParseHelper.ParseFriendshipUserB) as! PFUser
-            }
-
-            for var i = 0; i < friendUsers2.count; i++ {
-                self.friendUsers?.append(friendUsers2[i])
-            } */
-            
-            println(self.friendUsers)
-            
-            /*
-            if let error = error {
-            // Call the default error handler in case of an Error
-            ErrorHandling.defaultErrorHandler(error)
-            } */
-        }
     }
-
 }
 
 
