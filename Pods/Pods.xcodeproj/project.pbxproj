@@ -452,7 +452,6 @@
 		C862AD890A89BEC067CDE590 /* FBSDKGraphRequestDataAttachment.h in Headers */ = {isa = PBXBuildFile; fileRef = D3FD7B22617F4BCE07FD3B05 /* FBSDKGraphRequestDataAttachment.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C909A91814F13C8C0334070D /* GridHiddenAlbum@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A0459DEFD7B685AD9554AF63 /* GridHiddenAlbum@2x.png */; };
 		C920EEB35DC5BB22B1BC1BE5 /* FBSDKLoginKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 339159A08C9E1F0E187F0AD4 /* FBSDKLoginKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C9F473576188971B9E5103EF /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 847E34D3CA9DB8E96E7EE1B7 /* Bolts.framework */; };
 		CA41DCA766FECB736DE51A2C /* ConvenienceKit.bundle in Resources */ = {isa = PBXBuildFile; fileRef = C1C6C24066950CEDF5216A7C /* ConvenienceKit.bundle */; };
 		CAE9339D83D6D97F5D4C48DE /* GridEmptyAlbum@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = B42DC3F81F0DC5761114E074 /* GridEmptyAlbum@3x.png */; };
 		CB3F252102B72A818C619802 /* hi-IN.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 4C8D4B59D4404CB4F5832A27 /* hi-IN.lproj */; };
@@ -484,7 +483,6 @@
 		DB6A2B939B36E17BF8232696 /* BadgeFavorites@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F8C2EA55A4FB61A33B23F34 /* BadgeFavorites@3x.png */; };
 		DBBDA2FE4BFD8D91EF93509F /* FBSDKProfile+Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BE7145B52E31303E7DB3879 /* FBSDKProfile+Internal.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		DC4FCE35B2D1F86F4A863369 /* Bond+UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944FE404E80DB173D0526843 /* Bond+UIButton.swift */; };
-		DC6CB037EB269B4551A21CC5 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 847E34D3CA9DB8E96E7EE1B7 /* Bolts.framework */; };
 		DE5F00E5DD9B190A405AF303 /* FBSDKBridgeAPIProtocolNativeV1.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB166B3BC582751C926272F /* FBSDKBridgeAPIProtocolNativeV1.m */; };
 		DE71DE006385C131A35D8906 /* PlayButton@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = E5EE16AE7E369F80FFC605F5 /* PlayButton@3x.png */; };
 		E05EA628C89DDD86AC5E8A0F /* Bond+UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F357FE32A8F75C67D925679 /* Bond+UITextField.swift */; };
@@ -1319,8 +1317,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				66EE72F8EB190469B3DC7441 /* Bolts.framework in Frameworks */,
-				DC6CB037EB269B4551A21CC5 /* Bolts.framework in Frameworks */,
-				C9F473576188971B9E5103EF /* Bolts.framework in Frameworks */,
 				5A1C5CC66FEF917EAA28FD76 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

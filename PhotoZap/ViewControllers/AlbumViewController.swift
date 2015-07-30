@@ -12,7 +12,7 @@ import CTAssetsPickerController
 
 class AlbumViewController: UIViewController, CTAssetsPickerControllerDelegate {
     
-    
+    var assets : [AnyObject] = []
     
     var freshLaunch = true
     override func viewWillAppear(animated: Bool) {
@@ -22,52 +22,63 @@ class AlbumViewController: UIViewController, CTAssetsPickerControllerDelegate {
         }
     }
 
-  //  self.assets = [[NSMutableArray alloc] init]
-    
-   // var assets:[PHAsset] = []
-    var assets : [AnyObject] = []
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    @IBAction func zapButtonTapped(sender: AnyObject) {
+        showAlbum()
+    }
+    
+    @IBAction func wifiButtonTapped(sender: AnyObject) {
+        showAlbum()
+    }
+    
+    
+    func showAlbum() {
         
-//        
-//        // request authorization status
-//        PHPhotoLibrary.requestAuthorization() { (status:PHAuthorizationStatus) in
-//            
-//            dispatch_async(dispatch_get_main_queue()) {
-//                // update some UI
-//            // init picker
-//            var picker = CTAssetsPickerController()
-//            
-//            // set delegate
-//            picker.delegate = self
-//            
-//            // present picker
-//            self.presentViewController(picker, animated: true, completion: nil)
-//            }
-//        }
-        /*
         PHPhotoLibrary.requestAuthorization() { (status:PHAuthorizationStatus) in
-            
             dispatch_async(dispatch_get_main_queue()) {
                 var picker = CTAssetsPickerController()
                 picker.delegate = self
+                //self.presentViewController(picker, animated: true, completion: nil)
+                
+                
+                // create options for fetching photo only
+                var fetchOptions = PHFetchOptions()
+                fetchOptions.predicate = NSPredicate(format: "mediaType == %d", PHAssetMediaType.Image.rawValue)
+
+                // assign options
+                picker.assetsFetchOptions = fetchOptions;
+
+                
+                // present picker
                 self.presentViewController(picker, animated: true, completion: nil)
             }
-        } */
+        }
 
     }
-    
+}
+
+extension AlbumViewController : CTAssetsPickerControllerDelegate {
     
     func assetsPickerController(picker: CTAssetsPickerController!, didFinishPickingAssets assets: [AnyObject]!) {
         picker.dismissViewControllerAnimated(true, completion: nil)
         self.assets = assets
+        // tableView.reloadData
     }
     
-//    func assetsPickerController(picker: CTAssetsPickerController, didFinishPickingAssets: [PHAsset]) {
-//        picker.dismissViewControllerAnimated(true, completion: nil)
-//        self.assets = didFinishPickingAssets
-//        // view.reloadData
-//    }
-  
+    func assetsPickerController(picker: CTAssetsPickerController!, shouldSelectAsset asset: PHAsset!) -> Bool {
+        let max = 10
+        
+        if picker.selectedAssets.count >= max {
+            var alert = UIAlertController(title: "Attention", message: "Please select not more than \(max) assets", preferredStyle: .Alert)
+            var action = UIAlertAction(title: "OK", style: .Default, handler: nil)
+            
+            alert.addAction(action)
+            picker.presentViewController(alert, animated: true, completion: nil)
+        }
+        
+        return picker.selectedAssets.count < max
+    }
 }

@@ -16,14 +16,14 @@ class ZapViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.tabBarController?.delegate = self
+      //  self.tabBarController?.delegate = self
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+    /*
     func viewAlbum() {
         photoTakingHelper = PhotoTakingHelper(viewController: self.tabBarController!) { (image: UIImage?) in
             println("Received a callback. ALBUM")
@@ -32,12 +32,12 @@ class ZapViewController: UIViewController {
             photo.image = image
             photo.uploadPhoto()
         }
-    }
+    } */
 }
 
 
 // MARK: Tab Bar Delegate
-
+/*
 extension ZapViewController: UITabBarControllerDelegate {
     
     func tabBarController(tabBarController: UITabBarController, shouldSelectViewController viewController: UIViewController) -> Bool {
@@ -48,4 +48,4 @@ extension ZapViewController: UITabBarControllerDelegate {
             return true
         }
     }
-}
+} */
