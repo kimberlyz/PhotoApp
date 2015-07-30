@@ -35,6 +35,7 @@ class ParseHelper {
         
         query.whereKey(ParseFriendshipUserA, equalTo:user)
         query.whereKey(ParseFriendshipEstablishFriendship, equalTo: true)
+        query.includeKey("userB")
         
         query.findObjectsInBackgroundWithBlock(completionBlock)
         
@@ -46,6 +47,7 @@ class ParseHelper {
         
         query.whereKey(ParseFriendshipUserB, equalTo: user)
         query.whereKey(ParseFriendshipEstablishFriendship, equalTo: true)
+        query.includeKey("userA")
     
         query.findObjectsInBackgroundWithBlock(completionBlock)
     }
