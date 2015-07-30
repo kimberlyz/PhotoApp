@@ -51,6 +51,14 @@ class AlbumViewController: UIViewController, CTAssetsPickerControllerDelegate {
                 // assign options
                 picker.assetsFetchOptions = fetchOptions;
 
+                // set default album (Camera Roll)
+                picker.defaultAssetCollection = PHAssetCollectionSubtype.SmartAlbumUserLibrary
+                
+                // hide cancel button;
+                picker.showsCancelButton = false
+                
+                // make done button enable even without selection
+                picker.alwaysEnableDoneButton = true
                 
                 // present picker
                 self.presentViewController(picker, animated: true, completion: nil)
