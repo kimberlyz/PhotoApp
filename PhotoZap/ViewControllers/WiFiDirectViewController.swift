@@ -9,16 +9,18 @@
 import UIKit
 import MultipeerConnectivity
 
-class WiFiDirectViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, MCSessionDelegate, MCBrowserViewControllerDelegate, ReceivedPhotoTableViewCellDelegate {
+class WiFiDirectViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, MCSessionDelegate, MCBrowserViewControllerDelegate, ReceivedPhotoTableViewCellDelegate, MCNearbyServiceBrowserDelegate {
 
   //  @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var tableView: UITableView!
     
     var peerID: MCPeerID!
     var mcSession: MCSession!
+    var mcAdvertiser : MCNearbyServiceAdvertiser!
     var mcAdvertiserAssistant: MCAdvertiserAssistant!
     var friendPeerID : MCPeerID?
-    var mcBrowser : MCBrowserViewController?
+    var mcBrowser : MCNearbyServiceBrowser?
+    var mcBrowserViewController : MCBrowserViewController?
     
     var images = [UIImage]()
     
@@ -98,14 +100,24 @@ class WiFiDirectViewController: UIViewController, UINavigationControllerDelegate
     
     
     func startHosting(action: UIAlertAction!) {
-        mcAdvertiserAssistant = MCAdvertiserAssistant(serviceType: "hws-project25", discoveryInfo: nil, session: mcSession)
-        mcAdvertiserAssistant.start()
+        mcAdvertiser = MCNearbyServiceAdvertiser(peer: peerID, discoveryInfo: nil, serviceType: "hws-project25")
+        mcAdvertiser.delegate = self
+        mcAdvertiser.startAdvertisingPeer()
+        
+        //mcAdvertiserAssistant = MCAdvertiserAssistant(serviceType: "hws-project25", discoveryInfo: nil, session: mcSession)
+        //mcAdvertiserAssistant.start()
     }
     
     func joinSession(action: UIAlertAction!) {
-        mcBrowser = MCBrowserViewController(serviceType: "hws-project25", session: mcSession)
+        mcBrowser = MCNearbyServiceBrowser(peer: peerID, serviceType: "hws-project25")
         mcBrowser!.delegate = self
-        presentViewController(mcBrowser!, animated: true, completion: nil)
+        
+        var mcBrowserViewController = MCBrowserViewController(browser: mcBrowser, session: mcSession)
+        mcBrowserViewController.delegate = self
+        
+        presentViewController(mcBrowserViewController!, animated: true) {
+            mcBrowser?.startBrowsingForPeers()
+        }
     }
     
     func sendNotification() {
@@ -119,17 +131,21 @@ class WiFiDirectViewController: UIViewController, UINavigationControllerDelegate
         
         println("Notification officially sent!!!")
     }
-    
-    /*
-    func advertiser(_ advertiser: MCNearbyServiceAdvertiser!,
-        didReceiveInvitationFromPeer peerID: MCPeerID!,
-        withContext context: NSData!,
-        invitationHandler invitationHandler: ((Bool,
-        MCSession!) -> Void)!) {
+}
+
+extension WiFiDirectViewController: MCNearbyServiceAdvertiserDelegate {
+    func advertiser(advertiser: MCNearbyServiceAdvertiser!, didReceiveInvitationFromPeer peerID: MCPeerID!, withContext context: NSData!, invitationHandler: ((Bool, MCSession!) -> Void)!) {
+            var alertController = UIAlertController(title: "Received invitation from \(peerID).", message: "", preferredStyle: .Alert)
+            var rejectAction = UIAlertAction(title: "Reject", style: .Cancel, handler: nil)
+            var acceptAction = UIAlertAction(title: "Accept", style: .Default) { (action) -> Void in
+                
+                self.mcSession = MCSession(peer: self.peerID, securityIdentity: nil, encryptionPreference: .Required)
+                self.mcSession.delegate = self
             
-    } */
-
-
+                invitationHandler(true, self.mcSession)
+                self.presentViewController(alertController, animated: true, completion: nil)
+        }
+    }
 }
 
 extension WiFiDirectViewController: MCSessionDelegate {
@@ -251,6 +267,32 @@ extension WiFiDirectViewController: ReceivedPhotoTableViewCellDelegate {
         let cellIndexPath = self.tableView.indexPathForCell(cell)
         self.images.removeAtIndex(cellIndexPath!.row)
         self.tableView.deleteRowsAtIndexPaths([cellIndexPath!], withRowAnimation: UITableViewRowAnimation.Automatic)
+    }
+}
+
+extension WiFiDirectViewController: MCNearbyServiceBrowserDelegate {
+    // Found a nearby advertising peer
+    func browser(browser: MCNearbyServiceBrowser!, foundPeer peerID: MCPeerID!, withDiscoveryInfo info: [NSObject : AnyObject]!) {
+        
+        println("Found peer /(peerID.displayName)")
+        
+        mcBrowser?.invitePeer(peerID, toSession: mcSession, withContext: nil, timeout: 10)
+        
+    }
+    
+    // A nearby peer has stopped advertising
+    func browser(browser: MCNearbyServiceBrowser!, lostPeer peerID: MCPeerID!) {
+        println("Lost peer \(peerID.displayName)")
+        
+        
+        mcSession = nil
+        
+        mcAdvertiser.startAdvertisingPeer()
+        mcBrowser!.startBrowsingForPeers()
+    }
+    
+    func browser(browser: MCNearbyServiceBrowser!, didNotStartBrowsingForPeers error: NSError!) {
+        println("Error: Didn't start browsing")
     }
 }
 

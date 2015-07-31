@@ -62,10 +62,10 @@ class AlbumViewController: UIViewController, CTAssetsPickerControllerDelegate {
                 picker.defaultAssetCollection = PHAssetCollectionSubtype.SmartAlbumUserLibrary
                 
                 // hide cancel button;
-                picker.showsCancelButton = false
+                // picker.showsCancelButton = false
                 
                 // make done button enable even without selection
-                picker.alwaysEnableDoneButton = true
+                // picker.alwaysEnableDoneButton = true
                 
                 // present picker
                 self.presentViewController(picker, animated: true, completion: nil)
@@ -78,14 +78,15 @@ class AlbumViewController: UIViewController, CTAssetsPickerControllerDelegate {
 extension AlbumViewController : CTAssetsPickerControllerDelegate {
     
     func assetsPickerController(picker: CTAssetsPickerController!, didFinishPickingAssets assets: [AnyObject]!) {
+        
         picker.dismissViewControllerAnimated(true, completion: nil)
         self.assets = assets
-        
         
         let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let nearbyFriends = mainStoryboard.instantiateViewControllerWithIdentifier("NearbyFriendsViewController") as! NearbyFriendsViewController
 
         self.presentViewController(nearbyFriends, animated: true, completion: nil)
+        
         // tableView.reloadData
     }
     
