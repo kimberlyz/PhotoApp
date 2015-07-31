@@ -18,7 +18,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
         // Set up Parse SDK
-        Parse.setApplicationId("nynNgfGlqdxWbUSTVOQWpssFFHumyGd3lOKfpOgU", clientKey: "coum5Edl90uh0ARRSbRRiDYd5g02noZkNk5JKxLs")
+        Parse.setApplicationId("nynNgfGlqdxWbUSTVOQWpssFFHumyGd3lOKfpOgU", clientKey:
+            "coum5Edl90uh0ARRSbRRiDYd5g02noZkNk5JKxLs")
         
         // Done in the background
         PFAnalytics.trackAppOpenedWithLaunchOptionsInBackground(launchOptions, block: nil)

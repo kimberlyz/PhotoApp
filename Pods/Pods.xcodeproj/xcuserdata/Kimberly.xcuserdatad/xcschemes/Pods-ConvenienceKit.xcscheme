@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "52171EC4330A35D9F1C12B6D"
+               BlueprintIdentifier = "B72E647EF804CC8C6E85D9D3"
                BuildableName = "ConvenienceKit.framework"
                BlueprintName = "Pods-ConvenienceKit"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -39,6 +39,15 @@
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       allowLocationSimulation = "YES">
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "B72E647EF804CC8C6E85D9D3"
+            BuildableName = "ConvenienceKit.framework"
+            BlueprintName = "Pods-ConvenienceKit"
+            ReferencedContainer = "container:Pods.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>

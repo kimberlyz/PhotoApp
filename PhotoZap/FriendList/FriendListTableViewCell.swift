@@ -12,7 +12,16 @@ import Parse
 class FriendListTableViewCell: UITableViewCell {
 
     @IBOutlet weak var usernameLabel: UILabel!
-
+    
+    var user: PFUser? {
+        didSet {
+            if let user = user {
+                user.fetchIfNeeded()
+                usernameLabel.text = user["username"] as? String
+            }
+        }
+    }
+    
     /*
     override func awakeFromNib() {
         super.awakeFromNib()

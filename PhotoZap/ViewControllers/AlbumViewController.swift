@@ -8,76 +8,118 @@
 
 import UIKit
 import Parse
+import CTAssetsPickerController
 
-class AlbumViewController: UIViewController {
+class AlbumViewController: UIViewController, CTAssetsPickerControllerDelegate {
     
-    var photoTakingHelper: PhotoTakingHelper?
+    var assets : [AnyObject] = []
+    var zapBool : Bool?
+    
+    var freshLaunch = true
+    override func viewWillAppear(animated: Bool) {
+        if freshLaunch == true {
+            freshLaunch = false
+            self.tabBarController!.selectedIndex = 1 // 2nd tab
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.tabBarController?.delegate = self
+    }
+  /*
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
         
+        nearbyFriends = NearbyFriendsViewController()
+    } */
+    
+    @IBAction func zapButtonTapped(sender: AnyObject) {
+        zapBool = true
+        showAlbum()
     }
     
-    func takePhoto(sourceViewController: UIViewController) {
-        // instantiate photo taking class, provide callback for when photo is selected
-        photoTakingHelper = PhotoTakingHelper(viewController: self.tabBarController!, sourceViewController: sourceViewController) { (image: UIImage?) in
-            println("Received a callback")
+    @IBAction func wifiButtonTapped(sender: AnyObject) {
+        zapBool = false
+        showAlbum()
+    }
+    
+    
+    func showAlbum() {
+        
+        PHPhotoLibrary.requestAuthorization() { (status:PHAuthorizationStatus) in
+            dispatch_async(dispatch_get_main_queue()) {
+                var picker = CTAssetsPickerController()
+                picker.delegate = self
+                //self.presentViewController(picker, animated: true, completion: nil)
+                
+                
+                // create options for fetching photo only
+                var fetchOptions = PHFetchOptions()
+                fetchOptions.predicate = NSPredicate(format: "mediaType == %d", PHAssetMediaType.Image.rawValue)
 
-            let photo = Photo()
-            photo.image = image
-            photo.uploadPhoto()
+                // assign options
+                picker.assetsFetchOptions = fetchOptions;
+
+                // set default album (Camera Roll)
+                picker.defaultAssetCollection = PHAssetCollectionSubtype.SmartAlbumUserLibrary
+                
+                // hide cancel button;
+                // picker.showsCancelButton = false
+                
+                // make done button enable even without selection
+                picker.alwaysEnableDoneButton = true
+                
+                // present picker
+                self.presentViewController(picker, animated: true, completion: nil)
+            }
+        }
+
+    }
+}
+
+extension AlbumViewController : CTAssetsPickerControllerDelegate {
+    
+    func assetsPickerController(picker: CTAssetsPickerController!, didFinishPickingAssets assets: [AnyObject]!) {
+        
+        // If no photos were selected, dismiss CTAssetsPickerController
+        if assets.count == 0 {
+            picker.dismissViewControllerAnimated(true, completion: nil)
+        }
+        // If photos were selected, check for the method of sending
+        else {
+            if let zapBool = zapBool {
+                // Do Wi-Fi Direct
+                if zapBool {
+                    picker.dismissViewControllerAnimated(true, completion: nil)
+                    self.assets = assets
+                    
+                    let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                    
+                    let nearbyFriends = mainStoryboard.instantiateViewControllerWithIdentifier("NearbyFriendsNavigation") as! UINavigationController
+                    self.presentViewController(nearbyFriends, animated: true, completion: nil)
+                }
+                // Do Wi-Fi Delay
+                else {
+                    
+                     println("Do Wi-Fi Delay")
+                }
+            }
+        }
+        // tableView.reloadData
+    }
+    
+    func assetsPickerController(picker: CTAssetsPickerController!, shouldSelectAsset asset: PHAsset!) -> Bool {
+        let max = 10
+        
+        if picker.selectedAssets.count >= max {
+            var alert = UIAlertController(title: "Attention", message: "Please select not more than \(max) assets", preferredStyle: .Alert)
+            var action = UIAlertAction(title: "OK", style: .Default, handler: nil)
             
+            alert.addAction(action)
+            picker.presentViewController(alert, animated: true, completion: nil)
         }
-    }
-    
-    func viewAlbum() {
-        photoTakingHelper = PhotoTakingHelper(viewController: self.tabBarController!, sourceViewController: self) { (image: UIImage?) in
-            println("Received a callback. ALBUM")
-            
-            let photo = Photo()
-            photo.image = image
-            photo.uploadPhoto()
-        }
-    }
-    
-
-}
-
-// MARK: Tab Bar Delegate
-
-extension AlbumViewController: UITabBarControllerDelegate {
-
-    func tabBarController(tabBarController: UITabBarController, shouldSelectViewController viewController: UIViewController) -> Bool {
-        if (viewController is CameraViewController) {
-            takePhoto(viewController)
-            return false
-        } else if (viewController is AlbumViewController) {
-            viewAlbum()
-            return false
-        } else {
-            return true
-        }
+        
+        return picker.selectedAssets.count < max
     }
 }
-
-
-
-/*
-// Not sure if I need it
-override func didReceiveMemoryWarning() {
-super.didReceiveMemoryWarning()
-// Dispose of any resources that can be recreated.
-}
-
-
-
-// MARK: - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-// Get the new view controller using segue.destinationViewController.
-// Pass the selected object to the new view controller.
-}
-*/
