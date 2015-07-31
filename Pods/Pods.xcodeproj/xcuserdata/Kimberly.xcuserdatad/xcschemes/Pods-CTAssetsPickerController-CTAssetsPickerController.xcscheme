@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "242B9506B2823EB0489DF041"
+               BlueprintIdentifier = "1268EDD1FA33565D3877D109"
                BuildableName = "CTAssetsPickerController.bundle"
                BlueprintName = "Pods-CTAssetsPickerController-CTAssetsPickerController"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -39,15 +39,6 @@
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       allowLocationSimulation = "YES">
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "242B9506B2823EB0489DF041"
-            BuildableName = "CTAssetsPickerController.bundle"
-            BlueprintName = "Pods-CTAssetsPickerController-CTAssetsPickerController"
-            ReferencedContainer = "container:Pods.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>

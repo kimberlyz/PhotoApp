@@ -20,6 +20,9 @@ PODS:
     - FBSDKCoreKit/arc
   - FBSDKLoginKit (4.4.0):
     - FBSDKCoreKit
+  - Mixpanel (2.8.2):
+    - Mixpanel/Mixpanel (= 2.8.2)
+  - Mixpanel/Mixpanel (2.8.2)
   - Parse (1.7.5):
     - Bolts/Tasks (>= 1.2.0)
   - ParseFacebookUtilsV4 (1.7.5):
@@ -36,6 +39,7 @@ DEPENDENCIES:
   - ConvenienceKit
   - CTAssetsPickerController (~> 3.0.0)
   - FBSDKCoreKit
+  - Mixpanel
   - Parse
   - ParseFacebookUtilsV4
   - ParseUI
@@ -47,6 +51,7 @@ SPEC CHECKSUMS:
   CTAssetsPickerController: 4f88e226f23fbe67b421cf8b9520ebfb03ab82ff
   FBSDKCoreKit: 75bdd75c980e811db218488d99dd93b7740f4474
   FBSDKLoginKit: 02a9254a4c132412fa03577b0d53e936d068a7fb
+  Mixpanel: f4d71ac2a306e7cda6ad03d4a2be249a0fd7a967
   Parse: 7c0f115eff3e0cea3fac08d50bda47154edb8832
   ParseFacebookUtilsV4: 3107725c6f2b69e3a03afe9c3aff35d6ee3e9ba5
   ParseUI: d1228541b02a36a7354c8f47747f5f7a89cf1ff0
