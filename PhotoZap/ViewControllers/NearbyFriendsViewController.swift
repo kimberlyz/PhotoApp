@@ -22,6 +22,8 @@ class NearbyFriendsViewController: UIViewController {
     }
 
     @IBAction func cancelButtonTapped(sender: AnyObject) {
+        
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
 
     @IBAction func reselectPhotosTapped(sender: AnyObject) {

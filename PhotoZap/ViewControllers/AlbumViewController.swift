@@ -13,6 +13,7 @@ import CTAssetsPickerController
 class AlbumViewController: UIViewController, CTAssetsPickerControllerDelegate {
     
     var assets : [AnyObject] = []
+    var zapBool : Bool?
     
     var freshLaunch = true
     override func viewWillAppear(animated: Bool) {
@@ -34,10 +35,12 @@ class AlbumViewController: UIViewController, CTAssetsPickerControllerDelegate {
     } */
     
     @IBAction func zapButtonTapped(sender: AnyObject) {
+        zapBool = true
         showAlbum()
     }
     
     @IBAction func wifiButtonTapped(sender: AnyObject) {
+        zapBool = false
         showAlbum()
     }
     
@@ -65,7 +68,7 @@ class AlbumViewController: UIViewController, CTAssetsPickerControllerDelegate {
                 // picker.showsCancelButton = false
                 
                 // make done button enable even without selection
-                // picker.alwaysEnableDoneButton = true
+                picker.alwaysEnableDoneButton = true
                 
                 // present picker
                 self.presentViewController(picker, animated: true, completion: nil)
@@ -79,14 +82,30 @@ extension AlbumViewController : CTAssetsPickerControllerDelegate {
     
     func assetsPickerController(picker: CTAssetsPickerController!, didFinishPickingAssets assets: [AnyObject]!) {
         
-        picker.dismissViewControllerAnimated(true, completion: nil)
-        self.assets = assets
-        
-        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let nearbyFriends = mainStoryboard.instantiateViewControllerWithIdentifier("NearbyFriendsViewController") as! NearbyFriendsViewController
-
-        self.presentViewController(nearbyFriends, animated: true, completion: nil)
-        
+        // If no photos were selected, dismiss CTAssetsPickerController
+        if assets.count == 0 {
+            picker.dismissViewControllerAnimated(true, completion: nil)
+        }
+        // If photos were selected, check for the method of sending
+        else {
+            if let zapBool = zapBool {
+                // Do Wi-Fi Direct
+                if zapBool {
+                    picker.dismissViewControllerAnimated(true, completion: nil)
+                    self.assets = assets
+                    
+                    let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                    
+                    let nearbyFriends = mainStoryboard.instantiateViewControllerWithIdentifier("NearbyFriendsNavigation") as! UINavigationController
+                    self.presentViewController(nearbyFriends, animated: true, completion: nil)
+                }
+                // Do Wi-Fi Delay
+                else {
+                    
+                     println("Do Wi-Fi Delay")
+                }
+            }
+        }
         // tableView.reloadData
     }
     
