@@ -10,5 +10,6 @@
 #define PhotoZap_PhotoZap_Bridging_Header_h
 
 #import <CTAssetsPickerController/CTAssetsPickerController.h>
+#import <Mixpanel/Mixpanel.h>
 
 #endif

@@ -36,7 +36,26 @@ class AlbumViewController: UIViewController, CTAssetsPickerControllerDelegate {
     
     @IBAction func zapButtonTapped(sender: AnyObject) {
         zapBool = true
-        showAlbum()
+        
+        let alertController = UIAlertController(title: nil, message: "What would you like to do?", preferredStyle: .ActionSheet)
+        let sendPhotoAction = UIAlertAction(title: "Send Photo", style: .Default) { (action) in
+            self.showAlbum()
+        }
+        
+        let receivePhotoAction = UIAlertAction(title: "Receive Photo", style: .Default) { (action) in
+            println("Receive Photo Screen")
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+        
+        alertController.addAction(sendPhotoAction)
+        alertController.addAction(receivePhotoAction)
+        alertController.addAction(cancelAction)
+        
+        self.presentViewController(alertController, animated: true, completion: nil)
+        
+            
+        // showAlbum()
     }
     
     @IBAction func wifiButtonTapped(sender: AnyObject) {
@@ -76,6 +95,7 @@ class AlbumViewController: UIViewController, CTAssetsPickerControllerDelegate {
         }
 
     }
+    
 }
 
 extension AlbumViewController : CTAssetsPickerControllerDelegate {
@@ -93,7 +113,7 @@ extension AlbumViewController : CTAssetsPickerControllerDelegate {
                 if zapBool {
                     picker.dismissViewControllerAnimated(true, completion: nil)
                     self.assets = assets
-                    
+                        
                     let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
                     
                     let nearbyFriends = mainStoryboard.instantiateViewControllerWithIdentifier("NearbyFriendsNavigation") as! UINavigationController

@@ -9,16 +9,29 @@
 import UIKit
 import MultipeerConnectivity
 
-class NearbyFriendsViewController: UIViewController {
 
-    var nearbyFriends : [MCPeerID]?
-    
+class NearbyFriendsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource/*, MPCManagerDelegate */{
+
     @IBOutlet weak var tableView: UITableView!
+    
+    var isAdvertising: Bool!
+    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        /*
+        appDelegate.mpcManager.delegate = self
+        appDelegate.mpcManager.browser.startBrowsingForPeers() */
+        
+        appDelegate.mpcManager.advertiser.startAdvertisingPeer()
+        isAdvertising = true
+        
+    }
+    
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+        appDelegate.mpcManager.browser.stopBrowsingForPeers()
     }
 
     @IBAction func cancelButtonTapped(sender: AnyObject) {
@@ -31,19 +44,31 @@ class NearbyFriendsViewController: UIViewController {
 
 }
 
+/*
+extension NearbyFriendsViewController: MPCManagerDelegate {
+    func foundPeer() {
+        tableView.reloadData()
+    }
+    
+    func lostPeer() {
+        tableView.reloadData()
+    }
+} */
+
+
 
 extension NearbyFriendsViewController: UITableViewDataSource {
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return nearbyFriends?.count ?? 0
+        return appDelegate.mpcManager.foundPeers.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("nearbyFriendsCell") as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("PeerIDCell") as! UITableViewCell
         
-        cell.textLabel!.text = nearbyFriends![indexPath.row].displayName
+        // if foundPeers is not empty
+        cell.textLabel?.text = appDelegate.mpcManager.foundPeers[indexPath.row].displayName
 
         return cell
     }
-    
 }
 

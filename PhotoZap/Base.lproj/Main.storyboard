@@ -5,7 +5,7 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Nearby Friends-->
+        <!--Connections-->
         <scene sceneID="uoh-Vb-4k6">
             <objects>
                 <viewController automaticallyAdjustsScrollViewInsets="NO" id="zSz-C2-EX4" customClass="NearbyFriendsViewController" customModule="PhotoZap" customModuleProvider="target" sceneMemberID="viewController">
@@ -21,7 +21,7 @@
                                 <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                                 <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="NearbyFriendsCell" textLabel="BSd-pW-cuw" style="IBUITableViewCellStyleDefault" id="d1e-re-Fjf">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="PeerIDCell" textLabel="BSd-pW-cuw" style="IBUITableViewCellStyleDefault" id="d1e-re-Fjf">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="d1e-re-Fjf" id="rJ6-sN-qSZ">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -50,13 +50,13 @@
                             <constraint firstItem="nt9-9x-hG1" firstAttribute="top" secondItem="xhK-uS-qrm" secondAttribute="bottom" id="xOR-uO-v6f"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Nearby Friends" id="Y5V-GC-eni">
-                        <barButtonItem key="leftBarButtonItem" title="Photos" id="mYX-LA-b1W">
+                    <navigationItem key="navigationItem" title="Connections" id="Y5V-GC-eni">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="mYX-LA-b1W">
                             <connections>
                                 <action selector="reselectPhotosTapped:" destination="zSz-C2-EX4" id="ZQ6-Vq-ED7"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="lnd-ce-xgE">
+                        <barButtonItem key="rightBarButtonItem" title="Send" id="lnd-ce-xgE">
                             <connections>
                                 <action selector="cancelButtonTapped:" destination="zSz-C2-EX4" id="xcy-ch-Phj"/>
                             </connections>
@@ -82,20 +82,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1h4-5D-ajU">
-                                <rect key="frame" x="0.0" y="276" width="600" height="275"/>
-                                <color key="backgroundColor" red="0.0" green="0.50196081399917603" blue="0.50196081399917603" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <state key="normal" title="Wi-Fi">
-                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="wifiButtonTapped:" destination="StI-Ir-0gR" eventType="touchUpInside" id="k7E-m9-ExE"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bGo-5Q-piA">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="276"/>
+                                <rect key="frame" x="0.0" y="276" width="600" height="275"/>
                                 <color key="backgroundColor" red="0.26568405890000002" green="0.61388871180000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="100" id="ci0-9i-wBm"/>
@@ -115,6 +103,18 @@
                                     <action selector="zapButtonTapped:" destination="StI-Ir-0gR" eventType="touchUpInside" id="Snx-na-FRK"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1h4-5D-ajU">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="276"/>
+                                <color key="backgroundColor" red="0.0" green="0.50196081399917603" blue="0.50196081399917603" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal" title="Wi-Fi">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="wifiButtonTapped:" destination="StI-Ir-0gR" eventType="touchUpInside" id="k7E-m9-ExE"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -124,13 +124,19 @@
                             <constraint firstItem="bGo-5Q-piA" firstAttribute="height" secondItem="1h4-5D-ajU" secondAttribute="height" id="OMN-CH-BfI"/>
                             <constraint firstItem="bGo-5Q-piA" firstAttribute="top" secondItem="uKJ-HA-JGv" secondAttribute="bottom" id="Vud-nz-Ix7"/>
                             <constraint firstItem="bGo-5Q-piA" firstAttribute="leading" secondItem="NDO-8t-qaJ" secondAttribute="leading" id="Xo7-70-CtE"/>
+                            <constraint firstItem="bGo-5Q-piA" firstAttribute="top" secondItem="1h4-5D-ajU" secondAttribute="bottom" id="aHl-I0-puY"/>
                             <constraint firstAttribute="trailing" secondItem="1h4-5D-ajU" secondAttribute="trailing" id="jZ9-DL-uap"/>
+                            <constraint firstItem="lwg-Bt-7fe" firstAttribute="top" secondItem="bGo-5Q-piA" secondAttribute="bottom" id="lxm-FJ-BGO"/>
                             <constraint firstItem="lwg-Bt-7fe" firstAttribute="top" secondItem="1h4-5D-ajU" secondAttribute="bottom" id="pTR-mK-B3N"/>
                             <constraint firstAttribute="trailing" secondItem="bGo-5Q-piA" secondAttribute="trailing" id="rSV-Ag-SkX"/>
+                            <constraint firstItem="1h4-5D-ajU" firstAttribute="top" secondItem="NDO-8t-qaJ" secondAttribute="topMargin" id="se8-MR-D78"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
+                                <exclude reference="NCB-57-fa0"/>
+                                <exclude reference="Mp3-w4-BqR"/>
                                 <exclude reference="Vud-nz-Ix7"/>
+                                <exclude reference="pTR-mK-B3N"/>
                             </mask>
                         </variation>
                     </view>

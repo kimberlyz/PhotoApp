@@ -8,14 +8,20 @@
 
 import UIKit
 import Parse
+import Mixpanel
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    var mpcManager: MPCManager!
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
+        /*
+        Mixpanel.sharedInstanceWithToken(57c3cd570c65e05727b88d2f9d8fe6da)
+        let mixpanel: Mixpanel = Mixpanel.sharedInstance()
+        mixpanel.track("App launched") */
         
         // Set up Parse SDK
         Parse.setApplicationId("nynNgfGlqdxWbUSTVOQWpssFFHumyGd3lOKfpOgU", clientKey:
@@ -37,6 +43,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let notificationType = UIUserNotificationType.Alert | UIUserNotificationType.Badge
         let settings = UIUserNotificationSettings(forTypes: notificationType, categories: nil)
         application.registerUserNotificationSettings(settings)
+        
+        mpcManager = MPCManager()
         
        // application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: UIUserNotificationType.Alert | UIUserNotificationType.Badge, categories: nil))
     
