@@ -8,13 +8,13 @@
 
 import UIKit
 import MultipeerConnectivity
+import ConvenienceKit
 
 protocol MPCManagerDelegate {
     func foundPeer()
     func lostPeer()
     func invitationWasReceived(fromPeer: String)
     func connectedWithPeer(peerID: MCPeerID)
-    
 }
 
 
@@ -25,6 +25,7 @@ class MPCManager: NSObject, MCSessionDelegate, MCNearbyServiceBrowserDelegate, M
     var browser: MCNearbyServiceBrowser!
     var advertiser: MCNearbyServiceAdvertiser!
     var foundPeers = [MCPeerID]()
+    var connectedPeers = [MCPeerID]()
     var invitationHandler : ((Bool, MCSession!) -> Void)!
     var delegate : MPCManagerDelegate?
     
@@ -34,7 +35,7 @@ class MPCManager: NSObject, MCSessionDelegate, MCNearbyServiceBrowserDelegate, M
         // make the displayName your username in the future
         peer = MCPeerID(displayName: UIDevice.currentDevice().name)
         
-        session = MCSession(peer: peer)
+        session = MCSession(peer: peer, securityIdentity: nil, encryptionPreference: .Required)
         session.delegate = self
         
         browser = MCNearbyServiceBrowser(peer: peer, serviceType: "PhotoZap-mpc12")
@@ -49,6 +50,8 @@ class MPCManager: NSObject, MCSessionDelegate, MCNearbyServiceBrowserDelegate, M
 extension MPCManager: MCNearbyServiceBrowserDelegate {
     func browser(browser: MCNearbyServiceBrowser!, foundPeer peerID: MCPeerID!, withDiscoveryInfo info: [NSObject : AnyObject]!) {
         foundPeers.append(peerID)
+        println("Found Peer on receiving end")
+        println(foundPeers)
         delegate?.foundPeer()
     }
     
@@ -81,6 +84,7 @@ extension MPCManager: MCNearbyServiceAdvertiserDelegate {
             invitationHandler(true, self.mcSession)
             self.presentViewController(alertController, animated: true, completion: nil)
         } */
+        println("received invitation")
         self.invitationHandler = invitationHandler
         delegate?.invitationWasReceived(peerID.displayName)
     }
@@ -101,6 +105,7 @@ extension MPCManager: MCSessionDelegate {
             
         case MCSessionState.Connected:
             println("Connected: \(peerID.displayName)")
+            connectedPeers.append(peerID)
             
             /*
             let alertController = UIAlertController(title: "Connected", message: "", preferredStyle: UIAlertControllerStyle.Alert)
@@ -113,6 +118,8 @@ extension MPCManager: MCSessionDelegate {
             
         case MCSessionState.NotConnected:
             println("Not Connected: \(peerID.displayName)")
+            removeObjectFromArray(peerID, &connectedPeers)
+
             
             /*
             let alertController = UIAlertController(title: "Lost connection", message: "", preferredStyle: UIAlertControllerStyle.Alert)

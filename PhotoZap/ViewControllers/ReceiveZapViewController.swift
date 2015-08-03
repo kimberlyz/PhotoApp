@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MultipeerConnectivity
 
 class ReceiveZapViewController: UIViewController {
 
@@ -16,22 +17,40 @@ class ReceiveZapViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        appDelegate.mpcManager.delegate = self
+        appDelegate.mpcManager.browser.startBrowsingForPeers()
     }
 
-
-    
     @IBAction func backButtonTapped(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
 
 }
 
+extension ReceiveZapViewController: MPCManagerDelegate {
+    func foundPeer() {
+        tableView.reloadData()
+    }
+    
+    func lostPeer() {
+        tableView.reloadData()
+    }
+    
+    
+    func invitationWasReceived(fromPeer: String) {
+        // empty
+    }
+    
+    func connectedWithPeer(peerID: MCPeerID) {
+        println("Connected With Peer on the receiving end")
+    }
+}
+
 extension ReceiveZapViewController: UITableViewDataSource {
 
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "Finding Nearby Devices..."
+        return "Searching for Nearby Friends..."
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -39,6 +58,7 @@ extension ReceiveZapViewController: UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        //println(appDelegate.mpcManager.foundPeers.count)
         return appDelegate.mpcManager.foundPeers.count
     }
     
@@ -49,6 +69,12 @@ extension ReceiveZapViewController: UITableViewDataSource {
         cell.connectionStatusLabel.text = "Not connected"
         
         return cell
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let selectedPeer = appDelegate.mpcManager.foundPeers[indexPath.row] as MCPeerID
+        
+        appDelegate.mpcManager.browser.invitePeer(selectedPeer, toSession: appDelegate.mpcManager.session, withContext: nil, timeout: 20)
     }
 
 }

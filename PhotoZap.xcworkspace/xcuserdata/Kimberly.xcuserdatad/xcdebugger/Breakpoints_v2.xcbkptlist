@@ -106,7 +106,7 @@
                   moduleName = "PhotoZap"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Kimberly/Documents/iOSApps/PhotoZap/PhotoZap/ViewControllers/WiFiDirectViewController.swift"
-                  timestampString = "460313374.797814"
+                  timestampString = "460317052.940952"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "180"
@@ -121,7 +121,7 @@
                   moduleName = "PhotoZap"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Kimberly/Documents/iOSApps/PhotoZap/PhotoZap/ViewControllers/WiFiDirectViewController.swift"
-                  timestampString = "460313374.798058"
+                  timestampString = "460317052.941222"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "180"
@@ -137,13 +137,45 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "PhotoZap/ViewControllers/FriendListViewController.swift"
-            timestampString = "460063499.916405"
+            filePath = "PhotoZap/ViewControllers/ReceiveZapViewController.swift"
+            timestampString = "460316869.619819"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "81"
-            endingLineNumber = "81"
-            landmarkName = "getFriendRequests()"
+            startingLineNumber = "33"
+            endingLineNumber = "33"
+            landmarkName = "foundPeer()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PhotoZap/ViewControllers/ReceiveZapViewController.swift"
+            timestampString = "460317020.257848"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "37"
+            endingLineNumber = "37"
+            landmarkName = "lostPeer()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PhotoZap/Helpers/MPCManager.swift"
+            timestampString = "460317256.442493"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "87"
+            endingLineNumber = "87"
+            landmarkName = "advertiser(_:didReceiveInvitationFromPeer:withContext:invitationHandler:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

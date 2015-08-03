@@ -5,7 +5,7 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Connections-->
+        <!--Waiting-->
         <scene sceneID="uoh-Vb-4k6">
             <objects>
                 <viewController automaticallyAdjustsScrollViewInsets="NO" id="zSz-C2-EX4" customClass="NearbyFriendsViewController" customModule="PhotoZap" customModuleProvider="target" sceneMemberID="viewController">
@@ -50,7 +50,7 @@
                             <constraint firstItem="nt9-9x-hG1" firstAttribute="top" secondItem="xhK-uS-qrm" secondAttribute="bottom" id="xOR-uO-v6f"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Connections" id="Y5V-GC-eni">
+                    <navigationItem key="navigationItem" title="Waiting" id="Y5V-GC-eni">
                         <barButtonItem key="leftBarButtonItem" title="Cancel" id="mYX-LA-b1W">
                             <connections>
                                 <action selector="cancelButtonTapped:" destination="zSz-C2-EX4" id="eeK-0g-9tq"/>

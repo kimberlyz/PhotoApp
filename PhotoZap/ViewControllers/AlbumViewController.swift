@@ -122,10 +122,10 @@ extension AlbumViewController : CTAssetsPickerControllerDelegate {
                     
                     let nearbyFriends = mainStoryboard.instantiateViewControllerWithIdentifier("NearbyFriendsNavigation") as! UINavigationController
                     self.presentViewController(nearbyFriends, animated: true, completion: nil)
+                    //self.performSegueWithIdentifier("NearbyFriendsNavigation", sender: self)
                 }
                 // Do Wi-Fi Delay
                 else {
-                    
                      println("Do Wi-Fi Delay")
                 }
             }
