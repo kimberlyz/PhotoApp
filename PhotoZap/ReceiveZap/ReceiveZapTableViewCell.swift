@@ -1,4 +1,4 @@
-//
+
 //  ReceiveZapTableViewCell.swift
 //  PhotoZap
 //
@@ -14,7 +14,17 @@ class ReceiveZapTableViewCell: UITableViewCell {
     @IBOutlet weak var connectionStatusLabel: UILabel!
     @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
     
+//    var connection : Connection {
+//    didSet {
+    //        cell.usernameLabel.text = appDelegate.mpcManager.foundPeers[indexPath.row].displayName
+    //        cell.connectionStatusLabel.text = self.connectionState
+//    }
+//}
     
+    func displayStatus() {
+        // is my peer a member of appDelegate.mpcManager.connectedPeers
+    }
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

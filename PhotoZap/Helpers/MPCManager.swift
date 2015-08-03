@@ -14,8 +14,18 @@ protocol MPCManagerDelegate {
     func foundPeer()
     func lostPeer()
     func invitationWasReceived(fromPeer: String)
-    func connectedWithPeer(peerID: MCPeerID)
+    //func connectedWithPeer(peerID: MCPeerID)
+    
+    // ReceiveZapViewController
+    func connectedWithPeer(cell: UITableViewCell)
+    func connectingWithPeer(cell: UITableViewCell)
+    func notConnectedWithPeer(cell: UITableViewCell)
+    
+    // NearbyFriendsViewController
+    func connectedWithPeer()
+    func notConnectedWithPeer()
 }
+
 
 
 class MPCManager: NSObject, MCSessionDelegate, MCNearbyServiceBrowserDelegate, MCNearbyServiceAdvertiserDelegate {
@@ -28,7 +38,7 @@ class MPCManager: NSObject, MCSessionDelegate, MCNearbyServiceBrowserDelegate, M
     var connectedPeers = [MCPeerID]()
     var invitationHandler : ((Bool, MCSession!) -> Void)!
     var delegate : MPCManagerDelegate?
-    var connectingPeerCell : ReceiveZapTableViewCell?
+    var connectingPeerCell : UITableViewCell?
     
     override init() {
         super.init()
@@ -74,17 +84,6 @@ extension MPCManager: MCNearbyServiceBrowserDelegate {
 
 extension MPCManager: MCNearbyServiceAdvertiserDelegate {
     func advertiser(advertiser: MCNearbyServiceAdvertiser!, didReceiveInvitationFromPeer peerID: MCPeerID!, withContext context: NSData!, invitationHandler: ((Bool, MCSession!) -> Void)!) {
-        /*
-        var alertController = UIAlertController(title: "Received invitation from \(peerID).", message: "", preferredStyle: .Alert)
-        var rejectAction = UIAlertAction(title: "Reject", style: .Cancel, handler: nil)
-        var acceptAction = UIAlertAction(title: "Accept", style: .Default) { (action) -> Void in
-            
-            self.mcSession = MCSession(peer: self.peerID, securityIdentity: nil, encryptionPreference: .Required)
-            self.mcSession.delegate = self
-            
-            invitationHandler(true, self.mcSession)
-            self.presentViewController(alertController, animated: true, completion: nil)
-        } */
         println("received invitation")
         self.invitationHandler = invitationHandler
         delegate?.invitationWasReceived(peerID.displayName)
@@ -107,21 +106,20 @@ extension MPCManager: MCSessionDelegate {
         case MCSessionState.Connected:
             println("Connected: \(peerID.displayName)")
             connectedPeers.append(peerID)
-            println(connectedPeers)
-            if (connectingPeerCell != nil){
-                connectingPeerCell!.connectionStatusLabel.text = "Connected"
-                connectingPeerCell!.activityIndicatorView.stopAnimating()
+            delegate?.connectedWithPeer()
+            
+            // ReceiveZapCell
+            if connectingPeerCell != nil {
+                delegate?.connectedWithPeer(connectingPeerCell!)
                 connectingPeerCell = nil
             }
             
         case MCSessionState.Connecting:
             println("Connecting: \(peerID.displayName)")
-            if (connectingPeerCell != nil) {
-                
-                var view = connectingPeerCell?.superview
-                
-                connectingPeerCell!.connectionStatusLabel.text = "Connecting"
-                connectingPeerCell!.activityIndicatorView.startAnimating()
+            
+            // ReceiveZapCell
+            if connectingPeerCell != nil {
+                delegate?.connectingWithPeer(connectingPeerCell!)
             }
             
             
@@ -130,6 +128,13 @@ extension MPCManager: MCSessionDelegate {
             println(connectedPeers)
             if connectedPeers.count != 0 {
                 removeObjectFromArray(peerID, &connectedPeers)
+                delegate?.notConnectedWithPeer()
+            }
+            
+            // ReceiveZapCell
+            if connectingPeerCell != nil {
+                delegate?.notConnectedWithPeer(connectingPeerCell!)
+                connectingPeerCell = nil
             }
         }
         

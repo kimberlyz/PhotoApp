@@ -175,23 +175,31 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Not connected" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="do3-8w-EIg">
-                                                    <rect key="frame" x="451" y="11" width="114" height="21"/>
+                                                    <rect key="frame" x="471" y="11" width="114" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="RcY-N6-71T">
-                                                    <rect key="frame" x="572" y="11" width="20" height="20"/>
+                                                    <rect key="frame" x="565" y="11" width="20" height="20"/>
                                                 </activityIndicatorView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="Agt-ue-g6C" firstAttribute="leading" secondItem="Xpe-Sh-E5u" secondAttribute="leading" constant="15" id="74j-JT-6Im"/>
-                                                <constraint firstAttribute="trailing" secondItem="do3-8w-EIg" secondAttribute="trailing" constant="35" id="A3e-rd-USg"/>
+                                                <constraint firstAttribute="trailing" secondItem="do3-8w-EIg" secondAttribute="trailing" constant="15" id="A3e-rd-USg"/>
                                                 <constraint firstAttribute="centerY" secondItem="Agt-ue-g6C" secondAttribute="centerY" id="DQe-cY-YOU"/>
                                                 <constraint firstItem="RcY-N6-71T" firstAttribute="leading" secondItem="do3-8w-EIg" secondAttribute="trailing" constant="7" id="ECs-zU-maU"/>
                                                 <constraint firstAttribute="centerY" secondItem="do3-8w-EIg" secondAttribute="centerY" id="NZU-un-z0h"/>
+                                                <constraint firstAttribute="centerY" secondItem="RcY-N6-71T" secondAttribute="centerY" id="dmX-2M-Iqa"/>
+                                                <constraint firstAttribute="trailing" secondItem="RcY-N6-71T" secondAttribute="trailing" constant="15" id="kpE-PX-wMX"/>
                                                 <constraint firstAttribute="centerY" secondItem="RcY-N6-71T" secondAttribute="centerY" constant="0.5" id="qFP-HQ-zKy"/>
                                             </constraints>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="ECs-zU-maU"/>
+                                                    <exclude reference="qFP-HQ-zKy"/>
+                                                </mask>
+                                            </variation>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="activityIndicatorView" destination="RcY-N6-71T" id="ZHj-6s-8t7"/>

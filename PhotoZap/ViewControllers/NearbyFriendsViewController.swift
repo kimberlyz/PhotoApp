@@ -70,15 +70,24 @@ extension NearbyFriendsViewController: MPCManagerDelegate {
         alertController.addAction(acceptAction)
         alertController.addAction(declineAction)
         
-        
-        // What?
-        NSOperationQueue.mainQueue().addOperationWithBlock { () -> Void in
-            self.presentViewController(alertController, animated: true, completion: nil)
-        }
+        self.presentViewController(alertController, animated: true, completion: nil)
+    }
+
+    
+    func connectedWithPeer(cell: UITableViewCell) {
     }
     
-    func connectedWithPeer(peerID: MCPeerID) {
-        println("Connected With Peer on the sending end")
+    func connectingWithPeer(cell: UITableViewCell) {
+    }
+    
+    func notConnectedWithPeer(cell: UITableViewCell) {
+    }
+    
+    func connectedWithPeer() {
+        tableView.reloadData()
+    }
+        
+    func notConnectedWithPeer() {
         tableView.reloadData()
     }
 }
