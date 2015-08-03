@@ -16,6 +16,8 @@
 		DB1625291B5043B000EC0004 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = DB1625271B5043B000EC0004 /* LaunchScreen.xib */; };
 		DB1625351B5043B000EC0004 /* PhotoZapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB1625341B5043B000EC0004 /* PhotoZapTests.swift */; };
 		DB4657831B6C525A00F801A3 /* MPCManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4657821B6C525A00F801A3 /* MPCManager.swift */; };
+		DB4657871B6FCDB300F801A3 /* ReceiveZapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4657861B6FCDB300F801A3 /* ReceiveZapViewController.swift */; };
+		DB46578A1B6FCF7D00F801A3 /* ReceiveZapTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4657891B6FCF7D00F801A3 /* ReceiveZapTableViewCell.swift */; };
 		DB6168D51B5576D800305D2E /* FriendListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6168D41B5576D800305D2E /* FriendListTableViewCell.swift */; };
 		DB6168D81B55879400305D2E /* ParseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6168D71B55879400305D2E /* ParseHelper.swift */; };
 		DB6168DA1B55B88E00305D2E /* AddFriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6168D91B55B88E00305D2E /* AddFriendViewController.swift */; };
@@ -55,6 +57,8 @@
 		DB1625331B5043B000EC0004 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DB1625341B5043B000EC0004 /* PhotoZapTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoZapTests.swift; sourceTree = "<group>"; };
 		DB4657821B6C525A00F801A3 /* MPCManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPCManager.swift; sourceTree = "<group>"; };
+		DB4657861B6FCDB300F801A3 /* ReceiveZapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReceiveZapViewController.swift; sourceTree = "<group>"; };
+		DB4657891B6FCF7D00F801A3 /* ReceiveZapTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReceiveZapTableViewCell.swift; sourceTree = "<group>"; };
 		DB6168D41B5576D800305D2E /* FriendListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendListTableViewCell.swift; sourceTree = "<group>"; };
 		DB6168D71B55879400305D2E /* ParseHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseHelper.swift; sourceTree = "<group>"; };
 		DB6168D91B55B88E00305D2E /* AddFriendViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFriendViewController.swift; sourceTree = "<group>"; };
@@ -136,6 +140,7 @@
 		DB16251B1B5043B000EC0004 /* PhotoZap */ = {
 			isa = PBXGroup;
 			children = (
+				DB4657881B6FCF6400F801A3 /* ReceiveZap */,
 				DB0A32421B572DAE009D332C /* WiFiDirect */,
 				DB6168DB1B55BF5A00305D2E /* AddFriend */,
 				DB6168D61B55877400305D2E /* Helpers */,
@@ -178,6 +183,14 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		DB4657881B6FCF6400F801A3 /* ReceiveZap */ = {
+			isa = PBXGroup;
+			children = (
+				DB4657891B6FCF7D00F801A3 /* ReceiveZapTableViewCell.swift */,
+			);
+			path = ReceiveZap;
+			sourceTree = "<group>";
+		};
 		DB6168D31B55746F00305D2E /* FriendList */ = {
 			isa = PBXGroup;
 			children = (
@@ -213,6 +226,7 @@
 				DB0A32401B56F94A009D332C /* WiFiDirectViewController.swift */,
 				DBAD5DE61B62A2690076FE66 /* ZapViewController.swift */,
 				DB6D6E421B6AD9200038F336 /* NearbyFriendsViewController.swift */,
+				DB4657861B6FCDB300F801A3 /* ReceiveZapViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -391,6 +405,7 @@
 				DB6168DD1B55BF6D00305D2E /* AddFriendTableViewCell.swift in Sources */,
 				DB6168DA1B55B88E00305D2E /* AddFriendViewController.swift in Sources */,
 				DB6AC4691B5431430019C46E /* FriendListViewController.swift in Sources */,
+				DB4657871B6FCDB300F801A3 /* ReceiveZapViewController.swift in Sources */,
 				DB6AC4671B54307B0019C46E /* AlbumViewController.swift in Sources */,
 				DB0A32411B56F94A009D332C /* WiFiDirectViewController.swift in Sources */,
 				DBAD5DF11B669E4C0076FE66 /* FriendRequestTableViewCell.swift in Sources */,
@@ -398,6 +413,7 @@
 				DB6D6E431B6AD9200038F336 /* NearbyFriendsViewController.swift in Sources */,
 				DB0A32441B581137009D332C /* ReceivedPhotoTableViewCell.swift in Sources */,
 				DB6168D81B55879400305D2E /* ParseHelper.swift in Sources */,
+				DB46578A1B6FCF7D00F801A3 /* ReceiveZapTableViewCell.swift in Sources */,
 				DB6168D51B5576D800305D2E /* FriendListTableViewCell.swift in Sources */,
 				DBAD5DE71B62A2690076FE66 /* ZapViewController.swift in Sources */,
 			);

@@ -43,7 +43,10 @@ class AlbumViewController: UIViewController, CTAssetsPickerControllerDelegate {
         }
         
         let receivePhotoAction = UIAlertAction(title: "Receive Photo", style: .Default) { (action) in
-            println("Receive Photo Screen")
+            let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+            
+            let receiveZap = mainStoryboard.instantiateViewControllerWithIdentifier("ReceiveZapNavigation") as! UINavigationController
+            self.presentViewController(receiveZap, animated: true, completion: nil)
         }
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
@@ -51,6 +54,7 @@ class AlbumViewController: UIViewController, CTAssetsPickerControllerDelegate {
         alertController.addAction(sendPhotoAction)
         alertController.addAction(receivePhotoAction)
         alertController.addAction(cancelAction)
+        
         
         self.presentViewController(alertController, animated: true, completion: nil)
         

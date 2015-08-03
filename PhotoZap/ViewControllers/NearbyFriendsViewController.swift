@@ -34,12 +34,11 @@ class NearbyFriendsViewController: UIViewController, UITableViewDelegate, UITabl
         appDelegate.mpcManager.browser.stopBrowsingForPeers()
     }
 
-    @IBAction func cancelButtonTapped(sender: AnyObject) {
-        
-        self.dismissViewControllerAnimated(true, completion: nil)
+    @IBAction func sendButtonTapped(sender: AnyObject) {
     }
 
-    @IBAction func reselectPhotosTapped(sender: AnyObject) {
+    @IBAction func cancelButtonTapped(sender: AnyObject) {
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
 
 }
