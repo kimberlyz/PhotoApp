@@ -28,6 +28,7 @@ class MPCManager: NSObject, MCSessionDelegate, MCNearbyServiceBrowserDelegate, M
     var connectedPeers = [MCPeerID]()
     var invitationHandler : ((Bool, MCSession!) -> Void)!
     var delegate : MPCManagerDelegate?
+    var connectingPeerCell : ReceiveZapTableViewCell?
     
     override init() {
         super.init()
@@ -106,45 +107,36 @@ extension MPCManager: MCSessionDelegate {
         case MCSessionState.Connected:
             println("Connected: \(peerID.displayName)")
             connectedPeers.append(peerID)
-            
-            /*
-            let alertController = UIAlertController(title: "Connected", message: "", preferredStyle: UIAlertControllerStyle.Alert)
-            let dismissAction = UIAlertAction(title: "Ok", style: .Cancel, handler: nil)
-            alertController.addAction(dismissAction)
-            self.presentViewController(alertController, animated: true, completion: nil) */
+            println(connectedPeers)
+            if (connectingPeerCell != nil){
+                connectingPeerCell!.connectionStatusLabel.text = "Connected"
+                connectingPeerCell!.activityIndicatorView.stopAnimating()
+                connectingPeerCell = nil
+            }
             
         case MCSessionState.Connecting:
             println("Connecting: \(peerID.displayName)")
+            if (connectingPeerCell != nil) {
+                
+                var view = connectingPeerCell?.superview
+                
+                connectingPeerCell!.connectionStatusLabel.text = "Connecting"
+                connectingPeerCell!.activityIndicatorView.startAnimating()
+            }
+            
             
         case MCSessionState.NotConnected:
             println("Not Connected: \(peerID.displayName)")
-            removeObjectFromArray(peerID, &connectedPeers)
-
-            
-            /*
-            let alertController = UIAlertController(title: "Lost connection", message: "", preferredStyle: UIAlertControllerStyle.Alert)
-            let dismissAction = UIAlertAction(title: "Dismiss", style: .Cancel, handler: nil)
-            alertController.addAction(dismissAction)
-            self.presentViewController(alertController, animated: true, completion: nil) */
+            println(connectedPeers)
+            if connectedPeers.count != 0 {
+                removeObjectFromArray(peerID, &connectedPeers)
+            }
         }
         
     }
     
     
     func session(session: MCSession!, didReceiveData data: NSData!, fromPeer peerID: MCPeerID!) {
-        /*
-        
-        if let image = UIImage(data: data) {
-            dispatch_async(dispatch_get_main_queue()) { [unowned self] in
-                self.friendPeerID = peerID
-                self.images.insert(image, atIndex: 0)
-                self.tableView.reloadData()
-                //   println("Notifaction sent")
-                //  self.sendNotification()
-                //UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
-            }
-            
-        }*/
     }
     
     func session(session: MCSession!, didReceiveStream stream: NSInputStream!, withName streamName: String!, fromPeer peerID: MCPeerID!) {

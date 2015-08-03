@@ -79,6 +79,7 @@ extension NearbyFriendsViewController: MPCManagerDelegate {
     
     func connectedWithPeer(peerID: MCPeerID) {
         println("Connected With Peer on the sending end")
+        tableView.reloadData()
     }
 }
 
