@@ -47,11 +47,15 @@ class NearbyFriendsViewController: UIViewController, UITableViewDelegate, UITabl
 
 
 extension NearbyFriendsViewController: MPCManagerDelegate {
-    func foundPeer() {
-        tableView.reloadData()
-    }
+//    func foundPeer() {
+//        tableView.reloadData()
+//    }
+//    
+//    func lostPeer() {
+//        tableView.reloadData()
+//    }
     
-    func lostPeer() {
+    func refreshConnectionStatus() {
         tableView.reloadData()
     }
     
@@ -74,22 +78,22 @@ extension NearbyFriendsViewController: MPCManagerDelegate {
     }
 
     
-    func connectedWithPeer(cell: UITableViewCell) {
-    }
-    
-    func connectingWithPeer(cell: UITableViewCell) {
-    }
-    
-    func notConnectedWithPeer(cell: UITableViewCell) {
-    }
-    
-    func connectedWithPeer() {
-        tableView.reloadData()
-    }
-        
-    func notConnectedWithPeer() {
-        tableView.reloadData()
-    }
+//    func connectedWithPeer(cell: UITableViewCell) {
+//    }
+//    
+//    func connectingWithPeer(cell: UITableViewCell) {
+//    }
+//    
+//    func notConnectedWithPeer(cell: UITableViewCell) {
+//    }
+//    
+//    func connectedWithPeer() {
+//        tableView.reloadData()
+//    }
+//        
+//    func notConnectedWithPeer() {
+//        tableView.reloadData()
+//    }
 }
 
 

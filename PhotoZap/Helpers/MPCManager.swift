@@ -11,19 +11,20 @@ import MultipeerConnectivity
 import ConvenienceKit
 
 protocol MPCManagerDelegate {
-    func foundPeer()
-    func lostPeer()
+    //func foundPeer()
+    //func lostPeer()
     func invitationWasReceived(fromPeer: String)
+    func refreshConnectionStatus()
     //func connectedWithPeer(peerID: MCPeerID)
     
-    // ReceiveZapViewController
-    func connectedWithPeer(cell: UITableViewCell)
-    func connectingWithPeer(cell: UITableViewCell)
-    func notConnectedWithPeer(cell: UITableViewCell)
-    
-    // NearbyFriendsViewController
-    func connectedWithPeer()
-    func notConnectedWithPeer()
+//    // ReceiveZapViewController
+//    func connectedWithPeer(cell: UITableViewCell)
+//    func connectingWithPeer(cell: UITableViewCell)
+//    func notConnectedWithPeer(cell: UITableViewCell)
+//    
+//    // NearbyFriendsViewController
+//    func connectedWithPeer()
+//    func notConnectedWithPeer()
 }
 
 
@@ -38,7 +39,7 @@ class MPCManager: NSObject, MCSessionDelegate, MCNearbyServiceBrowserDelegate, M
     var connectedPeers = [MCPeerID]()
     var invitationHandler : ((Bool, MCSession!) -> Void)!
     var delegate : MPCManagerDelegate?
-    var connectingPeerCell : UITableViewCell?
+   // var connectingPeerCell : UITableViewCell?
     
     override init() {
         super.init()
@@ -63,7 +64,8 @@ extension MPCManager: MCNearbyServiceBrowserDelegate {
         foundPeers.append(peerID)
         println("Found Peer on receiving end")
         println(foundPeers)
-        delegate?.foundPeer()
+        //delegate?.foundPeer()
+        delegate?.refreshConnectionStatus()
     }
     
     func browser(browser: MCNearbyServiceBrowser!, lostPeer peerID: MCPeerID!) {
@@ -73,7 +75,8 @@ extension MPCManager: MCNearbyServiceBrowserDelegate {
                 break
             }
         }
-        delegate?.lostPeer()
+        //delegate?.lostPeer()
+        delegate?.refreshConnectionStatus()
     }
     
     // If browsing is unable to be performed
@@ -106,36 +109,38 @@ extension MPCManager: MCSessionDelegate {
         case MCSessionState.Connected:
             println("Connected: \(peerID.displayName)")
             connectedPeers.append(peerID)
-            delegate?.connectedWithPeer()
+            delegate?.refreshConnectionStatus()
+            //delegate?.connectedWithPeer()
             
-            // ReceiveZapCell
-            if connectingPeerCell != nil {
-                delegate?.connectedWithPeer(connectingPeerCell!)
-                connectingPeerCell = nil
-            }
+//            // ReceiveZapCell
+//            if connectingPeerCell != nil {
+//                //delegate?.connectedWithPeer(connectingPeerCell!)
+//                connectingPeerCell = nil
+//            }
             
         case MCSessionState.Connecting:
             println("Connecting: \(peerID.displayName)")
             
-            // ReceiveZapCell
-            if connectingPeerCell != nil {
-                delegate?.connectingWithPeer(connectingPeerCell!)
-            }
-            
+//            // ReceiveZapCell
+//            if connectingPeerCell != nil {
+//                delegate?.connectingWithPeer(connectingPeerCell!)
+//            }
+//            
             
         case MCSessionState.NotConnected:
             println("Not Connected: \(peerID.displayName)")
             println(connectedPeers)
             if connectedPeers.count != 0 {
                 removeObjectFromArray(peerID, &connectedPeers)
-                delegate?.notConnectedWithPeer()
+//                delegate?.notConnectedWithPeer()
             }
+            delegate?.refreshConnectionStatus()
             
-            // ReceiveZapCell
-            if connectingPeerCell != nil {
-                delegate?.notConnectedWithPeer(connectingPeerCell!)
-                connectingPeerCell = nil
-            }
+//            // ReceiveZapCell
+//            if connectingPeerCell != nil {
+//                delegate?.notConnectedWithPeer(connectingPeerCell!)
+//                connectingPeerCell = nil
+//            }
         }
         
     }

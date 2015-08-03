@@ -32,54 +32,57 @@ class ReceiveZapViewController: UIViewController {
 
 
 extension ReceiveZapViewController: MPCManagerDelegate {
-    func foundPeer() {
+//    func foundPeer() {
+//        tableView.reloadData()
+//    }
+//    
+//    func lostPeer() {
+//        tableView.reloadData()
+//    }
+    
+    func refreshConnectionStatus() {
         tableView.reloadData()
     }
-    
-    func lostPeer() {
-        tableView.reloadData()
-    }
-    
     
     func invitationWasReceived(fromPeer: String) {
         // empty
     }
     
-    func connectedWithPeer(cell: UITableViewCell) {
-        receiveCell = cell as? ReceiveZapTableViewCell
-        
-        receiveCell!.connectionStatusLabel.text = "Connected"
-        receiveCell!.activityIndicatorView.stopAnimating()
-        tableView.reloadData()
-        
-        receiveCell = nil
-    }
-    
-    func connectingWithPeer(cell: UITableViewCell) {
-        receiveCell = cell as? ReceiveZapTableViewCell
-        
-        receiveCell!.connectionStatusLabel.text = "Connecting"
-        receiveCell!.activityIndicatorView.startAnimating()
-        tableView.reloadData()
-        
-        receiveCell = nil
-    }
-    
-    func notConnectedWithPeer(cell: UITableViewCell) {
-        receiveCell = cell as? ReceiveZapTableViewCell
-        
-        receiveCell!.connectionStatusLabel.text = "Not Connected"
-        receiveCell!.activityIndicatorView.stopAnimating()
-        tableView.reloadData()
-        
-        receiveCell = nil
-    }
-    
-    func connectedWithPeer() {
-    }
-    
-    func notConnectedWithPeer() {
-    }
+//    func connectedWithPeer(cell: UITableViewCell) {
+//        receiveCell = cell as? ReceiveZapTableViewCell
+//        
+//        receiveCell!.connectionStatusLabel.text = "Connected"
+//        receiveCell!.activityIndicatorView.stopAnimating()
+//        tableView.reloadData()
+//        
+//        receiveCell = nil
+//    }
+//    
+//    func connectingWithPeer(cell: UITableViewCell) {
+//        receiveCell = cell as? ReceiveZapTableViewCell
+//        
+//        receiveCell!.connectionStatusLabel.text = "Connecting"
+//        receiveCell!.activityIndicatorView.startAnimating()
+//        tableView.reloadData()
+//        
+//        receiveCell = nil
+//    }
+//    
+//    func notConnectedWithPeer(cell: UITableViewCell) {
+//        receiveCell = cell as? ReceiveZapTableViewCell
+//        
+//        receiveCell!.connectionStatusLabel.text = "Not Connected"
+//        receiveCell!.activityIndicatorView.stopAnimating()
+//        tableView.reloadData()
+//        
+//        receiveCell = nil
+//    }
+//    
+//    func connectedWithPeer() {
+//    }
+//    
+//    func notConnectedWithPeer() {
+//    }
 }
 
 extension ReceiveZapViewController: UITableViewDataSource {
@@ -93,13 +96,16 @@ extension ReceiveZapViewController: UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        println(appDelegate.mpcManager.foundPeers.count)
+        //println(appDelegate.mpcManager.foundPeers.count)
         return appDelegate.mpcManager.foundPeers.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCellWithIdentifier("ReceiveZapCell") as! ReceiveZapTableViewCell
+        cell.peer = appDelegate.mpcManager.foundPeers[indexPath.row]
+        cell.displayStatus()
+        
         
         // cell.peer = appDelegate.mpcManager.foundPeers[indexPath.row]
         // cell.displayStatus
@@ -125,10 +131,12 @@ extension ReceiveZapViewController: UITableViewDataSource {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         let selectedCell = tableView.cellForRowAtIndexPath(indexPath) as! ReceiveZapTableViewCell
-        appDelegate.mpcManager.connectingPeerCell = selectedCell
         
-        let selectedPeer = appDelegate.mpcManager.foundPeers[indexPath.row] as MCPeerID
-        appDelegate.mpcManager.browser.invitePeer(selectedPeer, toSession: appDelegate.mpcManager.session, withContext: nil, timeout: 20)
+        if selectedCell.state == .NotConnected {
+            let selectedPeer = appDelegate.mpcManager.foundPeers[indexPath.row] as MCPeerID
+            appDelegate.mpcManager.browser.invitePeer(selectedPeer, toSession: appDelegate.mpcManager.session, withContext: nil, timeout: 20)
+            selectedCell.state = .Connecting
+        }
     }
 
 }
