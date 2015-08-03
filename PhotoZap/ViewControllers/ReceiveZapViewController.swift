@@ -23,6 +23,13 @@ class ReceiveZapViewController: UIViewController {
         
         appDelegate.mpcManager.browser.startBrowsingForPeers()
     }
+    
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        appDelegate.mpcManager.foundPeers = [MCPeerID]()
+        appDelegate.mpcManager.browser.stopBrowsingForPeers()
+    }
 
     @IBAction func backButtonTapped(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
@@ -32,14 +39,7 @@ class ReceiveZapViewController: UIViewController {
 
 
 extension ReceiveZapViewController: MPCManagerDelegate {
-//    func foundPeer() {
-//        tableView.reloadData()
-//    }
-//    
-//    func lostPeer() {
-//        tableView.reloadData()
-//    }
-    
+
     func refreshConnectionStatus() {
         tableView.reloadData()
     }
@@ -47,42 +47,6 @@ extension ReceiveZapViewController: MPCManagerDelegate {
     func invitationWasReceived(fromPeer: String) {
         // empty
     }
-    
-//    func connectedWithPeer(cell: UITableViewCell) {
-//        receiveCell = cell as? ReceiveZapTableViewCell
-//        
-//        receiveCell!.connectionStatusLabel.text = "Connected"
-//        receiveCell!.activityIndicatorView.stopAnimating()
-//        tableView.reloadData()
-//        
-//        receiveCell = nil
-//    }
-//    
-//    func connectingWithPeer(cell: UITableViewCell) {
-//        receiveCell = cell as? ReceiveZapTableViewCell
-//        
-//        receiveCell!.connectionStatusLabel.text = "Connecting"
-//        receiveCell!.activityIndicatorView.startAnimating()
-//        tableView.reloadData()
-//        
-//        receiveCell = nil
-//    }
-//    
-//    func notConnectedWithPeer(cell: UITableViewCell) {
-//        receiveCell = cell as? ReceiveZapTableViewCell
-//        
-//        receiveCell!.connectionStatusLabel.text = "Not Connected"
-//        receiveCell!.activityIndicatorView.stopAnimating()
-//        tableView.reloadData()
-//        
-//        receiveCell = nil
-//    }
-//    
-//    func connectedWithPeer() {
-//    }
-//    
-//    func notConnectedWithPeer() {
-//    }
 }
 
 extension ReceiveZapViewController: UITableViewDataSource {
@@ -105,25 +69,6 @@ extension ReceiveZapViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCellWithIdentifier("ReceiveZapCell") as! ReceiveZapTableViewCell
         cell.peer = appDelegate.mpcManager.foundPeers[indexPath.row]
         cell.displayStatus()
-        
-        
-        // cell.peer = appDelegate.mpcManager.foundPeers[indexPath.row]
-        // cell.displayStatus
-        
-//        if receiveCell?.usernameLabel.text == cell.usernameLabel.text {
-//            return receiveCell!
-//        } else {
-//            cell.usernameLabel.text = appDelegate.mpcManager.foundPeers[indexPath.row].displayName
-//            cell.connectionStatusLabel.text = "Not connected"
-//
-//            return cell
-//        }
-        
-        // if connected, show name and "connected"
-        // else, show name, and "not connected"
-        
-//        cell.usernameLabel.text = appDelegate.mpcManager.foundPeers[indexPath.row].displayName
-//        cell.connectionStatusLabel.text = "Not connected"
         
         return cell
     }

@@ -11,20 +11,8 @@ import MultipeerConnectivity
 import ConvenienceKit
 
 protocol MPCManagerDelegate {
-    //func foundPeer()
-    //func lostPeer()
     func invitationWasReceived(fromPeer: String)
     func refreshConnectionStatus()
-    //func connectedWithPeer(peerID: MCPeerID)
-    
-//    // ReceiveZapViewController
-//    func connectedWithPeer(cell: UITableViewCell)
-//    func connectingWithPeer(cell: UITableViewCell)
-//    func notConnectedWithPeer(cell: UITableViewCell)
-//    
-//    // NearbyFriendsViewController
-//    func connectedWithPeer()
-//    func notConnectedWithPeer()
 }
 
 
@@ -39,7 +27,6 @@ class MPCManager: NSObject, MCSessionDelegate, MCNearbyServiceBrowserDelegate, M
     var connectedPeers = [MCPeerID]()
     var invitationHandler : ((Bool, MCSession!) -> Void)!
     var delegate : MPCManagerDelegate?
-   // var connectingPeerCell : UITableViewCell?
     
     override init() {
         super.init()
@@ -64,7 +51,6 @@ extension MPCManager: MCNearbyServiceBrowserDelegate {
         foundPeers.append(peerID)
         println("Found Peer on receiving end")
         println(foundPeers)
-        //delegate?.foundPeer()
         delegate?.refreshConnectionStatus()
     }
     
@@ -75,7 +61,6 @@ extension MPCManager: MCNearbyServiceBrowserDelegate {
                 break
             }
         }
-        //delegate?.lostPeer()
         delegate?.refreshConnectionStatus()
     }
     
@@ -110,37 +95,17 @@ extension MPCManager: MCSessionDelegate {
             println("Connected: \(peerID.displayName)")
             connectedPeers.append(peerID)
             delegate?.refreshConnectionStatus()
-            //delegate?.connectedWithPeer()
-            
-//            // ReceiveZapCell
-//            if connectingPeerCell != nil {
-//                //delegate?.connectedWithPeer(connectingPeerCell!)
-//                connectingPeerCell = nil
-//            }
-            
+
         case MCSessionState.Connecting:
             println("Connecting: \(peerID.displayName)")
-            
-//            // ReceiveZapCell
-//            if connectingPeerCell != nil {
-//                delegate?.connectingWithPeer(connectingPeerCell!)
-//            }
-//            
             
         case MCSessionState.NotConnected:
             println("Not Connected: \(peerID.displayName)")
             println(connectedPeers)
             if connectedPeers.count != 0 {
                 removeObjectFromArray(peerID, &connectedPeers)
-//                delegate?.notConnectedWithPeer()
             }
             delegate?.refreshConnectionStatus()
-            
-//            // ReceiveZapCell
-//            if connectingPeerCell != nil {
-//                delegate?.notConnectedWithPeer(connectingPeerCell!)
-//                connectingPeerCell = nil
-//            }
         }
         
     }

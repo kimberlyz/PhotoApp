@@ -19,10 +19,6 @@ class NearbyFriendsViewController: UIViewController, UITableViewDelegate, UITabl
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        /*
-        appDelegate.mpcManager.delegate = self
-        appDelegate.mpcManager.browser.startBrowsingForPeers() */
         
         appDelegate.mpcManager.delegate = self
         
@@ -33,7 +29,9 @@ class NearbyFriendsViewController: UIViewController, UITableViewDelegate, UITabl
     
     override func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(animated)
-        //appDelegate.mpcManager.browser.stopBrowsingForPeers()
+        
+        appDelegate.mpcManager.foundPeers = [MCPeerID]()
+        appDelegate.mpcManager.advertiser.stopAdvertisingPeer()
     }
     
     @IBAction func sendButtonTapped(sender: AnyObject) {
@@ -47,14 +45,6 @@ class NearbyFriendsViewController: UIViewController, UITableViewDelegate, UITabl
 
 
 extension NearbyFriendsViewController: MPCManagerDelegate {
-//    func foundPeer() {
-//        tableView.reloadData()
-//    }
-//    
-//    func lostPeer() {
-//        tableView.reloadData()
-//    }
-    
     func refreshConnectionStatus() {
         tableView.reloadData()
     }
@@ -76,24 +66,6 @@ extension NearbyFriendsViewController: MPCManagerDelegate {
         
         self.presentViewController(alertController, animated: true, completion: nil)
     }
-
-    
-//    func connectedWithPeer(cell: UITableViewCell) {
-//    }
-//    
-//    func connectingWithPeer(cell: UITableViewCell) {
-//    }
-//    
-//    func notConnectedWithPeer(cell: UITableViewCell) {
-//    }
-//    
-//    func connectedWithPeer() {
-//        tableView.reloadData()
-//    }
-//        
-//    func notConnectedWithPeer() {
-//        tableView.reloadData()
-//    }
 }
 
 
