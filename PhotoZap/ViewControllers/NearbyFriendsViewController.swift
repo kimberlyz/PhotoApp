@@ -46,18 +46,15 @@ class NearbyFriendsViewController: UIViewController, UITableViewDelegate, UITabl
         
             PHImageManager.defaultManager().requestImageDataForAsset(asset, options: nil) {
                 (imageData: NSData!, dataUTI: String!, orientation: UIImageOrientation, info: [NSObject : AnyObject]!) -> Void in
-//                fileURL = NSURL(fileURLWithPath: info["PHImageFileURLKey"])    /*info.objectForKey("PHImageFileURLKey")*/
-                //let path = info["PHImageFileURLKey"] as! String
                 fileURL = info["PHImageFileURLKey"] as? NSURL
-                //fileURL = NSURL.fileURLWithPath(info["PHImageFileURLKey"])
                 println("yay")
             }
-            /*
+            
             for peer in appDelegate.mpcManager.connectedPeers {
                 var progress = appDelegate.mpcManager.session.sendResourceAtURL(fileURL, withName: fileURL?.lastPathComponent, toPeer: peer) { (error: NSError?) -> Void in
                     NSLog("Error: \(error)")
                 }
-            } */
+            }
         }
 
         /*

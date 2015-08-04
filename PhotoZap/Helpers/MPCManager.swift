@@ -44,6 +44,17 @@ class MPCManager: NSObject, MCSessionDelegate, MCNearbyServiceBrowserDelegate, M
         advertiser.delegate = self
 
     }
+    
+    override func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject, change: [NSObject : AnyObject], context: UnsafeMutablePointer<Void>) {
+        NSNotificationCenter.defaultCenter().postNotificationName("MCReceivingProgressNotification", object: nil, userInfo: ["progress" : object])
+    }
+    
+    /*
+    -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"MCReceivingProgressNotification"
+    object:nil
+    userInfo:@{@"progress": (NSProgress *)object}]; 
+    } */
 }
 
 extension MPCManager: MCNearbyServiceBrowserDelegate {
@@ -118,14 +129,16 @@ extension MPCManager: MCSessionDelegate {
     }
     
     func session(session: MCSession!, didStartReceivingResourceWithName resourceName: String!, fromPeer peerID: MCPeerID!, withProgress progress: NSProgress!) {
-    }
-    
-    func session(session: MCSession!, didFinishReceivingResourceWithName resourceName: String!, fromPeer peerID: MCPeerID!, atURL localURL: NSURL!, withError error: NSError!) {
-    }
-    
-    /*
-    func sendResourceAtURL(resourceURL: NSURL!, withName resourceName: String!, toPeer peerID: MCPeerID!, withCompletionHandler completionHandler: ((NSError!) -> Void)!) -> NSProgress! {
         
+        var dict = ["resourceName" : resourceName, "peerID" : peerID, "progress" : progress]
+        
+        NSNotificationCenter.defaultCenter().postNotificationName("MCDidStartReceivingResourceNotification", object: nil, userInfo: dict)
+        dispatch_async(dispatch_get_main_queue()) { // 2
+            progress.addObserver(self, forKeyPath: "fractionCompleted", options: NSKeyValueObservingOptions.New, context: nil)
+        }
     }
-     */
+    
+    func session(session: MCSession!, didFinishReceivingResourceWithName resourceName: String!, fromPeer peerID: MCPeerID!, atURL localURL: NSURL!, withError error: NSError! {
+    }
+    
 }
