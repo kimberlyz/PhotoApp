@@ -236,7 +236,7 @@
         <!--Notifications-->
         <scene sceneID="frL-10-KWj">
             <objects>
-                <viewController id="zAI-6q-dtg" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="zAI-6q-dtg" customClass="NotificationsViewController" customModule="PhotoZap" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="QmD-Xj-tVL"/>
                         <viewControllerLayoutGuide type="bottom" id="RvA-ET-NdS"/>
@@ -244,13 +244,66 @@
                     <view key="view" contentMode="scaleToFill" id="Rmz-rq-B42">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="5eW-3D-hA9">
+                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" restorationIdentifier="NotificationsCell" selectionStyle="default" indentationWidth="10" rowHeight="100" id="yU5-5c-O8y" customClass="NotificationsTableViewCell" customModule="PhotoZap" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yU5-5c-O8y" id="zTq-n0-9Ad">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="CJG-vL-Zo6">
+                                                    <rect key="frame" x="15" y="10" width="80" height="80"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="80" id="09A-1J-m0i"/>
+                                                        <constraint firstAttribute="height" constant="80" id="FFh-gm-kuP"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3PU-nv-FZK">
+                                                    <rect key="frame" x="110" y="39" width="46" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="centerY" secondItem="3PU-nv-FZK" secondAttribute="centerY" id="IKq-u9-BB1"/>
+                                                <constraint firstItem="CJG-vL-Zo6" firstAttribute="leading" secondItem="zTq-n0-9Ad" secondAttribute="leading" constant="15" id="WR2-xg-bqp"/>
+                                                <constraint firstItem="3PU-nv-FZK" firstAttribute="leading" secondItem="CJG-vL-Zo6" secondAttribute="trailing" constant="15" id="arI-mx-sqJ"/>
+                                                <constraint firstAttribute="centerY" secondItem="CJG-vL-Zo6" secondAttribute="centerY" id="fu2-A0-Nfz"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="notificationsImageView" destination="CJG-vL-Zo6" id="LQ9-E0-aaB"/>
+                                            <outlet property="usernameLabel" destination="3PU-nv-FZK" id="RqY-wA-Hqu"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="zAI-6q-dtg" id="NxK-oH-kxv"/>
+                                    <outlet property="delegate" destination="zAI-6q-dtg" id="Wgf-gv-vZo"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="5eW-3D-hA9" secondAttribute="bottom" id="0vk-Qa-ihQ"/>
+                            <constraint firstAttribute="trailing" secondItem="5eW-3D-hA9" secondAttribute="trailing" id="BJM-Q2-wPG"/>
+                            <constraint firstItem="5eW-3D-hA9" firstAttribute="leading" secondItem="Rmz-rq-B42" secondAttribute="leading" id="u38-vt-fbn"/>
+                            <constraint firstItem="5eW-3D-hA9" firstAttribute="top" secondItem="QmD-Xj-tVL" secondAttribute="bottom" id="ubW-hL-PZ7"/>
+                        </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Notifications" image="Camera" id="Q5W-z0-ICd"/>
+                    <navigationItem key="navigationItem" title="Notifications" id="3HE-aj-AGr"/>
+                    <connections>
+                        <outlet property="tableView" destination="5eW-3D-hA9" id="2iM-Pi-Djh"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cGB-Fc-Wee" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="876" y="1584"/>
+            <point key="canvasLocation" x="1688" y="1584"/>
         </scene>
         <!--Searching-->
         <scene sceneID="ySe-P6-w96">
@@ -361,7 +414,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="StI-Ir-0gR" kind="relationship" relationship="viewControllers" id="2MX-95-JSW"/>
-                        <segue destination="zAI-6q-dtg" kind="relationship" relationship="viewControllers" id="P5o-F1-k6d"/>
+                        <segue destination="t3w-gD-c5p" kind="relationship" relationship="viewControllers" id="P5o-F1-k6d"/>
                         <segue destination="TUf-Br-kU1" kind="relationship" relationship="viewControllers" id="oh3-qR-FVF"/>
                         <segue destination="yvR-dN-MUW" kind="relationship" relationship="viewControllers" id="anZ-ko-LcO"/>
                     </connections>
@@ -727,7 +780,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="58F-jY-Nok" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2055" y="1564"/>
+            <point key="canvasLocation" x="2867" y="1564"/>
         </scene>
         <!--Wi-Fi Direct-->
         <scene sceneID="Fzs-Gd-0nN">
@@ -801,6 +854,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e2g-pD-Jq9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1779" y="1564"/>
+        </scene>
+        <!--Notifications-->
+        <scene sceneID="IJW-ZB-jjI">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="t3w-gD-c5p" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Notifications" image="Camera" id="Q5W-z0-ICd"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="uxg-Pj-uyA">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="zAI-6q-dtg" kind="relationship" relationship="rootViewController" id="IbN-hC-i7R"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OjG-sF-jc3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="876" y="1584"/>
         </scene>
     </scenes>
     <resources>
