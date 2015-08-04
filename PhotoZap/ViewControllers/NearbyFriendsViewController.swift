@@ -40,32 +40,25 @@ class NearbyFriendsViewController: UIViewController, UITableViewDelegate, UITabl
         
         var fileURL : NSURL?
         
+        println("SendButtonTapped")
         
-        let asset = PHAsset()
-        //for asset in transaction.assets {
-
-//        PHImageManager.defaultManager().requestImageDataForAsset(<#asset: PHAsset!#>, options: <#PHImageRequestOptions!#>, resultHandler: <#((NSData!, String!, UIImageOrientation, [NSObject : AnyObject]!) -> Void)!##(NSData!, String!, UIImageOrientation, [NSObject : AnyObject]!) -> Void#>)
-//        /*
-//        PHImageManager.defaultManager().requestImageDataForAsset(asset, options: nil) { (NSData!, String!, UIImageOrientation, Dictionary) -> Void in
-//            <#code#>
-//        } */
-//        //}
+        for asset in (transaction!.assets as! [PHAsset]) {
         
-        
-        PHImageManager.defaultManager().requestImageDataForAsset(asset, options: nil) {
-            (imageData: NSData!, dataUTI: String!, orientation: UIImageOrientation, info: [NSObject : AnyObject]!) -> Void in
+            PHImageManager.defaultManager().requestImageDataForAsset(asset, options: nil) {
+                (imageData: NSData!, dataUTI: String!, orientation: UIImageOrientation, info: [NSObject : AnyObject]!) -> Void in
 //                fileURL = NSURL(fileURLWithPath: info["PHImageFileURLKey"])    /*info.objectForKey("PHImageFileURLKey")*/
-            let path = info["PHImageFileURLKey"] as! String
-            fileURL = NSURL.fileURLWithPath(path)
+                //let path = info["PHImageFileURLKey"] as! String
+                fileURL = info["PHImageFileURLKey"] as? NSURL
+                //fileURL = NSURL.fileURLWithPath(info["PHImageFileURLKey"])
                 println("yay")
             }
-        
-//            for peer in appDelegate.mpcManager.connectedPeers {
-//                var progress = appDelegate.mpcManager.session.sendResourceAtURL(fileURL, withName: fileURL?.lastPathComponent, toPeer: peer) { (error: NSError?) -> Void in
-//                    NSLog("Error: \(error)")
-//                }
-//            }
-       // }
+            /*
+            for peer in appDelegate.mpcManager.connectedPeers {
+                var progress = appDelegate.mpcManager.session.sendResourceAtURL(fileURL, withName: fileURL?.lastPathComponent, toPeer: peer) { (error: NSError?) -> Void in
+                    NSLog("Error: \(error)")
+                }
+            } */
+        }
 
         /*
         [[PHImageManager defaultManager] requestImageDataForAsset:asset options:nil resultHandler:^(NSData *imageData, NSString *dataUTI, UIImageOrientation orientation, NSDictionary *info) {
