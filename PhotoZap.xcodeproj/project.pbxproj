@@ -24,6 +24,7 @@
 		DB6168DD1B55BF6D00305D2E /* AddFriendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6168DC1B55BF6D00305D2E /* AddFriendTableViewCell.swift */; };
 		DB6702191B708DD400908460 /* ChooseFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6702181B708DD400908460 /* ChooseFriendsViewController.swift */; };
 		DB67021C1B708DF000908460 /* ChooseFriendsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB67021B1B708DF000908460 /* ChooseFriendsTableViewCell.swift */; };
+		DB6702201B71319D00908460 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB67021F1B71319D00908460 /* Transaction.swift */; };
 		DB6AC4671B54307B0019C46E /* AlbumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6AC4661B54307B0019C46E /* AlbumViewController.swift */; };
 		DB6AC4691B5431430019C46E /* FriendListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6AC4681B5431430019C46E /* FriendListViewController.swift */; };
 		DB6AC46E1B5467A90019C46E /* PhotoTakingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6AC46D1B5467A90019C46E /* PhotoTakingHelper.swift */; };
@@ -67,6 +68,7 @@
 		DB6168DC1B55BF6D00305D2E /* AddFriendTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFriendTableViewCell.swift; sourceTree = "<group>"; };
 		DB6702181B708DD400908460 /* ChooseFriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseFriendsViewController.swift; sourceTree = "<group>"; };
 		DB67021B1B708DF000908460 /* ChooseFriendsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseFriendsTableViewCell.swift; sourceTree = "<group>"; };
+		DB67021F1B71319D00908460 /* Transaction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
 		DB6AC4661B54307B0019C46E /* AlbumViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumViewController.swift; sourceTree = "<group>"; };
 		DB6AC4681B5431430019C46E /* FriendListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendListViewController.swift; sourceTree = "<group>"; };
 		DB6AC46D1B5467A90019C46E /* PhotoTakingHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoTakingHelper.swift; sourceTree = "<group>"; };
@@ -257,6 +259,7 @@
 			isa = PBXGroup;
 			children = (
 				DB6AC4721B547B8B0019C46E /* Photo.swift */,
+				DB67021F1B71319D00908460 /* Transaction.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -427,6 +430,7 @@
 				DB16251F1B5043B000EC0004 /* AppDelegate.swift in Sources */,
 				DB6D6E431B6AD9200038F336 /* NearbyFriendsViewController.swift in Sources */,
 				DB0A32441B581137009D332C /* ReceivedPhotoTableViewCell.swift in Sources */,
+				DB6702201B71319D00908460 /* Transaction.swift in Sources */,
 				DB6702191B708DD400908460 /* ChooseFriendsViewController.swift in Sources */,
 				DB6168D81B55879400305D2E /* ParseHelper.swift in Sources */,
 				DB46578A1B6FCF7D00F801A3 /* ReceiveZapTableViewCell.swift in Sources */,

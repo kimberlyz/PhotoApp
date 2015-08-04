@@ -32,6 +32,7 @@ class ChooseFriendsViewController: UIViewController {
     }
 
     @IBAction func sendButtonTapped(sender: AnyObject) {
+        
     }
     
     
@@ -119,19 +120,5 @@ extension ChooseFriendsViewController: UITableViewDataSource {
             selectedCell.canSelect = true
             removeObjectFromArray(selectedCell.user!, &selectedFriendUsers)
         }
-        
-//        let alreadySelectedBool = contains(selectedFriendUsers, user)
-//        
-//        if alreadySelectedBool {
-//            selectedCell.canSelect = false
-//            removeObjectFromArray(user, &selectedFriendUsers)
-//        } else {
-//            selectedCell.canSelect = true
-//            selectedFriendUsers.append(user)
-//        }
-        //println(selectedCell.canSelect)
-        //println("YES")
-        
-        //selectedCell.canSelect = selectedCell.canSelect!
     }
 }

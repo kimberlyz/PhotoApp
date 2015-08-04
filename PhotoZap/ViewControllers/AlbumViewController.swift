@@ -12,7 +12,8 @@ import CTAssetsPickerController
 
 class AlbumViewController: UIViewController, CTAssetsPickerControllerDelegate {
     
-    var assets : [AnyObject] = []
+    //var assets : [AnyObject] = []
+    var transaction : Transaction?
     var zapBool : Bool?
     
     /*
@@ -100,7 +101,6 @@ class AlbumViewController: UIViewController, CTAssetsPickerControllerDelegate {
         }
 
     }
-    
 }
 
 extension AlbumViewController : CTAssetsPickerControllerDelegate {
@@ -115,14 +115,17 @@ extension AlbumViewController : CTAssetsPickerControllerDelegate {
         else {
             if let zapBool = zapBool {
                 
+                transaction = Transaction()
+                
                 picker.dismissViewControllerAnimated(true, completion: nil)
-                self.assets = assets
+                transaction!.assets = assets
                 
                 let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
                 
                 // Do Wi-Fi Direct
                 if zapBool {
                     let nearbyFriends = mainStoryboard.instantiateViewControllerWithIdentifier("NearbyFriendsNavigation") as! UINavigationController
+                    (nearbyFriends.visibleViewController as! NearbyFriendsViewController).transaction = transaction
                     self.presentViewController(nearbyFriends, animated: true, completion: nil)
                     //self.performSegueWithIdentifier("NearbyFriendsNavigation", sender: self)
                 }
