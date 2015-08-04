@@ -8,6 +8,7 @@
 
 import UIKit
 import MultipeerConnectivity
+import Photos
 
 
 class NearbyFriendsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, MPCManagerDelegate {
@@ -35,6 +36,46 @@ class NearbyFriendsViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     @IBAction func sendButtonTapped(sender: AnyObject) {
+        
+        var fileURL : NSURL?
+        
+        
+        
+        // for image in self.assets. Do for peer in connectedPeers
+        
+        /*
+        PHImageManager.defaultManager().requestImageDataForAsset(asset, options: nil) { (imageData: NSData, dataUTI: String, orientation: UIImageOrientation, info: NSDictionary) -> Void in
+            fileURL = NSURL(fileURLWithPath: info.objectForKey("PHImageFileURLKey"))
+        }
+        
+        for peer in appDelegate.mpcManager.connectedPeers {
+            var progress = appDelegate.mpcManager.session.sendResourceAtURL(fileURL, withName: fileURL?.lastPathComponent, toPeer: peer) { (error: NSError?) -> Void in
+                NSLog("Error: \(error)")
+            }
+        } */
+        
+
+        /*
+        [[PHImageManager defaultManager] requestImageDataForAsset:asset options:nil resultHandler:^(NSData *imageData, NSString *dataUTI, UIImageOrientation orientation, NSDictionary *info) {
+        
+        //imageData contains the correct data for images and videos
+        NSLog(@"info - %@", info);
+        NSURL* fileURL = [info objectForKey:@"PHImageFileURLKey"];
+        }];
+        
+        
+        PHImageManger
+        
+        PHImageManager.defaultManager().requestImageForAsset(asset, targetSize: self.assetThumbnailSize, contentMode: .AspectFill, options: nil, resultHandler: {(result, info)in
+        cell.setThumbnailImage(result)
+        })
+        [[PHImageManager defaultManager] requestImageDataForAsset:asset options:nil resultHandler:^(NSData *imageData, NSString *dataUTI, UIImageOrientation orientation, NSDictionary *info) {
+            
+            //imageData contains the correct data for images and videos
+            NSLog(@"info - %@", info);
+            NSURL* fileURL = [info objectForKey:@"PHImageFileURLKey"];
+            }]; */
+        
     }
 
     @IBAction func cancelButtonTapped(sender: AnyObject) {

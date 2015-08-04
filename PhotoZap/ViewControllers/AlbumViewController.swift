@@ -15,13 +15,14 @@ class AlbumViewController: UIViewController, CTAssetsPickerControllerDelegate {
     var assets : [AnyObject] = []
     var zapBool : Bool?
     
+    /*
     var freshLaunch = true
     override func viewWillAppear(animated: Bool) {
         if freshLaunch == true {
             freshLaunch = false
             self.tabBarController!.selectedIndex = 1 // 2nd tab
         }
-    }
+    } */
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -113,20 +114,22 @@ extension AlbumViewController : CTAssetsPickerControllerDelegate {
         // If photos were selected, check for the method of sending
         else {
             if let zapBool = zapBool {
+                
+                picker.dismissViewControllerAnimated(true, completion: nil)
+                self.assets = assets
+                
+                let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                
                 // Do Wi-Fi Direct
                 if zapBool {
-                    picker.dismissViewControllerAnimated(true, completion: nil)
-                    self.assets = assets
-                        
-                    let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                    
                     let nearbyFriends = mainStoryboard.instantiateViewControllerWithIdentifier("NearbyFriendsNavigation") as! UINavigationController
                     self.presentViewController(nearbyFriends, animated: true, completion: nil)
                     //self.performSegueWithIdentifier("NearbyFriendsNavigation", sender: self)
                 }
                 // Do Wi-Fi Delay
                 else {
-                     println("Do Wi-Fi Delay")
+                    let chooseFriends = mainStoryboard.instantiateViewControllerWithIdentifier("ChooseFriendsNavigation") as! UINavigationController
+                    self.presentViewController(chooseFriends, animated: true, completion: nil)
                 }
             }
         }

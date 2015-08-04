@@ -68,7 +68,94 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jiQ-oW-uYd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1538" y="1584"/>
+            <point key="canvasLocation" x="-1289" y="3140"/>
+        </scene>
+        <!--Choose Friends-->
+        <scene sceneID="QOM-ea-xFZ">
+            <objects>
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="kGR-cm-6th" customClass="ChooseFriendsViewController" customModule="PhotoZap" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="yyB-Kp-AQB"/>
+                        <viewControllerLayoutGuide type="bottom" id="icQ-AI-MHM"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="oTR-gS-mFf">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Xcy-6q-BM6">
+                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ChooseFriendsCell" id="IOW-dF-e6b" customClass="ChooseFriendsTableViewCell" customModule="PhotoZap" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="IOW-dF-e6b" id="0TP-o6-tiC">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RVv-Hr-VSk">
+                                                    <rect key="frame" x="15" y="11" width="46" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GVH-ot-ZiW">
+                                                    <rect key="frame" x="560" y="9" width="25" height="25"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="25" id="KjA-Xf-jzO"/>
+                                                        <constraint firstAttribute="width" constant="25" id="RFe-Zy-AH3"/>
+                                                    </constraints>
+                                                    <state key="normal" image="EmptyCheckMark">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <state key="selected" image="CheckMark"/>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="RVv-Hr-VSk" firstAttribute="leading" secondItem="0TP-o6-tiC" secondAttribute="leading" constant="15" id="5OO-Sn-wxA"/>
+                                                <constraint firstAttribute="centerY" secondItem="RVv-Hr-VSk" secondAttribute="centerY" id="Ofo-ku-0eV"/>
+                                                <constraint firstAttribute="trailing" secondItem="GVH-ot-ZiW" secondAttribute="trailing" constant="15" id="PAR-M8-b3p"/>
+                                                <constraint firstAttribute="centerY" secondItem="GVH-ot-ZiW" secondAttribute="centerY" id="xYk-eu-asd"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="selectedFriendButton" destination="GVH-ot-ZiW" id="Fwg-Mm-e6i"/>
+                                            <outlet property="usernameLabel" destination="RVv-Hr-VSk" id="aTc-vT-2fr"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="kGR-cm-6th" id="Tmk-PD-FMU"/>
+                                    <outlet property="delegate" destination="kGR-cm-6th" id="W5h-7p-1fa"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="Xcy-6q-BM6" secondAttribute="trailing" id="Ets-er-dM9"/>
+                            <constraint firstAttribute="bottom" secondItem="Xcy-6q-BM6" secondAttribute="bottom" id="Sgp-SX-zYf"/>
+                            <constraint firstItem="Xcy-6q-BM6" firstAttribute="leading" secondItem="oTR-gS-mFf" secondAttribute="leading" id="WGb-CH-ncc"/>
+                            <constraint firstItem="Xcy-6q-BM6" firstAttribute="top" secondItem="yyB-Kp-AQB" secondAttribute="bottom" id="xmy-rS-w0O"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Choose Friends" id="KxV-Mm-tEc">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="zLL-m0-ccv">
+                            <connections>
+                                <action selector="cancelButtonTapped:" destination="kGR-cm-6th" id="JRo-Be-IwO"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Send" id="yoa-4M-ayo">
+                            <connections>
+                                <action selector="sendButtonTapped:" destination="kGR-cm-6th" id="oLs-La-Kjn"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="Xcy-6q-BM6" id="gbU-NM-J3K"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SeG-vl-8iD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1058" y="1564"/>
         </scene>
         <!--Send Photos-->
         <scene sceneID="xIY-eX-EhH">
@@ -144,7 +231,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wq6-uh-y66" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-648" y="1579"/>
+            <point key="canvasLocation" x="164" y="1579"/>
         </scene>
         <!--Searching-->
         <scene sceneID="ySe-P6-w96">
@@ -241,7 +328,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nfs-tS-J3b" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-653" y="2380"/>
+            <point key="canvasLocation" x="-1289" y="2396"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="O3A-iC-x94">
@@ -621,7 +708,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4df-eW-MVl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="283" y="1572"/>
+            <point key="canvasLocation" x="1095" y="1572"/>
         </scene>
         <!--Friends-->
         <scene sceneID="IHl-SH-aTN">
@@ -640,7 +727,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="58F-jY-Nok" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1243" y="1564"/>
+            <point key="canvasLocation" x="2055" y="1564"/>
         </scene>
         <!--Wi-Fi Direct-->
         <scene sceneID="Fzs-Gd-0nN">
@@ -677,7 +764,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="na7-WR-e2z" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2303" y="1584"/>
+            <point key="canvasLocation" x="-2078" y="3140"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Ubk-wV-h29">
@@ -695,7 +782,25 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3K1-LY-uWW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1465" y="2380"/>
+            <point key="canvasLocation" x="-2097" y="2396"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="gne-Pa-h6A">
+            <objects>
+                <navigationController storyboardIdentifier="ChooseFriendsNavigation" automaticallyAdjustsScrollViewInsets="NO" id="gra-UZ-vuw" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="YxF-gj-5lk">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="kGR-cm-6th" kind="relationship" relationship="rootViewController" id="1VA-6u-7Oo"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="e2g-pD-Jq9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1779" y="1564"/>
         </scene>
     </scenes>
     <resources>
@@ -703,6 +808,8 @@
         <image name="Album" width="26" height="17"/>
         <image name="Camera" width="40" height="30"/>
         <image name="Check" width="42" height="42"/>
+        <image name="CheckMark" width="152" height="152"/>
+        <image name="EmptyCheckMark" width="152" height="152"/>
         <image name="Friends" width="42" height="42"/>
         <image name="Home" width="38" height="36"/>
         <image name="Reject" width="50" height="50"/>
