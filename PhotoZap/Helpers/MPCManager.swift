@@ -130,7 +130,7 @@ extension MPCManager: MCSessionDelegate {
     
     func session(session: MCSession!, didStartReceivingResourceWithName resourceName: String!, fromPeer peerID: MCPeerID!, withProgress progress: NSProgress!) {
         
-
+        println("Started Receiving Resource")
        // NSNotificationCenter.defaultCenter().postNotificationName("receivedMPCDataNotification", object: dictionary)
         var dict: [String: AnyObject] = ["resourceName" : resourceName, "peerID" : peerID, "progress" : progress]
         
@@ -144,6 +144,7 @@ extension MPCManager: MCSessionDelegate {
     
     func session(session: MCSession!, didFinishReceivingResourceWithName resourceName: String!, fromPeer peerID: MCPeerID!, atURL localURL: NSURL!, withError error: NSError!) {
         
+        println("Finished Receiving Resource")
         var dict: [String: AnyObject] = ["resourceName" : resourceName, "peerID" : peerID, "localURL" : localURL]
         
         NSNotificationCenter.defaultCenter().postNotificationName("didFinishReceivingResourceNotification", object: nil, userInfo: dict)

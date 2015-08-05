@@ -18,6 +18,7 @@
 		DB4657831B6C525A00F801A3 /* MPCManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4657821B6C525A00F801A3 /* MPCManager.swift */; };
 		DB4657871B6FCDB300F801A3 /* ReceiveZapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4657861B6FCDB300F801A3 /* ReceiveZapViewController.swift */; };
 		DB46578A1B6FCF7D00F801A3 /* ReceiveZapTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4657891B6FCF7D00F801A3 /* ReceiveZapTableViewCell.swift */; };
+		DB51CAA91B728B7E0024BBAC /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = DB51CAA81B728B7D0024BBAC /* libsqlite3.dylib */; };
 		DB6168D51B5576D800305D2E /* FriendListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6168D41B5576D800305D2E /* FriendListTableViewCell.swift */; };
 		DB6168D81B55879400305D2E /* ParseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6168D71B55879400305D2E /* ParseHelper.swift */; };
 		DB6168DA1B55B88E00305D2E /* AddFriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6168D91B55B88E00305D2E /* AddFriendViewController.swift */; };
@@ -65,6 +66,7 @@
 		DB4657821B6C525A00F801A3 /* MPCManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPCManager.swift; sourceTree = "<group>"; };
 		DB4657861B6FCDB300F801A3 /* ReceiveZapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReceiveZapViewController.swift; sourceTree = "<group>"; };
 		DB4657891B6FCF7D00F801A3 /* ReceiveZapTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReceiveZapTableViewCell.swift; sourceTree = "<group>"; };
+		DB51CAA81B728B7D0024BBAC /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		DB6168D41B5576D800305D2E /* FriendListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendListTableViewCell.swift; sourceTree = "<group>"; };
 		DB6168D71B55879400305D2E /* ParseHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseHelper.swift; sourceTree = "<group>"; };
 		DB6168D91B55B88E00305D2E /* AddFriendViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFriendViewController.swift; sourceTree = "<group>"; };
@@ -90,6 +92,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DB51CAA91B728B7E0024BBAC /* libsqlite3.dylib in Frameworks */,
 				4DF94236657B40DD58D03286 /* Pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -107,6 +110,7 @@
 		A5F4747479943C56A5D7FD2A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DB51CAA81B728B7D0024BBAC /* libsqlite3.dylib */,
 				7EB23EE8F0907A83F0AE0437 /* Pods.framework */,
 			);
 			name = Frameworks;

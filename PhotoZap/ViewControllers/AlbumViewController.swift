@@ -9,12 +9,20 @@
 import UIKit
 import Parse
 import CTAssetsPickerController
+import RealmSwift
 
 class AlbumViewController: UIViewController, CTAssetsPickerControllerDelegate {
     
     //var assets : [AnyObject] = []
     //var transaction : Transaction?
     var zapBool : Bool?
+    
+    var transactions: Results<Transaction>! {
+        didSet {
+            // Whenever notes update, update the table view
+            println("Transaction assigned")
+        }
+    }
     
     /*
     var freshLaunch = true
@@ -27,6 +35,9 @@ class AlbumViewController: UIViewController, CTAssetsPickerControllerDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let realm = Realm()
+        transactions = realm.objects(Transaction)
 
     }
   /*

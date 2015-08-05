@@ -90,12 +90,12 @@
                   moduleName = "PhotoZap"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Kimberly/Documents/iOSApps/PhotoZap/PhotoZap/ViewControllers/WiFiDirectViewController.swift"
-                  timestampString = "460489600.964252"
+                  timestampString = "460490534.117224"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "180"
                   endingLineNumber = "180"
-                  offsetFromSymbolStart = "3353">
+                  offsetFromSymbolStart = "3144">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -105,12 +105,12 @@
                   moduleName = "PhotoZap"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Kimberly/Documents/iOSApps/PhotoZap/PhotoZap/ViewControllers/WiFiDirectViewController.swift"
-                  timestampString = "460489600.96452"
+                  timestampString = "460490534.117452"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "180"
                   endingLineNumber = "180"
-                  offsetFromSymbolStart = "3832">
+                  offsetFromSymbolStart = "3660">
                </Location>
             </Locations>
          </BreakpointContent>
