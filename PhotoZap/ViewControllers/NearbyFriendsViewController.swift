@@ -15,7 +15,9 @@ class NearbyFriendsViewController: UIViewController, UITableViewDelegate, UITabl
 
     @IBOutlet weak var tableView: UITableView!
     
-    var transaction : Transaction?
+    var assets : [AnyObject] = []
+    
+    //var transaction : Transaction?
     var isAdvertising: Bool!
     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     
@@ -42,19 +44,23 @@ class NearbyFriendsViewController: UIViewController, UITableViewDelegate, UITabl
         
         println("SendButtonTapped")
         
-        for asset in (transaction!.assets as! [PHAsset]) {
+        for asset in (assets/*transaction!.assets*/ as! [PHAsset]) {
         
             PHImageManager.defaultManager().requestImageDataForAsset(asset, options: nil) {
                 (imageData: NSData!, dataUTI: String!, orientation: UIImageOrientation, info: [NSObject : AnyObject]!) -> Void in
                 fileURL = info["PHImageFileURLKey"] as? NSURL
+                print(fileURL)
                 println("yay")
+                
+                /*
+                for peer in self.appDelegate.mpcManager.connectedPeers {
+                    var progress = self.appDelegate.mpcManager.session.sendResourceAtURL(fileURL, withName: fileURL?.lastPathComponent, toPeer: peer) { (error: NSError?) -> Void in
+                        NSLog("Error: \(error)")
+                    }
+                } */
             }
             
-            for peer in appDelegate.mpcManager.connectedPeers {
-                var progress = appDelegate.mpcManager.session.sendResourceAtURL(fileURL, withName: fileURL?.lastPathComponent, toPeer: peer) { (error: NSError?) -> Void in
-                    NSLog("Error: \(error)")
-                }
-            }
+
         }
 
         /*
