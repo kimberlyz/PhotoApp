@@ -9,10 +9,11 @@
 import UIKit
 import Parse
 import ConvenienceKit
-import Reachability
+import Photos
 
 class ChooseFriendsViewController: UIViewController {
 
+    var assets : [AnyObject] = []
     var friendUsers = [PFUser]()
     var selectedFriendUsers = [PFUser]()
     var friendUsersCount = -1
@@ -34,10 +35,45 @@ class ChooseFriendsViewController: UIViewController {
 
     @IBAction func sendButtonTapped(sender: AnyObject) {
         
+//        
+//        PHImageManager.defaultManager().requestImageForAsset(asset, targetSize: targetSize, contentMode: .AspectFill, options: nil, resultHandler: {(result, info)in
+//            
+//            if let image = result {
+//                dispatch_async(dispatch_get_main_queue()) { [unowned self] in
+//                    self.images.insert(image, atIndex: 0)
+//                    self.imageView = UIImageView(image: result)
+//                    self.tableView.reloadData()
+//                }
+//            }
+//            
+//        })
+        
+        
+        
+        
         let reachability = Reachability.reachabilityForInternetConnection()
         
         reachability.whenReachable = { reachability in
             if reachability.isReachableViaWiFi() {
+                
+                for var i = 0; i < self.assets.count; i++ {
+                    let asset = self.assets[i] as! PHAsset
+                    PHImageManager.defaultManager().requestImageDataForAsset(asset, options: nil) {
+                        (imageData: NSData!, dataUTI: String!, orientation: UIImageOrientation, info: [NSObject : AnyObject]!) -> Void in
+                        
+                        for friend in self.selectedFriendUsers {
+                            let photo = Photo()
+                            photo.imageData = imageData
+                            photo.toUser = friend
+                            photo.uploadPhoto()
+                            
+//                            
+//                            let photo = Photo()
+//                            photo.image = image
+//                            photo.uploadPhoto()
+                        }
+                    }
+                }
                 println("Reachable via WiFi")
             } else {
                 // Do I want to send a photo using cellular data??? Maybe in the future.

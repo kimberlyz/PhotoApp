@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "DF0B03197D4FC211F5A1B43D"
+               BlueprintIdentifier = "4D6F2B6344DFCE32F58C7AD6"
                BuildableName = "CTAssetsPickerController.bundle"
                BlueprintName = "CTAssetsPickerController-CTAssetsPickerController"
                ReferencedContainer = "container:Pods.xcodeproj">

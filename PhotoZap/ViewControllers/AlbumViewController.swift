@@ -133,6 +133,7 @@ extension AlbumViewController : CTAssetsPickerControllerDelegate {
                 // Do Wi-Fi Delay
                 else {
                     let chooseFriends = mainStoryboard.instantiateViewControllerWithIdentifier("ChooseFriendsNavigation") as! UINavigationController
+                    (chooseFriends.visibleViewController as! ChooseFriendsViewController).assets = assets
                     self.presentViewController(chooseFriends, animated: true, completion: nil)
                 }
             }

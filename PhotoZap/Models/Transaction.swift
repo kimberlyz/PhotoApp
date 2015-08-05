@@ -10,12 +10,12 @@ import UIKit
 import MultipeerConnectivity
 
 import Foundation
-import RealmSwift
+//import RealmSwift
 
-class Transaction: Object {
+class Transaction: NSObject {
 
-    dynamic var recipient : PFUser = PFUser()
-    dynamic var image : UIImage = UIImage()
+//    dynamic var recipient : PFUser = PFUser()
+//    dynamic var image : UIImage = UIImage()
     
     
 //    var recipients : [MCPeerID]?
