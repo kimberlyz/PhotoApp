@@ -34,23 +34,21 @@ class ChooseFriendsViewController: UIViewController {
 
     @IBAction func sendButtonTapped(sender: AnyObject) {
         
-        var reachability: Reachability = Reachability.reachabilityForInternetConnection()
-        var networkStatus = reachability.currentReachabilityStatus().rawValue
-
+        let reachability = Reachability.reachabilityForInternetConnection()
         
-        if(status == NotReachable)
-        {
-            //No internet
+        reachability.whenReachable = { reachability in
+            if reachability.isReachableViaWiFi() {
+                println("Reachable via WiFi")
+            } else {
+                // Do I want to send a photo using cellular data??? Maybe in the future.
+                println("Reachable via Cellular")
+            }
         }
-        else if (status == ReachableViaWiFi)
-        {
-            //WiFi
-        }
-        else if (status == ReachableViaWWAN) 
-        {
-            //3G
+        reachability.whenUnreachable = { reachability in
+            println("Not reachable")
         }
         
+        reachability.startNotifier()
     }
     
     
