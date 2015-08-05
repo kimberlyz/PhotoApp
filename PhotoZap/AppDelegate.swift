@@ -18,10 +18,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
-        /*
-        Mixpanel.sharedInstanceWithToken(57c3cd570c65e05727b88d2f9d8fe6da)
+        
+        Mixpanel.sharedInstanceWithToken("57c3cd570c65e05727b88d2f9d8fe6da")
         let mixpanel: Mixpanel = Mixpanel.sharedInstance()
-        mixpanel.track("App launched") */
+        mixpanel.track("App launched")
         
         // Set up Parse SDK
         Parse.setApplicationId("nynNgfGlqdxWbUSTVOQWpssFFHumyGd3lOKfpOgU", clientKey:

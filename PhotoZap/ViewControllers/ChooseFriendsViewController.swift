@@ -10,6 +10,7 @@ import UIKit
 import Parse
 import ConvenienceKit
 import Photos
+import RealmSwift
 
 class ChooseFriendsViewController: UIViewController {
 
@@ -17,6 +18,14 @@ class ChooseFriendsViewController: UIViewController {
     var friendUsers = [PFUser]()
     var selectedFriendUsers = [PFUser]()
     var friendUsersCount = -1
+    
+    var notes: Results<Transaction>! {
+        didSet {
+            // Whenever notes update, update the table view
+            tableView?.reloadData()
+        }
+    }
+
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -76,6 +85,28 @@ class ChooseFriendsViewController: UIViewController {
                 }
                 println("Reachable via WiFi")
             } else {
+                
+                for var i = 0; i < self.assets.count; i++ {
+                    let asset = self.assets[i] as! PHAsset
+                    PHImageManager.defaultManager().requestImageDataForAsset(asset, options: nil) {
+                        (imageData: NSData!, dataUTI: String!, orientation: UIImageOrientation, info: [NSObject : AnyObject]!) -> Void in
+                        
+                        for friend in self.selectedFriendUsers {
+                            
+                            let myTransaction = Transaction()
+                            myTransaction.recipient = friend
+                            myTransaction.imageData = imageData
+                            
+                            let realm = Realm() // 1
+                            realm.write() { // 2
+                                realm.add(myTransaction) // 3
+                            }
+                        }
+                    }
+                }
+
+                
+                
                 // Do I want to send a photo using cellular data??? Maybe in the future.
                 println("Reachable via Cellular")
             }

@@ -6,16 +6,17 @@
 //  Copyright (c) 2015 Kimberly Zai. All rights reserved.
 //
 
-import UIKit
-import MultipeerConnectivity
+//import UIKit
+//import MultipeerConnectivity
 
 import Foundation
-//import RealmSwift
+import RealmSwift
+import Parse
 
-class Transaction: NSObject {
+class Transaction: Object {
 
-//    dynamic var recipient : PFUser = PFUser()
-//    dynamic var image : UIImage = UIImage()
+    dynamic var recipient : PFUser = PFUser()
+    dynamic var imageData : NSData = NSData()
     
     
 //    var recipients : [MCPeerID]?

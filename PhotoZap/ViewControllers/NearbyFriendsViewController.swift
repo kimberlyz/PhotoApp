@@ -52,12 +52,12 @@ class NearbyFriendsViewController: UIViewController, UITableViewDelegate, UITabl
                 print(fileURL)
                 println("yay")
                 
-                /*
+                
                 for peer in self.appDelegate.mpcManager.connectedPeers {
                     var progress = self.appDelegate.mpcManager.session.sendResourceAtURL(fileURL, withName: fileURL?.lastPathComponent, toPeer: peer) { (error: NSError?) -> Void in
                         NSLog("Error: \(error)")
                     }
-                } */
+                } 
             }
             
 
