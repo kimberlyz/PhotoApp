@@ -71,12 +71,7 @@ class NearbyFriendsViewController: UIViewController, UITableViewDelegate, UITabl
         PHImageManager.defaultManager().requestImageForAsset(asset, targetSize: self.assetThumbnailSize, contentMode: .AspectFill, options: nil, resultHandler: {(result, info)in
         cell.setThumbnailImage(result)
         })
-        [[PHImageManager defaultManager] requestImageDataForAsset:asset options:nil resultHandler:^(NSData *imageData, NSString *dataUTI, UIImageOrientation orientation, NSDictionary *info) {
-            
-            //imageData contains the correct data for images and videos
-            NSLog(@"info - %@", info);
-            NSURL* fileURL = [info objectForKey:@"PHImageFileURLKey"];
-            }]; */
+     */
         
     }
 

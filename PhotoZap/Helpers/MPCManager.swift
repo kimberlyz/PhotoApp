@@ -46,7 +46,7 @@ class MPCManager: NSObject, MCSessionDelegate, MCNearbyServiceBrowserDelegate, M
     }
     
     override func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject, change: [NSObject : AnyObject], context: UnsafeMutablePointer<Void>) {
-        NSNotificationCenter.defaultCenter().postNotificationName("MCReceivingProgressNotification", object: nil, userInfo: ["progress" : object])
+        NSNotificationCenter.defaultCenter().postNotificationName("MPCReceivingProgressNotification", object: nil, userInfo: ["progress" : object])
     }
     
     /*
@@ -130,16 +130,23 @@ extension MPCManager: MCSessionDelegate {
     
     func session(session: MCSession!, didStartReceivingResourceWithName resourceName: String!, fromPeer peerID: MCPeerID!, withProgress progress: NSProgress!) {
         
-        var dict = ["resourceName" : resourceName, "peerID" : peerID, "progress" : progress]
+
+       // NSNotificationCenter.defaultCenter().postNotificationName("receivedMPCDataNotification", object: dictionary)
+        var dict: [String: AnyObject] = ["resourceName" : resourceName, "peerID" : peerID, "progress" : progress]
         
-        NSNotificationCenter.defaultCenter().postNotificationName("MCDidStartReceivingResourceNotification", object: nil, userInfo: dict)
+        //NSNotificationCenter.defaultCenter().postNotificationName(<#aName: String#>, object: <#AnyObject?#>)
+        
+        NSNotificationCenter.defaultCenter().postNotificationName("MPCDidStartReceivingResourceNotification", object: nil, userInfo: dict)
         dispatch_async(dispatch_get_main_queue()) { // 2
             progress.addObserver(self, forKeyPath: "fractionCompleted", options: NSKeyValueObservingOptions.New, context: nil)
         }
     }
     
     func session(session: MCSession!, didFinishReceivingResourceWithName resourceName: String!, fromPeer peerID: MCPeerID!, atURL localURL: NSURL!, withError error: NSError!) {
-        <#code#>
+        
+        var dict: [String: AnyObject] = ["resourceName" : resourceName, "peerID" : peerID, "localURL" : localURL]
+        
+        NSNotificationCenter.defaultCenter().postNotificationName("didFinishReceivingResourceNotification", object: nil, userInfo: dict)
     }
     
 }
