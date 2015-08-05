@@ -9,6 +9,7 @@
 import UIKit
 import Parse
 import ConvenienceKit
+import Reachability
 
 class ChooseFriendsViewController: UIViewController {
 
@@ -32,6 +33,23 @@ class ChooseFriendsViewController: UIViewController {
     }
 
     @IBAction func sendButtonTapped(sender: AnyObject) {
+        
+        var reachability: Reachability = Reachability.reachabilityForInternetConnection()
+        var networkStatus = reachability.currentReachabilityStatus().rawValue
+
+        
+        if(status == NotReachable)
+        {
+            //No internet
+        }
+        else if (status == ReachableViaWiFi)
+        {
+            //WiFi
+        }
+        else if (status == ReachableViaWWAN) 
+        {
+            //3G
+        }
         
     }
     

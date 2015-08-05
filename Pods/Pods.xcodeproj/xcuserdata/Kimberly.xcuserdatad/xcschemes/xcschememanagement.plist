@@ -4,67 +4,62 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Pods-Bolts.xcscheme</key>
+		<key>Bolts.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-Bond.xcscheme</key>
+		<key>Bond.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-CTAssetsPickerController-CTAssetsPickerController.xcscheme</key>
+		<key>CTAssetsPickerController-CTAssetsPickerController.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-CTAssetsPickerController.xcscheme</key>
+		<key>CTAssetsPickerController.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-ConvenienceKit-ConvenienceKit.xcscheme</key>
+		<key>ConvenienceKit-ConvenienceKit.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-ConvenienceKit.xcscheme</key>
+		<key>ConvenienceKit.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-FBSDKCoreKit.xcscheme</key>
+		<key>FBSDKCoreKit.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-FBSDKLoginKit.xcscheme</key>
+		<key>FBSDKLoginKit.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-Mixpanel.xcscheme</key>
+		<key>Mixpanel.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-Parse.xcscheme</key>
+		<key>Parse.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-ParseFacebookUtilsV4.xcscheme</key>
+		<key>ParseFacebookUtilsV4.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-ParseUI.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Pods-PureLayout.xcscheme</key>
+		<key>ParseUI.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -74,75 +69,80 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>PureLayout.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>01B3A478C396B8D5EB124C35</key>
+		<key>1295E69BE8E7E1529BF06F08153FEE27</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>08D9C7DF559A5C4BE9BC0C6F</key>
+		<key>1D3B1A7357C479D3BCA0A4E9EE054968</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>1268EDD1FA33565D3877D109</key>
+		<key>2572CD499947041E9AFFEABCAEFC99E3</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>17A4E0AD3F5B30FD43F092B5</key>
+		<key>5A6D01C4CCF7004E52EC3ACADCA169E4</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>1AD1AFF4B7DA41B14F3D7F9F</key>
+		<key>5B1017717011B4D095251C66290FEA40</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>27CDAB5274B067D29BE08CD7</key>
+		<key>5E7A5F2FCB525B03A30D74E9ABF05943</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>341EC5F41B2B8483AC1884D7</key>
+		<key>8240A687A12B3496C485DFBEB80E79E2</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>500F09D075C5C77FAF180DFC</key>
+		<key>8579A9BF5D33FB9700D16F947B73A71E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>75B6E15C5DBF5D3BB660C046</key>
+		<key>B0B90710944E6590FF8050C0864B6E17</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>A1E5AD5A7CF82810513F54A9</key>
+		<key>B8232AC59448A96F5CDEB46FA8034188</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>A406BFFB5AE92AADEA78EA0E</key>
+		<key>C4C51EEF083D7FF431141738DA16AEFA</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>CCBF15E9FECB936552798109</key>
+		<key>E6AE2677FE736D8D4BDCB1A857C2A1DC</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>D426702B0208D330627DF88C</key>
+		<key>E8A6457182787CA902B91A34055519B0</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>D663BFA2C8E9138DB709ACE6</key>
+		<key>F0946EA25CC69B4AC06A68D33987B319</key>
 		<dict>
 			<key>primary</key>
 			<true/>
