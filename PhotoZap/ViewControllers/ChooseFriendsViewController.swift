@@ -10,7 +10,10 @@ import UIKit
 import Parse
 import ConvenienceKit
 import Photos
-import RealmSwift
+//import RealmSwift
+import ReachabilitySwift
+
+
 
 class ChooseFriendsViewController: UIViewController {
 
@@ -19,12 +22,14 @@ class ChooseFriendsViewController: UIViewController {
     var selectedFriendUsers = [PFUser]()
     var friendUsersCount = -1
     
-    var notes: Results<Transaction>! {
-        didSet {
-            // Whenever notes update, update the table view
-            tableView?.reloadData()
-        }
-    }
+    let reachability = Reachability.reachabilityForInternetConnection()
+    
+//    var notes: Results<Transaction>! {
+//        didSet {
+//            // Whenever notes update, update the table view
+//            tableView?.reloadData()
+//        }
+//    }
 
     
     @IBOutlet weak var tableView: UITableView!
@@ -34,6 +39,11 @@ class ChooseFriendsViewController: UIViewController {
         super.viewDidLoad()
         
         getFriendshipForUser()
+        
+        println(reachability)
+        reachability.whenReachable = { reachability in
+            println("Wifi")
+        }
 
         // Do any additional setup after loading the view.
     }
@@ -43,6 +53,38 @@ class ChooseFriendsViewController: UIViewController {
     }
 
     @IBAction func sendButtonTapped(sender: AnyObject) {
+        
+        reachability.startNotifier()
+        
+        // Initial reachability check
+        if reachability.isReachable() {
+            if reachability.isReachableViaWiFi() {
+                for var i = 0; i < self.assets.count; i++ {
+                    let asset = self.assets[i] as! PHAsset
+                    PHImageManager.defaultManager().requestImageDataForAsset(asset, options: nil) {
+                        (imageData: NSData!, dataUTI: String!, orientation: UIImageOrientation, info: [NSObject : AnyObject]!) -> Void in
+                        
+                        for friend in self.selectedFriendUsers {
+                            let photo = Photo()
+                            photo.imageData = imageData
+                            photo.toUser = friend
+                            photo.uploadPhoto()
+                            
+                            //
+                            //                            let photo = Photo()
+                            //                            photo.image = image
+                            //                            photo.uploadPhoto()
+                        }
+                    }
+                }
+                println("Reachable via WiFi")
+
+            } else {
+                println("Reachable via Cellular Network")
+            }
+        } else {
+            println("NOOOO")
+        }
         
 //        
 //        PHImageManager.defaultManager().requestImageForAsset(asset, targetSize: targetSize, contentMode: .AspectFill, options: nil, resultHandler: {(result, info)in
@@ -60,30 +102,14 @@ class ChooseFriendsViewController: UIViewController {
         
         
         
-        let reachability = Reachability.reachabilityForInternetConnection()
+        
+
+        println(reachability)
         
         reachability.whenReachable = { reachability in
             if reachability.isReachableViaWiFi() {
                 
-                for var i = 0; i < self.assets.count; i++ {
-                    let asset = self.assets[i] as! PHAsset
-                    PHImageManager.defaultManager().requestImageDataForAsset(asset, options: nil) {
-                        (imageData: NSData!, dataUTI: String!, orientation: UIImageOrientation, info: [NSObject : AnyObject]!) -> Void in
-                        
-                        for friend in self.selectedFriendUsers {
-                            let photo = Photo()
-                            photo.imageData = imageData
-                            photo.toUser = friend
-                            photo.uploadPhoto()
-                            
-//                            
-//                            let photo = Photo()
-//                            photo.image = image
-//                            photo.uploadPhoto()
-                        }
-                    }
-                }
-                println("Reachable via WiFi")
+                
             } else {
                 
                 for var i = 0; i < self.assets.count; i++ {
@@ -93,14 +119,24 @@ class ChooseFriendsViewController: UIViewController {
                         
                         for friend in self.selectedFriendUsers {
                             
-                            let myTransaction = Transaction()
-                            myTransaction.recipient = friend
-                            myTransaction.imageData = imageData
+                            let photo = PFObject(className: "Photo")
+                            photo["toUser"] = friend
+                            photo["fromUser"] = PFUser.currentUser()!
                             
-                            let realm = Realm() // 1
-                            realm.write() { // 2
-                                realm.add(myTransaction) // 3
-                            }
+                            let imageData = imageData
+                            let imageFile = PFFile(data: imageData!)
+                            photo["image"] = imageFile
+                            photo.pinInBackgroundWithBlock(nil)
+                        
+                            
+//                            let myTransaction = Transaction()
+//                            myTransaction.recipient = friend
+//                            myTransaction.imageData = imageData
+//                            
+//                            let realm = Realm() // 1
+//                            realm.write() { // 2
+//                                realm.add(myTransaction) // 3
+//                            }
                         }
                     }
                 }

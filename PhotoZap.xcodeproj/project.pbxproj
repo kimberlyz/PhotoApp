@@ -29,7 +29,6 @@
 		DB6702221B7164B100908460 /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6702211B7164B100908460 /* NotificationsViewController.swift */; };
 		DB6702251B717E3C00908460 /* NotificationsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6702241B717E3C00908460 /* NotificationsTableViewCell.swift */; };
 		DB67022B1B71E32A00908460 /* ErrorHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB67022A1B71E32A00908460 /* ErrorHandling.swift */; };
-		DB67022D1B71E85F00908460 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB67022C1B71E85F00908460 /* Reachability.swift */; };
 		DB6AC4671B54307B0019C46E /* AlbumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6AC4661B54307B0019C46E /* AlbumViewController.swift */; };
 		DB6AC4691B5431430019C46E /* FriendListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6AC4681B5431430019C46E /* FriendListViewController.swift */; };
 		DB6AC46E1B5467A90019C46E /* PhotoTakingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6AC46D1B5467A90019C46E /* PhotoTakingHelper.swift */; };
@@ -77,7 +76,6 @@
 		DB6702211B7164B100908460 /* NotificationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
 		DB6702241B717E3C00908460 /* NotificationsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsTableViewCell.swift; sourceTree = "<group>"; };
 		DB67022A1B71E32A00908460 /* ErrorHandling.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorHandling.swift; sourceTree = "<group>"; };
-		DB67022C1B71E85F00908460 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		DB6AC4661B54307B0019C46E /* AlbumViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumViewController.swift; sourceTree = "<group>"; };
 		DB6AC4681B5431430019C46E /* FriendListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendListViewController.swift; sourceTree = "<group>"; };
 		DB6AC46D1B5467A90019C46E /* PhotoTakingHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoTakingHelper.swift; sourceTree = "<group>"; };
@@ -221,7 +219,6 @@
 		DB6168D61B55877400305D2E /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				DB67022C1B71E85F00908460 /* Reachability.swift */,
 				DB6168D71B55879400305D2E /* ParseHelper.swift */,
 				DB4657821B6C525A00F801A3 /* MPCManager.swift */,
 				DB67022A1B71E32A00908460 /* ErrorHandling.swift */,
@@ -452,7 +449,6 @@
 				DB16251F1B5043B000EC0004 /* AppDelegate.swift in Sources */,
 				DB6D6E431B6AD9200038F336 /* NearbyFriendsViewController.swift in Sources */,
 				DB0A32441B581137009D332C /* ReceivedPhotoTableViewCell.swift in Sources */,
-				DB67022D1B71E85F00908460 /* Reachability.swift in Sources */,
 				DB6702201B71319D00908460 /* Transaction.swift in Sources */,
 				DB6702221B7164B100908460 /* NotificationsViewController.swift in Sources */,
 				DB67022B1B71E32A00908460 /* ErrorHandling.swift in Sources */,

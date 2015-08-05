@@ -85,7 +85,6 @@ class ParseHelper {
         
         friendshipObject.saveInBackgroundWithBlock(nil)
     }
-
     
     static func getPendingFriendRequests(user: PFUser, completionBlock: PFArrayResultBlock) {
         

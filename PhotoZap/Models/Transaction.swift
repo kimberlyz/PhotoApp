@@ -11,11 +11,11 @@
 
 import Foundation
 import RealmSwift
-import Parse
+//import Parse
 
 class Transaction: Object {
 
-    dynamic var recipient : PFUser = PFUser()
+    //dynamic var recipient : PFUser = PFUser()
     dynamic var imageData : NSData = NSData()
     
     

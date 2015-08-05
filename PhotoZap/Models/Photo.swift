@@ -11,7 +11,8 @@ import Parse
 
 class Photo : PFObject, PFSubclassing {
     
-    @NSManaged var imageFile: PFFile?
+    //@NSManaged var imageFile: PFFile?
+    @NSManaged var image : PFObject?
     @NSManaged var toUser: PFUser?
     @NSManaged var fromUser: PFUser?
     
@@ -42,22 +43,26 @@ class Photo : PFObject, PFSubclassing {
         let imageFile = PFFile(data: imageData!)
         imageFile.saveInBackgroundWithBlock(nil)
         
-        photoUploadTask = UIApplication.sharedApplication().beginBackgroundTaskWithExpirationHandler { () -> Void in
-            UIApplication.sharedApplication().endBackgroundTask(self.photoUploadTask!)
-        }
+        let imageObject = PFObject(className: "Image")
+        imageObject.setObject(imageFile, forKey: "imageFile")
         
-        imageFile.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
-            
-            if let error = error {
-                ErrorHandling.defaultErrorHandler(error)
-            }
-            
-            UIApplication.sharedApplication().endBackgroundTask(self.photoUploadTask!)
-        }
+        
+//        photoUploadTask = UIApplication.sharedApplication().beginBackgroundTaskWithExpirationHandler { () -> Void in
+//            UIApplication.sharedApplication().endBackgroundTask(self.photoUploadTask!)
+//        }
+//        
+//        imageFile.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
+//            
+//            if let error = error {
+//                ErrorHandling.defaultErrorHandler(error)
+//            }
+//            
+//            UIApplication.sharedApplication().endBackgroundTask(self.photoUploadTask!)
+//        }
         
         // any uploaded post should be associated with the current user
         fromUser = PFUser.currentUser()
-        self.imageFile = imageFile
+        self.image = imageObject
         saveInBackgroundWithBlock(nil)
     }
 }

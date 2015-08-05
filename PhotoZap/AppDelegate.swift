@@ -23,6 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let mixpanel: Mixpanel = Mixpanel.sharedInstance()
         mixpanel.track("App launched")
         
+        Parse.enableLocalDatastore()
         // Set up Parse SDK
         Parse.setApplicationId("nynNgfGlqdxWbUSTVOQWpssFFHumyGd3lOKfpOgU", clientKey:
             "coum5Edl90uh0ARRSbRRiDYd5g02noZkNk5JKxLs")
