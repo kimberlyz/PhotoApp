@@ -9,14 +9,22 @@
 import UIKit
 import MultipeerConnectivity
 
-class Transaction: NSObject {
-    var recipients : [MCPeerID]?
-    var assets : [AnyObject]?
-    var progress : [NSProgress]?
+import Foundation
+import RealmSwift
+
+class Transaction: Object {
+
+    dynamic var recipient : PFUser = PFUser()
+    dynamic var image : UIImage = UIImage()
     
-    override init() {
-        recipients = [MCPeerID]()
-        assets = [PHAsset]()
-        progress = [NSProgress]()
-    }
+    
+//    var recipients : [MCPeerID]?
+//    var assets : [AnyObject]?
+//    var progress : [NSProgress]?
+//    
+//    override init() {
+//        recipients = [MCPeerID]()
+//        assets = [PHAsset]()
+//        progress = [NSProgress]()
+//    }
 }

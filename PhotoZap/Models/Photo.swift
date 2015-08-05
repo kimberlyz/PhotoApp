@@ -12,9 +12,11 @@ import Parse
 class Photo : PFObject, PFSubclassing {
     
     @NSManaged var imageFile: PFFile?
-    @NSManaged var user: PFUser?
+    @NSManaged var toUser: PFUser?
+    @NSManaged var fromUser: PFUser?
     
     var image: UIImage?
+    var photoUploadTask : UIBackgroundTaskIdentifier?
     
     // MARK: PFSubclassing Protocol
     
@@ -39,8 +41,21 @@ class Photo : PFObject, PFSubclassing {
         let imageFile = PFFile(data: imageData)
         imageFile.saveInBackgroundWithBlock(nil)
         
+        photoUploadTask = UIApplication.sharedApplication().beginBackgroundTaskWithExpirationHandler { () -> Void in
+            UIApplication.sharedApplication().endBackgroundTask(self.photoUploadTask!)
+        }
+        
+        imageFile.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
+            
+            if let error = error {
+                ErrorHandling.defaultErrorHandler(error)
+            }
+            
+            UIApplication.sharedApplication().endBackgroundTask(self.photoUploadTask!)
+        }
+        
         // any uploaded post should be associated with the current user
-        user = PFUser.currentUser()
+        fromUser = PFUser.currentUser()
         self.imageFile = imageFile
         saveInBackgroundWithBlock(nil)
     }
