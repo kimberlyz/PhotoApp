@@ -152,7 +152,7 @@ class NotificationsViewController: UIViewController {
         var userInfo = notification.userInfo as! Dictionary<String, AnyObject>
         var progress = userInfo["progress"] as! NSProgress
         var dict: [String: AnyObject] = senderInfo[senderInfo.count-1] as! [String : AnyObject]
-        var updatedDict: AnyObject = ["resourceName" : dict["resourceName"], "peerID" : dict["peerID"], "progress" : progress] as! AnyObject
+        var updatedDict: [String: AnyObject] = ["resourceName" : dict["resourceName"]!, "peerID" : dict["peerID"]!, "progress" : progress] as [String: AnyObject]
         
         senderInfo.removeLast()
         senderInfo.append(updatedDict)

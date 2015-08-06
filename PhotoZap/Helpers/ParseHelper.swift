@@ -38,7 +38,6 @@ class ParseHelper {
     // Image Pointer
     static let ParseImageClass = "Image"
     static let ParseImageImageFile = "imageFile"
-
     
     /** 
         Fetches all notifications that the person receives

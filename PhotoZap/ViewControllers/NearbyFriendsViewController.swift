@@ -40,7 +40,7 @@ class NearbyFriendsViewController: UIViewController, UITableViewDelegate, UITabl
     
     @IBAction func sendButtonTapped(sender: AnyObject) {
         
-        var fileURL : NSURL?
+        var fileURL = NSURL()
         
         println("SendButtonTapped")
         
@@ -48,14 +48,22 @@ class NearbyFriendsViewController: UIViewController, UITableViewDelegate, UITabl
         
             PHImageManager.defaultManager().requestImageDataForAsset(asset, options: nil) {
                 (imageData: NSData!, dataUTI: String!, orientation: UIImageOrientation, info: [NSObject : AnyObject]!) -> Void in
-//                fileURL = info["PHImageFileURLKey"] as? NSURL
-                fileURL = NSURL.fileURLWithPath("/var/mobile/Media/DCIM/105APPLE/IMG_5852.JPG")
+                fileURL = info["PHImageFileURLKey"] as! NSURL
+                //fileURL = NSURL.fileURLWithPath("/var/mobile/Media/DCIM/105APPLE/IMG_5852.JPG")
                 println(fileURL)
                 println("yay")
                 
+                /*
+                //@IBOutlet var imageURL : UIImageView
+                //if let url = fileURL {
+                    if let data = NSData(contentsOfURL: url){
+                        //imageURL.contentMode = UIViewContentMode.ScaleAspectFit
+                        var image = UIImage(data: data)
+                    }
+                //} */
                 
                 for peer in self.appDelegate.mpcManager.connectedPeers {
-                    var progress = self.appDelegate.mpcManager.session.sendResourceAtURL(fileURL, withName: fileURL?.lastPathComponent, toPeer: peer) { (error: NSError?) -> Void in
+                    var progress = self.appDelegate.mpcManager.session.sendResourceAtURL(fileURL, withName: fileURL.lastPathComponent, toPeer: peer) { (error: NSError?) -> Void in
                         NSLog("Error: \(error)")
                     }
                 } 
