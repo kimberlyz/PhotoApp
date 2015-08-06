@@ -327,9 +327,11 @@ extension NotificationsViewController: UITableViewDataSource {
                 }
             }
         } else {
-            TSMessage.showNotificationWithTitle("Image saved!", type: .Success)
+            TSMessage.showNotificationInViewController(self, title: "Image saved!", subtitle: "", type: .Success, duration: 1.0, canBeDismissedByUser: true)
             
-            
+            //TSMessage.showNotificationInViewController(self, title: "Imaged saved!", subtitle: "", type: )
+
+
 //            
 //            
 //            // Add a button inside the message
