@@ -9,20 +9,24 @@
 import UIKit
 import ConvenienceKit
 import Photos
+import Parse
 
 class NotificationsViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
+    var notifications = [PFObject]()
     var images = [UIImage]()
     
     // UHHH
     var senderInfo = [AnyObject]()  // var dict: [String: AnyObject]
     
-    var notificationsSectionTitles : [String] = ["Received", "Pending"]
+    var notificationsSectionTitles : [String] = ["Received", "", "Pending"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        getNotifications()
         
 
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "didStartReceivingResourceWithNotification:", name: "MPCDidStartReceivingResourceNotification", object: nil)
@@ -32,6 +36,83 @@ class NotificationsViewController: UIViewController {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "didFinishReceivingResourceNotification", name: "didFinishReceivingResourceNotification", object: nil)
         
     }
+    
+    
+    func getNotifications() {
+        ParseHelper.getNotifications(PFUser.currentUser()!) {
+            (results: [AnyObject]?, error: NSError?) -> Void in
+            let relations = results as? [PFObject] ?? []
+            
+            self.notifications = relations
+        }
+    }
+    
+
+    /*
+    func getNotifications() {
+        ParseHelper.getNotifications(PFUser.currentUser()!) {
+            (results: [AnyObject]?, error: NSError?) -> Void in
+            let relations = results as? [PFObject] ?? []
+            
+            
+            
+            var userArray = [PFUser]()
+            userArray = relations.map {
+                $0.objectForKey(ParseHelper.ParsePhotoFromUser) as! PFUser
+            }
+            
+            var imageArray = [PFObject]()
+            imageArray = relations.map {
+                $0.objectForKey(ParseHelper.ParsePhotoImage) as! PFObject
+            }
+            
+            var imageFileArray = [PFFile]()
+            imageFileArray = imageArray.map {
+                $0.objectForKey(ParseHelper.ParseImageImageFile) as! PFFile
+            }
+        
+            for var i = 0; i < userArray.count; i++ {
+                
+                
+                let imageFile = imageFileArray[i]
+                
+                imageFile.getDataInBackgroundWithBlock {
+                    (imageData: NSData?, error: NSError?) -> Void in
+                    if (error == nil) {
+                        let image = UIImage(data: imageData!)
+                        //var airports = ["YYZ": "Toronto Pearson", "DUB": "Dublin"]
+                        let dict: [PFUser : UIImage] = [userArray[i]: image!]
+                        self.notifications.append(dict)
+                        
+                        //self.notifications[i][currentUser] = imageFileArray[i]
+                    }
+                    
+                }
+                
+               // self.notifications[userArray[i]] = imageFileArray[i]
+            }
+            /*
+            for user in userArray {
+                self.notifications[user] =
+            }
+            //self.notifications[
+            for imageFile in imageFileArray {
+                println("Hi")
+                
+                imageFile.getDataInBackgroundWithBlock {
+                    (imageData: NSData?, error: NSError?) -> Void in
+                    if (error == nil) {
+                        let image = UIImage(data: imageData!)
+                    }
+                    
+                }
+                
+            } */
+            
+            self.tableView.reloadData()
+        }
+    } */
+    
     
     func didStartReceivingResourceWithNotification(notification: NSNotification) {
         senderInfo.append(notification.userInfo!)
@@ -125,14 +206,40 @@ extension NotificationsViewController: UITableViewDataSource {
 //            return self.friendUsers.count ?? 0
 //        }
         
-        return 1
+        return self.notifications.count
     }
     
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return notificationsSectionTitles[section]
     }
     
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("NotificationsCell") as! NotificationsTableViewCell
+        
+        let notificationObject = self.notifications[indexPath.row]
+        
+        cell.fromUser = notificationObject.objectForKey(ParseHelper.ParseNotificationFromUser) as? PFUser
+        /*
+        let imageFile = notificationObject.objectForKey(ParseHelper.ParseNotificationImage) as? PFFile
+        imageFile.getDataInBackgroundWithBlock {
+            (imageData: NSData?, error: NSError?) -> Void in
+            if (error == nil) {
+                if let imageData = imageData {
+                    let image = UIImage(data: imageData, scale:1.0)!
+                    // 3
+                    self.image.value = image
+                }
+                //let image = UIImage(data: imageData!)
+            }
+        }
+        */
+
+        cell.imageView!.image = notificationObject.objectForKey(ParseHelper.ParseNotificationImage) as? UIImage
+        
+        return cell
+    }
     
+    /*
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCellWithIdentifier("NotificationsCell") as! NotificationsTableViewCell
@@ -193,7 +300,7 @@ extension NotificationsViewController: UITableViewDataSource {
 //        
 //        return cell;
         
-    }
+    } */
     
 //    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
 //        if editingStyle == UITableViewCellEditingStyle.Delete {
@@ -208,7 +315,15 @@ extension NotificationsViewController: UITableViewDelegate {
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         
-        return 30
+        if section == 0 {
+            return 30
+        } else if section == 1 {
+            return 0
+        } else {
+            return 30
+        }
+        
+        //return 30
         
 //        if section == 0 && (self.requestingUsers == nil || self.requestingUsers?.count == 0) {
 //            return 0

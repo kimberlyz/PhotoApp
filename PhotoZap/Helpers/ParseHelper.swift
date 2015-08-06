@@ -21,7 +21,40 @@ class ParseHelper {
     static let ParseFriendshipEstablishFriendship = "establishFriendship"
     static let ParseFriendshipUsernameA = "usernameA"
     static let ParseFriendshipUsernameB = "usernameB"
+    
+    // Photo Relation
+    static let ParsePhotoClass = "Photo"
+    static let ParsePhotoToUser = "toUser"
+    static let ParsePhotoFromUser = "fromUser"
+    static let ParsePhotoImage = "image"
+    
+    
+    // Notification Relation
+    static let ParseNotificationClass = "Notification"
+    static let ParseNotificationToUser = "toUser"
+    static let ParseNotificationFromUser = "fromUser"
+    static let ParseNotificationImage = "image"
+    
+    // Image Pointer
+    static let ParseImageClass = "Image"
+    static let ParseImageImageFile = "imageFile"
 
+    
+    /** 
+        Fetches all notifications that the person receives
+    */
+    
+    static func getNotifications(user: PFUser, completionBlock: PFArrayResultBlock) {
+        let query = PFQuery(className: ParseNotificationClass)
+        
+        query.whereKey(ParseNotificationToUser, equalTo: user)
+        query.includeKey("fromUser")
+        query.includeKey("image")
+        
+        query.findObjectsInBackgroundWithBlock(completionBlock)
+    }
+    
+    
     
     /**
         Fetches all users that the provided user is friends with.

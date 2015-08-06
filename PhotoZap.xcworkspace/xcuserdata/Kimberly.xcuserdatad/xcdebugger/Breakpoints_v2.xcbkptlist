@@ -90,7 +90,7 @@
                   moduleName = "PhotoZap"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Kimberly/Documents/iOSApps/PhotoZap/PhotoZap/ViewControllers/WiFiDirectViewController.swift"
-                  timestampString = "460497031.341776"
+                  timestampString = "460517022.631468"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "180"
@@ -105,7 +105,7 @@
                   moduleName = "PhotoZap"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Kimberly/Documents/iOSApps/PhotoZap/PhotoZap/ViewControllers/WiFiDirectViewController.swift"
-                  timestampString = "460497031.341942"
+                  timestampString = "460517022.632176"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "180"
@@ -122,11 +122,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PhotoZap/Models/Photo.swift"
-            timestampString = "460493031.702435"
+            timestampString = "460504055.720343"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "43"
-            endingLineNumber = "43"
+            startingLineNumber = "56"
+            endingLineNumber = "56"
             landmarkName = "uploadPhoto()"
             landmarkType = "5">
          </BreakpointContent>
@@ -138,11 +138,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PhotoZap/ViewControllers/ChooseFriendsViewController.swift"
-            timestampString = "460497031.005504"
+            timestampString = "460519480.148563"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "150"
-            endingLineNumber = "150"
+            startingLineNumber = "160"
+            endingLineNumber = "160"
             landmarkName = "sendButtonTapped(_:)"
             landmarkType = "5">
             <Locations>
@@ -154,11 +154,11 @@
                   moduleName = "PhotoZap"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Kimberly/Documents/iOSApps/PhotoZap/PhotoZap/ViewControllers/ChooseFriendsViewController.swift"
-                  timestampString = "460497031.343444"
+                  timestampString = "460517022.676441"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "150"
-                  endingLineNumber = "150"
+                  startingLineNumber = "151"
+                  endingLineNumber = "151"
                   offsetFromSymbolStart = "1941">
                </Location>
                <Location
@@ -169,11 +169,11 @@
                   moduleName = "PhotoZap"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Kimberly/Documents/iOSApps/PhotoZap/PhotoZap/ViewControllers/ChooseFriendsViewController.swift"
-                  timestampString = "460497031.343606"
+                  timestampString = "460517022.676957"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "151"
-                  endingLineNumber = "151"
+                  startingLineNumber = "152"
+                  endingLineNumber = "152"
                   offsetFromSymbolStart = "37">
                </Location>
             </Locations>
@@ -186,11 +186,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PhotoZap/ViewControllers/ChooseFriendsViewController.swift"
-            timestampString = "460497031.005504"
+            timestampString = "460519480.148563"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "151"
-            endingLineNumber = "151"
+            startingLineNumber = "161"
+            endingLineNumber = "161"
             landmarkName = "sendButtonTapped(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -202,11 +202,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PhotoZap/ViewControllers/ChooseFriendsViewController.swift"
-            timestampString = "460497031.005504"
+            timestampString = "460519480.148563"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "119"
-            endingLineNumber = "119"
+            startingLineNumber = "121"
+            endingLineNumber = "121"
             landmarkName = "sendButtonTapped(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -218,43 +218,75 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PhotoZap/ViewControllers/ChooseFriendsViewController.swift"
-            timestampString = "460496966.189944"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "68"
-            endingLineNumber = "68"
-            landmarkName = "sendButtonTapped(_:)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "PhotoZap/ViewControllers/ChooseFriendsViewController.swift"
-            timestampString = "460497021.487465"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "61"
-            endingLineNumber = "61"
-            landmarkName = "sendButtonTapped(_:)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "PhotoZap/ViewControllers/ChooseFriendsViewController.swift"
-            timestampString = "460497022.136272"
+            timestampString = "460517022.370639"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "62"
             endingLineNumber = "62"
+            landmarkName = "sendButtonTapped(_:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PhotoZap/ViewControllers/ChooseFriendsViewController.swift"
+            timestampString = "460517022.370639"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "63"
+            endingLineNumber = "63"
+            landmarkName = "sendButtonTapped(_:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PhotoZap/ViewControllers/NearbyFriendsViewController.swift"
+            timestampString = "460512323.309746"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "57"
+            endingLineNumber = "57"
+            landmarkName = "sendButtonTapped(_:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PhotoZap/ViewControllers/NearbyFriendsViewController.swift"
+            timestampString = "460512323.309746"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "53"
+            endingLineNumber = "53"
+            landmarkName = "sendButtonTapped(_:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PhotoZap/ViewControllers/NearbyFriendsViewController.swift"
+            timestampString = "460512443.755451"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "59"
+            endingLineNumber = "59"
             landmarkName = "sendButtonTapped(_:)"
             landmarkType = "5">
          </BreakpointContent>

@@ -31,13 +31,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Done in the background
         PFAnalytics.trackAppOpenedWithLaunchOptionsInBackground(launchOptions, block: nil)
         
-        PFUser.logInWithUsername("test", password: "test")
+        PFUser.logInWithUsername("leslieKnope", password: "leslieKnope")
         
         if let user = PFUser.currentUser() {
             println("Log in successful")
         } else {
             println("No logged in user :(")
-        }
+        } 
 
         
 

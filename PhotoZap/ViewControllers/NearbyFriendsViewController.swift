@@ -48,8 +48,9 @@ class NearbyFriendsViewController: UIViewController, UITableViewDelegate, UITabl
         
             PHImageManager.defaultManager().requestImageDataForAsset(asset, options: nil) {
                 (imageData: NSData!, dataUTI: String!, orientation: UIImageOrientation, info: [NSObject : AnyObject]!) -> Void in
-                fileURL = info["PHImageFileURLKey"] as? NSURL
-                print(fileURL)
+//                fileURL = info["PHImageFileURLKey"] as? NSURL
+                fileURL = NSURL.fileURLWithPath("/var/mobile/Media/DCIM/105APPLE/IMG_5852.JPG")
+                println(fileURL)
                 println("yay")
                 
                 

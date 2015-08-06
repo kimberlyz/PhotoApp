@@ -20,7 +20,6 @@ class ChooseFriendsViewController: UIViewController {
     var assets : [AnyObject] = []
     var friendUsers = [PFUser]()
     var selectedFriendUsers = [PFUser]()
-    var friendUsersCount = -1
     
     let reachability = Reachability.reachabilityForInternetConnection()
     
@@ -37,6 +36,8 @@ class ChooseFriendsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        friendUsers = [PFUser]()
         
         getFriendshipForUser()
         
@@ -65,15 +66,16 @@ class ChooseFriendsViewController: UIViewController {
                         (imageData: NSData!, dataUTI: String!, orientation: UIImageOrientation, info: [NSObject : AnyObject]!) -> Void in
                         
                         for friend in self.selectedFriendUsers {
-                            let photo = Photo()
-                            photo.imageData = imageData
-                            photo.toUser = friend
-                            photo.uploadPhoto()
+                            let notification = Notification()
+                            notification.imageData = imageData
+                            notification.toUser = friend
+                            notification.uploadNotification()
+//                            let photo = Photo()
+//                            photo.imageData = imageData
+//                            photo.toUser = friend
+//                            photo.uploadPhoto()
                             
-                            //
-                            //                            let photo = Photo()
-                            //                            photo.image = image
-                            //                            photo.uploadPhoto()
+
                         }
                     }
                 }
@@ -119,14 +121,22 @@ class ChooseFriendsViewController: UIViewController {
                         
                         for friend in self.selectedFriendUsers {
                             
-                            let photo = PFObject(className: "Photo")
-                            photo["toUser"] = friend
-                            photo["fromUser"] = PFUser.currentUser()!
+                            let notification = PFObject(className: "Notification")
+                            notification["toUser"] = friend
+                            notification["fromUser"] = PFUser.currentUser()!
                             
                             let imageData = imageData
                             let imageFile = PFFile(data: imageData!)
-                            photo["image"] = imageFile
-                            photo.pinInBackgroundWithBlock(nil)
+                            notification["image"] = imageFile
+                            notification.pinInBackgroundWithBlock(nil)
+//                            let photo = PFObject(className: "Photo")
+//                            photo["toUser"] = friend
+//                            photo["fromUser"] = PFUser.currentUser()!
+//                            
+//                            let imageData = imageData
+//                            let imageFile = PFFile(data: imageData!)
+//                            photo["image"] = imageFile
+//                            photo.pinInBackgroundWithBlock(nil)
                         
                             
 //                            let myTransaction = Transaction()
@@ -178,8 +188,8 @@ class ChooseFriendsViewController: UIViewController {
                 
                 // If your list of friends has changed (# of friends has changed),
                 // add the friends to the array and reload the tableView
-                if self.friendUsersCount != self.friendUsers.count {
-                    self.friendUsers = []
+                //if self.friendUsersCount != self.friendUsers.count {
+                    //self.friendUsers = []
                     if let friend1 = friendUsers1 {
                         self.friendUsers += friend1
                     }
@@ -188,14 +198,14 @@ class ChooseFriendsViewController: UIViewController {
                         self.friendUsers += friend2
                     }
                     
-                    // Keep number of friends up-to-date
-                    self.friendUsersCount = self.friendUsers.count
-                    
+//                    // Keep number of friends up-to-date
+//                    self.friendUsersCount = self.friendUsers.count
+                
                     // Sort friends by their usernames alphabetically
                     self.friendUsers.sort({ $0.username < $1.username })
                     
                     self.tableView.reloadData()
-                }
+                //}
             }
         }
     }

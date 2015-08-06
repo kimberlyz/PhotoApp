@@ -7,12 +7,23 @@
 //
 
 import UIKit
+import Parse
 
 class NotificationsTableViewCell: UITableViewCell {
 
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var notificationsImageView: UIImageView!
     @IBOutlet weak var progressView: UIProgressView!
-
+    
+    //var fromUser : PFUser?
+    
+    var fromUser: PFUser? {
+        didSet {
+            if let fromUser = fromUser {
+                fromUser.fetchIfNeeded()
+                usernameLabel.text = fromUser["username"] as? String
+            }
+        }
+    }
 
 }

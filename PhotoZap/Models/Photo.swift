@@ -18,7 +18,7 @@ class Photo : PFObject, PFSubclassing {
     
     //var imageData: UIImage?
     var imageData: NSData?
-    var photoUploadTask : UIBackgroundTaskIdentifier?
+//    var photoUploadTask : UIBackgroundTaskIdentifier?
     
     // MARK: PFSubclassing Protocol
     
@@ -37,6 +37,19 @@ class Photo : PFObject, PFSubclassing {
             self.registerSubclass()
         }
     }
+    
+//    func setPhoto() {
+//        let imageFile = PFFile(data: imageData!)
+//        imageFile.saveInBackgroundWithBlock(nil)
+//        
+//        let imageObject = PFObject(className: "Image")
+//        imageObject.setObject(imageFile, forKey: "imageFile")
+//        
+//        fromUser = PFUser.currentUser()
+//        self.image = imageObject
+//        //saveInBackgroundWithBlock(nil)
+//        
+//    }
     
     func uploadPhoto() {
         //let imageData = UIImageJPEGRepresentation(image, 0.8)
