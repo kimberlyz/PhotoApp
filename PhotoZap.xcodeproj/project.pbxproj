@@ -35,6 +35,7 @@
 		DB6AC46E1B5467A90019C46E /* PhotoTakingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6AC46D1B5467A90019C46E /* PhotoTakingHelper.swift */; };
 		DB6AC4731B547B8B0019C46E /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6AC4721B547B8B0019C46E /* Photo.swift */; };
 		DB6D6E431B6AD9200038F336 /* NearbyFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6D6E421B6AD9200038F336 /* NearbyFriendsViewController.swift */; };
+		DBA03C691B733D1B00E5D6BD /* ParseLoginHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA03C681B733D1B00E5D6BD /* ParseLoginHelper.swift */; };
 		DBAD5DF11B669E4C0076FE66 /* FriendRequestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBAD5DF01B669E4C0076FE66 /* FriendRequestTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -84,6 +85,8 @@
 		DB6AC4721B547B8B0019C46E /* Photo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		DB6D6E421B6AD9200038F336 /* NearbyFriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyFriendsViewController.swift; sourceTree = "<group>"; };
 		DB8AB9881B6973B400401A18 /* PhotoZap-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PhotoZap-Bridging-Header.h"; sourceTree = "<group>"; };
+		DBA03C681B733D1B00E5D6BD /* ParseLoginHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseLoginHelper.swift; sourceTree = "<group>"; };
+		DBA03C6A1B733E5E00E5D6BD /* Bond.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bond.framework; path = "Pods/../build/Debug-iphoneos/Bond.framework"; sourceTree = "<group>"; };
 		DBAD5DF01B669E4C0076FE66 /* FriendRequestTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendRequestTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -110,6 +113,7 @@
 		A5F4747479943C56A5D7FD2A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DBA03C6A1B733E5E00E5D6BD /* Bond.framework */,
 				DB51CAA81B728B7D0024BBAC /* libsqlite3.dylib */,
 				7EB23EE8F0907A83F0AE0437 /* Pods.framework */,
 			);
@@ -224,6 +228,7 @@
 				DB6168D71B55879400305D2E /* ParseHelper.swift */,
 				DB4657821B6C525A00F801A3 /* MPCManager.swift */,
 				DB67022A1B71E32A00908460 /* ErrorHandling.swift */,
+				DBA03C681B733D1B00E5D6BD /* ParseLoginHelper.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -450,6 +455,7 @@
 				DB6AC4671B54307B0019C46E /* AlbumViewController.swift in Sources */,
 				DB0A32411B56F94A009D332C /* WiFiDirectViewController.swift in Sources */,
 				DBAD5DF11B669E4C0076FE66 /* FriendRequestTableViewCell.swift in Sources */,
+				DBA03C691B733D1B00E5D6BD /* ParseLoginHelper.swift in Sources */,
 				DB16251F1B5043B000EC0004 /* AppDelegate.swift in Sources */,
 				DB6D6E431B6AD9200038F336 /* NearbyFriendsViewController.swift in Sources */,
 				DB0A32441B581137009D332C /* ReceivedPhotoTableViewCell.swift in Sources */,
@@ -591,6 +597,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+				);
 				INFOPLIST_FILE = PhotoZap/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -606,6 +616,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+				);
 				INFOPLIST_FILE = PhotoZap/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
