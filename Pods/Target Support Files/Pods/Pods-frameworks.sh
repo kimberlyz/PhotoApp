@@ -58,6 +58,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework 'Pods/ConvenienceKit.framework'
   install_framework 'Pods/FBSDKCoreKit.framework'
   install_framework 'Pods/FBSDKLoginKit.framework'
+  install_framework 'Pods/HexColors.framework'
   install_framework 'Pods/Mixpanel.framework'
   install_framework 'Pods/Parse.framework'
   install_framework 'Pods/ParseFacebookUtilsV4.framework'
@@ -66,6 +67,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework 'Pods/ReachabilitySwift.framework'
   install_framework 'Pods/Realm.framework'
   install_framework 'Pods/RealmSwift.framework'
+  install_framework 'Pods/TSMessages.framework'
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework 'Pods/Bolts.framework'
@@ -74,6 +76,7 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework 'Pods/ConvenienceKit.framework'
   install_framework 'Pods/FBSDKCoreKit.framework'
   install_framework 'Pods/FBSDKLoginKit.framework'
+  install_framework 'Pods/HexColors.framework'
   install_framework 'Pods/Mixpanel.framework'
   install_framework 'Pods/Parse.framework'
   install_framework 'Pods/ParseFacebookUtilsV4.framework'
@@ -82,4 +85,5 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework 'Pods/ReachabilitySwift.framework'
   install_framework 'Pods/Realm.framework'
   install_framework 'Pods/RealmSwift.framework'
+  install_framework 'Pods/TSMessages.framework'
 fi

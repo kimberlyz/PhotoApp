@@ -10,6 +10,7 @@ import UIKit
 import ConvenienceKit
 import Photos
 import Parse
+import TSMessages
 
 class NotificationsViewController: UIViewController {
 
@@ -296,43 +297,65 @@ extension NotificationsViewController: UITableViewDataSource {
         
         if notificationObject.imagePic == nil {
         
-        let imageObject = notificationObject.objectForKey(ParseHelper.ParseNotificationImage) as? PFObject
+            let imageObject = notificationObject.objectForKey(ParseHelper.ParseNotificationImage) as? PFObject
         
-        if let imageObject = imageObject {
-            let imageFile = imageObject.objectForKey(ParseHelper.ParseImageImageFile) as! PFFile
+            if let imageObject = imageObject {
+                let imageFile = imageObject.objectForKey(ParseHelper.ParseImageImageFile) as! PFFile
             
-            selectedCell.activityIndicator.startAnimating()
+                selectedCell.activityIndicator.startAnimating()
             
-            imageFile.getDataInBackgroundWithBlock {
-                (imageData: NSData?, error: NSError?) -> Void in
-                if (error == nil) {
-                    if let imageData = imageData {
-                        //let image = UIImage(data: imageData, scale:1.0)!
+                imageFile.getDataInBackgroundWithBlock {
+                    (imageData: NSData?, error: NSError?) -> Void in
+                    if (error == nil) {
+                        if let imageData = imageData {
+                            //let image = UIImage(data: imageData, scale:1.0)!
                         
-                        let image = UIImage(data: imageData)
-                        notificationObject.imagePic = image
+                            let image = UIImage(data: imageData)
+                            notificationObject.imagePic = image
                         
-                        selectedCell.notificationsImageView.image = image
+                            selectedCell.notificationsImageView.image = image
                         
-                        selectedCell.activityIndicator.stopAnimating()
+                            selectedCell.activityIndicator.stopAnimating()
                         
-                        self.tableView.reloadData()
+                            self.tableView.reloadData()
                         
-                        // 3
-                        //self.image.value = image
-                    }
+                            // 3
+                            //self.image.value = image
+                        }
                     
+                    }
                 }
             }
-        }
+        } else {
+            TSMessage.showNotificationWithTitle("Image saved!", type: .Success)
             
+            
+//            
+//            
+//            // Add a button inside the message
+//            [TSMessage showNotificationInViewController:self
+//            title:@"Update available"
+//            subtitle:@"Please update the app"
+//            image:nil
+//            type:TSMessageNotificationTypeMessage
+//            duration:TSMessageNotificationDurationAutomatic
+//            callback:nil
+//            buttonTitle:@"Update"
+//            buttonCallback:^{
+//            NSLog(@"User tapped the button");
+//            }
+//            atPosition:TSMessageNotificationPositionTop
+//            canBeDismissedByUser:YES];
+            
+            UIImageWriteToSavedPhotosAlbum(notificationObject.imagePic, nil, nil, nil)
+            println("Image Saved")
         }
         
     }
     
     /*
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
+    
         let cell = tableView.dequeueReusableCellWithIdentifier("NotificationsCell") as! NotificationsTableViewCell
         
 //        cell.usernameLabel.text = "Merp"
