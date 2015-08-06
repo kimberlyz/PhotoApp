@@ -235,7 +235,7 @@ extension NotificationsViewController: UITableViewDataSource {
         }
         */
 
-        cell.imageView!.image = notificationObject.objectForKey(ParseHelper.ParseNotificationImage) as? UIImage
+        //cell.imageView!.image = notificationObject.objectForKey(ParseHelper.ParseNotificationImage) as? UIImage
         
         return cell
     }
