@@ -23,8 +23,18 @@ class NotificationsViewController: UIViewController {
     
     var notificationsSectionTitles : [String] = ["Received", "", "Pending"]
     
+    
+    lazy var refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
+        
+        return refreshControl
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.tableView.addSubview(self.refreshControl)
         
         getNotifications()
         
@@ -36,6 +46,21 @@ class NotificationsViewController: UIViewController {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "didFinishReceivingResourceNotification", name: "didFinishReceivingResourceNotification", object: nil)
         
     }
+    
+    func refresh(refreshControl: UIRefreshControl) {
+        // Do some reloading of data and update the table view's data source
+        // Fetch more objects from a web service, for example...
+        
+        // Simply adding an object to the data source for this example
+//        let newMovie = Movie(title: "Serenity", genre: "Sci-fi")
+//        movies.append(newMovie)
+//        
+//        movies.sort() { $0.title < $1.title }
+        
+        self.tableView.reloadData()
+        refreshControl.endRefreshing()
+    }
+    
     
     
     func getNotifications() {
