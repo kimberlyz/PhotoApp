@@ -44,6 +44,7 @@ class NotificationsViewController: UIViewController {
             let relations = results as? [PFObject] ?? []
             
             self.notifications = relations
+            self.tableView.reloadData()
         }
     }
     
