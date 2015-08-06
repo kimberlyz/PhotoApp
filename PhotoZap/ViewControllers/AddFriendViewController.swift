@@ -212,6 +212,7 @@ extension AddFriendViewController: UISearchBarDelegate {
     }
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        let searchText = searchText.lowercaseString
         ParseHelper.searchUsers(searchText, completionBlock: updateList)
     }
 }

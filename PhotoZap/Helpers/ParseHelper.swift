@@ -269,11 +269,19 @@ class ParseHelper {
         lowercased username in a separate column and perform a regular string compare.
         */
 
-        let query = PFUser.query()!.whereKey(ParseHelper.ParseUserUsername, matchesRegex: searchText, modifiers: "i")
+//        let query = PFUser.query()!.whereKey(ParseHelper.ParseUserUsername, matchesRegex: searchText, modifiers: "i")
+//        
+//        query.whereKey(ParseHelper.ParseUserUsername, notEqualTo: PFUser.currentUser()!.username!)
+//        
+//        query.orderByAscending(ParseHelper.ParseUserUsername)
+//        query.limit = 20
+//        
+//        query.findObjectsInBackgroundWithBlock(completionBlock)
         
-        query.whereKey(ParseHelper.ParseUserUsername, notEqualTo: PFUser.currentUser()!.username!)
+        //let query = PFUser.query()!.whereKey("lowercaseUsername", equalTo: searchText.lowercaseString)
         
-        query.orderByAscending(ParseHelper.ParseUserUsername)
+        let query = PFUser.query()!.whereKey("lowercaseUsername", matchesRegex: searchText)
+        query.orderByAscending("lowercaseUsername")
         query.limit = 20
         
         query.findObjectsInBackgroundWithBlock(completionBlock)
