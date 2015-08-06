@@ -268,8 +268,13 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="z25-Yt-Qr3">
+                                                    <rect key="frame" x="45" y="39" width="20" height="20"/>
+                                                </activityIndicatorView>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstAttribute="centerY" secondItem="z25-Yt-Qr3" secondAttribute="centerY" constant="0.5" id="2hQ-e6-6jE"/>
+                                                <constraint firstItem="z25-Yt-Qr3" firstAttribute="leading" secondItem="zTq-n0-9Ad" secondAttribute="leading" constant="45" id="I4v-BB-g2P"/>
                                                 <constraint firstAttribute="centerY" secondItem="3PU-nv-FZK" secondAttribute="centerY" id="IKq-u9-BB1"/>
                                                 <constraint firstItem="CJG-vL-Zo6" firstAttribute="leading" secondItem="zTq-n0-9Ad" secondAttribute="leading" constant="15" id="WR2-xg-bqp"/>
                                                 <constraint firstItem="3PU-nv-FZK" firstAttribute="leading" secondItem="CJG-vL-Zo6" secondAttribute="trailing" constant="15" id="arI-mx-sqJ"/>
@@ -277,6 +282,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="activityIndicator" destination="z25-Yt-Qr3" id="b7l-Oh-7wT"/>
                                             <outlet property="notificationsImageView" destination="CJG-vL-Zo6" id="LQ9-E0-aaB"/>
                                             <outlet property="usernameLabel" destination="3PU-nv-FZK" id="RqY-wA-Hqu"/>
                                         </connections>

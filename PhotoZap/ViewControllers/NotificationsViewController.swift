@@ -249,7 +249,7 @@ extension NotificationsViewController: UITableViewDataSource {
         
 //        let imageObject = PFObject(className: "Image")
 //        imageObject.setObject(imageFile, forKey: "imageFile")
-        
+        /*
         let imageObject = notificationObject.objectForKey(ParseHelper.ParseNotificationImage) as? PFObject
         
         if let imageObject = imageObject {
@@ -272,13 +272,57 @@ extension NotificationsViewController: UITableViewDataSource {
                     
                 }
             }
-        }
+        } */
 
         
 
         //cell.imageView!.image = notificationObject.objectForKey(ParseHelper.ParseNotificationImage) as? UIImage
         
         return cell
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        let selectedCell = tableView.cellForRowAtIndexPath(indexPath) as! NotificationsTableViewCell
+        
+        
+        let notificationObject = self.notifications[indexPath.row]
+        
+        //selectedCell.fromUser = notificationObject.objectForKey(ParseHelper.ParseNotificationFromUser) as? PFUser
+        //cell.notificationsImageView.image = notificationObject.objectFor
+        
+        //        let imageObject = PFObject(className: "Image")
+        //        imageObject.setObject(imageFile, forKey: "imageFile")
+        
+        let imageObject = notificationObject.objectForKey(ParseHelper.ParseNotificationImage) as? PFObject
+        
+        if let imageObject = imageObject {
+            let imageFile = imageObject.objectForKey(ParseHelper.ParseImageImageFile) as! PFFile
+            
+            selectedCell.activityIndicator.startAnimating()
+            
+            imageFile.getDataInBackgroundWithBlock {
+                (imageData: NSData?, error: NSError?) -> Void in
+                if (error == nil) {
+                    if let imageData = imageData {
+                        //let image = UIImage(data: imageData, scale:1.0)!
+                        
+                        let image = UIImage(data: imageData)
+                        selectedCell.notificationsImageView.image = image
+                        
+                        selectedCell.activityIndicator.stopAnimating()
+                        
+                        self.tableView.reloadData()
+                        
+                        // 3
+                        //self.image.value = image
+                    }
+                    
+                }
+            }
+        }
+        
+        selectedCell
     }
     
     /*
