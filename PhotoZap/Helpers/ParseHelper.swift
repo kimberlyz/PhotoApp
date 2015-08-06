@@ -48,6 +48,7 @@ class ParseHelper {
         
         query.whereKey(ParseNotificationToUser, equalTo: user)
         query.includeKey("fromUser")
+        query.includeKey("toUser")
         query.includeKey("image")
         
         query.findObjectsInBackgroundWithBlock(completionBlock)

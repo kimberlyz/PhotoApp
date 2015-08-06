@@ -20,10 +20,6 @@ class Notification : PFObject, PFSubclassing {
     
     // MARK: PFSubclassing Protocol
     
-    static func getNotificationQuery() {
-        return ParseQuery.getQuery(Notification);
-    }
-    
     static func parseClassName() -> String {
         return "Notification"
     }

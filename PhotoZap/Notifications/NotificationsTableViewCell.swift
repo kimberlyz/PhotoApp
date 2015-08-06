@@ -25,5 +25,14 @@ class NotificationsTableViewCell: UITableViewCell {
             }
         }
     }
+    
+    var toUser: PFUser? {
+        didSet {
+            if let toUser = toUser {
+                toUser.fetchIfNeeded()
+                usernameLabel.text = toUser["username"] as? String
+            }
+        }
+    }
 
 }

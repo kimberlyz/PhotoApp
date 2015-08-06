@@ -17,6 +17,8 @@ class NotificationsViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     var notifications = [Notification]()
+    var pendingNotifications = [Notification]()
+    
     var images = [UIImage]()
     var delayedNotifications = [Notification]()
     
@@ -86,18 +88,53 @@ class NotificationsViewController: UIViewController {
     }
     
     func getDelayedNotifications() {
+        
+        /*
+        PFQuery *query = [PFQuery queryWithClassName:@"Feed"];
+        // Query the Local Datastore
+        [query fromLocalDatastore];
+        [query whereKey:@"starred" equalTo:@YES];
+        [[query findInBackground] continueWithBlock:^id(BFTask *task) {
+        // Update the UI
+        }]]; */
+        
         let query = PFQuery(className:"Notification")
         query.fromLocalDatastore()
-        query.getObjectInBackgroundWithId("xWMyZ4YEGZ").continueWithBlock({
+        
+        query.findObjectsInBackgroundWithBlock({
+            (results: [AnyObject]?, error: NSError?) -> Void in
+            let relations = results as? [Notification] ?? []
+            
+            self.pendingNotifications = relations
+            println("HEIHIHIHIHI")
+        })
+        
+        /*
+        [[query findInBackground] continueWithBlock:^id(BFTask *task) {
+            // Update the UI
+            }]]; */
+        
+        /*
+        query.findObjectsInBackgroundWithBlock({
             (task: BFTask!) -> AnyObject! in
             if task.error != nil {
-                // There was an error.
+                // There was an error
+                println("Task Error")
                 return task
             }
+            /*
+            (results: [AnyObject]?, error: NSError?) -> Void in
+            let relations = results as? [PFObject] ?? []
             
-            // task.result will be your game score
+            friendUsers1 = relations.map {
+                $0.objectForKey(ParseHelper.ParseFriendshipUserA) as! PFUser
+            } */
+            
+            
             return task
-        })
+            
+        }) */
+    
     }
     
 
@@ -250,16 +287,14 @@ extension NotificationsViewController: UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // return self.friendUsers?.count ?? 0
-    
-//        
-//        if section == 0 {
-//            return self.requestingUsers?.count ?? 0
-//        } else {
-//            return self.friendUsers.count ?? 0
-//        }
-        
-        return self.notifications.count
+        if section == 0 {
+            return 0
+            //return self.notifications.count
+        } else if section == 1 {
+            return self.notifications.count
+        } else {
+            return self.pendingNotifications.count
+        }
     }
     
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -267,11 +302,48 @@ extension NotificationsViewController: UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("NotificationsCell") as! NotificationsTableViewCell
+//        let cell = tableView.dequeueReusableCellWithIdentifier("NotificationsCell") as! NotificationsTableViewCell
+//        
+//        let notificationObject = self.notifications[indexPath.row]
+//        
+//        cell.fromUser = notificationObject.objectForKey(ParseHelper.ParseNotificationFromUser) as? PFUser
         
-        let notificationObject = self.notifications[indexPath.row]
+        if indexPath.section == 0 {
+            let cell = tableView.dequeueReusableCellWithIdentifier("NotificationsCell") as! NotificationsTableViewCell
+            
+            cell.usernameLabel.text = "Uhh. Not supposed to be here"
+            //let notificationObject = self.notifications[indexPath.row]
+            //cell.fromUser = notificationObject.objectForKey(ParseHelper.ParseNotificationFromUser) as? PFUser
+
+            return cell
+        } else if indexPath.section == 1 {
+            let cell = tableView.dequeueReusableCellWithIdentifier("NotificationsCell") as! NotificationsTableViewCell
+            
+            let notificationObject = self.notifications[indexPath.row]
+            cell.fromUser = notificationObject.objectForKey(ParseHelper.ParseNotificationFromUser) as? PFUser
+            
+            return cell
+        } else {
+            // Some wonky logic....
+            let cell = tableView.dequeueReusableCellWithIdentifier("NotificationsCell") as! NotificationsTableViewCell
+            
+            let pendingNotificationObject = self.pendingNotifications[indexPath.row]
+            
+            //cell.fromUser = PFUser.currentUser()!
+            var pendingImage = UIImage(named: "PendingImage.png")
+            
+            cell.toUser = pendingNotificationObject.objectForKey(ParseHelper.ParseNotificationToUser) as? PFUser
+            cell.imageView!.image = pendingImage
+            
+            //FromUser is not set when it is pending? OH wait no. I should set it. But maybe only set it when I send it?
+            //Or just add a variable. IsPending = true or false
+            // cell.fromUser = notificationObject.objectForKey(ParseHelper.ParseNotificationFromUser) as? PFUser
+            
+            return cell
+        }
         
-        cell.fromUser = notificationObject.objectForKey(ParseHelper.ParseNotificationFromUser) as? PFUser
+        
+        
         //cell.notificationsImageView.image = notificationObject.objectFor
         
 //        let imageObject = PFObject(className: "Image")
@@ -305,76 +377,66 @@ extension NotificationsViewController: UITableViewDataSource {
 
         //cell.imageView!.image = notificationObject.objectForKey(ParseHelper.ParseNotificationImage) as? UIImage
         
-        return cell
+        //return cell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        let selectedCell = tableView.cellForRowAtIndexPath(indexPath) as! NotificationsTableViewCell
-        
-        
-        let notificationObject = self.notifications[indexPath.row]
-        
-        if notificationObject.imagePic == nil {
-        
-            let imageObject = notificationObject.objectForKey(ParseHelper.ParseNotificationImage) as? PFObject
-        
-            if let imageObject = imageObject {
-                let imageFile = imageObject.objectForKey(ParseHelper.ParseImageImageFile) as! PFFile
+        if indexPath.section == 0 {
+            println("Not supposed to be able to click here")
+        } else if indexPath.section == 1 { /* Is an image sent from Wi-Fi */
+            let selectedCell = tableView.cellForRowAtIndexPath(indexPath) as! NotificationsTableViewCell
             
-                selectedCell.activityIndicator.startAnimating()
+            let notificationObject = self.notifications[indexPath.row]
             
-                imageFile.getDataInBackgroundWithBlock {
-                    (imageData: NSData?, error: NSError?) -> Void in
-                    if (error == nil) {
-                        if let imageData = imageData {
-                            //let image = UIImage(data: imageData, scale:1.0)!
-                        
-                            let image = UIImage(data: imageData)
-                            notificationObject.imagePic = image
-                        
-                            selectedCell.notificationsImageView.image = image
-                        
-                            selectedCell.activityIndicator.stopAnimating()
-                        
-                            self.tableView.reloadData()
-                        
-                            // 3
-                            //self.image.value = image
-                        }
+            // Image hasn't been downloaded yet, so download it
+            if notificationObject.imagePic == nil {
+                
+                let imageObject = notificationObject.objectForKey(ParseHelper.ParseNotificationImage) as? PFObject
+                
+                if let imageObject = imageObject {
+                    let imageFile = imageObject.objectForKey(ParseHelper.ParseImageImageFile) as! PFFile
                     
+                    selectedCell.activityIndicator.startAnimating()
+                    
+                    imageFile.getDataInBackgroundWithBlock {
+                        (imageData: NSData?, error: NSError?) -> Void in
+                        if (error == nil) {
+                            if let imageData = imageData {
+                                //let image = UIImage(data: imageData, scale:1.0)!
+                                
+                                let image = UIImage(data: imageData)
+                                notificationObject.imagePic = image
+                                
+                                selectedCell.notificationsImageView.image = image
+                                
+                                selectedCell.activityIndicator.stopAnimating()
+                                
+                                self.tableView.reloadData()
+                            }
+                            
+                        }
                     }
                 }
+            } else { /* If image is already downloaded, save the image */
+                TSMessage.showNotificationInViewController(self, title: "Image saved!", subtitle: "", type: .Success, duration: 1.0, canBeDismissedByUser: true)
+                
+                UIImageWriteToSavedPhotosAlbum(notificationObject.imagePic, nil, nil, nil)
+                println("Image Saved")
             }
-        } else {
-            TSMessage.showNotificationInViewController(self, title: "Image saved!", subtitle: "", type: .Success, duration: 1.0, canBeDismissedByUser: true)
             
-            //TSMessage.showNotificationInViewController(self, title: "Imaged saved!", subtitle: "", type: )
-
-
-//            
-//            
-//            // Add a button inside the message
-//            [TSMessage showNotificationInViewController:self
-//            title:@"Update available"
-//            subtitle:@"Please update the app"
-//            image:nil
-//            type:TSMessageNotificationTypeMessage
-//            duration:TSMessageNotificationDurationAutomatic
-//            callback:nil
-//            buttonTitle:@"Update"
-//            buttonCallback:^{
-//            NSLog(@"User tapped the button");
-//            }
-//            atPosition:TSMessageNotificationPositionTop
-//            canBeDismissedByUser:YES];
+        } else { /* Pending cell */
+            let cell = tableView.dequeueReusableCellWithIdentifier("NotificationsCell") as! NotificationsTableViewCell
             
-            UIImageWriteToSavedPhotosAlbum(notificationObject.imagePic, nil, nil, nil)
-            println("Image Saved")
+            let pendingNotificationObject = self.pendingNotifications[indexPath.row]
+            println("Going to send pendingNotificationObject to Parse")
+            
         }
-        
+            
     }
-    
+}
+
+        
     /*
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     
@@ -445,7 +507,7 @@ extension NotificationsViewController: UITableViewDataSource {
 //            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
 //        }
 //    }
-}
+//}
 
 extension NotificationsViewController: UITableViewDelegate {
     
