@@ -32,6 +32,7 @@ class AddFriendTableViewCell: UITableViewCell {
             Change the state of the friend button based on whether or not
             it is possible to friend request a user.
             */
+            
             if let canFriend = canFriend {
                 friendButton.selected = !canFriend
             }
@@ -44,7 +45,9 @@ class AddFriendTableViewCell: UITableViewCell {
             Change the state of the friend button based on whether or not
             the current user is already friends with the displayed user.
             */
-            if let alreadyFriends = alreadyFriends {
+            if user?.username == PFUser.currentUser()!.username {
+                friendButton.enabled = false
+            } else if let alreadyFriends = alreadyFriends {
                 friendButton.enabled = !alreadyFriends
             }
             
