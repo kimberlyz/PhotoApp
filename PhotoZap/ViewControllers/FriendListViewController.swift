@@ -25,7 +25,10 @@ class FriendListViewController: UIViewController {
     */
     
     var friendUsers: [PFUser] = []
-    //var friendUsersCount = -1
+    var friendUsersCount = -1
+    
+    var requestingUsers: [PFUser]?
+    var requestingUsersCount = -1
     
     lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
@@ -34,45 +37,12 @@ class FriendListViewController: UIViewController {
         return refreshControl
     }()
     
-    /*{
-        didSet {
-            /**
-            the list of following users may be fetched after the tableView has displayed
-            cells. In this case, we reload the data to reflect "following" status
-            */
-           tableView.reloadData()
-        }
-    } */
-    
-    var requestingUsers: [PFUser]? /* {
-        didSet {
-            tableView.reloadData()
-        }
-    } */
-    
-    // the current parse query
-    var query: PFQuery? {
-        didSet {
-            // whenever we assign a new query, cancel any previous requests
-            oldValue?.cancel()
-        }
-    }
     
     // MARK: View Lifecycle
     
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        
-        
-        
-        /*
-        ParseHelper.getFriendshipForUser(PFUser.currentUser()!) {
-            (results: [AnyObject]?, error: NSError?) -> Void in
-            let relations = results as? [PFUser] ?? []
-            
-            self.friendUsers = relations
-        } */
         
         getFriendRequests()
         getFriendshipForUser()
@@ -106,7 +76,13 @@ class FriendListViewController: UIViewController {
                 $0.objectForKey(ParseHelper.ParseFriendshipUserA) as! PFUser
             }
             
-            self.tableView.reloadData()
+            if self.requestingUsersCount != self.requestingUsers!.count {
+
+                self.requestingUsersCount = self.requestingUsers!.count
+                self.tableView.reloadData()
+            }
+            
+            //self.tableView.reloadData()
         }
     }
 
@@ -135,7 +111,7 @@ class FriendListViewController: UIViewController {
                 
                 // If your list of friends has changed (# of friends has changed),
                 // add the friends to the array and reload the tableView
-                //if self.friendUsersCount != self.friendUsers.count {
+                if self.friendUsersCount != self.friendUsers.count {
                     self.friendUsers = []
                     if let friend1 = friendUsers1 {
                         self.friendUsers += friend1
@@ -146,7 +122,7 @@ class FriendListViewController: UIViewController {
                     }
                     
                     // Keep number of friends up-to-date
-                    //self.friendUsersCount = self.friendUsers.count
+                    self.friendUsersCount = self.friendUsers.count
                     
                     // Sort friends by their usernames alphabetically
                     self.friendUsers.sort({ $0.username < $1.username })
@@ -159,7 +135,7 @@ class FriendListViewController: UIViewController {
                     }
                     
                     self.tableView.reloadData()
-                //}
+                }
             }
         }
     }
