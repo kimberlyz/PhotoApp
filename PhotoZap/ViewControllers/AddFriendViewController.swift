@@ -29,14 +29,7 @@ class AddFriendViewController: UIViewController {
     
     var friendUsers: [PFUser] = []
     var friendUsersCount = -1
-    /*{
-        didSet {
-            /**
-            the list of following users may be fetched after the tableView has displayed
-            cells. In this case, we reload the data to reflect "following" status
-            */
-        }
-    }*/
+
     
     var pendingUsers: [PFUser]? {
         didSet {
@@ -63,7 +56,9 @@ class AddFriendViewController: UIViewController {
         didSet {
             switch (state) {
             case .DefaultMode:
-                query = ParseHelper.allUsers(updateList)
+                println("Default Mode")
+                //
+                //query = ParseHelper.allUsers(updateList)
                 
             case .SearchMode:
                 let searchText = searchBar?.text ?? ""
