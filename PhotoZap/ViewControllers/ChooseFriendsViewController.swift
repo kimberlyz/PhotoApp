@@ -49,6 +49,27 @@ class ChooseFriendsViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    func delaySend() {
+        for var i = 0; i < self.assets.count; i++ {
+            let asset = self.assets[i] as! PHAsset
+            PHImageManager.defaultManager().requestImageDataForAsset(asset, options: nil) {
+                (imageData: NSData!, dataUTI: String!, orientation: UIImageOrientation, info: [NSObject : AnyObject]!) -> Void in
+                
+                for friend in self.selectedFriendUsers {
+                    
+                    let notification = PFObject(className: "Notification")
+                    notification["toUser"] = friend
+                    notification["fromUser"] = PFUser.currentUser()!
+                    
+                    let imageData = imageData
+                    let imageFile = PFFile(data: imageData!)
+                    notification["image"] = imageFile
+                    notification.pinInBackgroundWithBlock(nil)
+                }
+            }
+        }
+    }
+    
     @IBAction func cancelButtonTapped(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
@@ -82,9 +103,11 @@ class ChooseFriendsViewController: UIViewController {
                 println("Reachable via WiFi")
 
             } else {
+                delaySend()
                 println("Reachable via Cellular Network")
             }
         } else {
+            delaySend()
             println("NOOOO")
         }
         
@@ -105,7 +128,7 @@ class ChooseFriendsViewController: UIViewController {
         
         
         
-
+        /*
         println(reachability)
         
         reachability.whenReachable = { reachability in
@@ -161,7 +184,7 @@ class ChooseFriendsViewController: UIViewController {
             println("Not reachable")
         }
         
-        reachability.startNotifier()
+        reachability.startNotifier() */
     }
     
     

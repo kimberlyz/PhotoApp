@@ -18,6 +18,7 @@ class NotificationsViewController: UIViewController {
     
     var notifications = [Notification]()
     var images = [UIImage]()
+    var delayedNotifications = [Notification]()
     
     // UHHH
     var senderInfo = [AnyObject]()  // var dict: [String: AnyObject]
@@ -36,7 +37,10 @@ class NotificationsViewController: UIViewController {
         super.viewWillAppear(animated)
         
         getNotifications()
+        getDelayedNotifications()
     }
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,6 +74,7 @@ class NotificationsViewController: UIViewController {
     
     
     
+    
     func getNotifications() {
         ParseHelper.getNotifications(PFUser.currentUser()!) {
             (results: [AnyObject]?, error: NSError?) -> Void in
@@ -78,6 +83,21 @@ class NotificationsViewController: UIViewController {
             self.notifications = relations
             self.tableView.reloadData()
         }
+    }
+    
+    func getDelayedNotifications() {
+        let query = PFQuery(className:"Notification")
+        query.fromLocalDatastore()
+        query.getObjectInBackgroundWithId("xWMyZ4YEGZ").continueWithBlock({
+            (task: BFTask!) -> AnyObject! in
+            if task.error != nil {
+                // There was an error.
+                return task
+            }
+            
+            // task.result will be your game score
+            return task
+        })
     }
     
 
