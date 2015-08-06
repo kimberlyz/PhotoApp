@@ -16,6 +16,7 @@ class Notification : PFObject, PFSubclassing {
     @NSManaged var fromUser: PFUser?
     
     var imageData: NSData?
+    var imagePic: UIImage?
     
     // MARK: PFSubclassing Protocol
     

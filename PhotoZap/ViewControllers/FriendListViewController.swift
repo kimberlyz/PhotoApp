@@ -60,6 +60,7 @@ class FriendListViewController: UIViewController {
         // Fetch more objects from a web service, for example...
         
         getFriendshipForUser()
+        getFriendRequests()
         
         //self.tableView.reloadData()
         refreshControl.endRefreshing()
@@ -91,7 +92,7 @@ class FriendListViewController: UIViewController {
         var friendUsers1 : [PFUser]?
         var friendUsers2 : [PFUser]?
         
-        self.friendUsers = []
+        //self.friendUsers = []
             
         ParseHelper.getFriendshipAsUserB(PFUser.currentUser()!) {
             (results: [AnyObject]?, error: NSError?) -> Void in

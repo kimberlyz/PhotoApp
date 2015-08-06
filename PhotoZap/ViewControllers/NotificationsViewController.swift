@@ -15,7 +15,7 @@ class NotificationsViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
-    var notifications = [PFObject]()
+    var notifications = [Notification]()
     var images = [UIImage]()
     
     // UHHH
@@ -31,12 +31,18 @@ class NotificationsViewController: UIViewController {
         return refreshControl
     }()
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        getNotifications()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.tableView.addSubview(self.refreshControl)
         
-        getNotifications()
+        //getNotifications()
         
 
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "didStartReceivingResourceWithNotification:", name: "MPCDidStartReceivingResourceNotification", object: nil)
@@ -66,7 +72,7 @@ class NotificationsViewController: UIViewController {
     func getNotifications() {
         ParseHelper.getNotifications(PFUser.currentUser()!) {
             (results: [AnyObject]?, error: NSError?) -> Void in
-            let relations = results as? [PFObject] ?? []
+            let relations = results as? [Notification] ?? []
             
             self.notifications = relations
             self.tableView.reloadData()
@@ -288,11 +294,7 @@ extension NotificationsViewController: UITableViewDataSource {
         
         let notificationObject = self.notifications[indexPath.row]
         
-        //selectedCell.fromUser = notificationObject.objectForKey(ParseHelper.ParseNotificationFromUser) as? PFUser
-        //cell.notificationsImageView.image = notificationObject.objectFor
-        
-        //        let imageObject = PFObject(className: "Image")
-        //        imageObject.setObject(imageFile, forKey: "imageFile")
+        if notificationObject.imagePic == nil {
         
         let imageObject = notificationObject.objectForKey(ParseHelper.ParseNotificationImage) as? PFObject
         
@@ -308,6 +310,8 @@ extension NotificationsViewController: UITableViewDataSource {
                         //let image = UIImage(data: imageData, scale:1.0)!
                         
                         let image = UIImage(data: imageData)
+                        notificationObject.imagePic = image
+                        
                         selectedCell.notificationsImageView.image = image
                         
                         selectedCell.activityIndicator.stopAnimating()
@@ -321,8 +325,9 @@ extension NotificationsViewController: UITableViewDataSource {
                 }
             }
         }
+            
+        }
         
-        selectedCell
     }
     
     /*
