@@ -185,7 +185,7 @@ class NotificationsViewController: UIViewController {
             if let image = result {
                 dispatch_async(dispatch_get_main_queue()) { [unowned self] in
                     self.images.insert(image, atIndex: 0)
-                    self.imageView = UIImageView(image: result)
+                    //self.imageView = UIImageView(image: result)
                     self.tableView.reloadData()
                 }
             }
@@ -205,7 +205,7 @@ class NotificationsViewController: UIViewController {
 //        }
     }
     
-    var imageView: UIImageView!
+    //var imageView: UIImageView!
     
 
     
@@ -245,20 +245,36 @@ extension NotificationsViewController: UITableViewDataSource {
         let notificationObject = self.notifications[indexPath.row]
         
         cell.fromUser = notificationObject.objectForKey(ParseHelper.ParseNotificationFromUser) as? PFUser
-        /*
-        let imageFile = notificationObject.objectForKey(ParseHelper.ParseNotificationImage) as? PFFile
-        imageFile.getDataInBackgroundWithBlock {
-            (imageData: NSData?, error: NSError?) -> Void in
-            if (error == nil) {
-                if let imageData = imageData {
-                    let image = UIImage(data: imageData, scale:1.0)!
-                    // 3
-                    self.image.value = image
+        //cell.notificationsImageView.image = notificationObject.objectFor
+        
+//        let imageObject = PFObject(className: "Image")
+//        imageObject.setObject(imageFile, forKey: "imageFile")
+        
+        let imageObject = notificationObject.objectForKey(ParseHelper.ParseNotificationImage) as? PFObject
+        
+        if let imageObject = imageObject {
+            let imageFile = imageObject.objectForKey(ParseHelper.ParseImageImageFile) as! PFFile
+            
+            imageFile.getDataInBackgroundWithBlock {
+                (imageData: NSData?, error: NSError?) -> Void in
+                if (error == nil) {
+                    if let imageData = imageData {
+                        //let image = UIImage(data: imageData, scale:1.0)!
+                        
+                        let image = UIImage(data: imageData)
+                        cell.notificationsImageView.image = image
+                        
+                        self.tableView.reloadData()
+                        
+                        // 3
+                        //self.image.value = image
+                    }
+                    
                 }
-                //let image = UIImage(data: imageData!)
             }
         }
-        */
+
+        
 
         //cell.imageView!.image = notificationObject.objectForKey(ParseHelper.ParseNotificationImage) as? UIImage
         
