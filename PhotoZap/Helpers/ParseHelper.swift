@@ -240,10 +240,12 @@ class ParseHelper {
             }
         }
         
-        query.whereKey("userA", equalTo: user2)
-        query.whereKey("userB", equalTo: user1)
+        let query2 = PFQuery(className: ParseFriendshipClass)
         
-        query.findObjectsInBackgroundWithBlock {
+        query2.whereKey("userA", equalTo: user2)
+        query2.whereKey("userB", equalTo: user1)
+        
+        query2.findObjectsInBackgroundWithBlock {
             (results: [AnyObject]?, error: NSError?) -> Void in
             
             let results = results as? [PFObject] ?? []
