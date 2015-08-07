@@ -36,6 +36,7 @@
 		DB6AC4731B547B8B0019C46E /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6AC4721B547B8B0019C46E /* Photo.swift */; };
 		DB6D6E431B6AD9200038F336 /* NearbyFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6D6E421B6AD9200038F336 /* NearbyFriendsViewController.swift */; };
 		DBA03C691B733D1B00E5D6BD /* ParseLoginHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA03C681B733D1B00E5D6BD /* ParseLoginHelper.swift */; };
+		DBA03C9D1B742D8B00E5D6BD /* SweetAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA03C9C1B742D8B00E5D6BD /* SweetAlert.swift */; };
 		DBAD5DF11B669E4C0076FE66 /* FriendRequestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBAD5DF01B669E4C0076FE66 /* FriendRequestTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -87,6 +88,7 @@
 		DB8AB9881B6973B400401A18 /* PhotoZap-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PhotoZap-Bridging-Header.h"; sourceTree = "<group>"; };
 		DBA03C681B733D1B00E5D6BD /* ParseLoginHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseLoginHelper.swift; sourceTree = "<group>"; };
 		DBA03C6A1B733E5E00E5D6BD /* Bond.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bond.framework; path = "Pods/../build/Debug-iphoneos/Bond.framework"; sourceTree = "<group>"; };
+		DBA03C9C1B742D8B00E5D6BD /* SweetAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SweetAlert.swift; path = "../../../../../Downloads/SweetAlert-iOS-master/SweetAlert/SweetAlert.swift"; sourceTree = "<group>"; };
 		DBAD5DF01B669E4C0076FE66 /* FriendRequestTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendRequestTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -225,6 +227,7 @@
 		DB6168D61B55877400305D2E /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				DBA03C9C1B742D8B00E5D6BD /* SweetAlert.swift */,
 				DB6168D71B55879400305D2E /* ParseHelper.swift */,
 				DB4657821B6C525A00F801A3 /* MPCManager.swift */,
 				DB67022A1B71E32A00908460 /* ErrorHandling.swift */,
@@ -448,6 +451,7 @@
 				DB51CAAD1B72F2A40024BBAC /* Notification.swift in Sources */,
 				DB4657831B6C525A00F801A3 /* MPCManager.swift in Sources */,
 				DB6168DD1B55BF6D00305D2E /* AddFriendTableViewCell.swift in Sources */,
+				DBA03C9D1B742D8B00E5D6BD /* SweetAlert.swift in Sources */,
 				DB6168DA1B55B88E00305D2E /* AddFriendViewController.swift in Sources */,
 				DB6AC4691B5431430019C46E /* FriendListViewController.swift in Sources */,
 				DB67021C1B708DF000908460 /* ChooseFriendsTableViewCell.swift in Sources */,

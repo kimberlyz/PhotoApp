@@ -35,6 +35,15 @@ class NotificationsViewController: UIViewController {
         return refreshControl
     }()
     
+    func UIColorFromRGB(rgbValue: UInt) -> UIColor {
+        return UIColor(
+            red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
+            green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
+            blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
+            alpha: CGFloat(1.0)
+        )
+    }
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -429,6 +438,17 @@ extension NotificationsViewController: UITableViewDataSource {
             let cell = tableView.dequeueReusableCellWithIdentifier("NotificationsCell") as! NotificationsTableViewCell
             
             let pendingNotificationObject = self.pendingNotifications[indexPath.row]
+            
+            SweetAlert().showAlert("You are not connected to Wi-Fi right now.", subTitle: "Would you like to send the photo using cellular data?", style: AlertStyle.Warning, buttonTitle:"No thanks.", buttonColor:UIColorFromRGB(0xD0D0D0) , otherButtonTitle:  "Yes, send it.", otherButtonColor: UIColorFromRGB(0xDD6B55)) { (isOtherButton) -> Void in
+                if isOtherButton == true {
+                    
+                    println("Cancel Button  Pressed")
+                }
+                else {
+                    SweetAlert().showAlert("Image sent!", subTitle: "", style: AlertStyle.Success)
+                }
+            }
+            
             println("Going to send pendingNotificationObject to Parse")
             
         }
