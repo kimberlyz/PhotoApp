@@ -11,10 +11,13 @@ import ConvenienceKit
 import Photos
 import Parse
 import TSMessages
+import ReachabilitySwift
 
 class NotificationsViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
+    
+    let reachability = Reachability.reachabilityForInternetConnection()
     
     var notifications = [Notification]()
     var pendingNotifications = [Notification]()
@@ -57,6 +60,8 @@ class NotificationsViewController: UIViewController {
         super.viewDidLoad()
         
         self.tableView.addSubview(self.refreshControl)
+        
+        reachability.startNotifier()
         
         //getNotifications()
         
@@ -448,17 +453,30 @@ extension NotificationsViewController: UITableViewDataSource {
             
             let pendingNotificationObject = self.pendingNotifications[indexPath.row]
             
-            SweetAlert().showAlert("No Wi-Fi connection.", subTitle: "Would you like to send the photo using cellular data?", style: AlertStyle.Warning, buttonTitle:"No thanks.", buttonColor:UIColorFromRGB(0x90AEFF) , otherButtonTitle:  "Yes, send it.", otherButtonColor: UIColorFromRGB(0x90AEFF)) { (isOtherButton) -> Void in
-                if isOtherButton == true {
-                    
-                    println("Cancel Button  Pressed")
+            // Initial reachability check
+            if reachability.isReachable() {
+                if reachability.isReachableViaWiFi() {
+                    println("Reachable via WiFi")
+                    TSMessage.dismissActiveNotification()
+                    TSMessage.showNotificationInViewController(self, title: "Image successfully sent!", subtitle: "", type: .Success, duration: 1.0, canBeDismissedByUser: true)
+                    //SweetAlert().showAlert("No Connection.", subTitle: "Sorry, can't send a photo right now.", style: AlertStyle.None)
+                } else { /* Cellular network */
+                    println("Reachable via Cellular Network")
+                    SweetAlert().showAlert("No Wi-Fi connection.", subTitle: "Would you like to send the photo using cellular data?", style: AlertStyle.Warning, buttonTitle:"No thanks.", buttonColor: UIColor.colorFromRGB(0x66B2FF) , otherButtonTitle:  "Yes, send it.", otherButtonColor: UIColor.colorFromRGB(0x66B2FF/*0x90AEFF*/)) { (isOtherButton) -> Void in
+                        if isOtherButton == true {
+                            
+                            println("Cancel Button  Pressed")
+                        }
+                        else {
+                            SweetAlert().showAlert("Image sent!", subTitle: "", style: AlertStyle.Success)
+                        }
+                        
+                    }
                 }
-                else {
-                    SweetAlert().showAlert("Image sent!", subTitle: "", style: AlertStyle.Success)
-                }
+            } else { /* No connection at all */
+                SweetAlert().showAlert("No Connection.", subTitle: "Sorry, can't send a photo right now.", style: AlertStyle.None)
+                println("NOOOO")
             }
-            
-            println("Going to send pendingNotificationObject to Parse")
             
         }
             
