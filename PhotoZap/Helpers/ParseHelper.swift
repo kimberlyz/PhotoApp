@@ -70,94 +70,11 @@ class ParseHelper {
             for notification in results {
                 
                 notification.deleteInBackgroundWithBlock(nil)
-                //PFCloud.afterDelete(notification)
-               // Parse.Cloud.afterDelete("Notification", notification)
-                //PFCloud.afterDelete("Notification", notification)
-                //PFCloud.afterDelete
-                
-                /*
-                PFCloud.callFunctionInBackground("Notification", withParameters: ["Notification": notification]) { (object:AnyObject!, error: NSError!) -> Void in {
-                } */
-                
-                /*
-                PFCloud.callFunctionInBackground("afterDelete", withParameters: ["Notification" : notification ]) {
-                    (response: AnyObject?, error: NSError?) -> Void in
-                    // ratings is 4.5
-                } */
-                //PFCloud.callFunctionInBackground("Notification", withParameters: <#[NSObject : AnyObject]?#>)
-                
-                /*
-                PFCloud.callFunctionInBackground("Notification", withParameters: notification) {
-                    (response: AnyObject?, error: NSError?) -> Void in
-                } */
+
                 let imageObject = notification.objectForKey("image") as! PFObject
                 imageObject.deleteInBackgroundWithBlock(nil)
             }
         }
-        /*
-        let imageObject =
-        objectForKey(ParseHelper.ParseFriendshipUserA) as! PFUser
-        
-        let imageObject = image.objectForKey("imageFile") as! PFObject
-        imageObject.deleteInBackgroundWithBlock(nil) */
-        
-        
-        
-        /*
-        Parse.Cloud.afterDelete("ShoppingListConnections ", function(request) {
-            var fridgeId = request.object.get("ShoppingListID");
-            var query = new Parse.Query("ShoppingListConnections");
-            query.equalTo("ShoppingListID", shoppingListID);
-            query.find({
-                success: function(shoppingListConnections) {
-                    if (shoppingListConnections.length == 0) {
-                        var shoppingListQuery = new Parse.Query("ShoppingList");
-                        shoppingListQuery.get(ShoppingListID, {
-                            success: function(shoppingList) {
-                                shoppingList.destroy({});
-                            },
-                            error: function(error) {
-                                console.error("Error deleting shopping list from DB ");
-                            }
-                        });
-                        var foodQuery = new Parse.Query("Items");
-                        foodQuery.equalTo("ShoppingListID", shoppingListID);
-                        foodQuery.find({
-                            success: function(items) {
-                                Parse.Object.destroyAll(items);
-                            },
-                            error: function(error) {
-                                console.error("Error deleting food items from DB");
-                            }
-                        });
-                    }
-                }, 
-                error: function(error) {
-                    console.error("Error finding fridge in DB");
-                }
-            });
-            });
-        
-        Parse.Cloud.afterDelete(ParseNotificationClass, function(request) {
-            let query = Parse.Query(ParseNotificationImage)
-            
-            query.equalTo("post", request.object.id);
-            query.find({
-                success:
-                function(comments) {
-                    Parse.Object.destroyAll(comments, {
-                        success:
-                        function() {},
-                        error: function(error) {
-                            console.error("Error deleting related comments " + error.code + ": " + error.message);
-                        }
-                    });
-                },
-                error: function(error) {
-                    console.error("Error finding related comments " + error.code + ": " + error.message);
-                }
-            });
-            }); */
     }
     
     

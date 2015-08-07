@@ -113,13 +113,25 @@ class NotificationsViewController: UIViewController {
         }]]; */
         
         let query = PFQuery(className:"Notification")
+        query.includeKey("fromUser")
+        query.includeKey("toUser")
+        query.includeKey("image")
         query.fromLocalDatastore()
+
         
         query.findObjectsInBackgroundWithBlock({
             (results: [AnyObject]?, error: NSError?) -> Void in
             let relations = results as? [Notification] ?? []
             
             self.pendingNotifications = relations
+            
+            for what in self.pendingNotifications {
+                println(what)
+            }
+            /*
+            for relation in relations {
+                relation.saveEventually()
+            } */
         })
         
         /*
@@ -453,13 +465,19 @@ extension NotificationsViewController: UITableViewDataSource {
             let cell = tableView.dequeueReusableCellWithIdentifier("NotificationsCell") as! NotificationsTableViewCell
             
             let pendingNotificationObject = self.pendingNotifications[indexPath.row]
+            
+            let imageObject = pendingNotificationObject.objectForKey("image") as! PFObject
+            
+            //imageObject.deleteInBackgroundWithBlock(nil)
+            
             //query.fromLocalDatastore()
             
             // Initial reachability check
             if reachability.isReachable() {
                 if reachability.isReachableViaWiFi() {
                     
-                    pendingNotificationObject.saveInBackground()
+                    //imageObject.saveInBackground()
+                    pendingNotificationObject.saveInBackgroundWithBlock(nil)
                     
                     println("Reachable via WiFi")
                     TSMessage.dismissActiveNotification()

@@ -11,7 +11,7 @@ import Parse
 
 class Notification : PFObject, PFSubclassing {
     
-    @NSManaged var image : PFObject?
+    @NSManaged var imageFile : PFObject?
     @NSManaged var toUser: PFUser?
     @NSManaged var fromUser: PFUser?
     

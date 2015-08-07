@@ -41,7 +41,7 @@ class AlbumViewController: UIViewController, CTAssetsPickerControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        let query = PFQuery(className:"Notification")
+//        let query = PFQuery(className:"Image")
 //        query.fromLocalDatastore()
 //        
 //        query.findObjectsInBackgroundWithBlock({
@@ -50,8 +50,10 @@ class AlbumViewController: UIViewController, CTAssetsPickerControllerDelegate {
 //            
 //            for what in relations {
 //                what.unpinInBackground()
+//                println("hi")
 //            }
 //        })
+        
 //
         reachability.startNotifier()
 //        let realm = Realm()

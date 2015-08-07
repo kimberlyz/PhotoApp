@@ -65,7 +65,7 @@ class ChooseFriendsViewController: UIViewController {
                 
                 for friend in self.selectedFriendUsers {
                     
-                    let notification = PFObject(className: "Notification")
+                    let notification = Notification()
                     notification["toUser"] = friend
                     notification["fromUser"] = PFUser.currentUser()!
                     
@@ -74,8 +74,9 @@ class ChooseFriendsViewController: UIViewController {
                     
                     let imageObject = PFObject(className: "Image")
                     imageObject["imageFile"] = imageFile
+                    imageObject.pinInBackgroundWithBlock(nil)
                     
-                    notification["image"] = imageObject
+                    notification.image = imageObject
                     notification.pinInBackgroundWithBlock(nil)
                 }
             }
