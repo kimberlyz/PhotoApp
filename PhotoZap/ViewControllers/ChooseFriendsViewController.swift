@@ -71,7 +71,11 @@ class ChooseFriendsViewController: UIViewController {
                     
                     let imageData = imageData
                     let imageFile = PFFile(data: imageData!)
-                    notification["image"] = imageFile
+                    
+                    let imageObject = PFObject(className: "Image")
+                    imageObject["imageFile"] = imageFile
+                    
+                    notification["image"] = imageObject
                     notification.pinInBackgroundWithBlock(nil)
                 }
             }

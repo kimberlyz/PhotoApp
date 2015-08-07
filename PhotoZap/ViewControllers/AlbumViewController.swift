@@ -40,7 +40,19 @@ class AlbumViewController: UIViewController, CTAssetsPickerControllerDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+//        let query = PFQuery(className:"Notification")
+//        query.fromLocalDatastore()
 //        
+//        query.findObjectsInBackgroundWithBlock({
+//            (results: [AnyObject]?, error: NSError?) -> Void in
+//            let relations = results as? [Notification] ?? []
+//            
+//            for what in relations {
+//                what.unpinInBackground()
+//            }
+//        })
+//
         reachability.startNotifier()
 //        let realm = Realm()
 //        transactions = realm.objects(Transaction)

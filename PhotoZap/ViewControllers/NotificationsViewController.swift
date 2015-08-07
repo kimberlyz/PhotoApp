@@ -120,7 +120,6 @@ class NotificationsViewController: UIViewController {
             let relations = results as? [Notification] ?? []
             
             self.pendingNotifications = relations
-            println("HEIHIHIHIHI")
         })
         
         /*
@@ -443,7 +442,9 @@ extension NotificationsViewController: UITableViewDataSource {
                 let cellIndexPath = self.tableView.indexPathForCell(selectedCell)
                 self.notifications.removeAtIndex(cellIndexPath!.row)
                 let fromUser = notificationObject.objectForKey(ParseHelper.ParseNotificationFromUser) as? PFUser
-                ParseHelper.deleteNotification(fromUser!, toUser: PFUser.currentUser()!)
+                let imagePointer = notificationObject.objectForKey(ParseHelper.ParseNotificationImage) as? PFObject
+                
+                ParseHelper.deleteNotification(fromUser!, toUser: PFUser.currentUser()!, image: imagePointer!)
                 // need to delete notification from parse
                 self.tableView.deleteRowsAtIndexPaths([cellIndexPath!], withRowAnimation: UITableViewRowAnimation.Automatic)
             }
@@ -452,14 +453,19 @@ extension NotificationsViewController: UITableViewDataSource {
             let cell = tableView.dequeueReusableCellWithIdentifier("NotificationsCell") as! NotificationsTableViewCell
             
             let pendingNotificationObject = self.pendingNotifications[indexPath.row]
+            //query.fromLocalDatastore()
             
             // Initial reachability check
             if reachability.isReachable() {
                 if reachability.isReachableViaWiFi() {
+                    
+                    pendingNotificationObject.saveInBackground()
+                    
                     println("Reachable via WiFi")
                     TSMessage.dismissActiveNotification()
                     TSMessage.showNotificationInViewController(self, title: "Image successfully sent!", subtitle: "", type: .Success, duration: 1.0, canBeDismissedByUser: true)
-                    //SweetAlert().showAlert("No Connection.", subTitle: "Sorry, can't send a photo right now.", style: AlertStyle.None)
+                    
+                    
                 } else { /* Cellular network */
                     println("Reachable via Cellular Network")
                     SweetAlert().showAlert("No Wi-Fi connection.", subTitle: "Would you like to send the photo using cellular data?", style: AlertStyle.Warning, buttonTitle:"No thanks.", buttonColor: UIColor.colorFromRGB(0x66B2FF) , otherButtonTitle:  "Yes, send it.", otherButtonColor: UIColor.colorFromRGB(0x66B2FF/*0x90AEFF*/)) { (isOtherButton) -> Void in

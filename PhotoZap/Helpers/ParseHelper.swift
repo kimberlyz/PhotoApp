@@ -54,22 +54,45 @@ class ParseHelper {
         query.findObjectsInBackgroundWithBlock(completionBlock)
     }
     
-    static func deleteNotification(fromUser: PFUser, toUser: PFUser) {
+    static func deleteNotification(fromUser: PFUser, toUser: PFUser, image: PFObject) {
         let query = PFQuery(className: ParseNotificationClass)
         
         query.whereKey(ParseNotificationFromUser, equalTo: fromUser)
         query.whereKey(ParseNotificationToUser, equalTo: toUser)
+        query.whereKey(ParseNotificationImage, equalTo: image)
         query.includeKey(ParseNotificationImage)
         
         query.findObjectsInBackgroundWithBlock {
             (results: [AnyObject]?, error: NSError?) -> Void in
             
-            let results = results as? [PFObject] ?? []
+            let results = results as? [Notification] ?? []
             
             for notification in results {
+                
                 notification.deleteInBackgroundWithBlock(nil)
+                //PFCloud.afterDelete(notification)
+               // Parse.Cloud.afterDelete("Notification", notification)
+                //PFCloud.afterDelete("Notification", notification)
+                //PFCloud.afterDelete
+                
+                /*
+                PFCloud.callFunctionInBackground("Notification", withParameters: ["Notification": notification]) { (object:AnyObject!, error: NSError!) -> Void in {
+                } */
+                
+                /*
+                PFCloud.callFunctionInBackground("afterDelete", withParameters: ["Notification" : notification ]) {
+                    (response: AnyObject?, error: NSError?) -> Void in
+                    // ratings is 4.5
+                } */
+                //PFCloud.callFunctionInBackground("Notification", withParameters: <#[NSObject : AnyObject]?#>)
+                
+                /*
+                PFCloud.callFunctionInBackground("Notification", withParameters: notification) {
+                    (response: AnyObject?, error: NSError?) -> Void in
+                } */
             }
         }
+        
         
         /*
         Parse.Cloud.afterDelete("ShoppingListConnections ", function(request) {
