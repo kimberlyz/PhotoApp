@@ -69,6 +69,7 @@ class ChooseFriendsViewController: UIViewController {
                     notification.toUser = friend
                     notification.fromUser = PFUser.currentUser()!
                     notification.imageFile = PFFile(data: imageData)
+                    //notification.imageData = imageData
                     
                     notification.pinInBackgroundWithBlock(nil)
                 }
@@ -110,15 +111,6 @@ class ChooseFriendsViewController: UIViewController {
                 delaySend()
                 SweetAlert().showAlert("No Wi-Fi connection.", subTitle: "Putting the photos in the pending section. Will notify you to send them once you get Wi-Fi.", style: AlertStyle.None)
                 self.dismissViewControllerAnimated(true, completion: nil)
-                /* SweetAlert().showAlert("No Wi-Fi connection.", subTitle: "Putting the photos in the pending section. Will notify you once you to send them once you get Wi-Fi.", style: AlertStyle.Warning, buttonTitle:"No thanks.", buttonColor:UIColor.colorFromRGB(0x66B2FF) , otherButtonTitle:  "Yes, send it.", otherButtonColor: UIColor.colorFromRGB(0x66B2FF)) { (isOtherButton) -> Void in
-                    if isOtherButton == true {
-                        
-                        println("Cancel Button  Pressed")
-                    }
-                    else {
-                        SweetAlert().showAlert("Image sent!", subTitle: "", style: AlertStyle.Success)
-                    }
-                } */
                 println("Reachable via Cellular Network")
             }
         } else {

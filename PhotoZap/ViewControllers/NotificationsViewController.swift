@@ -103,23 +103,10 @@ class NotificationsViewController: UIViewController {
     
     func getDelayedNotifications() {
         
-        /*
-        PFQuery *query = [PFQuery queryWithClassName:@"Feed"];
-        // Query the Local Datastore
-        [query fromLocalDatastore];
-        [query whereKey:@"starred" equalTo:@YES];
-        [[query findInBackground] continueWithBlock:^id(BFTask *task) {
-        // Update the UI
-        }]]; */
-        
-        let query = PFQuery(className:"Notification")
-        query.includeKey("fromUser")
-        query.includeKey("toUser")
-        query.includeKey("imageFile")
-        query.fromLocalDatastore()
+        let query = Notification.query()
+        query!.fromLocalDatastore()
 
-        
-        query.findObjectsInBackgroundWithBlock({
+        query!.findObjectsInBackgroundWithBlock({
             (results: [AnyObject]?, error: NSError?) -> Void in
             let relations = results as? [Notification] ?? []
             
@@ -128,106 +115,10 @@ class NotificationsViewController: UIViewController {
             for what in self.pendingNotifications {
                 println(what)
             }
-            /*
-            for relation in relations {
-                relation.saveEventually()
-            } */
         })
         
-        /*
-        [[query findInBackground] continueWithBlock:^id(BFTask *task) {
-            // Update the UI
-            }]]; */
-        
-        /*
-        query.findObjectsInBackgroundWithBlock({
-            (task: BFTask!) -> AnyObject! in
-            if task.error != nil {
-                // There was an error
-                println("Task Error")
-                return task
-            }
-            /*
-            (results: [AnyObject]?, error: NSError?) -> Void in
-            let relations = results as? [PFObject] ?? []
-            
-            friendUsers1 = relations.map {
-                $0.objectForKey(ParseHelper.ParseFriendshipUserA) as! PFUser
-            } */
-            
-            
-            return task
-            
-        }) */
-    
     }
-    
 
-    /*
-    func getNotifications() {
-        ParseHelper.getNotifications(PFUser.currentUser()!) {
-            (results: [AnyObject]?, error: NSError?) -> Void in
-            let relations = results as? [PFObject] ?? []
-            
-            
-            
-            var userArray = [PFUser]()
-            userArray = relations.map {
-                $0.objectForKey(ParseHelper.ParsePhotoFromUser) as! PFUser
-            }
-            
-            var imageArray = [PFObject]()
-            imageArray = relations.map {
-                $0.objectForKey(ParseHelper.ParsePhotoImage) as! PFObject
-            }
-            
-            var imageFileArray = [PFFile]()
-            imageFileArray = imageArray.map {
-                $0.objectForKey(ParseHelper.ParseImageImageFile) as! PFFile
-            }
-        
-            for var i = 0; i < userArray.count; i++ {
-                
-                
-                let imageFile = imageFileArray[i]
-                
-                imageFile.getDataInBackgroundWithBlock {
-                    (imageData: NSData?, error: NSError?) -> Void in
-                    if (error == nil) {
-                        let image = UIImage(data: imageData!)
-                        //var airports = ["YYZ": "Toronto Pearson", "DUB": "Dublin"]
-                        let dict: [PFUser : UIImage] = [userArray[i]: image!]
-                        self.notifications.append(dict)
-                        
-                        //self.notifications[i][currentUser] = imageFileArray[i]
-                    }
-                    
-                }
-                
-               // self.notifications[userArray[i]] = imageFileArray[i]
-            }
-            /*
-            for user in userArray {
-                self.notifications[user] =
-            }
-            //self.notifications[
-            for imageFile in imageFileArray {
-                println("Hi")
-                
-                imageFile.getDataInBackgroundWithBlock {
-                    (imageData: NSData?, error: NSError?) -> Void in
-                    if (error == nil) {
-                        let image = UIImage(data: imageData!)
-                    }
-                    
-                }
-                
-            } */
-            
-            self.tableView.reloadData()
-        }
-    } */
-    
     
     func didStartReceivingResourceWithNotification(notification: NSNotification) {
         senderInfo.append(notification.userInfo!)
@@ -533,6 +424,21 @@ extension NotificationsViewController: UITableViewDataSource {
             let cell = tableView.dequeueReusableCellWithIdentifier("NotificationsCell") as! NotificationsTableViewCell
             
             let pendingNotificationObject = self.pendingNotifications[indexPath.row]
+
+            
+//            pendingNotificationObject.saveEventually() {(result, error) in
+//                if error != nil {
+//                    println(result)
+//                }
+//                
+//            }
+            /*pendingNotificationObject.saveInBackgroundWithBlock(){ (result, error) in
+                if error != nil {
+                    println(result)
+                }
+
+            } */
+            //pendingNotificationObject.unpinInBackgroundWithBlock(nil)
             
             //let imageObject = pendingNotificationObject.objectForKey("image") as! PFObject
             
@@ -544,8 +450,69 @@ extension NotificationsViewController: UITableViewDataSource {
             if reachability.isReachable() {
                 if reachability.isReachableViaWiFi() {
                     
-                    //imageObject.saveInBackground()
-                    pendingNotificationObject.saveInBackgroundWithBlock(nil)
+//                    println(pendingNotificationObject)
+//                    //imageObject.saveInBackground()
+//                    pendingNotificationObject.saveInBackgroundWithBlock(nil)
+//                    pendingNotificationObject.unpinInBackground()
+                    
+                    //pendingNotificationObject
+                    
+
+//                    
+//                    let query2 = Notification.query()
+//                    query2!.fromLocalDatastore()
+//                    
+//                    query2!.findObjectsInBackgroundWithBlock({
+//                        (results: [AnyObject]?, error: NSError?) -> Void in
+//                        let relations = results as? [Notification] ?? []
+//                        
+//                        //self.pendingNotifications = relations
+//                        
+//                        for what in relations {
+//                            println(what)
+//                        }
+//                    })
+//                    
+                    pendingNotificationObject.uploadNotification()
+                    //let pendingNotificationObjectId = pendingNotificationObject.objectId
+                    
+//                    let query = Notification.query()
+//                    query!.fromLocalDatastore()
+//                    query.getObjectInBackgroundWithId(pendingNotificationObjectId!).continueWithBlock({
+//                        (task: BFTask!) -> AnyObject! in
+//                        if task.error != nil {
+//                            // There was an error.
+//                            println("Errrrorororro")
+//                            return task
+//                        }
+//                        
+//                        let notificationObj = task.result as! PFObject
+//                        notificationObj.saveInBackgroundWithBlock(nil)
+//                        notificationObj.unpinInBackgroundWithBlock(nil)
+//                        //task.result
+//                        // task.result will be your game score
+//                        return task
+//                    })
+//                    
+                    
+                    /*
+                    pendingNotificationObject.fetchFromLocalDatastoreInBackground().continueWithBlock({
+                        (task: BFTask!) -> AnyObject! in
+                        if task.error != nil {
+                            // There was an error.
+                            println("Errrrror")
+                            return task
+                        }
+                        
+                        task.result.saveInBackgroundWithBlock(nil)
+                        task.result.unpinInBackgroundWithBlock(nil)
+                        // task.result will be your game score
+                        return task
+                    }) */
+                    
+                    
+
+                    
                     
                     println("Reachable via WiFi")
                     TSMessage.dismissActiveNotification()

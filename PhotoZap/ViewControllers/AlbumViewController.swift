@@ -41,7 +41,7 @@ class AlbumViewController: UIViewController, CTAssetsPickerControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        let query = PFQuery(className:"Image")
+//        let query = PFQuery(className:"Notification")
 //        query.fromLocalDatastore()
 //        
 //        query.findObjectsInBackgroundWithBlock({
@@ -108,8 +108,25 @@ class AlbumViewController: UIViewController, CTAssetsPickerControllerDelegate {
     
     func showAlbum() {
         
+        
         PHPhotoLibrary.requestAuthorization() { (status:PHAuthorizationStatus) in
             dispatch_async(dispatch_get_main_queue()) {
+                
+                switch (status)
+                {
+                case .Authorized:
+                    println("Authorized")
+                    
+                case .Denied:
+                    println("Denied")
+                case .Restricted:
+                    println("Restricted")
+                    
+                case .NotDetermined:
+                    println("Not determined")
+                    
+                }
+                
                 var picker = CTAssetsPickerController()
                 picker.delegate = self
                 //self.presentViewController(picker, animated: true, completion: nil)

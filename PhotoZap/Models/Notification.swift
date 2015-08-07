@@ -15,7 +15,7 @@ class Notification : PFObject, PFSubclassing {
     @NSManaged var toUser: PFUser?
     @NSManaged var fromUser: PFUser?
     
-    //var imageData: NSData?
+    var imageData: NSData?
     var imagePic: UIImage?
     
     // MARK: PFSubclassing Protocol
@@ -36,13 +36,25 @@ class Notification : PFObject, PFSubclassing {
         }
     }
     
-    /*
+    
     func uploadNotification() {
 
         //imageFile = PFFile(data: imageData!)
-        //imageFile!.saveInBackgroundWithBlock(nil)
+        //println(imageFile)
+        imageFile!.saveInBackgroundWithBlock() {(result, error) in
+            if error != nil {
+                println(result)
+                println("Save of imageFile")
+            }
+            self.saveEventually() {(result, error) in
+                if error != nil {
+                    println(result)
+                    println("Save of total object")
+                }
+            }
+        }
         
-        fromUser = PFUser.currentUser()
-        saveInBackgroundWithBlock(nil)
-    } */
+        //fromUser = PFUser.currentUser()
+
+    }
 }
