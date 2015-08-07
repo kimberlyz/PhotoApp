@@ -11,11 +11,11 @@ import Parse
 
 class Notification : PFObject, PFSubclassing {
     
-    @NSManaged var imageFile : PFObject?
+    @NSManaged var imageFile : PFFile?
     @NSManaged var toUser: PFUser?
     @NSManaged var fromUser: PFUser?
     
-    var imageData: NSData?
+    //var imageData: NSData?
     var imagePic: UIImage?
     
     // MARK: PFSubclassing Protocol
@@ -36,16 +36,13 @@ class Notification : PFObject, PFSubclassing {
         }
     }
     
+    /*
     func uploadNotification() {
 
-        let imageFile = PFFile(data: imageData!)
-        imageFile.saveInBackgroundWithBlock(nil)
-        
-        let imageObject = PFObject(className: "Image")
-        imageObject.setObject(imageFile, forKey: "imageFile")
+        //imageFile = PFFile(data: imageData!)
+        //imageFile!.saveInBackgroundWithBlock(nil)
         
         fromUser = PFUser.currentUser()
-        self.image = imageObject
         saveInBackgroundWithBlock(nil)
-    }
+    } */
 }

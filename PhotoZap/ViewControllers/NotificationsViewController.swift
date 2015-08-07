@@ -115,7 +115,7 @@ class NotificationsViewController: UIViewController {
         let query = PFQuery(className:"Notification")
         query.includeKey("fromUser")
         query.includeKey("toUser")
-        query.includeKey("image")
+        query.includeKey("imageFile")
         query.fromLocalDatastore()
 
         
@@ -418,12 +418,54 @@ extension NotificationsViewController: UITableViewDataSource {
             
             // Image hasn't been downloaded yet, so download it
             if notificationObject.imagePic == nil {
+                //let query = PFQuery(className: ParseNotificationClass)
                 
-                let imageObject = notificationObject.objectForKey(ParseHelper.ParseNotificationImage) as? PFObject
+                let query = PFQuery(className:ParseHelper.ParseNotificationClass)
+                let notificationObjectId = notificationObject.objectId
                 
-                if let imageObject = imageObject {
-                    let imageFile = imageObject.objectForKey(ParseHelper.ParseImageImageFile) as! PFFile
-                    
+                query.getObjectInBackgroundWithId(notificationObjectId!) {
+                    (notificationObj: PFObject?, error: NSError?) -> Void in
+                    if error == nil && notificationObj != nil {
+                        println(notificationObj)
+                        
+                        let imageFile = notificationObj!.objectForKey(ParseHelper.ParseNotificationImageFile) as! PFFile
+                        notificationObject.imageFile = imageFile
+                        
+                        selectedCell.activityIndicator.startAnimating()
+                        
+                        imageFile.getDataInBackgroundWithBlock {
+                            (imageData: NSData?, error: NSError?) -> Void in
+                            if (error == nil) {
+                                if let imageData = imageData {
+                                    //let image = UIImage(data: imageData, scale:1.0)!
+                                    
+                                    let image = UIImage(data: imageData)
+                                    notificationObject.imagePic = image
+                                    
+                                    selectedCell.notificationsImageView.image = image
+                                    
+                                    selectedCell.activityIndicator.stopAnimating()
+                                    
+                                    self.tableView.reloadData()
+                                }
+                                
+                            }
+                        }
+                    } else {
+                        println("error")
+                    }
+                }
+//                
+//                query.whereKey(ParseNotificationToUser, equalTo: user)
+//                query.includeKey("fromUser")
+//
+                
+                //let imageObject = notificationObject.objectForKey(ParseHelper.ParseNotificationImage) as? PFObject
+                
+//                if let imageObject = imageObject {
+//                    let imageFile = imageObject.objectForKey(ParseHelper.ParseImageImageFile) as! PFFile
+                
+                    /*
                     selectedCell.activityIndicator.startAnimating()
                     
                     imageFile.getDataInBackgroundWithBlock {
@@ -443,8 +485,8 @@ extension NotificationsViewController: UITableViewDataSource {
                             }
                             
                         }
-                    }
-                }
+                    } */
+                //}
             } else { /* If image is already downloaded, save the image */
                 TSMessage.showNotificationInViewController(self, title: "Image saved!", subtitle: "", type: .Success, duration: 1.0, canBeDismissedByUser: true)
                 
@@ -453,10 +495,36 @@ extension NotificationsViewController: UITableViewDataSource {
                 
                 let cellIndexPath = self.tableView.indexPathForCell(selectedCell)
                 self.notifications.removeAtIndex(cellIndexPath!.row)
-                let fromUser = notificationObject.objectForKey(ParseHelper.ParseNotificationFromUser) as? PFUser
-                let imagePointer = notificationObject.objectForKey(ParseHelper.ParseNotificationImage) as? PFObject
                 
-                ParseHelper.deleteNotification(fromUser!, toUser: PFUser.currentUser()!, image: imagePointer!)
+                
+                let query = PFQuery(className:ParseHelper.ParseNotificationClass)
+                let notificationObjectId = notificationObject.objectId
+                
+                query.getObjectInBackgroundWithId(notificationObjectId!) {
+                    (notificationObj: PFObject?, error: NSError?) -> Void in
+                    if error == nil && notificationObj != nil {
+                        notificationObj!.deleteInBackgroundWithBlock(nil)
+                    } else {
+                        println("error")
+                    }
+                }
+
+                
+                
+                
+//                let toUser = notificationObject.toUser
+//                let fromUser = notificationObject.fromUser
+//                let imageFile = notificationObject.imageFile
+                
+                
+                
+                
+                
+                
+                //let fromUser = notificationObject.objectForKey(ParseHelper.ParseNotificationFromUser) as? PFUser
+                //let imagePointer = notificationObject.objectForKey(ParseHelper.ParseNotificationImage) as? PFObject
+                
+                //ParseHelper.deleteNotification(fromUser!, toUser: toUser!, imageFile: imageFile!)
                 // need to delete notification from parse
                 self.tableView.deleteRowsAtIndexPaths([cellIndexPath!], withRowAnimation: UITableViewRowAnimation.Automatic)
             }
@@ -466,7 +534,7 @@ extension NotificationsViewController: UITableViewDataSource {
             
             let pendingNotificationObject = self.pendingNotifications[indexPath.row]
             
-            let imageObject = pendingNotificationObject.objectForKey("image") as! PFObject
+            //let imageObject = pendingNotificationObject.objectForKey("image") as! PFObject
             
             //imageObject.deleteInBackgroundWithBlock(nil)
             

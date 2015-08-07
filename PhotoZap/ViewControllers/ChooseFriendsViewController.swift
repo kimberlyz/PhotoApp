@@ -66,17 +66,10 @@ class ChooseFriendsViewController: UIViewController {
                 for friend in self.selectedFriendUsers {
                     
                     let notification = Notification()
-                    notification["toUser"] = friend
-                    notification["fromUser"] = PFUser.currentUser()!
+                    notification.toUser = friend
+                    notification.fromUser = PFUser.currentUser()!
+                    notification.imageFile = PFFile(data: imageData)
                     
-                    let imageData = imageData
-                    let imageFile = PFFile(data: imageData!)
-                    
-                    let imageObject = PFObject(className: "Image")
-                    imageObject["imageFile"] = imageFile
-                    imageObject.pinInBackgroundWithBlock(nil)
-                    
-                    notification.image = imageObject
                     notification.pinInBackgroundWithBlock(nil)
                 }
             }
@@ -101,15 +94,11 @@ class ChooseFriendsViewController: UIViewController {
                         
                         for friend in self.selectedFriendUsers {
                             let notification = Notification()
-                            notification.imageData = imageData
                             notification.toUser = friend
-                            notification.uploadNotification()
-//                            let photo = Photo()
-//                            photo.imageData = imageData
-//                            photo.toUser = friend
-//                            photo.uploadPhoto()
+                            notification.fromUser = PFUser.currentUser()!
+                            notification.imageFile = PFFile(data: imageData)
                             
-
+                            notification.saveInBackgroundWithBlock(nil)
                         }
                     }
                 }

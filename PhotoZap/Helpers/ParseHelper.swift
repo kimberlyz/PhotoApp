@@ -33,7 +33,7 @@ class ParseHelper {
     static let ParseNotificationClass = "Notification"
     static let ParseNotificationToUser = "toUser"
     static let ParseNotificationFromUser = "fromUser"
-    static let ParseNotificationImage = "image"
+    static let ParseNotificationImageFile = "imageFile"
     
     // Image Pointer
     static let ParseImageClass = "Image"
@@ -48,19 +48,22 @@ class ParseHelper {
         
         query.whereKey(ParseNotificationToUser, equalTo: user)
         query.includeKey("fromUser")
-        query.includeKey("toUser")
-        query.includeKey("image")
+        //query.includeKey("toUser")
+        //query.includeKey("imageFile")
         
         query.findObjectsInBackgroundWithBlock(completionBlock)
     }
     
-    static func deleteNotification(fromUser: PFUser, toUser: PFUser, image: PFObject) {
+    static func deleteNotification(fromUser: PFUser, toUser: PFUser, imageFile: PFFile) {
         let query = PFQuery(className: ParseNotificationClass)
         
         query.whereKey(ParseNotificationFromUser, equalTo: fromUser)
         query.whereKey(ParseNotificationToUser, equalTo: toUser)
-        query.whereKey(ParseNotificationImage, equalTo: image)
-        query.includeKey(ParseNotificationImage)
+        
+        // AHHHHHHHH  
+        query.whereKey(ParseNotificationImageFile, equalTo: imageFile)
+//        query.whereKey(ParseNotificationImage, equalTo: image)
+//        query.includeKey(ParseNotificationImage)
         
         query.findObjectsInBackgroundWithBlock {
             (results: [AnyObject]?, error: NSError?) -> Void in
@@ -71,8 +74,8 @@ class ParseHelper {
                 
                 notification.deleteInBackgroundWithBlock(nil)
 
-                let imageObject = notification.objectForKey("image") as! PFObject
-                imageObject.deleteInBackgroundWithBlock(nil)
+//                let imageObject = notification.objectForKey("image") as! PFObject
+//                imageObject.deleteInBackgroundWithBlock(nil)
             }
         }
     }
