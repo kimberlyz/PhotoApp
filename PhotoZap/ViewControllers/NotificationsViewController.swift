@@ -331,6 +331,8 @@ extension NotificationsViewController: UITableViewDataSource {
             let notificationObject = self.notifications[indexPath.row]
             cell.fromUser = notificationObject.objectForKey(ParseHelper.ParseNotificationFromUser) as? PFUser
             
+            //var image = UIImage(named: ")
+            
             return cell
         } else {
             // Some wonky logic....
@@ -432,6 +434,13 @@ extension NotificationsViewController: UITableViewDataSource {
                 
                 UIImageWriteToSavedPhotosAlbum(notificationObject.imagePic, nil, nil, nil)
                 println("Image Saved")
+                
+                let cellIndexPath = self.tableView.indexPathForCell(selectedCell)
+                self.notifications.removeAtIndex(cellIndexPath!.row)
+                let fromUser = notificationObject.objectForKey(ParseHelper.ParseNotificationFromUser) as? PFUser
+                ParseHelper.deleteNotification(fromUser!, toUser: PFUser.currentUser()!)
+                // need to delete notification from parse
+                self.tableView.deleteRowsAtIndexPaths([cellIndexPath!], withRowAnimation: UITableViewRowAnimation.Automatic)
             }
             
         } else { /* Pending cell */
@@ -439,7 +448,7 @@ extension NotificationsViewController: UITableViewDataSource {
             
             let pendingNotificationObject = self.pendingNotifications[indexPath.row]
             
-            SweetAlert().showAlert("You are not connected to Wi-Fi right now.", subTitle: "Would you like to send the photo using cellular data?", style: AlertStyle.Warning, buttonTitle:"No thanks.", buttonColor:UIColorFromRGB(0xD0D0D0) , otherButtonTitle:  "Yes, send it.", otherButtonColor: UIColorFromRGB(0xDD6B55)) { (isOtherButton) -> Void in
+            SweetAlert().showAlert("No Wi-Fi connection.", subTitle: "Would you like to send the photo using cellular data?", style: AlertStyle.Warning, buttonTitle:"No thanks.", buttonColor:UIColorFromRGB(0x90AEFF) , otherButtonTitle:  "Yes, send it.", otherButtonColor: UIColorFromRGB(0x90AEFF)) { (isOtherButton) -> Void in
                 if isOtherButton == true {
                     
                     println("Cancel Button  Pressed")

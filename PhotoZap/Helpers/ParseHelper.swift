@@ -54,6 +54,80 @@ class ParseHelper {
         query.findObjectsInBackgroundWithBlock(completionBlock)
     }
     
+    static func deleteNotification(fromUser: PFUser, toUser: PFUser) {
+        let query = PFQuery(className: ParseNotificationClass)
+        
+        query.whereKey(ParseNotificationFromUser, equalTo: fromUser)
+        query.whereKey(ParseNotificationToUser, equalTo: toUser)
+        query.includeKey(ParseNotificationImage)
+        
+        query.findObjectsInBackgroundWithBlock {
+            (results: [AnyObject]?, error: NSError?) -> Void in
+            
+            let results = results as? [PFObject] ?? []
+            
+            for notification in results {
+                notification.deleteInBackgroundWithBlock(nil)
+            }
+        }
+        
+        /*
+        Parse.Cloud.afterDelete("ShoppingListConnections ", function(request) {
+            var fridgeId = request.object.get("ShoppingListID");
+            var query = new Parse.Query("ShoppingListConnections");
+            query.equalTo("ShoppingListID", shoppingListID);
+            query.find({
+                success: function(shoppingListConnections) {
+                    if (shoppingListConnections.length == 0) {
+                        var shoppingListQuery = new Parse.Query("ShoppingList");
+                        shoppingListQuery.get(ShoppingListID, {
+                            success: function(shoppingList) {
+                                shoppingList.destroy({});
+                            },
+                            error: function(error) {
+                                console.error("Error deleting shopping list from DB ");
+                            }
+                        });
+                        var foodQuery = new Parse.Query("Items");
+                        foodQuery.equalTo("ShoppingListID", shoppingListID);
+                        foodQuery.find({
+                            success: function(items) {
+                                Parse.Object.destroyAll(items);
+                            },
+                            error: function(error) {
+                                console.error("Error deleting food items from DB");
+                            }
+                        });
+                    }
+                }, 
+                error: function(error) {
+                    console.error("Error finding fridge in DB");
+                }
+            });
+            });
+        
+        Parse.Cloud.afterDelete(ParseNotificationClass, function(request) {
+            let query = Parse.Query(ParseNotificationImage)
+            
+            query.equalTo("post", request.object.id);
+            query.find({
+                success:
+                function(comments) {
+                    Parse.Object.destroyAll(comments, {
+                        success:
+                        function() {},
+                        error: function(error) {
+                            console.error("Error deleting related comments " + error.code + ": " + error.message);
+                        }
+                    });
+                },
+                error: function(error) {
+                    console.error("Error finding related comments " + error.code + ": " + error.message);
+                }
+            });
+            }); */
+    }
+    
     
     
     /**
