@@ -37,9 +37,17 @@ class ChooseFriendsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        reachability.startNotifier()
+        
         friendUsers = [PFUser]()
         
-        getFriendshipForUser()
+        if reachability.isReachable() {
+            getFriendshipForUser()
+        } else {
+            SweetAlert().showAlert("No connection.", subTitle: "Sorry, can't send right now.", style: AlertStyle.Error)
+            self.dismissViewControllerAnimated(true, completion: nil)
+        }
+
         
 //        println(reachability)
 //        reachability.whenReachable = { reachability in
@@ -76,7 +84,7 @@ class ChooseFriendsViewController: UIViewController {
 
     @IBAction func sendButtonTapped(sender: AnyObject) {
         
-        reachability.startNotifier()
+
         
         // Initial reachability check
         if reachability.isReachable() {
@@ -121,6 +129,8 @@ class ChooseFriendsViewController: UIViewController {
             }
         } else {
             delaySend()
+            SweetAlert().showAlert("No Connection.", subTitle: "Putting the photos in the pending section. Will notify you to send them once you get Wi-Fi.", style: AlertStyle.None)
+            self.dismissViewControllerAnimated(true, completion: nil)
             println("NOOOO")
         }
         

@@ -9,12 +9,17 @@
 import UIKit
 import Parse
 import CTAssetsPickerController
+import ReachabilitySwift
 //import RealmSwift
 
 class AlbumViewController: UIViewController, CTAssetsPickerControllerDelegate {
     
     //var assets : [AnyObject] = []
     //var transaction : Transaction?
+    
+    
+    let reachability = Reachability.reachabilityForInternetConnection()
+
     var zapBool : Bool?
     
 //    var transactions: Results<Transaction>! {
@@ -36,6 +41,7 @@ class AlbumViewController: UIViewController, CTAssetsPickerControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 //        
+        reachability.startNotifier()
 //        let realm = Realm()
 //        transactions = realm.objects(Transaction)
 
@@ -76,8 +82,13 @@ class AlbumViewController: UIViewController, CTAssetsPickerControllerDelegate {
     }
     
     @IBAction func wifiButtonTapped(sender: AnyObject) {
-        zapBool = false
-        showAlbum()
+        if reachability.isReachable() {
+            zapBool = false
+            showAlbum()
+        } else {
+            SweetAlert().showAlert("No connection.", subTitle: "Sorry, can't send right now.", style: AlertStyle.Error)
+        }
+
     }
     
     
