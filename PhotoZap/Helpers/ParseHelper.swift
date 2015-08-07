@@ -90,8 +90,17 @@ class ParseHelper {
                 PFCloud.callFunctionInBackground("Notification", withParameters: notification) {
                     (response: AnyObject?, error: NSError?) -> Void in
                 } */
+                let imageObject = notification.objectForKey("image") as! PFObject
+                imageObject.deleteInBackgroundWithBlock(nil)
             }
         }
+        /*
+        let imageObject =
+        objectForKey(ParseHelper.ParseFriendshipUserA) as! PFUser
+        
+        let imageObject = image.objectForKey("imageFile") as! PFObject
+        imageObject.deleteInBackgroundWithBlock(nil) */
+        
         
         
         /*

@@ -58,7 +58,7 @@
                   moduleName = "PhotoZap"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Kimberly/Documents/iOSApps/PhotoZap/PhotoZap/ViewControllers/WiFiDirectViewController.swift"
-                  timestampString = "460613634.592326"
+                  timestampString = "460621760.477768"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "180"
@@ -73,7 +73,7 @@
                   moduleName = "PhotoZap"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Kimberly/Documents/iOSApps/PhotoZap/PhotoZap/ViewControllers/WiFiDirectViewController.swift"
-                  timestampString = "460613634.592609"
+                  timestampString = "460621760.478069"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "180"
@@ -202,7 +202,7 @@
                   moduleName = "PhotoZap"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Kimberly/Documents/iOSApps/PhotoZap/PhotoZap/ViewControllers/NotificationsViewController.swift"
-                  timestampString = "460613634.598616"
+                  timestampString = "460621760.48268"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "221"
@@ -217,7 +217,7 @@
                   moduleName = "PhotoZap"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Kimberly/Documents/iOSApps/PhotoZap/PhotoZap/ViewControllers/NotificationsViewController.swift"
-                  timestampString = "460613634.598854"
+                  timestampString = "460621760.482914"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "224"
@@ -266,7 +266,7 @@
                   moduleName = "PhotoZap"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Kimberly/Documents/iOSApps/PhotoZap/PhotoZap/ViewControllers/NotificationsViewController.swift"
-                  timestampString = "460613634.600852"
+                  timestampString = "460621760.484693"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "221"
@@ -281,7 +281,7 @@
                   moduleName = "PhotoZap"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Kimberly/Documents/iOSApps/PhotoZap/PhotoZap/ViewControllers/NotificationsViewController.swift"
-                  timestampString = "460613634.601083"
+                  timestampString = "460621760.484962"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "224"
@@ -368,6 +368,22 @@
             startingLineNumber = "455"
             endingLineNumber = "455"
             landmarkName = "tableView(_:didSelectRowAtIndexPath:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PhotoZap/Helpers/ParseHelper.swift"
+            timestampString = "460621721.97224"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "93"
+            endingLineNumber = "93"
+            landmarkName = "deleteNotification(_:toUser:image:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
