@@ -69,8 +69,8 @@ class ChooseFriendsViewController: UIViewController {
                     notification.toUser = friend
                     notification.fromUser = PFUser.currentUser()!
                     
-                    notification.imageFile = PFFile(data: imageData)
-                    //notification.imageData = imageData
+                    //notification.imageFile = PFFile(data: imageData)
+                    notification.imageData = imageData
                     
                     notification.pinInBackgroundWithBlock(nil)
                 }

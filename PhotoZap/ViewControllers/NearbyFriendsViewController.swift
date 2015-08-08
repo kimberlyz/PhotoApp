@@ -9,6 +9,7 @@
 import UIKit
 import MultipeerConnectivity
 import Photos
+import TSMessages
 
 
 class NearbyFriendsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, MPCManagerDelegate {
@@ -16,8 +17,7 @@ class NearbyFriendsViewController: UIViewController, UITableViewDelegate, UITabl
     @IBOutlet weak var tableView: UITableView!
     
     var assets : [AnyObject] = []
-    
-    //var transaction : Transaction?
+
     var isAdvertising: Bool!
     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     
@@ -38,37 +38,22 @@ class NearbyFriendsViewController: UIViewController, UITableViewDelegate, UITabl
         appDelegate.mpcManager.advertiser.stopAdvertisingPeer()
     }
     
-    
-    func getAssetUrl(asset: PHAsset, completionHandler: (NSURL!) -> ()) {
-        let option = PHContentEditingInputRequestOptions()
-        asset.requestContentEditingInputWithOptions(option) { contentEditingInput, info in
-            completionHandler(contentEditingInput?.fullSizeImageURL)
-        }
-    }
-    
     @IBAction func sendButtonTapped(sender: AnyObject) {
-        
-        //var fileURL = NSURL()
         
         println("SendButtonTapped")
         
         let tempDir = NSURL.fileURLWithPath(NSTemporaryDirectory(), isDirectory: true)
         
+        var numOfSends = assets.count + self.appDelegate.mpcManager.connectedPeers.count
+        var countingNumOfSends = 0
+        
         for asset in (assets/*transaction!.assets*/ as! [PHAsset]) {
             
-            //PHContentEditingInputRequestOptions *options = [PHContentEditingInputRequestOptions new];
-            
-//            let options = PHContentEditingInputRequestOptions()
-//            options.canHandleAdjustmentData {
-//                (adjustmentData: PHAdjustmentData) -> Bool in
-//            }
-            
+
             var fileURL  = NSURL()
             
-//            let tempPath = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.CachesDirectory, NSSearchPathDomainMask.UserDomainMask, true).last
-            
-
-            
+//          let tempPath = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.CachesDirectory, NSSearchPathDomainMask.UserDomainMask, true).last
+        
             var errorFileHandle : NSError?
 
             
@@ -97,76 +82,19 @@ class NearbyFriendsViewController: UIViewController, UITableViewDelegate, UITabl
                 for peer in self.appDelegate.mpcManager.connectedPeers {
                     var progress = self.appDelegate.mpcManager.session.sendResourceAtURL(newTempFileURL, withName: newTempFileURL!.lastPathComponent, toPeer: peer) { (error: NSError?) -> Void in
                         NSLog("Error: \(error)")
+                        TSMessage.showNotificationInViewController(self, title: "\(countingNumOfSends) out of \(numOfSends) images sent!", subtitle: "", type: .Success, duration: 1.0, canBeDismissedByUser: true)
                     }
                 }
-
-                
-                
-                /*
-                //@IBOutlet var imageURL : UIImageView
-                //if let url = fileURL {
-                if let data = NSData(contentsOfURL: url){
-                //imageURL.contentMode = UIViewContentMode.ScaleAspectFit
-                var image = UIImage(data: data)
-                }
-                //} */
-                
-                
             }
-
-            
-          /*  getAssetUrl(asset) { URL in
-                if URL != nil {
-                    //fileURL = NSURL()
-                    // do something with URL here
-                    //fileURL = URL
-                    println(URL)
-                    for peer in self.appDelegate.mpcManager.connectedPeers {
-                        var progress = self.appDelegate.mpcManager.session.sendResourceAtURL(URL, withName: URL.lastPathComponent, toPeer: peer) { (error: NSError?) -> Void in
-                            NSLog("Error: \(error)")
-                        }
-                    }
-                }
-            } */
-
-            
-//            [options setCanHandleAdjustmentData:^BOOL(PHAdjustmentData *adjustmentData) {
-//                return [adjustmentData.formatIdentifier isEqualToString:AdjustmentFormatIdentifier] && [adjustmentData.formatVersion isEqualToString:@"1.0"];
-//                }];
-//            
-//            asset.requestContentEditingInputWithOptions(options, completionHandler: { (contentEditingInput: PHContentEditingInput, info: NSDictionary) -> Void in
-//                fileURL = contentEditingInput.fullSizeImageURL
-//            })
-            
-            
-            
-            /*
-            [asset requestContentEditingInputWithOptions:editOptions
-                completionHandler:^(PHContentEditingInput *contentEditingInput, NSDictionary *info) {
-                NSURL *imageURL = contentEditingInput.fullSizeImageURL;
-                }]; */
-        
-            
-
-            
-
         }
+        
+        self.dismissViewControllerAnimated(true, completion: nil)
 
         /*
-        [[PHImageManager defaultManager] requestImageDataForAsset:asset options:nil resultHandler:^(NSData *imageData, NSString *dataUTI, UIImageOrientation orientation, NSDictionary *info) {
-        
-        //imageData contains the correct data for images and videos
-        NSLog(@"info - %@", info);
-        NSURL* fileURL = [info objectForKey:@"PHImageFileURLKey"];
-        }];
-        
-        
-        PHImageManger
-        
         PHImageManager.defaultManager().requestImageForAsset(asset, targetSize: self.assetThumbnailSize, contentMode: .AspectFill, options: nil, resultHandler: {(result, info)in
         cell.setThumbnailImage(result)
         })
-     */
+        */
         
     }
 

@@ -15,9 +15,8 @@ import RealmSwift
 
 class Transaction: Object {
 
-    //dynamic var recipient : PFUser = PFUser()
+    dynamic var toUser : PFUser = PFUser()
     dynamic var imageData : NSData = NSData()
-    
     
 //    var recipients : [MCPeerID]?
 //    var assets : [AnyObject]?

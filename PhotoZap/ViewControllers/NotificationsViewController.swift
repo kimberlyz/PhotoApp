@@ -38,15 +38,6 @@ class NotificationsViewController: UIViewController {
         return refreshControl
     }()
     
-    func UIColorFromRGB(rgbValue: UInt) -> UIColor {
-        return UIColor(
-            red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
-            green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
-            blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
-            alpha: CGFloat(1.0)
-        )
-    }
-    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -66,6 +57,7 @@ class NotificationsViewController: UIViewController {
         //getNotifications()
         
 
+        //NSNotificationCenter.defaultCenter().addObserver(<#observer: AnyObject#>, selector: <#Selector#>, name: <#String?#>, object: <#AnyObject?#>)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "didStartReceivingResourceWithNotification:", name: "MPCDidStartReceivingResourceNotification", object: nil)
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateReceivingProgressWithNotification:", name: "MPCReceivingProgressNotification", object: nil)
@@ -114,6 +106,7 @@ class NotificationsViewController: UIViewController {
             
             for what in self.pendingNotifications {
                 println(what)
+                
             }
         })
         
@@ -424,6 +417,7 @@ extension NotificationsViewController: UITableViewDataSource {
             let cell = tableView.dequeueReusableCellWithIdentifier("NotificationsCell") as! NotificationsTableViewCell
             
             let pendingNotificationObject = self.pendingNotifications[indexPath.row]
+            
 
             
 //            pendingNotificationObject.saveEventually() {(result, error) in

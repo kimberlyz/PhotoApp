@@ -28,6 +28,8 @@ class MPCManager: NSObject, MCSessionDelegate, MCNearbyServiceBrowserDelegate, M
     var invitationHandler : ((Bool, MCSession!) -> Void)!
     var delegate : MPCManagerDelegate?
     
+    let mySpecialNotificationKey = "pieandpudding.specialNotificationKey"
+    
     override init() {
         super.init()
         
@@ -134,7 +136,7 @@ extension MPCManager: MCSessionDelegate {
        // NSNotificationCenter.defaultCenter().postNotificationName("receivedMPCDataNotification", object: dictionary)
         var dict: [String: AnyObject] = ["resourceName" : resourceName, "peerID" : peerID, "progress" : progress]
         
-        //NSNotificationCenter.defaultCenter().postNotificationName(<#aName: String#>, object: <#AnyObject?#>)
+        //NSNotificationCenter.defaultCenter().postNotificationName(mySpecialNotificationKey, object: self)
         
         NSNotificationCenter.defaultCenter().postNotificationName("MPCDidStartReceivingResourceNotification", object: nil, userInfo: dict)
         dispatch_async(dispatch_get_main_queue()) { // 2
