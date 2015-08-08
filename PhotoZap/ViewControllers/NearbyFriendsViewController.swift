@@ -39,7 +39,29 @@ class NearbyFriendsViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     @IBAction func sendButtonTapped(sender: AnyObject) {
+        var i = 1
+        for asset in (assets as! [PHAsset]) {
+            PHImageManager.defaultManager().requestImageDataForAsset(asset, options: nil) {
+                (imageData: NSData!, dataUTI: String!, orientation: UIImageOrientation, info: [NSObject : AnyObject]!) -> Void in
+                
+                var error: NSError?
+                self.appDelegate.mpcManager.session.sendData(imageData, toPeers: self.appDelegate.mpcManager.session.connectedPeers, withMode: .Reliable, error: &error)
+                if error != nil {
+                    let ac = UIAlertController(title: "Send error", message: error!.localizedDescription, preferredStyle: .Alert)
+                    ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+                    self.presentViewController(ac, animated: true, completion: nil)
+                }
+        }
+            
+
+        //let imageData = UIImagePNGRepresentation(newImage)
         
+        // Send it to all peers, ensuring it gets delivered.
+
+        
+        // Show an error message if there's a problem.
+
+        /*
         println("SendButtonTapped")
         
         let tempDir = NSURL.fileURLWithPath(NSTemporaryDirectory(), isDirectory: true)
@@ -50,32 +72,40 @@ class NearbyFriendsViewController: UIViewController, UITableViewDelegate, UITabl
         for asset in (assets/*transaction!.assets*/ as! [PHAsset]) {
             
 
-            var fileURL  = NSURL()
+            //var fileURL  = NSURL()
             
 //          let tempPath = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.CachesDirectory, NSSearchPathDomainMask.UserDomainMask, true).last
         
-            var errorFileHandle : NSError?
+            //var errorFileHandle : NSError?
 
             
             PHImageManager.defaultManager().requestImageDataForAsset(asset, options: nil) {
                 (imageData: NSData!, dataUTI: String!, orientation: UIImageOrientation, info: [NSObject : AnyObject]!) -> Void in
-                var error : NSError?
+               
                 
+                //let imageData = UIImagePNGRepresentation(newImage)
+                
+                // Send it to all peers, ensuring it gets delivered.
+                var error: NSError?
+                
+                self.appDelegate.mpcManager.session.sendData(imageData, toPeers: self.appDelegate.mpcManager.session.connectedPeers, withMode: .Reliable, error: &error)
+                //sendNotification()
+                
+                // Show an error message if there's a problem.
+                if error != nil {
+                    let ac = UIAlertController(title: "Send error", message: error!.localizedDescription, preferredStyle: .Alert)
+                    ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+                    self.presentViewController(ac, animated: true, completion: nil)
+                }
+
+                
+                /*
                 fileURL = info["PHImageFileURLKey"] as! NSURL
                 let fileName = fileURL.lastPathComponent
                 let newTempFileURL = tempDir?.URLByAppendingPathComponent(fileName!)
                 
                 NSFileManager.defaultManager().createFileAtPath(newTempFileURL!.path!, contents: imageData, attributes: nil)
                 
-//                let fileHandle = NSFileHandle(forWritingToURL: newTempFileURL!, error: &errorFileHandle)
-                
-//                println("File Handle Error \(errorFileHandle)"
-                
-                
-//                fileHandle?.writeData(imageData)
-                //imageData.writeToURL(tempDir!, options: NSDataWritingOptions.DataWritingAtomic, error: &error)
-                
-                //fileURL = NSURL.fileURLWithPath("/var/mobile/Media/DCIM/105APPLE/IMG_5852.JPG")
                 println(newTempFileURL)
                 println("yay")
                 
@@ -84,11 +114,12 @@ class NearbyFriendsViewController: UIViewController, UITableViewDelegate, UITabl
                         NSLog("Error: \(error)")
                         TSMessage.showNotificationInViewController(self, title: "\(countingNumOfSends) out of \(numOfSends) images sent!", subtitle: "", type: .Success, duration: 1.0, canBeDismissedByUser: true)
                     }
-                }
-            }
+                } */
+            } */
         }
         
         self.dismissViewControllerAnimated(true, completion: nil)
+        SweetAlert().showAlert("Sending Photos...", subTitle: "", style: AlertStyle.None)
 
         /*
         PHImageManager.defaultManager().requestImageForAsset(asset, targetSize: self.assetThumbnailSize, contentMode: .AspectFill, options: nil, resultHandler: {(result, info)in
@@ -112,6 +143,19 @@ extension NearbyFriendsViewController: MPCManagerDelegate {
     
     
     func invitationWasReceived(fromPeer: String) {
+        //Chaining alerts with messages on button click
+        SweetAlert().showAlert("", subTitle: "\(fromPeer) wants to chat with you.", style: AlertStyle.None, buttonTitle:"Accept", buttonColor:UIColor.colorFromRGB(0x66B2FF) , otherButtonTitle:  "Decline", otherButtonColor: UIColor.colorFromRGB(0x66B2FF)) { (isOtherButton) -> Void in
+            if isOtherButton == true {
+                self.appDelegate.mpcManager.invitationHandler(true, self.appDelegate.mpcManager.session)
+                SweetAlert().showAlert("Accepted!", subTitle: "", style: AlertStyle.Success)
+            }
+            else {
+                self.appDelegate.mpcManager.invitationHandler(false, nil)
+                SweetAlert().showAlert("Decline!", subTitle: "", style: AlertStyle.Error)
+            }
+        }
+        
+        /*
         let alertController = UIAlertController(title: "", message: "\(fromPeer) wants to chat with you.", preferredStyle: UIAlertControllerStyle.Alert)
         
         let acceptAction: UIAlertAction = UIAlertAction(title: "Accept", style: UIAlertActionStyle.Default) { (action) in
@@ -123,10 +167,12 @@ extension NearbyFriendsViewController: MPCManagerDelegate {
         }
         
         alertController.addAction(acceptAction)
-        alertController.addAction(declineAction)
+        alertController.addAction(declineAction) */
         
-        self.presentViewController(alertController, animated: true, completion: nil)
+        //self.presentViewController(alertController, animated: true, completion: nil)
     }
+    
+    func photoWasReceived(image: UIImage, fromPeer: MCPeerID) {}
 }
 
 

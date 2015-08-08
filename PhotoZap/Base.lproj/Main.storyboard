@@ -273,7 +273,7 @@
                                                 </activityIndicatorView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="centerY" secondItem="z25-Yt-Qr3" secondAttribute="centerY" constant="0.5" id="2hQ-e6-6jE"/>
+                                                <constraint firstAttribute="centerY" secondItem="z25-Yt-Qr3" secondAttribute="centerY" id="2hQ-e6-6jE"/>
                                                 <constraint firstItem="z25-Yt-Qr3" firstAttribute="leading" secondItem="zTq-n0-9Ad" secondAttribute="leading" constant="45" id="I4v-BB-g2P"/>
                                                 <constraint firstAttribute="centerY" secondItem="3PU-nv-FZK" secondAttribute="centerY" id="IKq-u9-BB1"/>
                                                 <constraint firstItem="CJG-vL-Zo6" firstAttribute="leading" secondItem="zTq-n0-9Ad" secondAttribute="leading" constant="15" id="WR2-xg-bqp"/>
@@ -285,6 +285,44 @@
                                             <outlet property="activityIndicator" destination="z25-Yt-Qr3" id="b7l-Oh-7wT"/>
                                             <outlet property="notificationsImageView" destination="CJG-vL-Zo6" id="LQ9-E0-aaB"/>
                                             <outlet property="usernameLabel" destination="3PU-nv-FZK" id="RqY-wA-Hqu"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ZapCell" id="rEr-Zp-4yl" customClass="ZapTableViewCell" customModule="PhotoZap" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rEr-Zp-4yl" id="iyW-uM-cHi">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="o99-Dl-LcZ">
+                                                    <rect key="frame" x="15" y="10" width="80" height="80"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="80" id="6N4-PE-BIf"/>
+                                                        <constraint firstAttribute="height" constant="80" id="aMc-nR-htB"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Zap Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2mA-5z-bfx">
+                                                    <rect key="frame" x="110" y="39" width="80" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="mj5-aF-gdJ">
+                                                    <rect key="frame" x="45" y="39" width="20" height="20"/>
+                                                </activityIndicatorView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="o99-Dl-LcZ" firstAttribute="leading" secondItem="iyW-uM-cHi" secondAttribute="leading" constant="15" id="bpf-rJ-UrL"/>
+                                                <constraint firstAttribute="centerY" secondItem="mj5-aF-gdJ" secondAttribute="centerY" id="eDe-Hw-aaf"/>
+                                                <constraint firstItem="mj5-aF-gdJ" firstAttribute="leading" secondItem="iyW-uM-cHi" secondAttribute="leading" constant="45" id="ewz-5s-ZMt"/>
+                                                <constraint firstAttribute="centerY" secondItem="2mA-5z-bfx" secondAttribute="centerY" id="jhG-bM-XSo"/>
+                                                <constraint firstAttribute="centerY" secondItem="o99-Dl-LcZ" secondAttribute="centerY" id="k3G-Qa-dCd"/>
+                                                <constraint firstItem="2mA-5z-bfx" firstAttribute="leading" secondItem="o99-Dl-LcZ" secondAttribute="trailing" constant="15" id="wPk-rT-8kg"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="activityIndicator" destination="mj5-aF-gdJ" id="ko2-sd-9FX"/>
+                                            <outlet property="usernameLabel" destination="2mA-5z-bfx" id="d3w-2Y-Saw"/>
+                                            <outlet property="zapImageView" destination="o99-Dl-LcZ" id="RbJ-jr-hgJ"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

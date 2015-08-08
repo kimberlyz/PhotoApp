@@ -47,6 +47,10 @@ extension ReceiveZapViewController: MPCManagerDelegate {
     func invitationWasReceived(fromPeer: String) {
         // empty
     }
+    
+    func photoWasReceived(image: UIImage, fromPeer: MCPeerID) {
+        /// empty
+    }
 }
 
 extension ReceiveZapViewController: UITableViewDataSource {

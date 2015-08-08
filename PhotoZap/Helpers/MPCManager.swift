@@ -13,6 +13,7 @@ import ConvenienceKit
 protocol MPCManagerDelegate {
     func invitationWasReceived(fromPeer: String)
     func refreshConnectionStatus()
+    func photoWasReceived(image: UIImage, fromPeer: MCPeerID)
 }
 
 
@@ -28,7 +29,7 @@ class MPCManager: NSObject, MCSessionDelegate, MCNearbyServiceBrowserDelegate, M
     var invitationHandler : ((Bool, MCSession!) -> Void)!
     var delegate : MPCManagerDelegate?
     
-    let mySpecialNotificationKey = "pieandpudding.specialNotificationKey"
+    //let mySpecialNotificationKey = "pieandpudding.specialNotificationKey"
     
     override init() {
         super.init()
@@ -46,16 +47,9 @@ class MPCManager: NSObject, MCSessionDelegate, MCNearbyServiceBrowserDelegate, M
         advertiser.delegate = self
 
     }
-    
+    /*
     override func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject, change: [NSObject : AnyObject], context: UnsafeMutablePointer<Void>) {
         NSNotificationCenter.defaultCenter().postNotificationName("MPCReceivingProgressNotification", object: nil, userInfo: ["progress" : object])
-    }
-    
-    /*
-    -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"MCReceivingProgressNotification"
-    object:nil
-    userInfo:@{@"progress": (NSProgress *)object}]; 
     } */
 }
 
@@ -123,15 +117,27 @@ extension MPCManager: MCSessionDelegate {
         
     }
     
-    
     func session(session: MCSession!, didReceiveData data: NSData!, fromPeer peerID: MCPeerID!) {
+        if let image = UIImage(data: data) {
+            dispatch_async(dispatch_get_main_queue()) { [unowned self] in
+                delegate?.photoWasReceived(image, fromPeer: peerID)
+//                self.friendPeerID = peerID
+//                self.images.insert(image, atIndex: 0)
+//                self.tableView.reloadData()
+            }
+            
+        }
     }
+    
+    /*
+    func session(session: MCSession!, didReceiveData data: NSData!, fromPeer peerID: MCPeerID!) {
+    } */
     
     func session(session: MCSession!, didReceiveStream stream: NSInputStream!, withName streamName: String!, fromPeer peerID: MCPeerID!) {
     }
     
     func session(session: MCSession!, didStartReceivingResourceWithName resourceName: String!, fromPeer peerID: MCPeerID!, withProgress progress: NSProgress!) {
-        
+        /*
         println("Started Receiving Resource")
        // NSNotificationCenter.defaultCenter().postNotificationName("receivedMPCDataNotification", object: dictionary)
         var dict: [String: AnyObject] = ["resourceName" : resourceName, "peerID" : peerID, "progress" : progress]
@@ -141,15 +147,16 @@ extension MPCManager: MCSessionDelegate {
         NSNotificationCenter.defaultCenter().postNotificationName("MPCDidStartReceivingResourceNotification", object: nil, userInfo: dict)
         dispatch_async(dispatch_get_main_queue()) { // 2
             progress.addObserver(self, forKeyPath: "fractionCompleted", options: NSKeyValueObservingOptions.New, context: nil)
-        }
+        } */
     }
     
     func session(session: MCSession!, didFinishReceivingResourceWithName resourceName: String!, fromPeer peerID: MCPeerID!, atURL localURL: NSURL!, withError error: NSError!) {
         
+        /*
         println("Finished Receiving Resource")
         var dict: [String: AnyObject] = ["resourceName" : resourceName, "peerID" : peerID, "localURL" : localURL]
         
-        NSNotificationCenter.defaultCenter().postNotificationName("didFinishReceivingResourceNotification", object: nil, userInfo: dict)
+        NSNotificationCenter.defaultCenter().postNotificationName("didFinishReceivingResourceNotification", object: nil, userInfo: dict) */
     }
     
 }

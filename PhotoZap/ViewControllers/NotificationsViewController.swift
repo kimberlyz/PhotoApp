@@ -12,11 +12,13 @@ import Photos
 import Parse
 import TSMessages
 import ReachabilitySwift
+import MultipeerConnectivity
 
 class NotificationsViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
+    var friendPeerID: MCPeerID?
     let reachability = Reachability.reachabilityForInternetConnection()
     
     var notifications = [Notification]()
@@ -57,12 +59,13 @@ class NotificationsViewController: UIViewController {
         //getNotifications()
         
 
+        /*
         //NSNotificationCenter.defaultCenter().addObserver(<#observer: AnyObject#>, selector: <#Selector#>, name: <#String?#>, object: <#AnyObject?#>)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "didStartReceivingResourceWithNotification:", name: "MPCDidStartReceivingResourceNotification", object: nil)
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateReceivingProgressWithNotification:", name: "MPCReceivingProgressNotification", object: nil)
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "didFinishReceivingResourceNotification", name: "didFinishReceivingResourceNotification", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "didFinishReceivingResourceNotification", name: "didFinishReceivingResourceNotification", object: nil) */
         
     }
     
@@ -112,7 +115,7 @@ class NotificationsViewController: UIViewController {
         
     }
 
-    
+    /*
     func didStartReceivingResourceWithNotification(notification: NSNotification) {
         senderInfo.append(notification.userInfo!)
         
@@ -187,6 +190,7 @@ class NotificationsViewController: UIViewController {
 //    //        options.deliveryMode = PHImageRequestOptionsDeliveryMode.Opportunistic
 //    options.resizeMode = PHImageRequestOptionsResizeMode.Exact
     
+} */
 }
 
 extension NotificationsViewController: UITableViewDataSource {
@@ -197,7 +201,7 @@ extension NotificationsViewController: UITableViewDataSource {
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            return 0
+            return self.images.count
             //return self.notifications.count
         } else if section == 1 {
             return self.notifications.count
@@ -218,9 +222,13 @@ extension NotificationsViewController: UITableViewDataSource {
 //        cell.fromUser = notificationObject.objectForKey(ParseHelper.ParseNotificationFromUser) as? PFUser
         
         if indexPath.section == 0 {
-            let cell = tableView.dequeueReusableCellWithIdentifier("NotificationsCell") as! NotificationsTableViewCell
+            let cell = tableView.dequeueReusableCellWithIdentifier("ZapCell") as! ZapTableViewCell
             
-            cell.usernameLabel.text = "Uhh. Not supposed to be here"
+            if let friendPeerID = friendPeerID {
+                cell.usernameLabel.text = friendPeerID.displayName
+                cell.photo = self.images[indexPath.row]
+            }
+
             //let notificationObject = self.notifications[indexPath.row]
             //cell.fromUser = notificationObject.objectForKey(ParseHelper.ParseNotificationFromUser) as? PFUser
 
@@ -294,7 +302,18 @@ extension NotificationsViewController: UITableViewDataSource {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         if indexPath.section == 0 {
-            println("Not supposed to be able to click here")
+            
+            let selectedCell = tableView.cellForRowAtIndexPath(indexPath) as! ZapTableViewCell
+            
+            // if photo has been downloaded, download the image. Otherwise, don't do anything.
+            if selectedCell.photo != nil {
+                UIImageWriteToSavedPhotosAlbum(selectedCell.photo, nil, nil, nil)
+                TSMessage.showNotificationInViewController(self, title: "Image saved!", subtitle: "", type: .Success, duration: 1.0, canBeDismissedByUser: true)
+                
+                let cellIndexPath = self.tableView.indexPathForCell(selectedCell)
+                self.images.removeAtIndex(cellIndexPath!.row)
+            }
+            
         } else if indexPath.section == 1 { /* Is an image sent from Wi-Fi */
             let selectedCell = tableView.cellForRowAtIndexPath(indexPath) as! NotificationsTableViewCell
             
@@ -599,15 +618,6 @@ extension NotificationsViewController: UITableViewDataSource {
 //        return cell;
         
     } */
-    
-//    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-//        if editingStyle == UITableViewCellEditingStyle.Delete {
-//            ParseHelper.removeFriendRelationshipFromUser(PFUser.currentUser()!, user2: self.friendUsers[indexPath.row])
-//            self.friendUsers.removeAtIndex(indexPath.row)
-//            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
-//        }
-//    }
-//}
 
 extension NotificationsViewController: UITableViewDelegate {
     
@@ -620,16 +630,15 @@ extension NotificationsViewController: UITableViewDelegate {
         } else {
             return 30
         }
-        
-        //return 30
-        
-//        if section == 0 && (self.requestingUsers == nil || self.requestingUsers?.count == 0) {
-//            return 0
-//        } else if section == 2 && self.friendUsers.count == 0 {
-//            return 0}
-//        else {
-//            return 30
-//        }
     }
-    
+}
+
+extension NotificationsViewController: MPCManagerDelegate {
+    func invitationWasReceived(fromPeer: String) {}
+    func refreshConnectionStatus() {}
+    func photoWasReceived(image: UIImage, fromPeer: MCPeerID) {
+        self.friendPeerID = fromPeer
+        self.images.insert(image, atIndex: 0)
+        self.tableView.reloadData()
+    }
 }
