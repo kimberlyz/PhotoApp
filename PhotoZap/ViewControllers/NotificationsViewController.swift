@@ -55,37 +55,13 @@ class NotificationsViewController: UIViewController {
         self.tableView.addSubview(self.refreshControl)
         
         reachability.startNotifier()
-        
-        //getNotifications()
-        
-
-        /*
-        //NSNotificationCenter.defaultCenter().addObserver(<#observer: AnyObject#>, selector: <#Selector#>, name: <#String?#>, object: <#AnyObject?#>)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "didStartReceivingResourceWithNotification:", name: "MPCDidStartReceivingResourceNotification", object: nil)
-        
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateReceivingProgressWithNotification:", name: "MPCReceivingProgressNotification", object: nil)
-        
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "didFinishReceivingResourceNotification", name: "didFinishReceivingResourceNotification", object: nil) */
-        
     }
     
     func refresh(refreshControl: UIRefreshControl) {
-        // Do some reloading of data and update the table view's data source
-        // Fetch more objects from a web service, for example...
-        
-        // Simply adding an object to the data source for this example
-//        let newMovie = Movie(title: "Serenity", genre: "Sci-fi")
-//        movies.append(newMovie)
-//        
-//        movies.sort() { $0.title < $1.title }
-        
         self.tableView.reloadData()
         refreshControl.endRefreshing()
     }
-    
-    
-    
-    
+
     func getNotifications() {
         ParseHelper.getNotifications(PFUser.currentUser()!) {
             (results: [AnyObject]?, error: NSError?) -> Void in
@@ -115,82 +91,7 @@ class NotificationsViewController: UIViewController {
         
     }
 
-    /*
-    func didStartReceivingResourceWithNotification(notification: NSNotification) {
-        senderInfo.append(notification.userInfo!)
-        
-        dispatch_async(dispatch_get_main_queue(), {
-            self.tableView.reloadData()
-        })
-    }
-    
-    func updateReceivingProgressWithNotification(notification: NSNotification) {
-        var userInfo = notification.userInfo as! Dictionary<String, AnyObject>
-        var progress = userInfo["progress"] as! NSProgress
-        var dict: [String: AnyObject] = senderInfo[senderInfo.count-1] as! [String : AnyObject]
-        var updatedDict: [String: AnyObject] = ["resourceName" : dict["resourceName"]!, "peerID" : dict["peerID"]!, "progress" : progress] as [String: AnyObject]
-        
-        senderInfo.removeLast()
-        senderInfo.append(updatedDict)
-     
-        dispatch_async(dispatch_get_main_queue(), {
-            self.tableView.reloadData()
-        })
-        
-    }
-    
-    func didFinishReceivingResourceWithNotification(notification: NSNotification) {
-        var dict = notification.userInfo as! Dictionary<String, AnyObject>
-        var localURL = dict["localURL"] as! NSURL
-        
-        var localURLArray : [NSURL] = []
-        localURLArray.append(localURL)
-        
-        let fetchResult = PHAsset.fetchAssetsWithALAssetURLs(localURLArray, options: nil)
-        
-        var asset = fetchResult[0] as? PHAsset
-        
-        
-//        let screenSize: CGSize = UIScreen.mainScreen().bounds.size
-//        let targetSize = CGSizeMake(screenSize.width, screenSize.height)
-        
-        let targetSize = CGSize(width: 80.0, height: 80.0)
-        
-        PHImageManager.defaultManager().requestImageForAsset(asset, targetSize: targetSize, contentMode: .AspectFill, options: nil, resultHandler: {(result, info)in
-            
-            if let image = result {
-                dispatch_async(dispatch_get_main_queue()) { [unowned self] in
-                    self.images.insert(image, atIndex: 0)
-                    //self.imageView = UIImageView(image: result)
-                    self.tableView.reloadData()
-                }
-            }
-            
-        })
-        
-//        if let image = UIImage(data: data) {
-//            dispatch_async(dispatch_get_main_queue()) { [unowned self] in
-//                self.friendPeerID = peerID
-//                self.images.insert(image, atIndex: 0)
-//                self.tableView.reloadData()
-//                //   println("Notifaction sent")
-//                //  self.sendNotification()
-//                //UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
-//            }
-//            
-//        }
-    }
-    
-    //var imageView: UIImageView!
-    
 
-    
-//    
-//    var options = PHImageRequestOptions()
-//    //        options.deliveryMode = PHImageRequestOptionsDeliveryMode.Opportunistic
-//    options.resizeMode = PHImageRequestOptionsResizeMode.Exact
-    
-} */
 }
 
 extension NotificationsViewController: UITableViewDataSource {
@@ -261,43 +162,7 @@ extension NotificationsViewController: UITableViewDataSource {
             return cell
         }
         
-        
-        
-        //cell.notificationsImageView.image = notificationObject.objectFor
-        
-//        let imageObject = PFObject(className: "Image")
-//        imageObject.setObject(imageFile, forKey: "imageFile")
-        /*
-        let imageObject = notificationObject.objectForKey(ParseHelper.ParseNotificationImage) as? PFObject
-        
-        if let imageObject = imageObject {
-            let imageFile = imageObject.objectForKey(ParseHelper.ParseImageImageFile) as! PFFile
-            
-            imageFile.getDataInBackgroundWithBlock {
-                (imageData: NSData?, error: NSError?) -> Void in
-                if (error == nil) {
-                    if let imageData = imageData {
-                        //let image = UIImage(data: imageData, scale:1.0)!
-                        
-                        let image = UIImage(data: imageData)
-                        cell.notificationsImageView.image = image
-                        
-                        self.tableView.reloadData()
-                        
-                        // 3
-                        //self.image.value = image
-                    }
-                    
-                }
-            }
-        } */
-
-        
-
-        //cell.imageView!.image = notificationObject.objectForKey(ParseHelper.ParseNotificationImage) as? UIImage
-        
-        //return cell
-    }
+     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
@@ -358,38 +223,6 @@ extension NotificationsViewController: UITableViewDataSource {
                         println("error")
                     }
                 }
-//                
-//                query.whereKey(ParseNotificationToUser, equalTo: user)
-//                query.includeKey("fromUser")
-//
-                
-                //let imageObject = notificationObject.objectForKey(ParseHelper.ParseNotificationImage) as? PFObject
-                
-//                if let imageObject = imageObject {
-//                    let imageFile = imageObject.objectForKey(ParseHelper.ParseImageImageFile) as! PFFile
-                
-                    /*
-                    selectedCell.activityIndicator.startAnimating()
-                    
-                    imageFile.getDataInBackgroundWithBlock {
-                        (imageData: NSData?, error: NSError?) -> Void in
-                        if (error == nil) {
-                            if let imageData = imageData {
-                                //let image = UIImage(data: imageData, scale:1.0)!
-                                
-                                let image = UIImage(data: imageData)
-                                notificationObject.imagePic = image
-                                
-                                selectedCell.notificationsImageView.image = image
-                                
-                                selectedCell.activityIndicator.stopAnimating()
-                                
-                                self.tableView.reloadData()
-                            }
-                            
-                        }
-                    } */
-                //}
             } else { /* If image is already downloaded, save the image */
                 TSMessage.showNotificationInViewController(self, title: "Image saved!", subtitle: "", type: .Success, duration: 1.0, canBeDismissedByUser: true)
                 
@@ -412,23 +245,6 @@ extension NotificationsViewController: UITableViewDataSource {
                     }
                 }
 
-                
-                
-                
-//                let toUser = notificationObject.toUser
-//                let fromUser = notificationObject.fromUser
-//                let imageFile = notificationObject.imageFile
-                
-                
-                
-                
-                
-                
-                //let fromUser = notificationObject.objectForKey(ParseHelper.ParseNotificationFromUser) as? PFUser
-                //let imagePointer = notificationObject.objectForKey(ParseHelper.ParseNotificationImage) as? PFObject
-                
-                //ParseHelper.deleteNotification(fromUser!, toUser: toUser!, imageFile: imageFile!)
-                // need to delete notification from parse
                 self.tableView.deleteRowsAtIndexPaths([cellIndexPath!], withRowAnimation: UITableViewRowAnimation.Automatic)
             }
             
@@ -436,28 +252,15 @@ extension NotificationsViewController: UITableViewDataSource {
             let cell = tableView.dequeueReusableCellWithIdentifier("NotificationsCell") as! NotificationsTableViewCell
             
             let pendingNotificationObject = self.pendingNotifications[indexPath.row]
-            
 
-            
-//            pendingNotificationObject.saveEventually() {(result, error) in
-//                if error != nil {
-//                    println(result)
-//                }
-//                
-//            }
             /*pendingNotificationObject.saveInBackgroundWithBlock(){ (result, error) in
                 if error != nil {
                     println(result)
                 }
 
             } */
+            
             //pendingNotificationObject.unpinInBackgroundWithBlock(nil)
-            
-            //let imageObject = pendingNotificationObject.objectForKey("image") as! PFObject
-            
-            //imageObject.deleteInBackgroundWithBlock(nil)
-            
-            //query.fromLocalDatastore()
             
             // Initial reachability check
             if reachability.isReachable() {
@@ -554,70 +357,6 @@ extension NotificationsViewController: UITableViewDataSource {
             
     }
 }
-
-        
-    /*
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-    
-        let cell = tableView.dequeueReusableCellWithIdentifier("NotificationsCell") as! NotificationsTableViewCell
-        
-//        cell.usernameLabel.text = "Merp"
-//
-//        return cell
-        
-        // as?
-        if senderInfo[indexPath.row] is String {
-            cell.usernameLabel.text = senderInfo[indexPath.row] as? String
-    
-        } else {
-//            // Get the dictionary containing the data and the source peer from the notification.
-//            let receivedDataDictionary = notification.object as Dictionary<String, AnyObject>
-//            
-//            // "Extract" the data and the source peer from the received dictionary.
-//            let data = receivedDataDictionary["data"] as? NSData
-//            let fromPeer = receivedDataDictionary["fromPeer"] as MCPeerID
-
-            var dict = senderInfo[indexPath.row] as! Dictionary<String, AnyObject>
-            
-            //var dict: [String: AnyObject] = senderInfo[indexPath.row] as! [String : AnyObject]
-            var peerDisplayName = dict["peerID"]!.displayName
-            var progress = dict["progress"]!.progress
-            
-            cell.usernameLabel.text = peerDisplayName
-            cell.progressView.setProgress(progress, animated: true)
-            
-        }
-        
-        return cell
-        
-////        if ([[_arrFiles objectAtIndex:indexPath.row] isKindOfClass:[NSString class]]) {
-////            cell = [tableView dequeueReusableCellWithIdentifier:@"CellIdentifier"];
-////            
-////            if (cell == nil) {
-////                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CellIdentifier"];
-////                [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
-////            }
-////            
-////            cell.textLabel.text = [_arrFiles objectAtIndex:indexPath.row];
-////            
-////            [[cell textLabel] setFont:[UIFont systemFontOfSize:14.0]];
-////        }
-//        else{
-//            cell = [tableView dequeueReusableCellWithIdentifier:@"newFileCellIdentifier"];
-//            
-//            NSDictionary *dict = [_arrFiles objectAtIndex:indexPath.row];
-//            NSString *receivedFilename = [dict objectForKey:@"resourceName"];
-//            NSString *peerDisplayName = [[dict objectForKey:@"peerID"] displayName];
-//            NSProgress *progress = [dict objectForKey:@"progress"];
-//            
-//            [(UILabel *)[cell viewWithTag:100] setText:receivedFilename];
-//            [(UILabel *)[cell viewWithTag:200] setText:[NSString stringWithFormat:@"from %@", peerDisplayName]];
-//            [(UIProgressView *)[cell viewWithTag:300] setProgress:progress.fractionCompleted];
-//        }
-//        
-//        return cell;
-        
-    } */
 
 extension NotificationsViewController: UITableViewDelegate {
     
