@@ -18,13 +18,18 @@ class NotificationsViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
-    var friendPeerID: MCPeerID?
+    //var friendPeerID: MCPeerID?
     let reachability = Reachability.reachabilityForInternetConnection()
     
     var notifications = [Notification]()
     var pendingNotifications = [Notification]()
     
-    var images = [UIImage]()
+    //var images = [UIImage]()
+    
+    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+    
+    var zaps = [Zap]()
+
     var delayedNotifications = [Notification]()
     
     // UHHH
@@ -45,6 +50,8 @@ class NotificationsViewController: UIViewController {
         
         getNotifications()
         getDelayedNotifications()
+        
+        self.zaps = appDelegate.mpcManager.zaps
     }
     
     
@@ -102,7 +109,8 @@ extension NotificationsViewController: UITableViewDataSource {
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            return self.images.count
+            return self.zaps.count
+            //return self.images.count
             //return self.notifications.count
         } else if section == 1 {
             return self.notifications.count
@@ -125,10 +133,12 @@ extension NotificationsViewController: UITableViewDataSource {
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCellWithIdentifier("ZapCell") as! ZapTableViewCell
             
-            if let friendPeerID = friendPeerID {
-                cell.usernameLabel.text = friendPeerID.displayName
-                cell.photo = self.images[indexPath.row]
-            }
+
+            //cell.usernameLabel.text = friendPeerID.displayName
+            cell.usernameLabel.text = self.zaps[indexPath.row].peerID?.displayName
+            cell.photo = self.zaps[indexPath.row].image
+            //cell.photo = self.images[indexPath.row]
+
 
             //let notificationObject = self.notifications[indexPath.row]
             //cell.fromUser = notificationObject.objectForKey(ParseHelper.ParseNotificationFromUser) as? PFUser
@@ -169,15 +179,20 @@ extension NotificationsViewController: UITableViewDataSource {
         if indexPath.section == 0 {
             
             let selectedCell = tableView.cellForRowAtIndexPath(indexPath) as! ZapTableViewCell
-            
+        
             // if photo has been downloaded, download the image. Otherwise, don't do anything.
-            if selectedCell.photo != nil {
+            //if selectedCell.photo != nil {
                 UIImageWriteToSavedPhotosAlbum(selectedCell.photo, nil, nil, nil)
                 TSMessage.showNotificationInViewController(self, title: "Image saved!", subtitle: "", type: .Success, duration: 1.0, canBeDismissedByUser: true)
                 
                 let cellIndexPath = self.tableView.indexPathForCell(selectedCell)
-                self.images.removeAtIndex(cellIndexPath!.row)
-            }
+                
+                self.zaps.removeAtIndex(cellIndexPath!.row)
+                appDelegate.mpcManager.zaps.removeAtIndex(cellIndexPath!.row)
+                
+                self.tableView.deleteRowsAtIndexPaths([cellIndexPath!], withRowAnimation: UITableViewRowAnimation.Automatic)
+                //self.images.removeAtIndex(cellIndexPath!.row)
+            //}
             
         } else if indexPath.section == 1 { /* Is an image sent from Wi-Fi */
             let selectedCell = tableView.cellForRowAtIndexPath(indexPath) as! NotificationsTableViewCell
@@ -372,12 +387,12 @@ extension NotificationsViewController: UITableViewDelegate {
     }
 }
 
-extension NotificationsViewController: MPCManagerDelegate {
-    func invitationWasReceived(fromPeer: String) {}
-    func refreshConnectionStatus() {}
-    func photoWasReceived(image: UIImage, fromPeer: MCPeerID) {
-        self.friendPeerID = fromPeer
-        self.images.insert(image, atIndex: 0)
-        self.tableView.reloadData()
-    }
-}
+//extension NotificationsViewController: MPCManagerDelegate {
+//    func invitationWasReceived(fromPeer: String) {}
+//    func refreshConnectionStatus() {}
+//    func photoWasReceived(image: UIImage, fromPeer: MCPeerID) {
+//        self.friendPeerID = fromPeer
+//        self.images.insert(image, atIndex: 0)
+//        self.tableView.reloadData()
+//    }
+//}

@@ -14,17 +14,12 @@ class ZapTableViewCell: UITableViewCell {
     
     @IBOutlet weak var zapImageView: UIImageView!
 
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     
     var photo: UIImage? {
         didSet {
             if let photo = photo {
                 zapImageView.image = photo
-                
-                if activityIndicator.isAnimating() {
-                    activityIndicator.stopAnimating()
-                }
             }
         }
     }

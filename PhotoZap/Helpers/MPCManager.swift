@@ -9,11 +9,11 @@
 import UIKit
 import MultipeerConnectivity
 import ConvenienceKit
+import Bond
 
 protocol MPCManagerDelegate {
     func invitationWasReceived(fromPeer: String)
-    func refreshConnectionStatus()
-    func photoWasReceived(image: UIImage, fromPeer: MCPeerID)
+//    func photoWasReceived(image: UIImage, fromPeer: MCPeerID)
 }
 
 
@@ -28,6 +28,10 @@ class MPCManager: NSObject, MCSessionDelegate, MCNearbyServiceBrowserDelegate, M
     var connectedPeers = [MCPeerID]()
     var invitationHandler : ((Bool, MCSession!) -> Void)!
     var delegate : MPCManagerDelegate?
+    var zaps : [Zap] = []
+    
+    let connectionStatus = Dynamic<MCSessionState>(MCSessionState.NotConnected)
+     // let connectionStatus: Dynamic<String>
     
     //let mySpecialNotificationKey = "pieandpudding.specialNotificationKey"
     
@@ -58,7 +62,7 @@ extension MPCManager: MCNearbyServiceBrowserDelegate {
         foundPeers.append(peerID)
         println("Found Peer on receiving end")
         println(foundPeers)
-        delegate?.refreshConnectionStatus()
+        connectionStatus.value = .NotConnected
     }
     
     func browser(browser: MCNearbyServiceBrowser!, lostPeer peerID: MCPeerID!) {
@@ -68,7 +72,7 @@ extension MPCManager: MCNearbyServiceBrowserDelegate {
                 break
             }
         }
-        delegate?.refreshConnectionStatus()
+        connectionStatus.value = .NotConnected
     }
     
     // If browsing is unable to be performed
@@ -96,12 +100,15 @@ extension MPCManager: MCSessionDelegate {
     */
     func session(session: MCSession!, peer peerID: MCPeerID!, didChangeState state: MCSessionState) {
         
+
+        
         switch state {
             
         case MCSessionState.Connected:
             println("Connected: \(peerID.displayName)")
             connectedPeers.append(peerID)
-            delegate?.refreshConnectionStatus()
+
+            //delegate?.refreshConnectionStatus()
 
         case MCSessionState.Connecting:
             println("Connecting: \(peerID.displayName)")
@@ -112,20 +119,19 @@ extension MPCManager: MCSessionDelegate {
             if connectedPeers.count != 0 {
                 removeObjectFromArray(peerID, &connectedPeers)
             }
-            delegate?.refreshConnectionStatus()
+
         }
+        
+        connectionStatus.value = state
         
     }
     
     func session(session: MCSession!, didReceiveData data: NSData!, fromPeer peerID: MCPeerID!) {
         if let image = UIImage(data: data) {
             dispatch_async(dispatch_get_main_queue()) { [unowned self] in
-                delegate?.photoWasReceived(image, fromPeer: peerID)
-//                self.friendPeerID = peerID
-//                self.images.insert(image, atIndex: 0)
-//                self.tableView.reloadData()
+                let zap = Zap(peerID: peerID, image: image)
+                self.zaps.append(zap)
             }
-            
         }
     }
     

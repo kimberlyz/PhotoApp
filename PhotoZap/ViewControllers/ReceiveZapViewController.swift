@@ -8,6 +8,7 @@
 
 import UIKit
 import MultipeerConnectivity
+import Bond
 
 class ReceiveZapViewController: UIViewController {
 
@@ -16,18 +17,44 @@ class ReceiveZapViewController: UIViewController {
     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     var receiveCell : ReceiveZapTableViewCell?
     
+    var status: Bond<MCSessionState>!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        appDelegate.mpcManager.delegate = self
+        //appDelegate.mpcManager.delegate = self
         
         appDelegate.mpcManager.browser.startBrowsingForPeers()
+        
+        
+        status = Bond<MCSessionState> () { value in
+            // println("State has changed \(value)")
+            
+                switch value {
+                case .Connected:
+                    //self.tableView.reloadData()
+                    println("value: Connected")
+                    
+                case .Connecting:
+                    println("value: Connecting")
+                    
+                case .NotConnected:
+                    println("Value: Not connected")
+                }
+            
+        
+            println(self.appDelegate.mpcManager.connectedPeers)
+            self.tableView.reloadData()
+        }
+        
+        appDelegate.mpcManager.connectionStatus ->> status
+        
     }
     
     override func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(animated)
         
-        appDelegate.mpcManager.foundPeers = [MCPeerID]()
+        //appDelegate.mpcManager.foundPeers = [MCPeerID]()
         appDelegate.mpcManager.browser.stopBrowsingForPeers()
     }
 
@@ -35,22 +62,6 @@ class ReceiveZapViewController: UIViewController {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
 
-}
-
-
-extension ReceiveZapViewController: MPCManagerDelegate {
-
-    func refreshConnectionStatus() {
-        tableView.reloadData()
-    }
-    
-    func invitationWasReceived(fromPeer: String) {
-        // empty
-    }
-    
-    func photoWasReceived(image: UIImage, fromPeer: MCPeerID) {
-        /// empty
-    }
 }
 
 extension ReceiveZapViewController: UITableViewDataSource {

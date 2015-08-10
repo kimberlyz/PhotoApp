@@ -306,21 +306,15 @@
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="mj5-aF-gdJ">
-                                                    <rect key="frame" x="45" y="39" width="20" height="20"/>
-                                                </activityIndicatorView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="o99-Dl-LcZ" firstAttribute="leading" secondItem="iyW-uM-cHi" secondAttribute="leading" constant="15" id="bpf-rJ-UrL"/>
-                                                <constraint firstAttribute="centerY" secondItem="mj5-aF-gdJ" secondAttribute="centerY" id="eDe-Hw-aaf"/>
-                                                <constraint firstItem="mj5-aF-gdJ" firstAttribute="leading" secondItem="iyW-uM-cHi" secondAttribute="leading" constant="45" id="ewz-5s-ZMt"/>
                                                 <constraint firstAttribute="centerY" secondItem="2mA-5z-bfx" secondAttribute="centerY" id="jhG-bM-XSo"/>
                                                 <constraint firstAttribute="centerY" secondItem="o99-Dl-LcZ" secondAttribute="centerY" id="k3G-Qa-dCd"/>
                                                 <constraint firstItem="2mA-5z-bfx" firstAttribute="leading" secondItem="o99-Dl-LcZ" secondAttribute="trailing" constant="15" id="wPk-rT-8kg"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="activityIndicator" destination="mj5-aF-gdJ" id="ko2-sd-9FX"/>
                                             <outlet property="usernameLabel" destination="2mA-5z-bfx" id="d3w-2Y-Saw"/>
                                             <outlet property="zapImageView" destination="o99-Dl-LcZ" id="RbJ-jr-hgJ"/>
                                         </connections>

@@ -18,6 +18,7 @@
 		DB4657831B6C525A00F801A3 /* MPCManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4657821B6C525A00F801A3 /* MPCManager.swift */; };
 		DB4657871B6FCDB300F801A3 /* ReceiveZapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4657861B6FCDB300F801A3 /* ReceiveZapViewController.swift */; };
 		DB46578A1B6FCF7D00F801A3 /* ReceiveZapTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4657891B6FCF7D00F801A3 /* ReceiveZapTableViewCell.swift */; };
+		DB50B96F1B793E7A00AC3663 /* Zap.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB50B96E1B793E7A00AC3663 /* Zap.swift */; };
 		DB51CAA91B728B7E0024BBAC /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = DB51CAA81B728B7D0024BBAC /* libsqlite3.dylib */; };
 		DB51CAAD1B72F2A40024BBAC /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB51CAAC1B72F2A40024BBAC /* Notification.swift */; };
 		DB51E05B1B75837100CD04E4 /* PendingNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB51E05A1B75837100CD04E4 /* PendingNotification.swift */; };
@@ -70,6 +71,7 @@
 		DB4657821B6C525A00F801A3 /* MPCManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPCManager.swift; sourceTree = "<group>"; };
 		DB4657861B6FCDB300F801A3 /* ReceiveZapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReceiveZapViewController.swift; sourceTree = "<group>"; };
 		DB4657891B6FCF7D00F801A3 /* ReceiveZapTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReceiveZapTableViewCell.swift; sourceTree = "<group>"; };
+		DB50B96E1B793E7A00AC3663 /* Zap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Zap.swift; sourceTree = "<group>"; };
 		DB51CAA81B728B7D0024BBAC /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		DB51CAAC1B72F2A40024BBAC /* Notification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		DB51E05A1B75837100CD04E4 /* PendingNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PendingNotification.swift; sourceTree = "<group>"; };
@@ -295,6 +297,7 @@
 				DB67021F1B71319D00908460 /* Transaction.swift */,
 				DB51CAAC1B72F2A40024BBAC /* Notification.swift */,
 				DB51E05A1B75837100CD04E4 /* PendingNotification.swift */,
+				DB50B96E1B793E7A00AC3663 /* Zap.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -458,6 +461,7 @@
 				DB51CAAD1B72F2A40024BBAC /* Notification.swift in Sources */,
 				DB4657831B6C525A00F801A3 /* MPCManager.swift in Sources */,
 				DB6168DD1B55BF6D00305D2E /* AddFriendTableViewCell.swift in Sources */,
+				DB50B96F1B793E7A00AC3663 /* Zap.swift in Sources */,
 				DBA03C9D1B742D8B00E5D6BD /* SweetAlert.swift in Sources */,
 				DB51E05D1B758CBA00CD04E4 /* ZapTableViewCell.swift in Sources */,
 				DB6168DA1B55B88E00305D2E /* AddFriendViewController.swift in Sources */,

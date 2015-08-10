@@ -10,6 +10,7 @@ import UIKit
 import MultipeerConnectivity
 import Photos
 import TSMessages
+import Bond
 
 
 class NearbyFriendsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, MPCManagerDelegate {
@@ -17,24 +18,37 @@ class NearbyFriendsViewController: UIViewController, UITableViewDelegate, UITabl
     @IBOutlet weak var tableView: UITableView!
     
     var assets : [AnyObject] = []
-
-    var isAdvertising: Bool!
-    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     
+    var isAdvertising: Bool!
+    
+    var status: Bond<MCSessionState>!
+    
+    
+    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+
     override func viewDidLoad() {
         super.viewDidLoad()
+
         
         appDelegate.mpcManager.delegate = self
         
         appDelegate.mpcManager.advertiser.startAdvertisingPeer()
         isAdvertising = true
         
+        status = Bond<MCSessionState> () { value in
+            println("State has changed \(value)")
+            self.tableView.reloadData()
+            
+            println(self.appDelegate.mpcManager.connectedPeers)
+        }
+        
+        appDelegate.mpcManager.connectionStatus ->> status
     }
     
     override func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(animated)
         
-        appDelegate.mpcManager.foundPeers = [MCPeerID]()
+        //appDelegate.mpcManager.foundPeers = [MCPeerID]()
         appDelegate.mpcManager.advertiser.stopAdvertisingPeer()
     }
     
@@ -137,10 +151,6 @@ class NearbyFriendsViewController: UIViewController, UITableViewDelegate, UITabl
 
 
 extension NearbyFriendsViewController: MPCManagerDelegate {
-    func refreshConnectionStatus() {
-        tableView.reloadData()
-    }
-    
     
     func invitationWasReceived(fromPeer: String) {
         //Chaining alerts with messages on button click
@@ -171,8 +181,6 @@ extension NearbyFriendsViewController: MPCManagerDelegate {
         
         //self.presentViewController(alertController, animated: true, completion: nil)
     }
-    
-    func photoWasReceived(image: UIImage, fromPeer: MCPeerID) {}
 }
 
 
