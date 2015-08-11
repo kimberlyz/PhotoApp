@@ -393,13 +393,13 @@ extension NotificationsViewController: UITableViewDataSource {
                     (notificationObj: PFObject?, error: NSError?) -> Void in
                     if error == nil && notificationObj != nil {
                         notificationObj!.deleteInBackgroundWithBlock(nil)
+                        self.notifications.removeAtIndex(indexPath.row)
                         self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
-                        //self.notifications.removeAtIndex(indexPath.row)
-                        
                     } else {
                         println("error")
                     }
                 }
+
 
             } else {
                 

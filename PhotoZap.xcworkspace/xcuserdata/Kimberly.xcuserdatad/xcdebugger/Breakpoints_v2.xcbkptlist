@@ -58,7 +58,7 @@
                   moduleName = "PhotoZap"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Kimberly/Documents/iOSApps/PhotoZap/PhotoZap/ViewControllers/WiFiDirectViewController.swift"
-                  timestampString = "460944631.253826"
+                  timestampString = "460945368.177664"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "180"
@@ -73,7 +73,7 @@
                   moduleName = "PhotoZap"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Kimberly/Documents/iOSApps/PhotoZap/PhotoZap/ViewControllers/WiFiDirectViewController.swift"
-                  timestampString = "460944631.254083"
+                  timestampString = "460945368.17799"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "180"
@@ -250,11 +250,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PhotoZap/ViewControllers/NotificationsViewController.swift"
-            timestampString = "460944063.312352"
+            timestampString = "460945368.117357"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "694"
-            endingLineNumber = "694">
+            startingLineNumber = "717"
+            endingLineNumber = "717">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -270,22 +270,6 @@
             startingLineNumber = "47"
             endingLineNumber = "47"
             landmarkName = "viewDidLoad()"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "PhotoZap/ViewControllers/NotificationsViewController.swift"
-            timestampString = "460944106.396702"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "396"
-            endingLineNumber = "396"
-            landmarkName = "tableView(_:commitEditingStyle:forRowAtIndexPath:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
