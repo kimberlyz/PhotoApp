@@ -10,7 +10,7 @@ import UIKit
 import Parse
 import ConvenienceKit
 import Photos
-//import RealmSwift
+import RealmSwift
 import ReachabilitySwift
 
 
@@ -66,6 +66,9 @@ class ChooseFriendsViewController: UIViewController {
     }
     
     func delaySend() {
+        
+        let realm = Realm()
+        
         for var i = 0; i < self.assets.count; i++ {
             let asset = self.assets[i] as! PHAsset
             PHImageManager.defaultManager().requestImageDataForAsset(asset, options: nil) {
@@ -73,14 +76,24 @@ class ChooseFriendsViewController: UIViewController {
                 
                 for friend in self.selectedFriendUsers {
                     
+                    let pendingNotification = PendingNotification()
+                    pendingNotification.toUserObjectId = friend.objectId!
+                    pendingNotification.toUserUsername = friend.username!
+                    pendingNotification.imageData = imageData
+                
+                    realm.write() { // 2
+                        realm.add(pendingNotification) // 3
+                    }
+                    
+                    /*
                     let notification = Notification()
                     notification.toUser = friend
                     notification.fromUser = PFUser.currentUser()!
                     
-                    //notification.imageFile = PFFile(data: imageData)
-                    notification.imageData = imageData
+                    notification.imageFile = PFFile(data: imageData)
+                    //notification.imageData = imageData
                     
-                    notification.pinInBackgroundWithBlock(nil)
+                    notification.pinInBackgroundWithBlock(nil) */
                 }
             }
         }

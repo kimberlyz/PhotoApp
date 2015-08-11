@@ -10,7 +10,7 @@ import UIKit
 import Parse
 import CTAssetsPickerController
 import ReachabilitySwift
-//import RealmSwift
+import RealmSwift
 
 class AlbumViewController: UIViewController, CTAssetsPickerControllerDelegate {
     
@@ -53,11 +53,11 @@ class AlbumViewController: UIViewController, CTAssetsPickerControllerDelegate {
 //                println("hi")
 //            }
 //        })
+        let realm = Realm()
         
+        println("Are you here realm objects? \(realm.objects(PendingNotification))")
 //
         reachability.startNotifier()
-//        let realm = Realm()
-//        transactions = realm.objects(Transaction)
 
     }
   /*

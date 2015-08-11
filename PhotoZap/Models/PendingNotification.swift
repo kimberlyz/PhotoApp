@@ -8,20 +8,13 @@
 
 import Foundation
 import RealmSwift
-import Parse
 
 class PendingNotification: Object {
     
-    dynamic var toUser : PFUser = PFUser()
+    dynamic var toUserObjectId : String = ""
+    dynamic var toUserUsername : String = ""
+//    dynamic var fromUserObjectId : String = ""
+//    dynamic var fromUserUsername : String = ""
     dynamic var imageData : NSData = NSData()
     
-    //    var recipients : [MCPeerID]?
-    //    var assets : [AnyObject]?
-    //    var progress : [NSProgress]?
-    //
-    //    override init() {
-    //        recipients = [MCPeerID]()
-    //        assets = [PHAsset]()
-    //        progress = [NSProgress]()
-    //    }
 }

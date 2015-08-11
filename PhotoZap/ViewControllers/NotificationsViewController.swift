@@ -13,6 +13,7 @@ import Parse
 import TSMessages
 import ReachabilitySwift
 import MultipeerConnectivity
+import RealmSwift
 
 class NotificationsViewController: UIViewController {
 
@@ -22,7 +23,7 @@ class NotificationsViewController: UIViewController {
     let reachability = Reachability.reachabilityForInternetConnection()
     
     var notifications = [Notification]()
-    var pendingNotifications = [Notification]()
+    //var pendingNotifications = [Notification]()
     
     //var images = [UIImage]()
     
@@ -37,6 +38,12 @@ class NotificationsViewController: UIViewController {
     
     var notificationsSectionTitles : [String] = ["Received", "", "Pending"]
     
+    var pendingNotifications: Results<PendingNotification>! /*{
+        didSet {
+            // Whenever notes update, update the table view
+            tableView?.reloadData()
+        }
+    } */
     
     lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
@@ -59,9 +66,13 @@ class NotificationsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let realm = Realm()
+        
         self.tableView.addSubview(self.refreshControl)
         
         reachability.startNotifier()
+        
+        pendingNotifications = realm.objects(PendingNotification)
     }
     
     func refresh(refreshControl: UIRefreshControl) {
@@ -83,6 +94,7 @@ class NotificationsViewController: UIViewController {
     
     func getDelayedNotifications() {
         
+        /*
         let query = Notification.query()
         query!.fromLocalDatastore()
 
@@ -96,7 +108,7 @@ class NotificationsViewController: UIViewController {
                 println(what)
                 
             }
-        })
+        }) */
         
     }
 
@@ -164,7 +176,7 @@ extension NotificationsViewController: UITableViewDataSource {
             //cell.fromUser = PFUser.currentUser()!
             var pendingImage = UIImage(named: "PendingImage.png")
             
-            cell.toUser = pendingNotificationObject.objectForKey(ParseHelper.ParseNotificationToUser) as? PFUser
+            cell.usernameLabel.text = pendingNotificationObject.toUserUsername
             cell.imageView!.image = pendingImage
             
             //FromUser is not set when it is pending? OH wait no. I should set it. But maybe only set it when I send it?
@@ -283,6 +295,39 @@ extension NotificationsViewController: UITableViewDataSource {
             if reachability.isReachable() {
                 if reachability.isReachableViaWiFi() {
                     
+                    let realm = Realm()
+                    let query = PFUser.query()
+                    query!.whereKey("objectId", equalTo: pendingNotificationObject.toUserObjectId)
+                    
+                    query!.findObjectsInBackgroundWithBlock {
+                        (results: [AnyObject]?, error: NSError?) -> Void in
+                        
+                        let results = results as? [PFUser] ?? []
+                        
+                        for user in results {
+                            let notification = Notification()
+                            notification.toUser = user
+                            notification.fromUser = PFUser.currentUser()!
+                            notification.imageFile = PFFile(data: pendingNotificationObject.imageData)
+                            
+                            notification.uploadNotification()
+                            
+                            realm.write() {
+                                realm.delete(pendingNotificationObject)
+                            }
+                            
+                            self.pendingNotifications = realm.objects(PendingNotification)
+                        }
+                    }
+                    
+                    
+                    
+                    
+                    
+                    println("Reachable via WiFi")
+                    TSMessage.dismissActiveNotification()
+                    TSMessage.showNotificationInViewController(self, title: "Image successfully sent!", subtitle: "", type: .Success, duration: 1.0, canBeDismissedByUser: true)
+                    
 //                    println(pendingNotificationObject)
 //                    //imageObject.saveInBackground()
 //                    pendingNotificationObject.saveInBackgroundWithBlock(nil)
@@ -306,7 +351,7 @@ extension NotificationsViewController: UITableViewDataSource {
 //                        }
 //                    })
 //                    
-                    pendingNotificationObject.uploadNotification()
+                    //pendingNotificationObject.uploadNotification()
                     //let pendingNotificationObjectId = pendingNotificationObject.objectId
                     
 //                    let query = Notification.query()
@@ -342,15 +387,7 @@ extension NotificationsViewController: UITableViewDataSource {
                         // task.result will be your game score
                         return task
                     }) */
-                    
-                    
 
-                    
-                    
-                    println("Reachable via WiFi")
-                    TSMessage.dismissActiveNotification()
-                    TSMessage.showNotificationInViewController(self, title: "Image successfully sent!", subtitle: "", type: .Success, duration: 1.0, canBeDismissedByUser: true)
-                    
                     
                 } else { /* Cellular network */
                     println("Reachable via Cellular Network")
@@ -360,6 +397,8 @@ extension NotificationsViewController: UITableViewDataSource {
                             println("Cancel Button  Pressed")
                         }
                         else {
+                            
+                            /// DO SOMETHING HERE!!!!! SEND IT
                             SweetAlert().showAlert("Image sent!", subTitle: "", style: AlertStyle.Success)
                         }
                         
