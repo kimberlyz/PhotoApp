@@ -56,15 +56,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Done in the background
         PFAnalytics.trackAppOpenedWithLaunchOptionsInBackground(launchOptions, block: nil)
         
-//        PFUser.logInWithUsername("test", password: "test")
-//        
-//        if let user = PFUser.currentUser() {
-//            println("Log in successful")
-//        } else {
-//            println("No logged in user :(")
-//        } 
-
-        
         /*
         let notificationType = UIUserNotificationType.Alert | UIUserNotificationType.Badge
         let settings = UIUserNotificationSettings(forTypes: notificationType, categories: nil)
@@ -86,6 +77,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             // if we have a user, set the TabBarController to be the initial View Controller
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             startViewController = storyboard.instantiateViewControllerWithIdentifier("TabBarController") as! UITabBarController
+            
+            mpcManager = MPCManager()
+
         } else {
             // 4
             // Otherwise set the LoginViewController to be the first

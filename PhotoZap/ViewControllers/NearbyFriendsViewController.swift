@@ -23,14 +23,13 @@ class NearbyFriendsViewController: UIViewController, UITableViewDelegate, UITabl
     
     var status: Bond<MCSessionState>!
     
-    
     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        
         appDelegate.mpcManager.delegate = self
+        //appDelegate.mpcManager.delegate = self
         
         appDelegate.mpcManager.advertiser.startAdvertisingPeer()
         isAdvertising = true
@@ -53,6 +52,12 @@ class NearbyFriendsViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     @IBAction func sendButtonTapped(sender: AnyObject) {
+        
+        if appDelegate.mpcManager.connectedPeers.count == 0 {
+            SweetAlert().showAlert("No Friends Connected.", subTitle: "Please make sure you are connected with some friends before sending photos.", style: AlertStyle.None)
+        } else {
+
+        
         var i = 1
         for asset in (assets as! [PHAsset]) {
             PHImageManager.defaultManager().requestImageDataForAsset(asset, options: nil) {
@@ -140,6 +145,7 @@ class NearbyFriendsViewController: UIViewController, UITableViewDelegate, UITabl
         cell.setThumbnailImage(result)
         })
         */
+        }
         
     }
 

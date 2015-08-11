@@ -19,7 +19,15 @@ class ChooseFriendsViewController: UIViewController {
 
     var assets : [AnyObject] = []
     var friendUsers = [PFUser]()
-    var selectedFriendUsers = [PFUser]()
+    var selectedFriendUsers = [PFUser]() /*{
+        didSet {
+            if selectedFriendUsers.count == 0 {
+                sendButton.enabled = false
+            } else {
+                sendButton.enabled = true
+            }
+        }
+    } */
     
     let reachability = Reachability.reachabilityForInternetConnection()
     
@@ -84,6 +92,9 @@ class ChooseFriendsViewController: UIViewController {
 
     @IBAction func sendButtonTapped(sender: AnyObject) {
         
+        if selectedFriendUsers.count == 0 {
+            SweetAlert().showAlert("No Friends Selected.", subTitle: "Please select some friends before sending photos.", style: AlertStyle.None)
+        } else {
 
         
         // Initial reachability check
@@ -109,19 +120,21 @@ class ChooseFriendsViewController: UIViewController {
                 self.dismissViewControllerAnimated(true, completion: nil)
                 println("Reachable via WiFi")
 
-            } else {
+            } else { /* If there is a celllular network */
                 delaySend()
                 SweetAlert().showAlert("No Wi-Fi connection.", subTitle: "Putting the photos in the pending section. Will notify you to send them once you get Wi-Fi.", style: AlertStyle.None)
                 self.dismissViewControllerAnimated(true, completion: nil)
                 println("Reachable via Cellular Network")
             }
-        } else {
+        } else { /* Was able to select friends in time, but lost connection */
             delaySend()
             SweetAlert().showAlert("No Connection.", subTitle: "Putting the photos in the pending section. Will notify you to send them once you get Wi-Fi.", style: AlertStyle.None)
             self.dismissViewControllerAnimated(true, completion: nil)
             println("NOOOO")
         }
-        
+        }
+    }
+    
 //        
 //        PHImageManager.defaultManager().requestImageForAsset(asset, targetSize: targetSize, contentMode: .AspectFill, options: nil, resultHandler: {(result, info)in
 //            
@@ -196,7 +209,7 @@ class ChooseFriendsViewController: UIViewController {
         }
         
         reachability.startNotifier() */
-    }
+
     
     
     func getFriendshipForUser() {

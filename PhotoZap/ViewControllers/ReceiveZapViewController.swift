@@ -22,7 +22,7 @@ class ReceiveZapViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //appDelegate.mpcManager.delegate = self
+
         
         appDelegate.mpcManager.browser.startBrowsingForPeers()
         

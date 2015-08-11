@@ -13,6 +13,7 @@ class ParseHelper {
     
     // User Relation
     static let ParseUserUsername = "username"
+    static let ParseUserLowercaseUsername = "lowercaseUsername"
     
     // Friendship Relation
     static let ParseFriendshipClass = "Friendship"

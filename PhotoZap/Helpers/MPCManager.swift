@@ -41,6 +41,15 @@ class MPCManager: NSObject, MCSessionDelegate, MCNearbyServiceBrowserDelegate, M
         
         // make the displayName your username in the future
         peer = MCPeerID(displayName: /*UIDevice.currentDevice().name*/PFUser.currentUser()!.username)
+    
+        let userObject = PFUser.currentUser()!
+        
+        if userObject[ParseHelper.ParseUserLowercaseUsername] == nil {
+            let lowercaseUsername = userObject.username?.lowercaseString
+            userObject.setObject(lowercaseUsername!, forKey: ParseHelper.ParseUserLowercaseUsername)
+            userObject.saveInBackgroundWithBlock(nil)
+        }
+
         
         session = MCSession(peer: peer, securityIdentity: nil, encryptionPreference: .Required)
         session.delegate = self
