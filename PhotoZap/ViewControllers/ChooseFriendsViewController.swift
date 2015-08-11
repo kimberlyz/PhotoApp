@@ -104,7 +104,8 @@ class ChooseFriendsViewController: UIViewController {
                         }
                     }
                 }
-                SweetAlert().showAlert("Photos sent!", subTitle: "", style: AlertStyle.Success)
+                //SweetAlert().showAlert("Photos sent!", subTitle: "", style: AlertStyle.Success)
+                SweetAlert().showAlert("Sending photos...", subTitle: "", style: AlertStyle.None)
                 self.dismissViewControllerAnimated(true, completion: nil)
                 println("Reachable via WiFi")
 

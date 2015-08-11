@@ -64,17 +64,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        } 
 
         
-
+        /*
         let notificationType = UIUserNotificationType.Alert | UIUserNotificationType.Badge
         let settings = UIUserNotificationSettings(forTypes: notificationType, categories: nil)
-        application.registerUserNotificationSettings(settings)
+        application.registerUserNotificationSettings(settings) */
         
         mpcManager = MPCManager()
         
         
         // Initialize Facebook
         // 1
-        PFFacebookUtils.initializeFacebookWithApplicationLaunchOptions(launchOptions)
+        //PFFacebookUtils.initializeFacebookWithApplicationLaunchOptions(launchOptions)
         
         // check if we have logged in user
         // 2
@@ -91,7 +91,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             // 4
             // Otherwise set the LoginViewController to be the first
             let loginViewController = PFLogInViewController()
-            loginViewController.fields = .UsernameAndPassword | .LogInButton | .SignUpButton | .PasswordForgotten | .Facebook
+            loginViewController.fields = .UsernameAndPassword | .LogInButton | .SignUpButton | .PasswordForgotten //| .Facebook
             loginViewController.delegate = parseLoginHelper
             loginViewController.signUpController?.delegate = parseLoginHelper
             
@@ -114,22 +114,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
        // application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: UIUserNotificationType.Alert | UIUserNotificationType.Badge, categories: nil))
     
         // Override point for customization after application launch.
-        return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
+        //return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
+
+        return true
     }
     
     //MARK: Facebook Integration
     
     func applicationDidBecomeActive(application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-        FBSDKAppEvents.activateApp()
+        //FBSDKAppEvents.activateApp()
     }
     
+    /*
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
         return FBSDKApplicationDelegate.sharedInstance().application(application, openURL: url, sourceApplication: sourceApplication, annotation: annotation)
-    }
+    } */
     
 
-    
+    /*
     func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification) {
        // application.applicationIconBadgeNumber = 0 
         /*
@@ -160,7 +163,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             [alertView release];
         } */
        
-    }
+    } */
 
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
