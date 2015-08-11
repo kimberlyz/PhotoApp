@@ -28,7 +28,7 @@ class AddFriendViewController: UIViewController {
     // Keeps track of how many times friendUsers has been accessed
     
     var friendUsers: [PFUser] = []
-    var friendUsersCount = -1
+    //var friendUsersCount = -1
 
     
     var pendingUsers: [PFUser]? {
@@ -120,7 +120,7 @@ class AddFriendViewController: UIViewController {
                 
                 // If your list of friends has changed (# of friends has changed),
                 // add the friends to the array and reload the tableView
-                if self.friendUsersCount != self.friendUsers.count {
+                //if self.friendUsersCount != self.friendUsers.count {
                     self.friendUsers = []
                     if let friend1 = friendUsers1 {
                         self.friendUsers += friend1
@@ -131,13 +131,13 @@ class AddFriendViewController: UIViewController {
                     }
                     
                     // Keep number of friends up-to-date
-                    self.friendUsersCount = self.friendUsers.count
+                   // self.friendUsersCount = self.friendUsers.count
                     
                     // Sort friends by their usernames alphabetically
-                    self.friendUsers.sort({ $0.username < $1.username })
+                    //self.friendUsers.sort({ $0.username < $1.username })
                     
-                    self.tableView.reloadData()
-                }
+                    //self.tableView.reloadData()
+                //}
             }
         }
     }

@@ -86,13 +86,12 @@ class FriendListViewController: UIViewController {
             } */
             
             
-            if self.requestingUsersCount != self.requestingUsers.count {
+            //if self.requestingUsersCount != self.requestingUsers.count {
 
-                self.requestingUsersCount = self.requestingUsers.count
+           //     self.requestingUsersCount = self.requestingUsers.count
                 self.tableView.reloadData()
-            }
+            //}
             
-            //self.tableView.reloadData()
         }
     }
 
