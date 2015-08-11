@@ -111,7 +111,7 @@ class ChooseFriendsViewController: UIViewController {
                             notification.fromUser = PFUser.currentUser()!
                             notification.imageFile = PFFile(data: imageData)
                             
-                            notification.saveInBackgroundWithBlock(nil)
+                            notification.uploadNotification()
                         }
                     }
                 }

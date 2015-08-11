@@ -39,7 +39,7 @@ class Notification : PFObject, PFSubclassing {
     
     func uploadNotification() {
         
-        imageFile = PFFile(data: imageData!)
+        //imageFile = PFFile(data: imageData!)
         imageFile!.saveInBackgroundWithBlock(nil)
         
         let acl = PFACL()

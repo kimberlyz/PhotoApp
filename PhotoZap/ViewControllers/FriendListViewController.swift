@@ -26,11 +26,11 @@ class FriendListViewController: UIViewController {
     
     var friendUsers: [PFUser] = []
     var currentFriendUsers: [PFUser] = []
-    //var friendUsersCount = -1
+    var friendUsersCount = -1
     
     var requestingUsers: [PFUser] = []
-    var currentRequestingUsers: [PFUser] = []
-    //var requestingUsersCount = -1
+    //var currentRequestingUsers: [PFUser] = []
+    var requestingUsersCount = -1
     
     lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
@@ -75,21 +75,22 @@ class FriendListViewController: UIViewController {
             (results: [AnyObject]?, error: NSError?) -> Void in
             let relations = results as? [PFObject] ?? []
             
-            self.currentRequestingUsers = relations.map {
+            self.requestingUsers = relations.map {
                 $0.objectForKey(ParseHelper.ParseFriendshipUserA) as! PFUser
             }
             
+            /*
             if self.currentRequestingUsers.count != self.requestingUsers.count {
                 self.requestingUsers = self.currentRequestingUsers
                 self.tableView.reloadData()
-            }
-            
-            /*
-            if self.requestingUsersCount != self.requestingUsers!.count {
-
-                self.requestingUsersCount = self.requestingUsers!.count
-                self.tableView.reloadData()
             } */
+            
+            
+            if self.requestingUsersCount != self.requestingUsers.count {
+
+                self.requestingUsersCount = self.requestingUsers.count
+                self.tableView.reloadData()
+            }
             
             //self.tableView.reloadData()
         }
@@ -118,29 +119,33 @@ class FriendListViewController: UIViewController {
                     $0.objectForKey(ParseHelper.ParseFriendshipUserB) as! PFUser
                 }
                 
-                self.currentFriendUsers = []
+                /*
+                self.friendUsers = []
                 
                 if let friend1 = friendUsers1 {
-                    self.currentFriendUsers += friend1
+                    self.friendUsers += friend1
                 }
                 
                 if let friend2 = friendUsers2 {
-                    self.currentFriendUsers += friend2
+                    self.friendUsers += friend2
                 }
+                
                 
                 // Sort friends by their usernames alphabetically
                 self.currentFriendUsers.sort({ $0.username < $1.username })
                 
+                println("Current Friends: \(self.currentFriendUsers)")
+                println("Friends: \(self.friendUsers)")
                 
                 if self.currentFriendUsers.count != self.friendUsers.count {
                     self.friendUsers = self.currentFriendUsers
                     self.tableView.reloadData()
-                }
+                } */
                 
-                /*
+                
                 // If your list of friends has changed (# of friends has changed),
                 // add the friends to the array and reload the tableView
-                if self.friendUsersCount != self.friendUsers.count {
+                //if self.friendUsersCount != self.friendUsers.count {
                     self.friendUsers = []
                     if let friend1 = friendUsers1 {
                         self.friendUsers += friend1
@@ -155,16 +160,9 @@ class FriendListViewController: UIViewController {
                     
                     // Sort friends by their usernames alphabetically
                     self.friendUsers.sort({ $0.username < $1.username })
-                
-                
-                    // tell refresh control it can stop showing up now
-                    if self.refreshControl.refreshing
-                    {
-                        self.refreshControl.endRefreshing()
-                    }
-                    
+
                     self.tableView.reloadData()
-                } */
+                //}
             }
         }
     }
