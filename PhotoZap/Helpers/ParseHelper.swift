@@ -143,6 +143,13 @@ class ParseHelper {
         friendshipObject.setObject(userB, forKey: ParseFriendshipUserB)
         friendshipObject.setObject(false, forKey: ParseFriendshipEstablishFriendship)
         
+        let acl = PFACL()
+        acl.setReadAccess(true, forUser: userA)
+        acl.setReadAccess(true, forUser: userB)
+        acl.setWriteAccess(true, forUser: userA)
+        acl.setWriteAccess(true, forUser: userB)
+        
+        friendshipObject.ACL = acl
         friendshipObject.saveInBackgroundWithBlock(nil)
     }
     

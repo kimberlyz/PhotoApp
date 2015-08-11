@@ -38,7 +38,21 @@ class Notification : PFObject, PFSubclassing {
     
     
     func uploadNotification() {
-
+        
+        imageFile = PFFile(data: imageData!)
+        imageFile!.saveInBackgroundWithBlock(nil)
+        
+        let acl = PFACL()
+        acl.setReadAccess(true, forUser: toUser!)
+        acl.setReadAccess(true, forUser: fromUser!)
+        acl.setWriteAccess(true, forUser: fromUser!)
+        //acl.setWriteAccess(true, forUser: toUser!)
+        
+        self.ACL = acl
+        
+        saveInBackgroundWithBlock(nil)
+        
+        /*
         imageFile = PFFile(data: imageData!)
         //println(imageFile)
         imageFile!.saveInBackgroundWithBlock() {(result, error) in
@@ -52,7 +66,7 @@ class Notification : PFObject, PFSubclassing {
                     println("Save of total object")
                 }
             }
-        }
+        } */
         
         //fromUser = PFUser.currentUser()
 

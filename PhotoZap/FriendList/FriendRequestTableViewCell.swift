@@ -20,6 +20,9 @@ class FriendRequestTableViewCell: UITableViewCell {
 
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var friendButton: UIButton!
+    
+    @IBOutlet weak var rejectButton: UIButton!
+    
     weak var delegate: FriendRequestTableViewCellDelegate?
     
     var user: PFUser? {

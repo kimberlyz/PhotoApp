@@ -35,9 +35,7 @@ class NearbyFriendsViewController: UIViewController, UITableViewDelegate, UITabl
         isAdvertising = true
         
         status = Bond<MCSessionState> () { value in
-            println("State has changed \(value)")
             self.tableView.reloadData()
-            
             println(self.appDelegate.mpcManager.connectedPeers)
         }
         

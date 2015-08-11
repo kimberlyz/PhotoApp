@@ -75,7 +75,7 @@ extension ReceiveZapViewController: UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //println(appDelegate.mpcManager.foundPeers.count)
+        println(appDelegate.mpcManager.foundPeers.count)
         return appDelegate.mpcManager.foundPeers.count
     }
     

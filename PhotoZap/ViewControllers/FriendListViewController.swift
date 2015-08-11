@@ -25,10 +25,12 @@ class FriendListViewController: UIViewController {
     */
     
     var friendUsers: [PFUser] = []
-    var friendUsersCount = -1
+    var currentFriendUsers: [PFUser] = []
+    //var friendUsersCount = -1
     
-    var requestingUsers: [PFUser]?
-    var requestingUsersCount = -1
+    var requestingUsers: [PFUser] = []
+    var currentRequestingUsers: [PFUser] = []
+    //var requestingUsersCount = -1
     
     lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
@@ -73,15 +75,21 @@ class FriendListViewController: UIViewController {
             (results: [AnyObject]?, error: NSError?) -> Void in
             let relations = results as? [PFObject] ?? []
             
-            self.requestingUsers = relations.map {
+            self.currentRequestingUsers = relations.map {
                 $0.objectForKey(ParseHelper.ParseFriendshipUserA) as! PFUser
             }
             
+            if self.currentRequestingUsers.count != self.requestingUsers.count {
+                self.requestingUsers = self.currentRequestingUsers
+                self.tableView.reloadData()
+            }
+            
+            /*
             if self.requestingUsersCount != self.requestingUsers!.count {
 
                 self.requestingUsersCount = self.requestingUsers!.count
                 self.tableView.reloadData()
-            }
+            } */
             
             //self.tableView.reloadData()
         }
@@ -110,6 +118,26 @@ class FriendListViewController: UIViewController {
                     $0.objectForKey(ParseHelper.ParseFriendshipUserB) as! PFUser
                 }
                 
+                self.currentFriendUsers = []
+                
+                if let friend1 = friendUsers1 {
+                    self.currentFriendUsers += friend1
+                }
+                
+                if let friend2 = friendUsers2 {
+                    self.currentFriendUsers += friend2
+                }
+                
+                // Sort friends by their usernames alphabetically
+                self.currentFriendUsers.sort({ $0.username < $1.username })
+                
+                
+                if self.currentFriendUsers.count != self.friendUsers.count {
+                    self.friendUsers = self.currentFriendUsers
+                    self.tableView.reloadData()
+                }
+                
+                /*
                 // If your list of friends has changed (# of friends has changed),
                 // add the friends to the array and reload the tableView
                 if self.friendUsersCount != self.friendUsers.count {
@@ -136,7 +164,7 @@ class FriendListViewController: UIViewController {
                     }
                     
                     self.tableView.reloadData()
-                }
+                } */
             }
         }
     }
@@ -155,7 +183,7 @@ extension FriendListViewController: UITableViewDataSource {
        // var sectionTitle = friendSectionTitles[section]
         
         if section == 0 {
-            return self.requestingUsers?.count ?? 0
+            return self.requestingUsers.count
         } else {
             return self.friendUsers.count ?? 0
         }
@@ -171,7 +199,7 @@ extension FriendListViewController: UITableViewDataSource {
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCellWithIdentifier("FriendRequestCell") as! FriendRequestTableViewCell
             
-            let user = self.requestingUsers![indexPath.row]
+            let user = self.requestingUsers[indexPath.row]
             cell.user = user
             
             cell.delegate = self
@@ -200,10 +228,11 @@ extension FriendListViewController: UITableViewDelegate {
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         
-        if section == 0 && (self.requestingUsers == nil || self.requestingUsers?.count == 0) {
+        if section == 0 && self.requestingUsers.count == 0 {
             return 0
         } else if section == 2 && self.friendUsers.count == 0 {
-            return 0}
+            return 0
+        }
         else {
             return 30
         }
@@ -221,7 +250,9 @@ extension FriendListViewController: FriendRequestTableViewCellDelegate {
         //update local cache
         self.friendUsers.append(user)
         
-        removeObjectFromArray(user, &self.requestingUsers!)
+        removeObjectFromArray(user, &self.requestingUsers)
+        
+        cell.rejectButton.hidden = true
     }
     
     func cell(cell: FriendRequestTableViewCell, didSelectRejectRequest user: PFUser) {
@@ -230,15 +261,15 @@ extension FriendListViewController: FriendRequestTableViewCellDelegate {
         
         let dismissAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
         let yesAction = UIAlertAction(title: "Yes", style: .Default) { (action) -> Void in
-            if var requestingUsers = self.requestingUsers {
+            //if var requestingUsers = self.requestingUsers {
                 ParseHelper.rejectFriendRequest(user, userB: PFUser.currentUser()!)
                 //update local cache
-                removeObjectFromArray(user, &requestingUsers)
+                removeObjectFromArray(user, &self.requestingUsers)
                 
-                self.requestingUsers = requestingUsers
+                //self.requestingUsers = requestingUsers
                 
                 self.tableView.reloadData()
-            }
+            //}
         }
         
         alertController.addAction(dismissAction)

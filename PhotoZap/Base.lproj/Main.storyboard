@@ -648,6 +648,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="friendButton" destination="RWu-RB-nkP" id="kOa-OD-2C0"/>
+                                            <outlet property="rejectButton" destination="ded-96-oyT" id="TsL-bZ-CLg"/>
                                             <outlet property="usernameLabel" destination="6eT-Q9-JvJ" id="9TV-EO-l8B"/>
                                         </connections>
                                     </tableViewCell>

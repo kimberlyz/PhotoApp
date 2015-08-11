@@ -29,14 +29,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if let error = error {
                 // 1
                 ErrorHandling.defaultErrorHandler(error)
-            } else  if let user = user {
+            } else if let user = user {
                 // if login was successful, display the TabBarController
                 // 2
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                let tabBarController = storyboard.instantiateViewControllerWithIdentifier("TabBarController") as! UIViewController
+                let tabBarController = storyboard.instantiateViewControllerWithIdentifier("TabBarController") as! UITabBarController
                 // 3
+                println(self.window?.rootViewController)
                 self.window?.rootViewController!.presentViewController(tabBarController, animated:true, completion:nil)
-                self.mpcManager = MPCManager()
             }
         }
     }
@@ -96,11 +96,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.rootViewController = startViewController;
         self.window?.makeKeyAndVisible()
         
-        /*
+        
         
         let acl = PFACL()
         acl.setPublicReadAccess(true)
-        PFACL.setDefaultACL(acl, withAccessForCurrentUser: true)  */
+        PFACL.setDefaultACL(acl, withAccessForCurrentUser: true)
         
         
         
@@ -109,7 +109,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         //return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
 
-        return true
+        return false
     }
     
     //MARK: Facebook Integration
@@ -175,7 +175,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-
-
+    
 }
 
