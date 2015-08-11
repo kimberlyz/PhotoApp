@@ -10,6 +10,7 @@ import UIKit
 import MultipeerConnectivity
 import ConvenienceKit
 import Bond
+import Parse
 
 protocol MPCManagerDelegate {
     func invitationWasReceived(fromPeer: String)
@@ -39,7 +40,7 @@ class MPCManager: NSObject, MCSessionDelegate, MCNearbyServiceBrowserDelegate, M
         super.init()
         
         // make the displayName your username in the future
-        peer = MCPeerID(displayName: UIDevice.currentDevice().name)
+        peer = MCPeerID(displayName: UIDevice.currentDevice().name/*PFUser.currentUser()!.username*/)
         
         session = MCSession(peer: peer, securityIdentity: nil, encryptionPreference: .Required)
         session.delegate = self

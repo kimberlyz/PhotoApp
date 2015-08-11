@@ -371,6 +371,44 @@ extension NotificationsViewController: UITableViewDataSource {
         }
             
     }
+    
+    
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if editingStyle == UITableViewCellEditingStyle.Delete {
+            
+            if indexPath.section == 0 { /* Zap cells */
+                self.zaps.removeAtIndex(indexPath.row)
+                appDelegate.mpcManager.zaps.removeAtIndex(indexPath.row)
+                tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+                
+                
+            } else if indexPath.section == 1 { /* Wi-Fi cells */
+                
+                let notificationObject = self.notifications[indexPath.row]
+                
+                let query = PFQuery(className:ParseHelper.ParseNotificationClass)
+                let notificationObjectId = notificationObject.objectId
+                
+                query.getObjectInBackgroundWithId(notificationObjectId!) {
+                    (notificationObj: PFObject?, error: NSError?) -> Void in
+                    if error == nil && notificationObj != nil {
+                        notificationObj!.deleteInBackgroundWithBlock(nil)
+                        self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+                        //self.notifications.removeAtIndex(indexPath.row)
+                        
+                    } else {
+                        println("error")
+                    }
+                }
+
+            } else {
+                
+            }
+            //ParseHelper.removeFriendRelationshipFromUser(PFUser.currentUser()!, user2: self.friendUsers[indexPath.row])
+            //self.friendUsers.removeAtIndex(indexPath.row)
+
+        }
+    }
 }
 
 extension NotificationsViewController: UITableViewDelegate {

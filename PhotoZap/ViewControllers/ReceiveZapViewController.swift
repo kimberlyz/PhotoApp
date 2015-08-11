@@ -54,7 +54,7 @@ class ReceiveZapViewController: UIViewController {
     override func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(animated)
         
-        //appDelegate.mpcManager.foundPeers = [MCPeerID]()
+        appDelegate.mpcManager.foundPeers = [MCPeerID]()
         appDelegate.mpcManager.browser.stopBrowsingForPeers()
     }
 
