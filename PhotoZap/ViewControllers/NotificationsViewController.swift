@@ -65,6 +65,8 @@ class NotificationsViewController: UIViewController {
     }
     
     func refresh(refreshControl: UIRefreshControl) {
+        getNotifications()
+        getDelayedNotifications()
         self.tableView.reloadData()
         refreshControl.endRefreshing()
     }
@@ -420,7 +422,11 @@ extension NotificationsViewController: UITableViewDelegate {
         } else if section == 1 {
             return 0
         } else {
-            return 30
+            if self.pendingNotifications.count == 0 {
+                return 0
+            } else {
+                return 30
+            }
         }
     }
 }
