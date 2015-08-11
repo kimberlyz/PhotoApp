@@ -36,6 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 let tabBarController = storyboard.instantiateViewControllerWithIdentifier("TabBarController") as! UIViewController
                 // 3
                 self.window?.rootViewController!.presentViewController(tabBarController, animated:true, completion:nil)
+                self.mpcManager = MPCManager()
             }
         }
     }
@@ -68,8 +69,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let notificationType = UIUserNotificationType.Alert | UIUserNotificationType.Badge
         let settings = UIUserNotificationSettings(forTypes: notificationType, categories: nil)
         application.registerUserNotificationSettings(settings) */
-        
-        mpcManager = MPCManager()
         
         
         // Initialize Facebook
