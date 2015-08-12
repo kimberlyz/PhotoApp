@@ -56,7 +56,7 @@ class NotificationsViewController: UIViewController {
         super.viewWillAppear(animated)
         
         getNotifications()
-        getDelayedNotifications()
+        //getDelayedNotifications()
         
         self.zaps = appDelegate.mpcManager.zaps
     }
@@ -164,7 +164,13 @@ extension NotificationsViewController: UITableViewDataSource {
             let notificationObject = self.notifications[indexPath.row]
             cell.fromUser = notificationObject.objectForKey(ParseHelper.ParseNotificationFromUser) as? PFUser
             
-            //var image = UIImage(named: ")
+            if notificationObject.imagePic != nil {
+                cell.notificationsImageView.image = notificationObject.imagePic
+            } else {
+                var image = UIImage(named: "ImagePlaceholder.png")
+                cell.notificationsImageView.image = image
+            }
+
             
             return cell
         } else {
@@ -177,7 +183,7 @@ extension NotificationsViewController: UITableViewDataSource {
             var pendingImage = UIImage(named: "PendingImage.png")
             
             cell.usernameLabel.text = pendingNotificationObject.toUserUsername
-            cell.imageView!.image = pendingImage
+            cell.notificationsImageView.image = pendingImage
             
             //FromUser is not set when it is pending? OH wait no. I should set it. But maybe only set it when I send it?
             //Or just add a variable. IsPending = true or false
@@ -317,12 +323,10 @@ extension NotificationsViewController: UITableViewDataSource {
                             }
                             
                             self.pendingNotifications = realm.objects(PendingNotification)
+                            self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+                            //self.tableView.reloadData()
                         }
                     }
-                    
-                    
-                    
-                    
                     
                     println("Reachable via WiFi")
                     TSMessage.dismissActiveNotification()

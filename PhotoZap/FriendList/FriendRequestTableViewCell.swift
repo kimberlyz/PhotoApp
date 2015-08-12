@@ -31,6 +31,8 @@ class FriendRequestTableViewCell: UITableViewCell {
                 user.fetchIfNeeded()
                 usernameLabel.text = user["username"] as? String
             }
+//            friendButton.selected = false
+//            rejectButton.hidden = false
         }
     }
     

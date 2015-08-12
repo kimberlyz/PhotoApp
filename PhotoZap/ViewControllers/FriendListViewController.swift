@@ -155,7 +155,7 @@ class FriendListViewController: UIViewController {
                     }
                     
                     // Keep number of friends up-to-date
-                    self.friendUsersCount = self.friendUsers.count
+                    //self.friendUsersCount = self.friendUsers.count
                     
                     // Sort friends by their usernames alphabetically
                     self.friendUsers.sort({ $0.username < $1.username })
@@ -254,6 +254,7 @@ extension FriendListViewController: FriendRequestTableViewCellDelegate {
     
     func cell(cell: FriendRequestTableViewCell, didSelectRejectRequest user: PFUser) {
         
+        
         let alertController = UIAlertController(title: "Reject \(user.username!)'s request?", message: "", preferredStyle: UIAlertControllerStyle.Alert)
         
         let dismissAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
@@ -271,7 +272,6 @@ extension FriendListViewController: FriendRequestTableViewCellDelegate {
         
         alertController.addAction(dismissAction)
         alertController.addAction(yesAction)
-
 
         self.presentViewController(alertController, animated: true, completion: nil)
         

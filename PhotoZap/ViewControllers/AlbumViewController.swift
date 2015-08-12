@@ -37,6 +37,10 @@ class AlbumViewController: UIViewController, CTAssetsPickerControllerDelegate {
             self.tabBarController!.selectedIndex = 1 // 2nd tab
         }
     } */
+    
+//    override func viewWillAppear(animated: Bool) {
+//        super.viewWillAppear(true)
+//    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,17 +57,49 @@ class AlbumViewController: UIViewController, CTAssetsPickerControllerDelegate {
 //                println("hi")
 //            }
 //        })
+        reachability.startNotifier()
+        
         let realm = Realm()
         
-        println("Are you here realm objects? \(realm.objects(PendingNotification))")
-//
-        reachability.startNotifier()
+        if reachability.isReachableViaWiFi(){
+        
+            if realm.objects(PendingNotification) != 0  {
+                /*
+                SweetAlert().showAlert("No Wi-Fi connection.", subTitle: "Would you like to send the photo using cellular data?", style: AlertStyle.Warning, buttonTitle:"No thanks.", buttonColor: UIColor.colorFromRGB(0x66B2FF) , otherButtonTitle:  "Yes, send it.", otherButtonColor: UIColor.colorFromRGB(0x66B2FF/*0x90AEFF*/)) { (isOtherButton) -> Void in
+                    if isOtherButton == true {
+                        
+                        println("Cancel Button  Pressed")
+                    }
+                    else {
+                        
+                        /// DO SOMETHING HERE!!!!! SEND IT
+                        SweetAlert().showAlert("Image sent!", subTitle: "", style: AlertStyle.Success)
+                    }
+                    
+                } */
+                /*
+                let alertController = UIAlertController(title: "You have pending notifications and Wi-Fi access!", message: "Would you like to send the photos now?", preferredStyle: UIAlertControllerStyle.Alert)
+                
+                
+                let yesAction = UIAlertAction(title: "Yes", style: .Default, handler: { (action) -> Void in
+                    self.tabBarController!.selectedIndex = 1
+                })
+                
+                let noAction = UIAlertAction(title: "No", style: .Cancel, handler: nil)
+                
+                alertController.addAction(yesAction)
+                alertController.addAction(noAction)
+                
+                self.presentViewController(alertController, animated: true, completion: nil) */
+            }
+        }
+
 
     }
   /*
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        
+    
         nearbyFriends = NearbyFriendsViewController()
     } */
     
