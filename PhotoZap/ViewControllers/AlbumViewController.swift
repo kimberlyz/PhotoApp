@@ -11,6 +11,7 @@ import Parse
 import CTAssetsPickerController
 import ReachabilitySwift
 import RealmSwift
+import AMPopTip
 
 class AlbumViewController: UIViewController, CTAssetsPickerControllerDelegate {
     
@@ -18,10 +19,13 @@ class AlbumViewController: UIViewController, CTAssetsPickerControllerDelegate {
     //var transaction : Transaction?
     
     @IBOutlet weak var WiFiButton: UIButton!
+    @IBOutlet weak var infoButton: UIButton!
     
     let reachability = Reachability.reachabilityForInternetConnection()
 
     var zapBool : Bool?
+    
+    let infoPopTip = AMPopTip()
     
     // checks whether you have been notified that you are on wi-fi when app launches
     var firstWarning = true
@@ -118,6 +122,25 @@ class AlbumViewController: UIViewController, CTAssetsPickerControllerDelegate {
 
     }
     
+    @IBAction func infoButton(sender: AnyObject) {
+
+
+        //let rect = self.view.convertRect(rect: infoButton.frame, fromView: infoButton.superview)
+        
+        //CGRect rect = self.view.convertRect(infoButton.frame, fromView: infoButton.superview)
+        
+        infoPopTip.shouldDismissOnTap = true
+        infoPopTip.popoverColor = UIColor.colorFromRGB(0x2664C1)
+        infoPopTip.borderColor = UIColor.colorFromRGB(0x2664C1)
+
+        if infoPopTip.isVisible {
+            infoPopTip.hide()
+        } else {
+            infoPopTip.showText("Instantly send photos.\nSome setup required.", direction: .Right, maxWidth: 200, inView: self.view, fromFrame: infoButton.frame)
+        }
+
+    }
+
     
     func showAlbum() {
         

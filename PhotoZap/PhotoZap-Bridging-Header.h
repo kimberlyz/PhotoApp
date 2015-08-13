@@ -13,5 +13,6 @@
 #import <Mixpanel/Mixpanel.h>
 #import <ParseFacebookUtilsV4/PFFacebookUtils.h>
 #import <TSMessages/TSMessage.h>
+#import <AMPopTip/AMPopTip.h>
 
 #endif

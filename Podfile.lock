@@ -1,4 +1,5 @@
 PODS:
+  - AMPopTip (0.9.12)
   - Bolts (1.2.0):
     - Bolts/AppLinks (= 1.2.0)
     - Bolts/Tasks (= 1.2.0)
@@ -44,6 +45,7 @@ PODS:
     - HexColors (~> 2.3.0)
 
 DEPENDENCIES:
+  - AMPopTip
   - Bond
   - ConvenienceKit
   - CTAssetsPickerController (~> 3.0.0)
@@ -71,6 +73,7 @@ CHECKOUT OPTIONS:
     :git: https://github.com/KrauseFx/TSMessages.git
 
 SPEC CHECKSUMS:
+  AMPopTip: 3c98a9b38148868366b57765064bd9565f653038
   Bolts: d176cb1e0012175589e389a9db49b85e27787576
   Bond: 994ccc56aebfe2707d7b5e76f6d665a5beefa45b
   ConvenienceKit: 947032f82c3d419d107e0cbde1fcb725e9c7ed62

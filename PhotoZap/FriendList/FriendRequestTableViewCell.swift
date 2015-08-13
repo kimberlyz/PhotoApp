@@ -28,7 +28,7 @@ class FriendRequestTableViewCell: UITableViewCell {
     var user: PFUser? {
         didSet {
             if let user = user {
-                user.fetchIfNeeded()
+                user.fetchIfNeededInBackground()
                 usernameLabel.text = user["username"] as? String
             }
             friendButton.selected = false
@@ -39,7 +39,7 @@ class FriendRequestTableViewCell: UITableViewCell {
     
     @IBAction func friendButtonTapped(sender: AnyObject) {
         
-        //friendButton.selected = true
+        friendButton.selected = true
         friendButton.enabled = false
         delegate?.cell(self, didSelectConfirmRequest: user!)
 

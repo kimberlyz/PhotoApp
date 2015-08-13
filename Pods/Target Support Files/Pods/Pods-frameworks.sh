@@ -52,6 +52,7 @@ code_sign_if_enabled() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
+  install_framework 'Pods/AMPopTip.framework'
   install_framework 'Pods/Bolts.framework'
   install_framework 'Pods/Bond.framework'
   install_framework 'Pods/CTAssetsPickerController.framework'
@@ -70,6 +71,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework 'Pods/TSMessages.framework'
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
+  install_framework 'Pods/AMPopTip.framework'
   install_framework 'Pods/Bolts.framework'
   install_framework 'Pods/Bond.framework'
   install_framework 'Pods/CTAssetsPickerController.framework'

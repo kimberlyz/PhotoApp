@@ -202,19 +202,32 @@
                                     <action selector="wifiButtonTapped:" destination="StI-Ir-0gR" eventType="touchUpInside" id="k7E-m9-ExE"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qnI-0w-Cq7">
+                                <rect key="frame" x="15" y="286" width="66" height="30"/>
+                                <state key="normal" title="More Info">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="infoButton:" destination="StI-Ir-0gR" eventType="touchUpInside" id="L5M-hl-otc"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="1h4-5D-ajU" firstAttribute="leading" secondItem="NDO-8t-qaJ" secondAttribute="leading" id="1Ge-uY-od2"/>
                             <constraint firstItem="bGo-5Q-piA" firstAttribute="top" secondItem="NDO-8t-qaJ" secondAttribute="top" id="Mp3-w4-BqR"/>
                             <constraint firstItem="1h4-5D-ajU" firstAttribute="top" secondItem="bGo-5Q-piA" secondAttribute="bottom" id="NCB-57-fa0"/>
+                            <constraint firstItem="qnI-0w-Cq7" firstAttribute="top" secondItem="1h4-5D-ajU" secondAttribute="bottom" constant="10" id="OAy-cd-rKa"/>
                             <constraint firstItem="bGo-5Q-piA" firstAttribute="height" secondItem="1h4-5D-ajU" secondAttribute="height" id="OMN-CH-BfI"/>
                             <constraint firstItem="bGo-5Q-piA" firstAttribute="top" secondItem="uKJ-HA-JGv" secondAttribute="bottom" id="Vud-nz-Ix7"/>
                             <constraint firstItem="bGo-5Q-piA" firstAttribute="leading" secondItem="NDO-8t-qaJ" secondAttribute="leading" id="Xo7-70-CtE"/>
                             <constraint firstItem="bGo-5Q-piA" firstAttribute="top" secondItem="1h4-5D-ajU" secondAttribute="bottom" id="aHl-I0-puY"/>
+                            <constraint firstAttribute="trailing" secondItem="qnI-0w-Cq7" secondAttribute="trailing" constant="15" id="bF4-Sk-k7l"/>
                             <constraint firstAttribute="trailing" secondItem="1h4-5D-ajU" secondAttribute="trailing" id="jZ9-DL-uap"/>
                             <constraint firstItem="lwg-Bt-7fe" firstAttribute="top" secondItem="bGo-5Q-piA" secondAttribute="bottom" id="lxm-FJ-BGO"/>
                             <constraint firstItem="lwg-Bt-7fe" firstAttribute="top" secondItem="1h4-5D-ajU" secondAttribute="bottom" id="pTR-mK-B3N"/>
+                            <constraint firstItem="qnI-0w-Cq7" firstAttribute="leading" secondItem="NDO-8t-qaJ" secondAttribute="leading" constant="15" id="rHs-FT-YKy"/>
                             <constraint firstAttribute="trailing" secondItem="bGo-5Q-piA" secondAttribute="trailing" id="rSV-Ag-SkX"/>
                             <constraint firstItem="1h4-5D-ajU" firstAttribute="top" secondItem="NDO-8t-qaJ" secondAttribute="topMargin" id="se8-MR-D78"/>
                         </constraints>
@@ -224,12 +237,14 @@
                                 <exclude reference="Mp3-w4-BqR"/>
                                 <exclude reference="Vud-nz-Ix7"/>
                                 <exclude reference="pTR-mK-B3N"/>
+                                <exclude reference="bF4-Sk-k7l"/>
                             </mask>
                         </variation>
                     </view>
                     <tabBarItem key="tabBarItem" title="Home" image="Home" id="OUe-e8-is0"/>
                     <connections>
                         <outlet property="WiFiButton" destination="1h4-5D-ajU" id="nJj-Gh-Y4m"/>
+                        <outlet property="infoButton" destination="qnI-0w-Cq7" id="fRH-OW-VO6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wq6-uh-y66" userLabel="First Responder" sceneMemberID="firstResponder"/>

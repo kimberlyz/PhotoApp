@@ -16,11 +16,14 @@ class FriendListTableViewCell: UITableViewCell {
     var user: PFUser? {
         didSet {
             if let user = user {
-                user.fetchIfNeeded()
+                user.fetchIfNeededInBackground()
                 usernameLabel.text = user["username"] as? String
             }
         }
     }
+    
+    
+    
     
     /*
     override func awakeFromNib() {

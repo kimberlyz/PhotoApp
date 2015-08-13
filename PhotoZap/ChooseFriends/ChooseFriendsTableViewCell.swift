@@ -18,12 +18,15 @@ class ChooseFriendsTableViewCell: UITableViewCell {
     var user: PFUser? {
         didSet {
             if let user = user {
-                user.fetchIfNeeded()
+                user.fetchIfNeededInBackgroundWithBlock({ (userObject: PFObject?, error: NSError?) -> Void in
+                    if error != nil {
+                        ParseErrorHandlingController.handleParseError(error!)
+                    }
+                })
                 usernameLabel.text = user["username"] as? String
             }
         }
     }
-    
     var canSelect: Bool? = true {
         didSet {
             /*
@@ -31,7 +34,6 @@ class ChooseFriendsTableViewCell: UITableViewCell {
             it is possible to friend request a user.
             */
             if let canSelect = canSelect {
-                println(canSelect)
                 selectedFriendButton.selected = !canSelect
             }
         }

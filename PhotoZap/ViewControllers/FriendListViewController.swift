@@ -42,7 +42,6 @@ class FriendListViewController: UIViewController {
     
     // MARK: View Lifecycle
     
-    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         

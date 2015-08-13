@@ -137,12 +137,6 @@ class NearbyFriendsViewController: UIViewController, UITableViewDelegate, UITabl
         
         self.dismissViewControllerAnimated(true, completion: nil)
         SweetAlert().showAlert("Sending Photos...", subTitle: "", style: AlertStyle.None)
-
-        /*
-        PHImageManager.defaultManager().requestImageForAsset(asset, targetSize: self.assetThumbnailSize, contentMode: .AspectFill, options: nil, resultHandler: {(result, info)in
-        cell.setThumbnailImage(result)
-        })
-        */
         }
         
     }
