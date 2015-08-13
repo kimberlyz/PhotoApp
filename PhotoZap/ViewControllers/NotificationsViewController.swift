@@ -296,6 +296,37 @@ extension NotificationsViewController: UITableViewDataSource {
                         }
                         else {
                             
+                            let realm = Realm()
+                            let query = PFUser.query()
+                            query!.whereKey("objectId", equalTo: pendingNotificationObject.toUserObjectId)
+                            
+                            query!.findObjectsInBackgroundWithBlock {
+                                (results: [AnyObject]?, error: NSError?) -> Void in
+                                if error == nil {
+                                    let results = results as? [PFUser] ?? []
+                                    
+                                    for user in results {
+                                        let notification = Notification()
+                                        notification.toUser = user
+                                        notification.fromUser = PFUser.currentUser()!
+                                        notification.imageFile = PFFile(data: pendingNotificationObject.imageData)
+                                        
+                                        notification.uploadNotification()
+                                        
+                                        realm.write() {
+                                            realm.delete(pendingNotificationObject)
+                                        }
+                                        
+                                        self.pendingNotifications = realm.objects(PendingNotification)
+                                        self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+                                        //self.tableView.reloadData()
+                                    }
+                                } else {
+                                    ParseErrorHandlingController.handleParseError(error!)
+                                }
+                            }
+
+                            
                             /// DO SOMETHING HERE!!!!! SEND IT
                             SweetAlert().showAlert("Image sent!", subTitle: "", style: AlertStyle.Success)
                         }
