@@ -228,9 +228,20 @@ extension FriendListViewController: UITableViewDataSource {
     
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == UITableViewCellEditingStyle.Delete {
-            ParseHelper.removeFriendRelationshipFromUser(PFUser.currentUser()!, user2: self.friendUsers[indexPath.row])
-            self.friendUsers.removeAtIndex(indexPath.row)
+            
+            if indexPath.section == 0 {
+                ParseHelper.rejectFriendRequest(self.requestingUsers[indexPath.row], userB: PFUser.currentUser()!)
+                //update local cache
+                self.requestingUsers.removeAtIndex(indexPath.row)
+                
+                //self.tableView.reloadData()
+            } else {
+                ParseHelper.removeFriendRelationshipFromUser(PFUser.currentUser()!, user2: self.friendUsers[indexPath.row])
+                self.friendUsers.removeAtIndex(indexPath.row)
+            }
+            
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+
         }
     }
 }
@@ -263,9 +274,11 @@ extension FriendListViewController: FriendRequestTableViewCellDelegate {
         
         removeObjectFromArray(user, &self.requestingUsers)
         
-        cell.rejectButton.hidden = true
+        //cell.rejectButton.hidden = true
     }
     
+    
+    /*
     func cell(cell: FriendRequestTableViewCell, didSelectRejectRequest user: PFUser) {
         
         
@@ -289,7 +302,7 @@ extension FriendListViewController: FriendRequestTableViewCellDelegate {
 
         self.presentViewController(alertController, animated: true, completion: nil)
         
-    }
+    } */
 }
 
 

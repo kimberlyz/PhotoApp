@@ -511,41 +511,31 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RWu-RB-nkP" userLabel="Friend Button">
-                                                    <rect key="frame" x="548" y="2" width="42" height="42"/>
+                                                    <rect key="frame" x="548" y="-1" width="44" height="44"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="44" id="265-hq-anY"/>
+                                                        <constraint firstAttribute="width" constant="44" id="ccL-5W-BL5"/>
+                                                    </constraints>
+                                                    <inset key="contentEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
                                                     <state key="normal" image="Add">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
+                                                    <state key="disabled" image="Check"/>
                                                     <state key="selected" image="Check"/>
                                                     <connections>
                                                         <action selector="friendButtonTapped:" destination="Z3R-wB-4KF" eventType="touchUpInside" id="ULB-1W-xwD"/>
                                                     </connections>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ded-96-oyT" userLabel="Reject Button">
-                                                    <rect key="frame" x="483" y="4" width="35" height="35"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="35" id="LxM-bN-ZQa"/>
-                                                        <constraint firstAttribute="width" constant="35" id="fWa-GK-Gv8"/>
-                                                    </constraints>
-                                                    <state key="normal" image="Reject">
-                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </state>
-                                                    <connections>
-                                                        <action selector="rejectButton:" destination="Z3R-wB-4KF" eventType="touchUpInside" id="JC9-jG-qjf"/>
-                                                    </connections>
-                                                </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="centerY" secondItem="ded-96-oyT" secondAttribute="centerY" id="9LR-LD-lmf"/>
-                                                <constraint firstAttribute="centerY" secondItem="RWu-RB-nkP" secondAttribute="centerY" constant="-1.5" id="KHO-Ml-TsM"/>
-                                                <constraint firstAttribute="trailing" secondItem="RWu-RB-nkP" secondAttribute="trailing" constant="10" id="Pqc-BW-hx6"/>
+                                                <constraint firstAttribute="centerY" secondItem="RWu-RB-nkP" secondAttribute="centerY" id="KHO-Ml-TsM"/>
+                                                <constraint firstAttribute="trailing" secondItem="RWu-RB-nkP" secondAttribute="trailing" constant="8" id="Pqc-BW-hx6"/>
                                                 <constraint firstItem="6eT-Q9-JvJ" firstAttribute="leading" secondItem="03Y-AL-im2" secondAttribute="leading" constant="15" id="T4T-AJ-62W"/>
                                                 <constraint firstAttribute="centerY" secondItem="6eT-Q9-JvJ" secondAttribute="centerY" id="Xtc-24-HzI"/>
-                                                <constraint firstItem="RWu-RB-nkP" firstAttribute="leading" secondItem="ded-96-oyT" secondAttribute="trailing" constant="30" id="azy-me-LIE"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="friendButton" destination="RWu-RB-nkP" id="kOa-OD-2C0"/>
-                                            <outlet property="rejectButton" destination="ded-96-oyT" id="TsL-bZ-CLg"/>
                                             <outlet property="usernameLabel" destination="6eT-Q9-JvJ" id="9TV-EO-l8B"/>
                                         </connections>
                                     </tableViewCell>
@@ -802,6 +792,5 @@
         <image name="Friends" width="42" height="42"/>
         <image name="Home" width="38" height="36"/>
         <image name="ImagePlaceholder" width="82" height="82"/>
-        <image name="Reject" width="50" height="50"/>
     </resources>
 </document>
