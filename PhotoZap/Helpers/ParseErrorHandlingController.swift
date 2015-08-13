@@ -11,33 +11,11 @@ import Parse
 import ParseUI
 
 class ParseErrorHandlingController {
-    static var loginViewController = PFLogInViewController()
+    //static var loginViewController = PFLogInViewController()
     
     //static var presentingViewController = UIApplication.sharedApplication().keyWindow?.rootViewController
     
-    static var parseLoginHelper: ParseLoginHelper = ParseLoginHelper { user, signUpController, error in
-    // Initialize the ParseLoginHelper with a callback
-        if let error = error {
-            // 1
-            ErrorHandling.defaultErrorHandler(error)
-        } else if let user = user {
-            // if login was successful, display the TabBarController
-            // 2
-            PFUser.enableRevocableSessionInBackground()
-    
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let tabBarController = storyboard.instantiateViewControllerWithIdentifier("TabBarController") as! UITabBarController
-    
-            if signUpController == nil {
-
-                loginViewController.presentViewController(tabBarController, animated:true, completion:nil)
-            } else {
-                signUpController!.presentViewController(tabBarController, animated: true, completion: nil)
-            }
-    
-        }
-    }
-
+    //static var parseLoginHelper: ParseLoginHelper
     
     class func handleParseError(error: NSError) {
         if error.domain != PFParseErrorDomain {
@@ -47,11 +25,9 @@ class ParseErrorHandlingController {
         func handleInvalidSessionTokenError() {
             
             let presentingViewController = UIApplication.sharedApplication().keyWindow?.rootViewController
-
-            loginViewController.fields = .UsernameAndPassword | .LogInButton | .SignUpButton | .PasswordForgotten //| .Facebook
-            loginViewController.delegate = parseLoginHelper
-            loginViewController.signUpController?.delegate = parseLoginHelper
             
+            let loginViewController = PFLogInViewController()
+
             presentingViewController?.presentViewController(loginViewController, animated: true, completion: nil)
         }
         
