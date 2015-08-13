@@ -24,7 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     override init() {
         super.init()
         
-        parseLoginHelper = ParseLoginHelper {[unowned self] user, error in
+        parseLoginHelper = ParseLoginHelper {[unowned self] user, signUpController, error in
             // Initialize the ParseLoginHelper with a callback
             if let error = error {
                 // 1
@@ -32,11 +32,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             } else if let user = user {
                 // if login was successful, display the TabBarController
                 // 2
+                
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 let tabBarController = storyboard.instantiateViewControllerWithIdentifier("TabBarController") as! UITabBarController
-                // 3
-                println(self.window?.rootViewController)
-                self.window?.rootViewController!.presentViewController(tabBarController, animated:true, completion:nil)
+                
+                if signUpController == nil {
+                
+                    println(self.window?.rootViewController)
+                    self.window?.rootViewController!.presentViewController(tabBarController, animated:true, completion:nil)
+                } else {
+                    signUpController!.presentViewController(tabBarController, animated: true, completion: nil)
+                }
+                
             }
         }
     }

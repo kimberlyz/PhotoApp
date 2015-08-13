@@ -11,7 +11,7 @@ import FBSDKCoreKit
 import Parse
 import ParseUI
 
-typealias ParseLoginHelperCallback = (PFUser?, NSError?) -> Void
+typealias ParseLoginHelperCallback = (PFUser?, PFSignUpViewController?, NSError?) -> Void
 
 /**
 This class implements the 'PFLogInViewControllerDelegate' protocol. After a successfull login
@@ -38,14 +38,14 @@ extension ParseLoginHelper : PFLogInViewControllerDelegate {
         
         if !isFacebookLogin {
             // Plain parse login, we can return user immediately
-            self.callback(user, nil)
+            self.callback(user, nil, nil)
         } else {
             // if this is a Facebook login, fetch the username from Facebook
             FBSDKGraphRequest(graphPath: "me", parameters: nil).startWithCompletionHandler {
                 (connection: FBSDKGraphRequestConnection!, result: AnyObject?, error: NSError?) -> Void in
                 if let error = error {
                     // Facebook Error? -> hand error to callback
-                    self.callback(nil, error)
+                    self.callback(nil, nil, error)
                 }
                 
                 if let fbUsername = result?["name"] as? String {
@@ -55,10 +55,10 @@ extension ParseLoginHelper : PFLogInViewControllerDelegate {
                     user.saveInBackgroundWithBlock({ (success: Bool, error: NSError?) -> Void in
                         if (success) {
                             // updated username could be stored -> call success
-                            self.callback(user, error)
+                            self.callback(user, nil, error)
                         } else {
                             // updating username failed -> hand error to callback
-                            self.callback(nil, error)
+                            self.callback(nil, nil, error)
                         }
                     })
                 } else {
@@ -69,7 +69,7 @@ extension ParseLoginHelper : PFLogInViewControllerDelegate {
                         code: ParseLoginHelper.usernameNotFoundErrorCode,
                         userInfo: userInfo
                     )
-                    self.callback(nil, error)
+                    self.callback(nil, nil, error)
                 }
             }
         }
@@ -80,7 +80,7 @@ extension ParseLoginHelper : PFLogInViewControllerDelegate {
 extension ParseLoginHelper : PFSignUpViewControllerDelegate {
     
     func signUpViewController(signUpController: PFSignUpViewController, didSignUpUser user: PFUser) {
-        self.callback(user, nil)
+        self.callback(user, signUpController, nil)
     }
     
 }
