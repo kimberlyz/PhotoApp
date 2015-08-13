@@ -43,7 +43,7 @@ class Notification : PFObject, PFSubclassing {
         acl.setReadAccess(true, forUser: toUser!)
         acl.setReadAccess(true, forUser: fromUser!)
         acl.setWriteAccess(true, forUser: fromUser!)
-        //acl.setWriteAccess(true, forUser: toUser!)
+        acl.setWriteAccess(true, forUser: toUser!)
         
         self.ACL = acl
         
@@ -53,24 +53,5 @@ class Notification : PFObject, PFSubclassing {
         imageFile!.saveInBackgroundWithBlock(nil)
         
         saveInBackgroundWithBlock(nil)
-        
-        /*
-        imageFile = PFFile(data: imageData!)
-        //println(imageFile)
-        imageFile!.saveInBackgroundWithBlock() {(result, error) in
-            if error != nil {
-                println(result)
-                println("Save of imageFile")
-            }
-            self.saveEventually() {(result, error) in
-                if error != nil {
-                    println(result)
-                    println("Save of total object")
-                }
-            }
-        } */
-        
-        //fromUser = PFUser.currentUser()
-
     }
 }

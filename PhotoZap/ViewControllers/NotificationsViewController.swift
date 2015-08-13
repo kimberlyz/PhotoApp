@@ -19,13 +19,9 @@ class NotificationsViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
-    //var friendPeerID: MCPeerID?
     let reachability = Reachability.reachabilityForInternetConnection()
     
     var notifications = [Notification]()
-    //var pendingNotifications = [Notification]()
-    
-    //var images = [UIImage]()
     
     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     
@@ -34,7 +30,7 @@ class NotificationsViewController: UIViewController {
     var delayedNotifications = [Notification]()
     
     // UHHH
-    var senderInfo = [AnyObject]()  // var dict: [String: AnyObject]
+    //var senderInfo = [AnyObject]()
     
     var notificationsSectionTitles : [String] = ["Received", "", "Pending"]
     
@@ -77,7 +73,6 @@ class NotificationsViewController: UIViewController {
     
     func refresh(refreshControl: UIRefreshControl) {
         getNotifications()
-        getDelayedNotifications()
         self.tableView.reloadData()
         refreshControl.endRefreshing()
     }
@@ -91,28 +86,6 @@ class NotificationsViewController: UIViewController {
             self.tableView.reloadData()
         }
     }
-    
-    func getDelayedNotifications() {
-        
-        /*
-        let query = Notification.query()
-        query!.fromLocalDatastore()
-
-        query!.findObjectsInBackgroundWithBlock({
-            (results: [AnyObject]?, error: NSError?) -> Void in
-            let relations = results as? [Notification] ?? []
-            
-            self.pendingNotifications = relations
-            
-            for what in self.pendingNotifications {
-                println(what)
-                
-            }
-        }) */
-        
-    }
-
-
 }
 
 extension NotificationsViewController: UITableViewDataSource {
@@ -147,15 +120,8 @@ extension NotificationsViewController: UITableViewDataSource {
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCellWithIdentifier("ZapCell") as! ZapTableViewCell
             
-
-            //cell.usernameLabel.text = friendPeerID.displayName
             cell.usernameLabel.text = self.zaps[indexPath.row].peerID?.displayName
             cell.photo = self.zaps[indexPath.row].image
-            //cell.photo = self.images[indexPath.row]
-
-
-            //let notificationObject = self.notifications[indexPath.row]
-            //cell.fromUser = notificationObject.objectForKey(ParseHelper.ParseNotificationFromUser) as? PFUser
 
             return cell
         } else if indexPath.section == 1 {
@@ -179,15 +145,10 @@ extension NotificationsViewController: UITableViewDataSource {
             
             let pendingNotificationObject = self.pendingNotifications[indexPath.row]
             
-            //cell.fromUser = PFUser.currentUser()!
             var pendingImage = UIImage(named: "PendingImage.png")
             
             cell.usernameLabel.text = pendingNotificationObject.toUserUsername
             cell.notificationsImageView.image = pendingImage
-            
-            //FromUser is not set when it is pending? OH wait no. I should set it. But maybe only set it when I send it?
-            //Or just add a variable. IsPending = true or false
-            // cell.fromUser = notificationObject.objectForKey(ParseHelper.ParseNotificationFromUser) as? PFUser
             
             return cell
         }
@@ -287,15 +248,6 @@ extension NotificationsViewController: UITableViewDataSource {
             let cell = tableView.dequeueReusableCellWithIdentifier("NotificationsCell") as! NotificationsTableViewCell
             
             let pendingNotificationObject = self.pendingNotifications[indexPath.row]
-
-            /*pendingNotificationObject.saveInBackgroundWithBlock(){ (result, error) in
-                if error != nil {
-                    println(result)
-                }
-
-            } */
-            
-            //pendingNotificationObject.unpinInBackgroundWithBlock(nil)
             
             // Initial reachability check
             if reachability.isReachable() {
@@ -331,66 +283,6 @@ extension NotificationsViewController: UITableViewDataSource {
                     println("Reachable via WiFi")
                     TSMessage.dismissActiveNotification()
                     TSMessage.showNotificationInViewController(self, title: "Image successfully sent!", subtitle: "", type: .Success, duration: 1.0, canBeDismissedByUser: true)
-                    
-//                    println(pendingNotificationObject)
-//                    //imageObject.saveInBackground()
-//                    pendingNotificationObject.saveInBackgroundWithBlock(nil)
-//                    pendingNotificationObject.unpinInBackground()
-                    
-                    //pendingNotificationObject
-                    
-
-//                    
-//                    let query2 = Notification.query()
-//                    query2!.fromLocalDatastore()
-//                    
-//                    query2!.findObjectsInBackgroundWithBlock({
-//                        (results: [AnyObject]?, error: NSError?) -> Void in
-//                        let relations = results as? [Notification] ?? []
-//                        
-//                        //self.pendingNotifications = relations
-//                        
-//                        for what in relations {
-//                            println(what)
-//                        }
-//                    })
-//                    
-                    //pendingNotificationObject.uploadNotification()
-                    //let pendingNotificationObjectId = pendingNotificationObject.objectId
-                    
-//                    let query = Notification.query()
-//                    query!.fromLocalDatastore()
-//                    query.getObjectInBackgroundWithId(pendingNotificationObjectId!).continueWithBlock({
-//                        (task: BFTask!) -> AnyObject! in
-//                        if task.error != nil {
-//                            // There was an error.
-//                            println("Errrrorororro")
-//                            return task
-//                        }
-//                        
-//                        let notificationObj = task.result as! PFObject
-//                        notificationObj.saveInBackgroundWithBlock(nil)
-//                        notificationObj.unpinInBackgroundWithBlock(nil)
-//                        //task.result
-//                        // task.result will be your game score
-//                        return task
-//                    })
-//                    
-                    
-                    /*
-                    pendingNotificationObject.fetchFromLocalDatastoreInBackground().continueWithBlock({
-                        (task: BFTask!) -> AnyObject! in
-                        if task.error != nil {
-                            // There was an error.
-                            println("Errrrror")
-                            return task
-                        }
-                        
-                        task.result.saveInBackgroundWithBlock(nil)
-                        task.result.unpinInBackgroundWithBlock(nil)
-                        // task.result will be your game score
-                        return task
-                    }) */
 
                     
                 } else { /* Cellular network */
@@ -437,6 +329,7 @@ extension NotificationsViewController: UITableViewDataSource {
                 query.getObjectInBackgroundWithId(notificationObjectId!) {
                     (notificationObj: PFObject?, error: NSError?) -> Void in
                     if error == nil && notificationObj != nil {
+                        println(notificationObj)
                         notificationObj!.deleteInBackgroundWithBlock(nil)
                         self.notifications.removeAtIndex(indexPath.row)
                         self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
@@ -449,9 +342,6 @@ extension NotificationsViewController: UITableViewDataSource {
             } else {
                 
             }
-            //ParseHelper.removeFriendRelationshipFromUser(PFUser.currentUser()!, user2: self.friendUsers[indexPath.row])
-            //self.friendUsers.removeAtIndex(indexPath.row)
-
         }
     }
 }
@@ -473,13 +363,3 @@ extension NotificationsViewController: UITableViewDelegate {
         }
     }
 }
-
-//extension NotificationsViewController: MPCManagerDelegate {
-//    func invitationWasReceived(fromPeer: String) {}
-//    func refreshConnectionStatus() {}
-//    func photoWasReceived(image: UIImage, fromPeer: MCPeerID) {
-//        self.friendPeerID = fromPeer
-//        self.images.insert(image, atIndex: 0)
-//        self.tableView.reloadData()
-//    }
-//}

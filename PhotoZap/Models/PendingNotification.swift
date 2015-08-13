@@ -13,8 +13,6 @@ class PendingNotification: Object {
     
     dynamic var toUserObjectId : String = ""
     dynamic var toUserUsername : String = ""
-//    dynamic var fromUserObjectId : String = ""
-//    dynamic var fromUserUsername : String = ""
     dynamic var imageData : NSData = NSData()
     
 }

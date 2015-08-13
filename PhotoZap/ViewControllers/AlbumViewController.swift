@@ -106,7 +106,7 @@ class AlbumViewController: UIViewController, CTAssetsPickerControllerDelegate {
     @IBAction func zapButtonTapped(sender: AnyObject) {
         zapBool = true
         
-        let alertController = UIAlertController(title: nil, message: "What would you like to do?", preferredStyle: .ActionSheet)
+        let alertController = UIAlertController(title: nil, message: "", preferredStyle: .ActionSheet)
         let sendPhotoAction = UIAlertAction(title: "Send Photo", style: .Default) { (action) in
             self.showAlbum()
         }
