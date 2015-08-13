@@ -80,6 +80,11 @@ class NotificationsViewController: UIViewController {
     func getNotifications() {
         ParseHelper.getNotifications(PFUser.currentUser()!) {
             (results: [AnyObject]?, error: NSError?) -> Void in
+            
+            if let error = error {
+                ParseErrorHandlingController.handleParseError(error)
+            }
+            
             let relations = results as? [Notification] ?? []
             
             self.notifications = relations
@@ -111,12 +116,6 @@ extension NotificationsViewController: UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-//        let cell = tableView.dequeueReusableCellWithIdentifier("NotificationsCell") as! NotificationsTableViewCell
-//        
-//        let notificationObject = self.notifications[indexPath.row]
-//        
-//        cell.fromUser = notificationObject.objectForKey(ParseHelper.ParseNotificationFromUser) as? PFUser
-        
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCellWithIdentifier("ZapCell") as! ZapTableViewCell
             
@@ -216,7 +215,7 @@ extension NotificationsViewController: UITableViewDataSource {
                             }
                         }
                     } else {
-                        println("error")
+                        ParseErrorHandlingController.handleParseError(error!)
                     }
                 }
             } else { /* If image is already downloaded, save the image */
@@ -237,7 +236,7 @@ extension NotificationsViewController: UITableViewDataSource {
                     if error == nil && notificationObj != nil {
                         notificationObj!.deleteInBackgroundWithBlock(nil)
                     } else {
-                        println("error")
+                        ParseErrorHandlingController.handleParseError(error!)
                     }
                 }
 
@@ -259,24 +258,27 @@ extension NotificationsViewController: UITableViewDataSource {
                     
                     query!.findObjectsInBackgroundWithBlock {
                         (results: [AnyObject]?, error: NSError?) -> Void in
+                        if error == nil {
+                            let results = results as? [PFUser] ?? []
                         
-                        let results = results as? [PFUser] ?? []
-                        
-                        for user in results {
-                            let notification = Notification()
-                            notification.toUser = user
-                            notification.fromUser = PFUser.currentUser()!
-                            notification.imageFile = PFFile(data: pendingNotificationObject.imageData)
+                            for user in results {
+                                let notification = Notification()
+                                notification.toUser = user
+                                notification.fromUser = PFUser.currentUser()!
+                                notification.imageFile = PFFile(data: pendingNotificationObject.imageData)
                             
-                            notification.uploadNotification()
+                                notification.uploadNotification()
                             
-                            realm.write() {
-                                realm.delete(pendingNotificationObject)
+                                realm.write() {
+                                    realm.delete(pendingNotificationObject)
+                                }
+                            
+                                self.pendingNotifications = realm.objects(PendingNotification)
+                                self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+                                //self.tableView.reloadData()
                             }
-                            
-                            self.pendingNotifications = realm.objects(PendingNotification)
-                            self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
-                            //self.tableView.reloadData()
+                        } else {
+                            ParseErrorHandlingController.handleParseError(error!)
                         }
                     }
                     
@@ -334,7 +336,7 @@ extension NotificationsViewController: UITableViewDataSource {
                         self.notifications.removeAtIndex(indexPath.row)
                         self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
                     } else {
-                        println("error")
+                        ParseErrorHandlingController.handleParseError(error!)
                     }
                 }
 

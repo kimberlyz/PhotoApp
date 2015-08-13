@@ -73,6 +73,11 @@ class FriendListViewController: UIViewController {
         // fill the cache of friend requests directed toward the user
         ParseHelper.getFriendRequests(PFUser.currentUser()!) {
             (results: [AnyObject]?, error: NSError?) -> Void in
+            
+            if let error = error {
+                ParseErrorHandlingController.handleParseError(error)
+            }
+            
             let relations = results as? [PFObject] ?? []
             
             self.requestingUsers = relations.map {
@@ -104,8 +109,13 @@ class FriendListViewController: UIViewController {
             
         ParseHelper.getFriendshipAsUserB(PFUser.currentUser()!) {
             (results: [AnyObject]?, error: NSError?) -> Void in
+            
+            if let error = error {
+                ParseErrorHandlingController.handleParseError(error)
+            }
+            
             let relations = results as? [PFObject] ?? []
-                
+
             friendUsers1 = relations.map {
                 $0.objectForKey(ParseHelper.ParseFriendshipUserA) as! PFUser
             }
@@ -113,7 +123,11 @@ class FriendListViewController: UIViewController {
             ParseHelper.getFriendshipAsUserA(PFUser.currentUser()!) {
                 (results: [AnyObject]?, error: NSError?) -> Void in
                 let relations = results as? [PFObject] ?? []
-                    
+                
+                if let error = error {
+                    ParseErrorHandlingController.handleParseError(error)
+                }
+                
                 friendUsers2 = relations.map {
                     $0.objectForKey(ParseHelper.ParseFriendshipUserB) as! PFUser
                 }

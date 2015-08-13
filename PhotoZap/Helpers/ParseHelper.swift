@@ -73,7 +73,12 @@ class ParseHelper {
             
             for notification in results {
                 
-                notification.deleteInBackgroundWithBlock(nil)
+                notification.deleteInBackgroundWithBlock{ (success: Bool, error: NSError?) -> Void in
+                    if error != nil {
+                        ParseErrorHandlingController.handleParseError(error!)
+                    }
+                }
+
 
 //                let imageObject = notification.objectForKey("image") as! PFObject
 //                imageObject.deleteInBackgroundWithBlock(nil)
@@ -150,7 +155,10 @@ class ParseHelper {
         acl.setWriteAccess(true, forUser: userB)
         
         friendshipObject.ACL = acl
-        friendshipObject.saveInBackgroundWithBlock(nil)
+        friendshipObject.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
+            
+        }
+        //friendshipObject.saveInBackgroundWithBlock(ParseErrorHandlingController.handleParseError(error))
     }
     
     static func getPendingFriendRequests(user: PFUser, completionBlock: PFArrayResultBlock) {
@@ -178,7 +186,11 @@ class ParseHelper {
             
             for friendship in results {
                 friendship.setObject(true, forKey: self.ParseFriendshipEstablishFriendship)
-                friendship.saveInBackgroundWithBlock(nil)
+                friendship.saveInBackgroundWithBlock{ (success: Bool, error: NSError?) -> Void in
+                    if error != nil {
+                        ParseErrorHandlingController.handleParseError(error!)
+                    }
+                }
             }
         }
     }
@@ -203,7 +215,11 @@ class ParseHelper {
             let results = results as? [PFObject] ?? []
             
             for friendship in results {
-                friendship.deleteInBackgroundWithBlock(nil)
+                friendship.deleteInBackgroundWithBlock{ (success: Bool, error: NSError?) -> Void in
+                    if error != nil {
+                        ParseErrorHandlingController.handleParseError(error!)
+                    }
+                }
             }
         }
     }
@@ -226,7 +242,11 @@ class ParseHelper {
             let results = results as? [PFObject] ?? []
             
             for friend in results {
-                friend.deleteInBackgroundWithBlock(nil)
+                friend.deleteInBackgroundWithBlock{ (success: Bool, error: NSError?) -> Void in
+                    if error != nil {
+                        ParseErrorHandlingController.handleParseError(error!)
+                    }
+                }
             }
         }
     }
@@ -244,7 +264,11 @@ class ParseHelper {
             let results = results as? [PFObject] ?? []
             
             for friend in results {
-                friend.deleteInBackgroundWithBlock(nil)
+                friend.deleteInBackgroundWithBlock{ (success: Bool, error: NSError?) -> Void in
+                    if error != nil {
+                        ParseErrorHandlingController.handleParseError(error!)
+                    }
+                }
             }
         }
         
@@ -259,7 +283,11 @@ class ParseHelper {
             let results = results as? [PFObject] ?? []
             
             for friend in results {
-                friend.deleteInBackgroundWithBlock(nil)
+                friend.deleteInBackgroundWithBlock{ (success: Bool, error: NSError?) -> Void in
+                    if error != nil {
+                        ParseErrorHandlingController.handleParseError(error!)
+                    }
+                }
             }
         }
     }

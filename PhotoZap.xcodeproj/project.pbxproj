@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		4DF94236657B40DD58D03286 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EB23EE8F0907A83F0AE0437 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		DB0A32441B581137009D332C /* ReceivedPhotoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0A32431B581137009D332C /* ReceivedPhotoTableViewCell.swift */; };
 		DB16251F1B5043B000EC0004 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB16251E1B5043B000EC0004 /* AppDelegate.swift */; };
 		DB1625241B5043B000EC0004 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB1625221B5043B000EC0004 /* Main.storyboard */; };
 		DB1625261B5043B000EC0004 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB1625251B5043B000EC0004 /* Images.xcassets */; };
@@ -35,6 +34,7 @@
 		DB6AC4691B5431430019C46E /* FriendListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6AC4681B5431430019C46E /* FriendListViewController.swift */; };
 		DB6AC46E1B5467A90019C46E /* PhotoTakingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6AC46D1B5467A90019C46E /* PhotoTakingHelper.swift */; };
 		DB6D6E431B6AD9200038F336 /* NearbyFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6D6E421B6AD9200038F336 /* NearbyFriendsViewController.swift */; };
+		DB90D8F21B7C759A00EB1EDE /* ParseErrorHandlingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB90D8F11B7C759A00EB1EDE /* ParseErrorHandlingController.swift */; };
 		DBA03C691B733D1B00E5D6BD /* ParseLoginHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA03C681B733D1B00E5D6BD /* ParseLoginHelper.swift */; };
 		DBA03C9D1B742D8B00E5D6BD /* SweetAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA03C9C1B742D8B00E5D6BD /* SweetAlert.swift */; };
 		DBAD5DF11B669E4C0076FE66 /* FriendRequestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBAD5DF01B669E4C0076FE66 /* FriendRequestTableViewCell.swift */; };
@@ -54,7 +54,6 @@
 		7EB23EE8F0907A83F0AE0437 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A800476FFE3279A54458090B /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		C28908C0763EB2D17CFE748D /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
-		DB0A32431B581137009D332C /* ReceivedPhotoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReceivedPhotoTableViewCell.swift; sourceTree = "<group>"; };
 		DB1625191B5043B000EC0004 /* PhotoZap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoZap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB16251D1B5043B000EC0004 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DB16251E1B5043B000EC0004 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -86,6 +85,7 @@
 		DB6AC46D1B5467A90019C46E /* PhotoTakingHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoTakingHelper.swift; sourceTree = "<group>"; };
 		DB6D6E421B6AD9200038F336 /* NearbyFriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyFriendsViewController.swift; sourceTree = "<group>"; };
 		DB8AB9881B6973B400401A18 /* PhotoZap-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PhotoZap-Bridging-Header.h"; sourceTree = "<group>"; };
+		DB90D8F11B7C759A00EB1EDE /* ParseErrorHandlingController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseErrorHandlingController.swift; sourceTree = "<group>"; };
 		DBA03C681B733D1B00E5D6BD /* ParseLoginHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseLoginHelper.swift; sourceTree = "<group>"; };
 		DBA03C6A1B733E5E00E5D6BD /* Bond.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bond.framework; path = "Pods/../build/Debug-iphoneos/Bond.framework"; sourceTree = "<group>"; };
 		DBA03C9C1B742D8B00E5D6BD /* SweetAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SweetAlert.swift; path = "../../../../../Downloads/SweetAlert-iOS-master/SweetAlert/SweetAlert.swift"; sourceTree = "<group>"; };
@@ -131,14 +131,6 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		DB0A32421B572DAE009D332C /* WiFiDirect */ = {
-			isa = PBXGroup;
-			children = (
-				DB0A32431B581137009D332C /* ReceivedPhotoTableViewCell.swift */,
-			);
-			path = WiFiDirect;
-			sourceTree = "<group>";
-		};
 		DB1625101B5043B000EC0004 = {
 			isa = PBXGroup;
 			children = (
@@ -165,7 +157,6 @@
 				DB6702231B717E0600908460 /* Notifications */,
 				DB67021A1B708DDD00908460 /* ChooseFriends */,
 				DB4657881B6FCF6400F801A3 /* ReceiveZap */,
-				DB0A32421B572DAE009D332C /* WiFiDirect */,
 				DB6168DB1B55BF5A00305D2E /* AddFriend */,
 				DB6168D61B55877400305D2E /* Helpers */,
 				DB6168D31B55746F00305D2E /* FriendList */,
@@ -232,6 +223,7 @@
 				DB4657821B6C525A00F801A3 /* MPCManager.swift */,
 				DB67022A1B71E32A00908460 /* ErrorHandling.swift */,
 				DBA03C681B733D1B00E5D6BD /* ParseLoginHelper.swift */,
+				DB90D8F11B7C759A00EB1EDE /* ParseErrorHandlingController.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -446,6 +438,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DB6702251B717E3C00908460 /* NotificationsTableViewCell.swift in Sources */,
+				DB90D8F21B7C759A00EB1EDE /* ParseErrorHandlingController.swift in Sources */,
 				DB51E05B1B75837100CD04E4 /* PendingNotification.swift in Sources */,
 				DB6AC46E1B5467A90019C46E /* PhotoTakingHelper.swift in Sources */,
 				DB51CAAD1B72F2A40024BBAC /* Notification.swift in Sources */,
@@ -463,7 +456,6 @@
 				DBA03C691B733D1B00E5D6BD /* ParseLoginHelper.swift in Sources */,
 				DB16251F1B5043B000EC0004 /* AppDelegate.swift in Sources */,
 				DB6D6E431B6AD9200038F336 /* NearbyFriendsViewController.swift in Sources */,
-				DB0A32441B581137009D332C /* ReceivedPhotoTableViewCell.swift in Sources */,
 				DB6702221B7164B100908460 /* NotificationsViewController.swift in Sources */,
 				DB67022B1B71E32A00908460 /* ErrorHandling.swift in Sources */,
 				DB6702191B708DD400908460 /* ChooseFriendsViewController.swift in Sources */,

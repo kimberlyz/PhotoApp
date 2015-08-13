@@ -47,7 +47,11 @@ class MPCManager: NSObject, MCSessionDelegate, MCNearbyServiceBrowserDelegate, M
         if userObject[ParseHelper.ParseUserLowercaseUsername] == nil {
             let lowercaseUsername = userObject.username?.lowercaseString
             userObject.setObject(lowercaseUsername!, forKey: ParseHelper.ParseUserLowercaseUsername)
-            userObject.saveInBackgroundWithBlock(nil)
+            userObject.saveInBackgroundWithBlock{ (success: Bool, error: NSError?) -> Void in
+                if error != nil {
+                    ParseErrorHandlingController.handleParseError(error!)
+                }
+            }
         }
 
         

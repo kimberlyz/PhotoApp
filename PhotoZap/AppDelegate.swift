@@ -32,6 +32,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             } else if let user = user {
                 // if login was successful, display the TabBarController
                 // 2
+                PFUser.enableRevocableSessionInBackground()
+                self.mpcManager = MPCManager()
                 
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 let tabBarController = storyboard.instantiateViewControllerWithIdentifier("TabBarController") as! UITabBarController
@@ -57,11 +59,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         Parse.enableLocalDatastore()
         // Set up Parse SDK
+        
         Parse.setApplicationId("nynNgfGlqdxWbUSTVOQWpssFFHumyGd3lOKfpOgU", clientKey:
             "coum5Edl90uh0ARRSbRRiDYd5g02noZkNk5JKxLs")
         
         // Done in the background
         PFAnalytics.trackAppOpenedWithLaunchOptionsInBackground(launchOptions, block: nil)
+        
         
         /*
         let notificationType = UIUserNotificationType.Alert | UIUserNotificationType.Badge
@@ -81,6 +85,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if (user != nil) {
             // 3
+            
+            PFUser.enableRevocableSessionInBackground()
             // if we have a user, set the TabBarController to be the initial View Controller
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             startViewController = storyboard.instantiateViewControllerWithIdentifier("TabBarController") as! UITabBarController

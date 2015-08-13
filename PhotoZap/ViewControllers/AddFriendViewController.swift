@@ -74,13 +74,13 @@ class AddFriendViewController: UIViewController {
         As soon as a query completes, this method updates the Table View.
     */
     func updateList(results: [AnyObject]?, error: NSError?) {
+        if let error = error {
+            ParseErrorHandlingController.handleParseError(error)
+        }
+        
         self.users = results as? [PFUser] ?? []
         self.tableView.reloadData()
-        /*
-        if let error = error {
-            ErrorHandling.defaultErrorHandler(error)
-        }
-        */
+
     }
 
     
@@ -104,6 +104,11 @@ class AddFriendViewController: UIViewController {
         
         ParseHelper.getFriendshipAsUserB(PFUser.currentUser()!) {
             (results: [AnyObject]?, error: NSError?) -> Void in
+            
+            if let error = error {
+                ParseErrorHandlingController.handleParseError(error)
+            }
+            
             let relations = results as? [PFObject] ?? []
             
             friendUsers1 = relations.map {
@@ -112,6 +117,11 @@ class AddFriendViewController: UIViewController {
             
             ParseHelper.getFriendshipAsUserA(PFUser.currentUser()!) {
                 (results: [AnyObject]?, error: NSError?) -> Void in
+
+                if let error = error {
+                    ParseErrorHandlingController.handleParseError(error)
+                }
+                
                 let relations = results as? [PFObject] ?? []
                 
                 friendUsers2 = relations.map {
@@ -147,6 +157,11 @@ class AddFriendViewController: UIViewController {
         // fill the cache of a user's pending friends
         ParseHelper.getPendingFriendRequests(PFUser.currentUser()!) {
             (results: [AnyObject]?, error: NSError?) -> Void in
+            
+            if let error = error {
+                ParseErrorHandlingController.handleParseError(error)
+            }
+            
             let relations = results as? [PFObject] ?? []
             
             // use map to extract the User from a Friendship object

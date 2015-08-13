@@ -220,6 +220,11 @@ class ChooseFriendsViewController: UIViewController {
         
         ParseHelper.getFriendshipAsUserB(PFUser.currentUser()!) {
             (results: [AnyObject]?, error: NSError?) -> Void in
+            
+            if let error = error {
+                ParseErrorHandlingController.handleParseError(error)
+            }
+            
             let relations = results as? [PFObject] ?? []
             
             friendUsers1 = relations.map {
@@ -228,6 +233,10 @@ class ChooseFriendsViewController: UIViewController {
             
             ParseHelper.getFriendshipAsUserA(PFUser.currentUser()!) {
                 (results: [AnyObject]?, error: NSError?) -> Void in
+                if let error = error {
+                    ParseErrorHandlingController.handleParseError(error)
+                }
+                
                 let relations = results as? [PFObject] ?? []
                 
                 friendUsers2 = relations.map {
