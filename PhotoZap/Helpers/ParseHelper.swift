@@ -138,6 +138,7 @@ class ParseHelper {
         let query = PFQuery(className: ParseFriendshipClass)
         query.whereKey(ParseFriendshipUserB, equalTo: user)
         query.whereKey(ParseFriendshipEstablishFriendship, equalTo: false)
+        query.includeKey(ParseFriendshipUserA)
         
         query.findObjectsInBackgroundWithBlock(completionBlock)
     }

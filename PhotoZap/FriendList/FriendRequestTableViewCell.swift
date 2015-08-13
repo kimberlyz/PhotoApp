@@ -28,18 +28,32 @@ class FriendRequestTableViewCell: UITableViewCell {
     var user: PFUser? {
         didSet {
             if let user = user {
+                user.fetchIfNeededInBackgroundWithBlock({ (userObject: PFObject?, error: NSError?) -> Void in
+                    if error != nil {
+                        ParseErrorHandlingController.handleParseError(error!)
+                    } else {
+                        let userPFObject = userObject as! PFUser
+                        self.usernameLabel.text = userPFObject["username"] as? String
+                        self.friendButton.selected = false
+                        self.friendButton.enabled = true
+                    }
+                })
+                //usernameLabel.text = user["username"] as? String
+            }
+            /*
+            if let user = user {
                 user.fetchIfNeededInBackground()
                 usernameLabel.text = user["username"] as? String
             }
             friendButton.selected = false
             friendButton.enabled = true
-//            rejectButton.hidden = false
+*/
         }
     }
     
     @IBAction func friendButtonTapped(sender: AnyObject) {
         
-        friendButton.selected = true
+        //friendButton.selected = true
         friendButton.enabled = false
         delegate?.cell(self, didSelectConfirmRequest: user!)
 

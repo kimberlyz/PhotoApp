@@ -15,9 +15,21 @@ class FriendListTableViewCell: UITableViewCell {
     
     var user: PFUser? {
         didSet {
+            /*
             if let user = user {
                 user.fetchIfNeededInBackground()
                 usernameLabel.text = user["username"] as? String
+            } */
+            if let user = user {
+                user.fetchIfNeededInBackgroundWithBlock({ (userObject: PFObject?, error: NSError?) -> Void in
+                    if error != nil {
+                        ParseErrorHandlingController.handleParseError(error!)
+                    } else {
+                        let userPFObject = userObject as! PFUser
+                        self.usernameLabel.text = userPFObject["username"] as? String
+                    }
+                })
+                //usernameLabel.text = user["username"] as? String
             }
         }
     }

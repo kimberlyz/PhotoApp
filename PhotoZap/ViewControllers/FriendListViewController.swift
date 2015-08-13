@@ -194,6 +194,7 @@ extension FriendListViewController: UITableViewDataSource {
         
         if section == 0 {
             return self.requestingUsers.count
+ 
         } else {
             return self.friendUsers.count ?? 0
         }
