@@ -45,6 +45,7 @@ class AlbumViewController: UIViewController, CTAssetsPickerControllerDelegate {
 //    override func viewWillAppear(animated: Bool) {
 //        super.viewWillAppear(true)
 //    }
+    
 
   
     override func viewDidAppear(animated: Bool) {
@@ -57,8 +58,8 @@ class AlbumViewController: UIViewController, CTAssetsPickerControllerDelegate {
         if reachability.isReachableViaWiFi(){
             
             WiFiButton.setTitle("Wi-Fi", forState: .Normal)
-            
-            if realm.objects(PendingNotification) != 0 && firstWarning {
+
+            if firstWarning && realm.objects(PendingNotification).first != nil  {
                 
                 SweetAlert().showAlert("You have Wi-Fi!", subTitle: "Would you like to send your pending notifications now?", style: AlertStyle.None, buttonTitle:"No", buttonColor: UIColor.colorFromRGB(0x66B2FF) , otherButtonTitle:  "Yes", otherButtonColor: UIColor.colorFromRGB(0x66B2FF/*0x90AEFF*/)) { (isOtherButton) -> Void in
                     if isOtherButton == true {
