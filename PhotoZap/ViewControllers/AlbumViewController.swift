@@ -23,6 +23,9 @@ class AlbumViewController: UIViewController, CTAssetsPickerControllerDelegate {
 
     var zapBool : Bool?
     
+    // checks whether you have been notified that you are on wi-fi when app launches
+    var firstWarning = true
+    
 //    var transactions: Results<Transaction>! {
 //        didSet {
 //            // Whenever notes update, update the table view
@@ -43,9 +46,10 @@ class AlbumViewController: UIViewController, CTAssetsPickerControllerDelegate {
 //        super.viewWillAppear(true)
 //    }
 
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(true)
-        
+  
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+    
         reachability.startNotifier()
         
         let realm = Realm()
@@ -54,51 +58,31 @@ class AlbumViewController: UIViewController, CTAssetsPickerControllerDelegate {
             
             WiFiButton.setTitle("Wi-Fi", forState: .Normal)
             
-            if realm.objects(PendingNotification) != 0  {
-                /*
-                SweetAlert().showAlert("No Wi-Fi connection.", subTitle: "Would you like to send the photo using cellular data?", style: AlertStyle.Warning, buttonTitle:"No thanks.", buttonColor: UIColor.colorFromRGB(0x66B2FF) , otherButtonTitle:  "Yes, send it.", otherButtonColor: UIColor.colorFromRGB(0x66B2FF/*0x90AEFF*/)) { (isOtherButton) -> Void in
-                if isOtherButton == true {
+            if realm.objects(PendingNotification) != 0 && firstWarning {
                 
-                println("Cancel Button  Pressed")
+                SweetAlert().showAlert("You have Wi-Fi!", subTitle: "Would you like to send your pending notifications now?", style: AlertStyle.None, buttonTitle:"No", buttonColor: UIColor.colorFromRGB(0x66B2FF) , otherButtonTitle:  "Yes", otherButtonColor: UIColor.colorFromRGB(0x66B2FF/*0x90AEFF*/)) { (isOtherButton) -> Void in
+                    if isOtherButton == true {
+                        // nothing
+                    }
+                    else {
+                        self.tabBarController!.selectedIndex = 1
+                        /// DO SOMETHING HERE!!!!! SEND IT
+                        //SweetAlert().showAlert("Image sent!", subTitle: "", style: AlertStyle.Success)
+                    }
                 }
-                else {
                 
-                /// DO SOMETHING HERE!!!!! SEND IT
-                SweetAlert().showAlert("Image sent!", subTitle: "", style: AlertStyle.Success)
-                }
-                
-                } */
-                /*
-                let alertController = UIAlertController(title: "You have pending notifications and Wi-Fi access!", message: "Would you like to send the photos now?", preferredStyle: UIAlertControllerStyle.Alert)
-                
-                
-                let yesAction = UIAlertAction(title: "Yes", style: .Default, handler: { (action) -> Void in
-                self.tabBarController!.selectedIndex = 1
-                })
-                
-                let noAction = UIAlertAction(title: "No", style: .Cancel, handler: nil)
-                
-                alertController.addAction(yesAction)
-                alertController.addAction(noAction)
-                
-                self.presentViewController(alertController, animated: true, completion: nil) */
+                firstWarning = false
             }
         } else {
             WiFiButton.setTitle("Wi-Fi Delay", forState: .Normal)
         }
+
     }
-    
-  /*
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-    
-        nearbyFriends = NearbyFriendsViewController()
-    } */
     
     @IBAction func zapButtonTapped(sender: AnyObject) {
         zapBool = true
         
-        let alertController = UIAlertController(title: nil, message: "", preferredStyle: .ActionSheet)
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
         let sendPhotoAction = UIAlertAction(title: "Send Photo", style: .Default) { (action) in
             self.showAlbum()
         }
@@ -198,9 +182,11 @@ extension AlbumViewController : CTAssetsPickerControllerDelegate {
                 
                 //transaction = Transaction()
                 
-                picker.dismissViewControllerAnimated(true, completion: nil)
+                //picker.dismissViewControllerAnimated(true, completion: nil)
                 //transaction!.assets = assets
                 //self.assets = assets
+                
+                picker.dismissViewControllerAnimated(true, completion: nil)
                 
                 let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
                 
@@ -209,13 +195,17 @@ extension AlbumViewController : CTAssetsPickerControllerDelegate {
                     let nearbyFriends = mainStoryboard.instantiateViewControllerWithIdentifier("NearbyFriendsNavigation") as! UINavigationController
                     (nearbyFriends.visibleViewController as! NearbyFriendsViewController).assets = assets
                     self.presentViewController(nearbyFriends, animated: true, completion: nil)
+                    
                     //self.performSegueWithIdentifier("NearbyFriendsNavigation", sender: self)
                 }
                 // Do Wi-Fi Delay
                 else {
+                    //let chooseFriends = mainStoryboard.instantiateViewControllerWithIdentifier("ChooseFriendsNavigation") as! UINavigationController
                     let chooseFriends = mainStoryboard.instantiateViewControllerWithIdentifier("ChooseFriendsNavigation") as! UINavigationController
                     (chooseFriends.visibleViewController as! ChooseFriendsViewController).assets = assets
                     self.presentViewController(chooseFriends, animated: true, completion: nil)
+                    //(chooseFriends.visibleViewController as! ChooseFriendsViewController).picker = picker
+                    //picker.dismissViewControllerAnimated(true, completion: nil)
                 }
             }
         }

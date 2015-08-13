@@ -12,6 +12,7 @@ import ConvenienceKit
 import Photos
 import RealmSwift
 import ReachabilitySwift
+//import CTAssetsPickerController
 
 
 
@@ -19,26 +20,12 @@ class ChooseFriendsViewController: UIViewController {
 
     var assets : [AnyObject] = []
     var friendUsers = [PFUser]()
-    var selectedFriendUsers = [PFUser]() /*{
-        didSet {
-            if selectedFriendUsers.count == 0 {
-                sendButton.enabled = false
-            } else {
-                sendButton.enabled = true
-            }
-        }
-    } */
+    var selectedFriendUsers = [PFUser]()
+    
+    //var picker : CTAssetsPickerController?
     
     let reachability = Reachability.reachabilityForInternetConnection()
-    
-//    var notes: Results<Transaction>! {
-//        didSet {
-//            // Whenever notes update, update the table view
-//            tableView?.reloadData()
-//        }
-//    }
 
-    
     @IBOutlet weak var tableView: UITableView!
     
     
@@ -131,6 +118,7 @@ class ChooseFriendsViewController: UIViewController {
                 //SweetAlert().showAlert("Photos sent!", subTitle: "", style: AlertStyle.Success)
                 SweetAlert().showAlert("Sending photos...", subTitle: "", style: AlertStyle.None)
                 self.dismissViewControllerAnimated(true, completion: nil)
+                //picker!.dismissViewControllerAnimated(false, completion: nil)
                 println("Reachable via WiFi")
 
             } else { /* If there is a celllular network */
