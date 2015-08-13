@@ -25,10 +25,26 @@ class ParseErrorHandlingController {
         func handleInvalidSessionTokenError() {
             
             let presentingViewController = UIApplication.sharedApplication().keyWindow?.rootViewController
-            
             let loginViewController = PFLogInViewController()
+            
+            let alertController = UIAlertController(title: "Logged out.", message: "Please log back in to continue using PhotoZap.", preferredStyle: .Alert)
+            let loginAction = UIAlertAction(title: "Login", style: .Default) { (action) in
+                presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
+                presentingViewController?.presentViewController(loginViewController, animated: true, completion: nil)
+            }
+            alertController.addAction(loginAction)
+            
+            presentingViewController?.presentViewController(alertController, animated: true, completion: nil)
+            
 
-            presentingViewController?.presentViewController(loginViewController, animated: true, completion: nil)
+            /*
+            if presentingViewController is UITabBarController {
+                println("Whatttt")
+            } else {
+                presentingViewController?.presentViewController(loginViewController, animated: true, completion: nil)
+            } */
+
+
         }
         
         switch (error.code) {
