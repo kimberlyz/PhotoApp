@@ -17,6 +17,7 @@ class AlbumViewController: UIViewController, CTAssetsPickerControllerDelegate {
     //var assets : [AnyObject] = []
     //var transaction : Transaction?
     
+    @IBOutlet weak var WiFiButton: UIButton!
     
     let reachability = Reachability.reachabilityForInternetConnection()
 
@@ -42,47 +43,37 @@ class AlbumViewController: UIViewController, CTAssetsPickerControllerDelegate {
 //        super.viewWillAppear(true)
 //    }
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true)
         
-//        let query = PFQuery(className:"Notification")
-//        query.fromLocalDatastore()
-//        
-//        query.findObjectsInBackgroundWithBlock({
-//            (results: [AnyObject]?, error: NSError?) -> Void in
-//            let relations = results as? [Notification] ?? []
-//            
-//            for what in relations {
-//                what.unpinInBackground()
-//                println("hi")
-//            }
-//        })
         reachability.startNotifier()
         
         let realm = Realm()
         
         if reachability.isReachableViaWiFi(){
-        
+            
+            WiFiButton.setTitle("Wi-Fi", forState: .Normal)
+            
             if realm.objects(PendingNotification) != 0  {
                 /*
                 SweetAlert().showAlert("No Wi-Fi connection.", subTitle: "Would you like to send the photo using cellular data?", style: AlertStyle.Warning, buttonTitle:"No thanks.", buttonColor: UIColor.colorFromRGB(0x66B2FF) , otherButtonTitle:  "Yes, send it.", otherButtonColor: UIColor.colorFromRGB(0x66B2FF/*0x90AEFF*/)) { (isOtherButton) -> Void in
-                    if isOtherButton == true {
-                        
-                        println("Cancel Button  Pressed")
-                    }
-                    else {
-                        
-                        /// DO SOMETHING HERE!!!!! SEND IT
-                        SweetAlert().showAlert("Image sent!", subTitle: "", style: AlertStyle.Success)
-                    }
-                    
+                if isOtherButton == true {
+                
+                println("Cancel Button  Pressed")
+                }
+                else {
+                
+                /// DO SOMETHING HERE!!!!! SEND IT
+                SweetAlert().showAlert("Image sent!", subTitle: "", style: AlertStyle.Success)
+                }
+                
                 } */
                 /*
                 let alertController = UIAlertController(title: "You have pending notifications and Wi-Fi access!", message: "Would you like to send the photos now?", preferredStyle: UIAlertControllerStyle.Alert)
                 
                 
                 let yesAction = UIAlertAction(title: "Yes", style: .Default, handler: { (action) -> Void in
-                    self.tabBarController!.selectedIndex = 1
+                self.tabBarController!.selectedIndex = 1
                 })
                 
                 let noAction = UIAlertAction(title: "No", style: .Cancel, handler: nil)
@@ -92,10 +83,11 @@ class AlbumViewController: UIViewController, CTAssetsPickerControllerDelegate {
                 
                 self.presentViewController(alertController, animated: true, completion: nil) */
             }
+        } else {
+            WiFiButton.setTitle("Wi-Fi Delay", forState: .Normal)
         }
-
-
     }
+    
   /*
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)

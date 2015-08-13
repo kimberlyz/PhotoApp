@@ -228,6 +228,9 @@
                         </variation>
                     </view>
                     <tabBarItem key="tabBarItem" title="Home" image="Home" id="OUe-e8-is0"/>
+                    <connections>
+                        <outlet property="WiFiButton" destination="1h4-5D-ajU" id="nJj-Gh-Y4m"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wq6-uh-y66" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
