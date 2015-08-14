@@ -15,9 +15,6 @@ import AMPopTip
 
 class AlbumViewController: UIViewController, CTAssetsPickerControllerDelegate {
     
-    //var assets : [AnyObject] = []
-    //var transaction : Transaction?
-    
     @IBOutlet weak var WiFiButton: UIButton!
     @IBOutlet weak var infoButton: UIButton!
     
@@ -29,28 +26,6 @@ class AlbumViewController: UIViewController, CTAssetsPickerControllerDelegate {
     
     // checks whether you have been notified that you are on wi-fi when app launches
     var firstWarning = true
-    
-//    var transactions: Results<Transaction>! {
-//        didSet {
-//            // Whenever notes update, update the table view
-//            println("Transaction assigned")
-//        }
-//    }
-    
-    /*
-    var freshLaunch = true
-    override func viewWillAppear(animated: Bool) {
-        if freshLaunch == true {
-            freshLaunch = false
-            self.tabBarController!.selectedIndex = 1 // 2nd tab
-        }
-    } */
-    
-//    override func viewWillAppear(animated: Bool) {
-//        super.viewWillAppear(true)
-//    }
-    
-
   
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
@@ -65,14 +40,9 @@ class AlbumViewController: UIViewController, CTAssetsPickerControllerDelegate {
 
             if firstWarning && realm.objects(PendingNotification).first != nil  {
                 
-                SweetAlert().showAlert("You have Wi-Fi!", subTitle: "Would you like to send your pending notifications now?", style: AlertStyle.None, buttonTitle:"No", buttonColor: UIColor.colorFromRGB(0x66B2FF) , otherButtonTitle:  "Yes", otherButtonColor: UIColor.colorFromRGB(0x66B2FF/*0x90AEFF*/)) { (isOtherButton) -> Void in
-                    if isOtherButton == true {
-                        // nothing
-                    }
-                    else {
+                SweetAlert().showAlert("You have Wi-Fi!", subTitle: "Would you like to send your pending notifications now?", style: AlertStyle.None, buttonTitle:"No", buttonColor: UIColor.colorFromRGB(0x66B2FF) , otherButtonTitle:  "Yes", otherButtonColor: UIColor.colorFromRGB(0x66B2FF)) { (isOtherButton) -> Void in
+                    if isOtherButton == false {
                         self.tabBarController!.selectedIndex = 1
-                        /// DO SOMETHING HERE!!!!! SEND IT
-                        //SweetAlert().showAlert("Image sent!", subTitle: "", style: AlertStyle.Success)
                     }
                 }
                 
@@ -126,9 +96,6 @@ class AlbumViewController: UIViewController, CTAssetsPickerControllerDelegate {
         
         
         self.presentViewController(alertController, animated: true, completion: nil)
-        
-            
-        // showAlbum()
     }
     
     @IBAction func wifiButtonTapped(sender: AnyObject) {
@@ -142,11 +109,6 @@ class AlbumViewController: UIViewController, CTAssetsPickerControllerDelegate {
     }
     
     @IBAction func infoButton(sender: AnyObject) {
-
-
-        //let rect = self.view.convertRect(rect: infoButton.frame, fromView: infoButton.superview)
-        
-        //CGRect rect = self.view.convertRect(infoButton.frame, fromView: infoButton.superview)
         
         infoPopTip.shouldDismissOnTap = true
         infoPopTip.popoverColor = UIColor.colorFromRGB(0x2664C1)
@@ -169,8 +131,6 @@ class AlbumViewController: UIViewController, CTAssetsPickerControllerDelegate {
                 
                 var picker = CTAssetsPickerController()
                 picker.delegate = self
-                //self.presentViewController(picker, animated: true, completion: nil)
-                
                 
                 // create options for fetching photo only
                 var fetchOptions = PHFetchOptions()
@@ -181,9 +141,6 @@ class AlbumViewController: UIViewController, CTAssetsPickerControllerDelegate {
 
                 // set default album (Camera Roll)
                 picker.defaultAssetCollection = PHAssetCollectionSubtype.SmartAlbumUserLibrary
-                
-                // hide cancel button;
-                // picker.showsCancelButton = false
                 
                 // make done button enable even without selection
                 picker.alwaysEnableDoneButton = true
@@ -208,12 +165,6 @@ extension AlbumViewController : CTAssetsPickerControllerDelegate {
         else {
             if let zapBool = zapBool {
                 
-                //transaction = Transaction()
-                
-                //picker.dismissViewControllerAnimated(true, completion: nil)
-                //transaction!.assets = assets
-                //self.assets = assets
-                
                 picker.dismissViewControllerAnimated(true, completion: nil)
                 
                 let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
@@ -237,7 +188,6 @@ extension AlbumViewController : CTAssetsPickerControllerDelegate {
                 }
             }
         }
-        // tableView.reloadData
     }
     
     func assetsPickerController(picker: CTAssetsPickerController!, shouldSelectAsset asset: PHAsset!) -> Bool {

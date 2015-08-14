@@ -28,18 +28,11 @@ class NotificationsViewController: UIViewController {
     var zaps = [Zap]()
 
     var delayedNotifications = [Notification]()
-    
-    // UHHH
-    //var senderInfo = [AnyObject]()
+
     
     var notificationsSectionTitles : [String] = ["Received", "", "Pending"]
     
-    var pendingNotifications: Results<PendingNotification>! /*{
-        didSet {
-            // Whenever notes update, update the table view
-            tableView?.reloadData()
-        }
-    } */
+    var pendingNotifications: Results<PendingNotification>!
     
     lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
@@ -52,7 +45,6 @@ class NotificationsViewController: UIViewController {
         super.viewWillAppear(animated)
         
         getNotifications()
-        //getDelayedNotifications()
         
         self.zaps = appDelegate.mpcManager.zaps
     }
@@ -102,8 +94,6 @@ extension NotificationsViewController: UITableViewDataSource {
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
             return self.zaps.count
-            //return self.images.count
-            //return self.notifications.count
         } else if section == 1 {
             return self.notifications.count
         } else {
@@ -160,19 +150,17 @@ extension NotificationsViewController: UITableViewDataSource {
             
             let selectedCell = tableView.cellForRowAtIndexPath(indexPath) as! ZapTableViewCell
         
-            // if photo has been downloaded, download the image. Otherwise, don't do anything.
-            //if selectedCell.photo != nil {
-                UIImageWriteToSavedPhotosAlbum(selectedCell.photo, nil, nil, nil)
-                TSMessage.showNotificationInViewController(self, title: "Image saved!", subtitle: "", type: .Success, duration: 1.0, canBeDismissedByUser: true)
+
+            UIImageWriteToSavedPhotosAlbum(selectedCell.photo, nil, nil, nil)
+            TSMessage.showNotificationInViewController(self, title: "Image saved!", subtitle: "", type: .Success, duration: 1.0, canBeDismissedByUser: true)
                 
-                let cellIndexPath = self.tableView.indexPathForCell(selectedCell)
+            let cellIndexPath = self.tableView.indexPathForCell(selectedCell)
                 
-                self.zaps.removeAtIndex(cellIndexPath!.row)
-                appDelegate.mpcManager.zaps.removeAtIndex(cellIndexPath!.row)
+            self.zaps.removeAtIndex(cellIndexPath!.row)
+            appDelegate.mpcManager.zaps.removeAtIndex(cellIndexPath!.row)
                 
-                self.tableView.deleteRowsAtIndexPaths([cellIndexPath!], withRowAnimation: UITableViewRowAnimation.Automatic)
-                //self.images.removeAtIndex(cellIndexPath!.row)
-            //}
+            self.tableView.deleteRowsAtIndexPaths([cellIndexPath!], withRowAnimation: UITableViewRowAnimation.Automatic)
+
             
         } else if indexPath.section == 1 { /* Is an image sent from Wi-Fi */
             let selectedCell = tableView.cellForRowAtIndexPath(indexPath) as! NotificationsTableViewCell
@@ -181,7 +169,6 @@ extension NotificationsViewController: UITableViewDataSource {
             
             // Image hasn't been downloaded yet, so download it
             if notificationObject.imagePic == nil {
-                //let query = PFQuery(className: ParseNotificationClass)
                 
                 let query = PFQuery(className:ParseHelper.ParseNotificationClass)
                 let notificationObjectId = notificationObject.objectId
@@ -200,7 +187,6 @@ extension NotificationsViewController: UITableViewDataSource {
                             (imageData: NSData?, error: NSError?) -> Void in
                             if (error == nil) {
                                 if let imageData = imageData {
-                                    //let image = UIImage(data: imageData, scale:1.0)!
                                     
                                     let image = UIImage(data: imageData)
                                     notificationObject.imagePic = image
@@ -275,7 +261,6 @@ extension NotificationsViewController: UITableViewDataSource {
                             
                                 self.pendingNotifications = realm.objects(PendingNotification)
                                 self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
-                                //self.tableView.reloadData()
                             }
                         } else {
                             ParseErrorHandlingController.handleParseError(error!)
@@ -289,7 +274,7 @@ extension NotificationsViewController: UITableViewDataSource {
                     
                 } else { /* Cellular network */
                     println("Reachable via Cellular Network")
-                    SweetAlert().showAlert("No Wi-Fi connection.", subTitle: "Would you like to send the photo using cellular data?", style: AlertStyle.Warning, buttonTitle:"No thanks.", buttonColor: UIColor.colorFromRGB(0x66B2FF) , otherButtonTitle:  "Yes, send it.", otherButtonColor: UIColor.colorFromRGB(0x66B2FF/*0x90AEFF*/)) { (isOtherButton) -> Void in
+                    SweetAlert().showAlert("No Wi-Fi connection.", subTitle: "Would you like to send the photo using cellular data?", style: AlertStyle.Warning, buttonTitle:"No thanks.", buttonColor: UIColor.colorFromRGB(0x66B2FF) , otherButtonTitle:  "Yes, send it.", otherButtonColor: UIColor.colorFromRGB(0x66B2FF)) { (isOtherButton) -> Void in
                         if isOtherButton == true {
                             
                             println("Cancel Button  Pressed")
@@ -319,7 +304,6 @@ extension NotificationsViewController: UITableViewDataSource {
                                         
                                         self.pendingNotifications = realm.objects(PendingNotification)
                                         self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
-                                        //self.tableView.reloadData()
                                     }
                                 } else {
                                     ParseErrorHandlingController.handleParseError(error!)

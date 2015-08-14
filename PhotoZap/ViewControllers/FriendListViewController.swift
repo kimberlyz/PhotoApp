@@ -26,11 +26,7 @@ class FriendListViewController: UIViewController {
     
     var friendUsers: [PFUser] = []
     var currentFriendUsers: [PFUser] = []
-    var friendUsersCount = -1
-    
     var requestingUsers: [PFUser] = []
-    //var currentRequestingUsers: [PFUser] = []
-    var requestingUsersCount = -1
     
     lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
@@ -62,8 +58,7 @@ class FriendListViewController: UIViewController {
         
         getFriendshipForUser()
         getFriendRequests()
-        
-        //self.tableView.reloadData()
+
         refreshControl.endRefreshing()
     }
     
@@ -83,19 +78,8 @@ class FriendListViewController: UIViewController {
                 $0.objectForKey(ParseHelper.ParseFriendshipUserA) as! PFUser
             }
             
-            /*
-            if self.currentRequestingUsers.count != self.requestingUsers.count {
-                self.requestingUsers = self.currentRequestingUsers
-                self.tableView.reloadData()
-            } */
-            
-            
-            //if self.requestingUsersCount != self.requestingUsers.count {
 
-           //     self.requestingUsersCount = self.requestingUsers.count
-                self.tableView.reloadData()
-            //}
-            
+            self.tableView.reloadData()
         }
     }
 
@@ -103,8 +87,6 @@ class FriendListViewController: UIViewController {
         
         var friendUsers1 : [PFUser]?
         var friendUsers2 : [PFUser]?
-        
-        //self.friendUsers = []
             
         ParseHelper.getFriendshipAsUserB(PFUser.currentUser()!) {
             (results: [AnyObject]?, error: NSError?) -> Void in
@@ -131,50 +113,19 @@ class FriendListViewController: UIViewController {
                     $0.objectForKey(ParseHelper.ParseFriendshipUserB) as! PFUser
                 }
                 
-                /*
                 self.friendUsers = []
-                
                 if let friend1 = friendUsers1 {
                     self.friendUsers += friend1
                 }
-                
+                    
                 if let friend2 = friendUsers2 {
                     self.friendUsers += friend2
                 }
                 
-                
-                // Sort friends by their usernames alphabetically
-                self.currentFriendUsers.sort({ $0.username < $1.username })
-                
-                println("Current Friends: \(self.currentFriendUsers)")
-                println("Friends: \(self.friendUsers)")
-                
-                if self.currentFriendUsers.count != self.friendUsers.count {
-                    self.friendUsers = self.currentFriendUsers
-                    self.tableView.reloadData()
-                } */
-                
-                
-                // If your list of friends has changed (# of friends has changed),
-                // add the friends to the array and reload the tableView
-                //if self.friendUsersCount != self.friendUsers.count {
-                    self.friendUsers = []
-                    if let friend1 = friendUsers1 {
-                        self.friendUsers += friend1
-                    }
-                    
-                    if let friend2 = friendUsers2 {
-                        self.friendUsers += friend2
-                    }
-                    
-                    // Keep number of friends up-to-date
-                    //self.friendUsersCount = self.friendUsers.count
-                    
-                    // Sort friends by their usernames alphabetically
-                    self.friendUsers.sort({ $0.username < $1.username })
+                self.friendUsers.sort({ $0.username < $1.username })
 
-                    self.tableView.reloadData()
-                //}
+                self.tableView.reloadData()
+
             }
         }
     }
@@ -188,10 +139,6 @@ extension FriendListViewController: UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-       // return self.friendUsers?.count ?? 0
-        
-       // var sectionTitle = friendSectionTitles[section]
-        
         if section == 0 {
             return self.requestingUsers.count
  
@@ -233,8 +180,7 @@ extension FriendListViewController: UITableViewDataSource {
                 ParseHelper.rejectFriendRequest(self.requestingUsers[indexPath.row], userB: PFUser.currentUser()!)
                 //update local cache
                 self.requestingUsers.removeAtIndex(indexPath.row)
-                
-                //self.tableView.reloadData()
+
             } else {
                 ParseHelper.removeFriendRelationshipFromUser(PFUser.currentUser()!, user2: self.friendUsers[indexPath.row])
                 self.friendUsers.removeAtIndex(indexPath.row)
@@ -273,36 +219,8 @@ extension FriendListViewController: FriendRequestTableViewCellDelegate {
         self.friendUsers.append(user)
         
         removeObjectFromArray(user, &self.requestingUsers)
-        
-        //cell.rejectButton.hidden = true
-    }
-    
-    
-    /*
-    func cell(cell: FriendRequestTableViewCell, didSelectRejectRequest user: PFUser) {
-        
-        
-        let alertController = UIAlertController(title: "Reject \(user.username!)'s request?", message: "", preferredStyle: UIAlertControllerStyle.Alert)
-        
-        let dismissAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
-        let yesAction = UIAlertAction(title: "Yes", style: .Default) { (action) -> Void in
-            //if var requestingUsers = self.requestingUsers {
-                ParseHelper.rejectFriendRequest(user, userB: PFUser.currentUser()!)
-                //update local cache
-                removeObjectFromArray(user, &self.requestingUsers)
-                
-                //self.requestingUsers = requestingUsers
-                
-                self.tableView.reloadData()
-            //}
-        }
-        
-        alertController.addAction(dismissAction)
-        alertController.addAction(yesAction)
 
-        self.presentViewController(alertController, animated: true, completion: nil)
-        
-    } */
+    }
 }
 
 

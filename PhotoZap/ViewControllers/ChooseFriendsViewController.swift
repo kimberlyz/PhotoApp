@@ -58,8 +58,8 @@ class ChooseFriendsViewController: UIViewController {
                     pendingNotification.toUserUsername = friend.username!
                     pendingNotification.imageData = imageData
                 
-                    realm.write() { // 2
-                        realm.add(pendingNotification) // 3
+                    realm.write() {
+                        realm.add(pendingNotification)
                     }
                 }
             }
@@ -91,7 +91,13 @@ class ChooseFriendsViewController: UIViewController {
                                 notification.fromUser = PFUser.currentUser()!
                                 notification.imageFile = PFFile(data: imageData)
                             
-                                notification.uploadNotification()
+                                notification.uploadNotification { (success: Bool, error: NSError?) -> Void in
+                                    if error != nil {
+                                        ParseErrorHandlingController.handleParseError(error!)
+                                    } else {
+                                        println("success!")
+                                    }
+                                }
                             }
                         }
                     }
@@ -174,8 +180,7 @@ extension ChooseFriendsViewController: UITableViewDataSource {
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("ChooseFriendsCell") as! ChooseFriendsTableViewCell
-        
-        // if foundPeers is not empty
+
         let user = friendUsers[indexPath.row]
         cell.user = user
         

@@ -37,7 +37,7 @@ class Notification : PFObject, PFSubclassing {
     }
     
     
-    func uploadNotification() {
+    func uploadNotification(completionBlock: (Bool, NSError?) -> Void) {
         
         let acl = PFACL()
         acl.setReadAccess(true, forUser: toUser!)
@@ -46,12 +46,9 @@ class Notification : PFObject, PFSubclassing {
         acl.setWriteAccess(true, forUser: toUser!)
         
         self.ACL = acl
-        
-        //imageFile = PFFile(data: imageData!)
-        
-        println("hello: \(imageFile)")
+
         imageFile!.saveInBackgroundWithBlock(nil)
         
-        saveInBackgroundWithBlock(nil)
+        saveInBackgroundWithBlock(completionBlock)
     }
 }

@@ -25,12 +25,8 @@ class AddFriendViewController: UIViewController {
         for a server response.
     */
     
-    // Keeps track of how many times friendUsers has been accessed
-    
     var friendUsers: [PFUser] = []
-    //var friendUsersCount = -1
 
-    
     var pendingUsers: [PFUser]? {
         didSet {
             tableView.reloadData()
@@ -95,6 +91,24 @@ class AddFriendViewController: UIViewController {
 
     }
     
+    func getPendingFriendsForUser() {
+        // fill the cache of a user's pending friends
+        ParseHelper.getPendingFriendRequests(PFUser.currentUser()!) {
+            (results: [AnyObject]?, error: NSError?) -> Void in
+            
+            if let error = error {
+                ParseErrorHandlingController.handleParseError(error)
+            }
+            
+            let relations = results as? [PFObject] ?? []
+            
+            // use map to extract the User from a Friendship object
+            self.pendingUsers = relations.map {
+                $0.objectForKey(ParseHelper.ParseFriendshipUserB) as! PFUser
+            }
+        }
+    }
+    
     func getFriendshipForUser() {
         
         var friendUsers1 : [PFUser]?
@@ -126,52 +140,19 @@ class AddFriendViewController: UIViewController {
                     $0.objectForKey(ParseHelper.ParseFriendshipUserB) as! PFUser
                 }
                 
-                // If your list of friends has changed (# of friends has changed),
-                // add the friends to the array and reload the tableView
-                //if self.friendUsersCount != self.friendUsers.count {
-                    self.friendUsers = []
-                    if let friend1 = friendUsers1 {
-                        self.friendUsers += friend1
-                    }
+                self.friendUsers = []
+                if let friend1 = friendUsers1 {
+                    self.friendUsers += friend1
+                }
                     
-                    if let friend2 = friendUsers2 {
-                        self.friendUsers += friend2
-                    }
-                    
-                    // Keep number of friends up-to-date
-                   // self.friendUsersCount = self.friendUsers.count
-                    
-                    // Sort friends by their usernames alphabetically
-                    //self.friendUsers.sort({ $0.username < $1.username })
-                    
-                    //self.tableView.reloadData()
-                //}
+                if let friend2 = friendUsers2 {
+                    self.friendUsers += friend2
+                }
+
             }
         }
+
     }
-
-    
-    func getPendingFriendsForUser() {
-        // fill the cache of a user's pending friends
-        ParseHelper.getPendingFriendRequests(PFUser.currentUser()!) {
-            (results: [AnyObject]?, error: NSError?) -> Void in
-            
-            if let error = error {
-                ParseErrorHandlingController.handleParseError(error)
-            }
-            
-            let relations = results as? [PFObject] ?? []
-            
-            // use map to extract the User from a Friendship object
-            self.pendingUsers = relations.map {
-                $0.objectForKey(ParseHelper.ParseFriendshipUserB) as! PFUser
-            }
-        }
-    }
-    
-
-    
-
 }
 
 // MARK: TableView Data Source
@@ -201,7 +182,7 @@ extension AddFriendViewController: UITableViewDataSource {
         cell.delegate = self
         return cell
     }
-
+    
 }
 
 // MARK: Searchbar Delegate
@@ -239,7 +220,7 @@ extension AddFriendViewController: AddFriendTableViewCellDelegate {
         if var pendingUsers = pendingUsers {
             ParseHelper.removeFriendRequest(PFUser.currentUser()!, userB: user)
             //update local cache
-            removeObjectFromArray(user, &pendingUsers)
+            removeObjectFromArray(user, &self.pendingUsers!)
         
             self.pendingUsers = pendingUsers
         }

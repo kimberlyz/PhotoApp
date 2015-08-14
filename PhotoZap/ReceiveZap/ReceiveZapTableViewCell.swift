@@ -44,14 +44,6 @@ class ReceiveZapTableViewCell: UITableViewCell {
         }
     }
     
-    
-//    var connection : Connection {
-//    didSet {
-    //        cell.usernameLabel.text = appDelegate.mpcManager.foundPeers[indexPath.row].displayName
-    //        cell.connectionStatusLabel.text = self.connectionState
-//    }
-//}
-    
     func displayStatus() {
         usernameLabel.text = peer?.displayName
         
@@ -62,14 +54,6 @@ class ReceiveZapTableViewCell: UITableViewCell {
                 state = .Connected
             }
         }
-        
-        
-        // is my peer a member of appDelegate.mpcManager.connectedPeers
-    }
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
     }
 
 }

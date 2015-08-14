@@ -12,7 +12,6 @@ import Parse
 
 protocol FriendRequestTableViewCellDelegate: class {
     func cell(cell: FriendRequestTableViewCell, didSelectConfirmRequest user: PFUser)
-    //func cell(cell: FriendRequestTableViewCell, didSelectRejectRequest user: PFUser)
 }
 
 class FriendRequestTableViewCell: UITableViewCell {
@@ -20,8 +19,6 @@ class FriendRequestTableViewCell: UITableViewCell {
 
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var friendButton: UIButton!
-    
-    //@IBOutlet weak var rejectButton: UIButton!
     
     weak var delegate: FriendRequestTableViewCellDelegate?
     
@@ -38,31 +35,12 @@ class FriendRequestTableViewCell: UITableViewCell {
                         self.friendButton.enabled = true
                     }
                 })
-                //usernameLabel.text = user["username"] as? String
             }
-            /*
-            if let user = user {
-                user.fetchIfNeededInBackground()
-                usernameLabel.text = user["username"] as? String
-            }
-            friendButton.selected = false
-            friendButton.enabled = true
-*/
         }
     }
     
     @IBAction func friendButtonTapped(sender: AnyObject) {
-        
-        //friendButton.selected = true
         friendButton.enabled = false
         delegate?.cell(self, didSelectConfirmRequest: user!)
-
-    }
-    
-    /*
-    @IBAction func rejectButton(sender: AnyObject) {
-        delegate?.cell(self, didSelectRejectRequest: user!)
-    } */
-    
-    
+    }    
 }

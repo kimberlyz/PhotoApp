@@ -26,7 +26,6 @@ class ChooseFriendsTableViewCell: UITableViewCell {
                         self.usernameLabel.text = userPFObject["username"] as? String
                     }
                 })
-                //usernameLabel.text = user["username"] as? String
             }
         }
     }

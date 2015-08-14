@@ -29,7 +29,6 @@ class NearbyFriendsViewController: UIViewController, UITableViewDelegate, UITabl
         super.viewDidLoad()
 
         appDelegate.mpcManager.delegate = self
-        //appDelegate.mpcManager.delegate = self
         
         appDelegate.mpcManager.advertiser.startAdvertisingPeer()
         isAdvertising = true
@@ -44,8 +43,7 @@ class NearbyFriendsViewController: UIViewController, UITableViewDelegate, UITabl
     
     override func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(animated)
-        
-        //appDelegate.mpcManager.foundPeers = [MCPeerID]()
+
         appDelegate.mpcManager.advertiser.stopAdvertisingPeer()
     }
     
@@ -56,87 +54,24 @@ class NearbyFriendsViewController: UIViewController, UITableViewDelegate, UITabl
         } else {
 
         
-        var i = 1
-        for asset in (assets as! [PHAsset]) {
-            PHImageManager.defaultManager().requestImageDataForAsset(asset, options: nil) {
-                (imageData: NSData!, dataUTI: String!, orientation: UIImageOrientation, info: [NSObject : AnyObject]!) -> Void in
-                
-                var error: NSError?
-                self.appDelegate.mpcManager.session.sendData(imageData, toPeers: self.appDelegate.mpcManager.session.connectedPeers, withMode: .Reliable, error: &error)
-                if error != nil {
-                    let ac = UIAlertController(title: "Send error", message: error!.localizedDescription, preferredStyle: .Alert)
-                    ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
-                    self.presentViewController(ac, animated: true, completion: nil)
-                }
-        }
-            
-
-        //let imageData = UIImagePNGRepresentation(newImage)
-        
-        // Send it to all peers, ensuring it gets delivered.
-
-        
-        // Show an error message if there's a problem.
-
-        /*
-        println("SendButtonTapped")
-        
-        let tempDir = NSURL.fileURLWithPath(NSTemporaryDirectory(), isDirectory: true)
-        
-        var numOfSends = assets.count + self.appDelegate.mpcManager.connectedPeers.count
-        var countingNumOfSends = 0
-        
-        for asset in (assets/*transaction!.assets*/ as! [PHAsset]) {
-            
-
-            //var fileURL  = NSURL()
-            
-//          let tempPath = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.CachesDirectory, NSSearchPathDomainMask.UserDomainMask, true).last
-        
-            //var errorFileHandle : NSError?
-
-            
-            PHImageManager.defaultManager().requestImageDataForAsset(asset, options: nil) {
-                (imageData: NSData!, dataUTI: String!, orientation: UIImageOrientation, info: [NSObject : AnyObject]!) -> Void in
-               
-                
-                //let imageData = UIImagePNGRepresentation(newImage)
-                
-                // Send it to all peers, ensuring it gets delivered.
-                var error: NSError?
-                
-                self.appDelegate.mpcManager.session.sendData(imageData, toPeers: self.appDelegate.mpcManager.session.connectedPeers, withMode: .Reliable, error: &error)
-                //sendNotification()
-                
-                // Show an error message if there's a problem.
-                if error != nil {
-                    let ac = UIAlertController(title: "Send error", message: error!.localizedDescription, preferredStyle: .Alert)
-                    ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
-                    self.presentViewController(ac, animated: true, completion: nil)
-                }
-
-                
-                /*
-                fileURL = info["PHImageFileURLKey"] as! NSURL
-                let fileName = fileURL.lastPathComponent
-                let newTempFileURL = tempDir?.URLByAppendingPathComponent(fileName!)
-                
-                NSFileManager.defaultManager().createFileAtPath(newTempFileURL!.path!, contents: imageData, attributes: nil)
-                
-                println(newTempFileURL)
-                println("yay")
-                
-                for peer in self.appDelegate.mpcManager.connectedPeers {
-                    var progress = self.appDelegate.mpcManager.session.sendResourceAtURL(newTempFileURL, withName: newTempFileURL!.lastPathComponent, toPeer: peer) { (error: NSError?) -> Void in
-                        NSLog("Error: \(error)")
-                        TSMessage.showNotificationInViewController(self, title: "\(countingNumOfSends) out of \(numOfSends) images sent!", subtitle: "", type: .Success, duration: 1.0, canBeDismissedByUser: true)
+            var i = 1
+            for asset in (assets as! [PHAsset]) {
+                PHImageManager.defaultManager().requestImageDataForAsset(asset, options: nil) {
+                    (imageData: NSData!, dataUTI: String!, orientation: UIImageOrientation, info: [NSObject : AnyObject]!) -> Void in
+                    
+                    var error: NSError?
+                    self.appDelegate.mpcManager.session.sendData(imageData, toPeers: self.appDelegate.mpcManager.session.connectedPeers, withMode: .Reliable, error: &error)
+                    if error != nil {
+                        let ac = UIAlertController(title: "Send error", message: error!.localizedDescription, preferredStyle: .Alert)
+                        ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+                        self.presentViewController(ac, animated: true, completion: nil)
                     }
-                } */
-            } */
-        }
+                }
+
+            }
         
-        self.dismissViewControllerAnimated(true, completion: nil)
-        SweetAlert().showAlert("Sending Photos...", subTitle: "", style: AlertStyle.None)
+            self.dismissViewControllerAnimated(true, completion: nil)
+            SweetAlert().showAlert("Sending Photos...", subTitle: "", style: AlertStyle.None)
         }
         
     }
@@ -162,22 +97,6 @@ extension NearbyFriendsViewController: MPCManagerDelegate {
                 SweetAlert().showAlert("Decline!", subTitle: "", style: AlertStyle.Error)
             }
         }
-        
-        /*
-        let alertController = UIAlertController(title: "", message: "\(fromPeer) wants to chat with you.", preferredStyle: UIAlertControllerStyle.Alert)
-        
-        let acceptAction: UIAlertAction = UIAlertAction(title: "Accept", style: UIAlertActionStyle.Default) { (action) in
-            self.appDelegate.mpcManager.invitationHandler(true, self.appDelegate.mpcManager.session)
-        }
-        
-        let declineAction = UIAlertAction(title: "Decline", style: UIAlertActionStyle.Cancel) { (action) in
-            self.appDelegate.mpcManager.invitationHandler(false, nil)
-        }
-        
-        alertController.addAction(acceptAction)
-        alertController.addAction(declineAction) */
-        
-        //self.presentViewController(alertController, animated: true, completion: nil)
     }
 }
 

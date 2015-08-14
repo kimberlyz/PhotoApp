@@ -15,11 +15,6 @@ class FriendListTableViewCell: UITableViewCell {
     
     var user: PFUser? {
         didSet {
-            /*
-            if let user = user {
-                user.fetchIfNeededInBackground()
-                usernameLabel.text = user["username"] as? String
-            } */
             if let user = user {
                 user.fetchIfNeededInBackgroundWithBlock({ (userObject: PFObject?, error: NSError?) -> Void in
                     if error != nil {
@@ -29,24 +24,7 @@ class FriendListTableViewCell: UITableViewCell {
                         self.usernameLabel.text = userPFObject["username"] as? String
                     }
                 })
-                //usernameLabel.text = user["username"] as? String
             }
         }
     }
-    
-    
-    
-    
-    /*
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
- */
 }
