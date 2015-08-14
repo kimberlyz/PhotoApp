@@ -11,6 +11,7 @@ import MultipeerConnectivity
 import Bond
 import Photos
 import AMPopTip
+import Mixpanel
 
 class ReceiveZapViewController: UIViewController {
 
@@ -47,6 +48,7 @@ class ReceiveZapViewController: UIViewController {
 
     @IBAction func backButtonTapped(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
+        Mixpanel.sharedInstance().track("Zap receiver", properties: ["Button": "Back"])
     }
 
     @IBAction func infoButtonTapped(sender: AnyObject) {
@@ -57,6 +59,7 @@ class ReceiveZapViewController: UIViewController {
         if infoPopTip.isVisible {
             infoPopTip.hide()
         } else {
+            Mixpanel.sharedInstance().track("Zap receiver", properties: ["Button": "Info"])
             infoPopTip.showText("Wait for your friend to select a photo and arrive at the waiting screen.\nYour friend's username should now show up in this screen.\nTap on the row to start connecting with your friend.", direction: .Down, maxWidth: 320, inView: self.view, fromFrame: infoButton.frame)
         }
 
@@ -74,7 +77,7 @@ extension ReceiveZapViewController: UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        println(appDelegate.mpcManager.foundPeers.count)
+        //println(appDelegate.mpcManager.foundPeers.count)
         return appDelegate.mpcManager.foundPeers.count
     }
     

@@ -74,8 +74,8 @@ class MPCManager: NSObject, MCSessionDelegate, MCNearbyServiceBrowserDelegate, M
 extension MPCManager: MCNearbyServiceBrowserDelegate {
     func browser(browser: MCNearbyServiceBrowser!, foundPeer peerID: MCPeerID!, withDiscoveryInfo info: [NSObject : AnyObject]!) {
         foundPeers.append(peerID)
-        println("Found Peer on receiving end")
-        println(foundPeers)
+        //println("Found Peer on receiving end")
+        //println(foundPeers)
         connectionStatus.value = .NotConnected
     }
     
@@ -97,7 +97,7 @@ extension MPCManager: MCNearbyServiceBrowserDelegate {
 
 extension MPCManager: MCNearbyServiceAdvertiserDelegate {
     func advertiser(advertiser: MCNearbyServiceAdvertiser!, didReceiveInvitationFromPeer peerID: MCPeerID!, withContext context: NSData!, invitationHandler: ((Bool, MCSession!) -> Void)!) {
-        println("received invitation")
+        //println("received invitation")
         self.invitationHandler = invitationHandler
         delegate?.invitationWasReceived(peerID.displayName)
     }

@@ -12,6 +12,7 @@ import Photos
 import TSMessages
 import Bond
 import AMPopTip
+import Mixpanel
 
 class NearbyFriendsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, MPCManagerDelegate {
 
@@ -31,6 +32,7 @@ class NearbyFriendsViewController: UIViewController, UITableViewDelegate, UITabl
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        
         appDelegate.mpcManager.delegate = self
         
         appDelegate.mpcManager.advertiser.startAdvertisingPeer()
@@ -38,7 +40,7 @@ class NearbyFriendsViewController: UIViewController, UITableViewDelegate, UITabl
         
         status = Bond<MCSessionState> () { value in
             self.tableView.reloadData()
-            println(self.appDelegate.mpcManager.connectedPeers)
+            //println(self.appDelegate.mpcManager.connectedPeers)
         }
         
         appDelegate.mpcManager.connectionStatus ->> status
@@ -55,7 +57,7 @@ class NearbyFriendsViewController: UIViewController, UITableViewDelegate, UITabl
         if appDelegate.mpcManager.connectedPeers.count == 0 {
             SweetAlert().showAlert("No Friends Connected.", subTitle: "Please make sure you are connected with some friends before sending photos.", style: AlertStyle.None)
         } else {
-
+            Mixpanel.sharedInstance().track("Zap sender", properties: ["Button": "Sent photos"])
         
             var i = 1
             for asset in (assets as! [PHAsset]) {
@@ -81,6 +83,7 @@ class NearbyFriendsViewController: UIViewController, UITableViewDelegate, UITabl
 
     @IBAction func cancelButtonTapped(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
+        Mixpanel.sharedInstance().track("Zap sender", properties: ["Button": "Cancel"])
     }
     
     @IBAction func infoButtonTapped(sender: AnyObject) {
@@ -91,6 +94,7 @@ class NearbyFriendsViewController: UIViewController, UITableViewDelegate, UITabl
         if infoPopTip.isVisible {
             infoPopTip.hide()
         } else {
+            Mixpanel.sharedInstance().track("Zap sender", properties: ["Button": "Info"])
             infoPopTip.showText("Your friends need to:\n1. Be nearby\n2. Open the app\n3. Tap on the zap button\n4. Tap on the receive photo button\n5. Tap on your username to connect", direction: .Down, maxWidth: 320, inView: self.view, fromFrame: infoButton.frame)
         }
     }

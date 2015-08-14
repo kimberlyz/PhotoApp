@@ -9,6 +9,7 @@
 import UIKit
 import Parse
 import ConvenienceKit
+import Mixpanel
 
 class FriendListViewController: UIViewController {
 
@@ -23,10 +24,13 @@ class FriendListViewController: UIViewController {
     It is used to update the UI immediately upon user interaction instead of waiting
     for a server response.
     */
+
     
     var friendUsers: [PFUser] = []
     var currentFriendUsers: [PFUser] = []
     var requestingUsers: [PFUser] = []
+    
+    let mixpanel: Mixpanel = Mixpanel.sharedInstance()
     
     lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
@@ -40,6 +44,8 @@ class FriendListViewController: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        
+        self.mixpanel.track("TabBar", properties: ["Screen": "Friendlist"])
         
         getFriendRequests()
         getFriendshipForUser()

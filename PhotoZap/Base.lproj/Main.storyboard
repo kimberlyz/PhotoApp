@@ -193,7 +193,7 @@
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="100" id="ci0-9i-wBm"/>
                                     <constraint firstAttribute="height" relation="lessThanOrEqual" constant="500" id="nRf-Bu-wZX"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="70"/>
                                 <state key="normal" title="Zap">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -210,7 +210,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1h4-5D-ajU">
                                 <rect key="frame" x="0.0" y="64" width="600" height="244"/>
                                 <color key="backgroundColor" red="0.0" green="0.50196081399917603" blue="0.50196081399917603" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="70"/>
                                 <state key="normal" title="Wi-Fi">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -394,16 +394,8 @@
                             <constraint firstItem="5eW-3D-hA9" firstAttribute="top" secondItem="QmD-Xj-tVL" secondAttribute="bottom" id="ubW-hL-PZ7"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Notifications" id="3HE-aj-AGr">
-                        <barButtonItem key="rightBarButtonItem" title="Settings" id="whA-To-Maj">
-                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                            <connections>
-                                <action selector="settingsButtonTapped:" destination="zAI-6q-dtg" id="0NY-8h-wqQ"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Notifications" id="3HE-aj-AGr"/>
                     <connections>
-                        <outlet property="settingsButton" destination="whA-To-Maj" id="vlD-XK-6d8"/>
                         <outlet property="tableView" destination="5eW-3D-hA9" id="2iM-Pi-Djh"/>
                     </connections>
                 </viewController>

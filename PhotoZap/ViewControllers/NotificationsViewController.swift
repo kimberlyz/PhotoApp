@@ -14,11 +14,11 @@ import TSMessages
 import ReachabilitySwift
 import MultipeerConnectivity
 import RealmSwift
+import Mixpanel
 
 class NotificationsViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var settingsButton: UIBarButtonItem!
     
     let reachability = Reachability.reachabilityForInternetConnection()
     
@@ -47,6 +47,7 @@ class NotificationsViewController: UIViewController {
         
         getNotifications()
         
+        Mixpanel.sharedInstance().track("TabBar", properties: ["Screen": "Notifications"])
         self.zaps = appDelegate.mpcManager.zaps
         
     }
@@ -84,10 +85,6 @@ class NotificationsViewController: UIViewController {
             self.notifications = relations
             self.tableView.reloadData()
         }
-    }
-    
-    @IBAction func settingsButtonTapped(sender: AnyObject) {
-
     }
 }
 
@@ -166,6 +163,7 @@ extension NotificationsViewController: UITableViewDataSource {
             appDelegate.mpcManager.zaps.removeAtIndex(cellIndexPath!.row)
                 
             self.tableView.deleteRowsAtIndexPaths([cellIndexPath!], withRowAnimation: UITableViewRowAnimation.Automatic)
+            Mixpanel.sharedInstance().track("Notifications", properties: ["Selected cell": "Zap"])
 
             
         } else if indexPath.section == 1 { /* Is an image sent from Wi-Fi */
@@ -176,13 +174,14 @@ extension NotificationsViewController: UITableViewDataSource {
             // Image hasn't been downloaded yet, so download it
             if notificationObject.imagePic == nil {
                 
+                Mixpanel.sharedInstance().track("Notifications", properties: ["Selected cell": "Wi-Fi Download from Parse"])
                 let query = PFQuery(className:ParseHelper.ParseNotificationClass)
                 let notificationObjectId = notificationObject.objectId
                 
                 query.getObjectInBackgroundWithId(notificationObjectId!) {
                     (notificationObj: PFObject?, error: NSError?) -> Void in
                     if error == nil && notificationObj != nil {
-                        println(notificationObj)
+                        //println(notificationObj)
                         
                         let imageFile = notificationObj!.objectForKey(ParseHelper.ParseNotificationImageFile) as! PFFile
                         notificationObject.imageFile = imageFile
@@ -211,10 +210,11 @@ extension NotificationsViewController: UITableViewDataSource {
                     }
                 }
             } else { /* If image is already downloaded, save the image */
+                Mixpanel.sharedInstance().track("Notifications", properties: ["Selected cell": "Wi-Fi Download to Phone"])
                 TSMessage.showNotificationInViewController(self, title: "Image saved!", subtitle: "", type: .Success, duration: 1.0, canBeDismissedByUser: true)
                 
                 UIImageWriteToSavedPhotosAlbum(notificationObject.imagePic, nil, nil, nil)
-                println("Image Saved")
+                //println("Image Saved")
                 
                 let cellIndexPath = self.tableView.indexPathForCell(selectedCell)
                 self.notifications.removeAtIndex(cellIndexPath!.row)
@@ -243,7 +243,7 @@ extension NotificationsViewController: UITableViewDataSource {
             // Initial reachability check
             if reachability.isReachable() {
                 if reachability.isReachableViaWiFi() {
-                    
+                    Mixpanel.sharedInstance().track("Notifications", properties: ["Selected cell": "Pending Notification"])
                     let realm = Realm()
                     let query = PFUser.query()
                     query!.whereKey("objectId", equalTo: pendingNotificationObject.toUserObjectId)
@@ -261,8 +261,10 @@ extension NotificationsViewController: UITableViewDataSource {
                             
                                 notification.uploadNotification { (success: Bool, error: NSError?) -> Void in
                                     if error != nil {
+                                        Mixpanel.sharedInstance().track("Failed send", properties: ["Method": "Pending Use Wi-Fi"])
                                         SweetAlert().showAlert("Upload failed.", subTitle: "Leaving photo in the pending section.", style: AlertStyle.Warning)
                                     } else {
+                                        Mixpanel.sharedInstance().track("Successful send", properties: ["Method": "Pending Use Wi-Fi"])
                                         realm.write() {
                                             realm.delete(pendingNotificationObject)
                                         }
@@ -278,20 +280,21 @@ extension NotificationsViewController: UITableViewDataSource {
                         }
                     }
                     
-                    println("Reachable via WiFi")
+                    //println("Reachable via WiFi")
                     TSMessage.dismissActiveNotification()
                     TSMessage.showNotificationInViewController(self, title: "Image successfully sent!", subtitle: "", type: .Success, duration: 1.0, canBeDismissedByUser: true)
 
                     
                 } else { /* Cellular network */
-                    println("Reachable via Cellular Network")
+                    //println("Reachable via Cellular Network")
                     SweetAlert().showAlert("No Wi-Fi connection.", subTitle: "Would you like to send the photo using cellular data?", style: AlertStyle.Warning, buttonTitle:"No thanks.", buttonColor: UIColor.colorFromRGB(0x66B2FF) , otherButtonTitle:  "Yes, send it.", otherButtonColor: UIColor.colorFromRGB(0x66B2FF)) { (isOtherButton) -> Void in
                         if isOtherButton == true {
-                            
-                            println("Cancel Button  Pressed")
+                            Mixpanel.sharedInstance().track("Notifications", properties: ["Send Pending": "Didn't use Cellular Data"])
+                            //println("Cancel Button  Pressed")
                         }
                         else {
-                            
+                            Mixpanel.sharedInstance().track("Notifications", properties: ["Send Pending": "Used Cellular Data"])
+
                             let realm = Realm()
                             let query = PFUser.query()
                             query!.whereKey("objectId", equalTo: pendingNotificationObject.toUserObjectId)
@@ -310,7 +313,9 @@ extension NotificationsViewController: UITableViewDataSource {
                                         notification.uploadNotification { (success: Bool, error: NSError?) -> Void in
                                             if error != nil {
                                                 SweetAlert().showAlert("Upload failed.", subTitle: "Leaving photo in the pending section.", style: AlertStyle.Warning)
+                                                Mixpanel.sharedInstance().track("Failed send", properties: ["Method": "Pending Use Cellular"])
                                             } else {
+                                                Mixpanel.sharedInstance().track("Successful send", properties: ["Method": "Pending Use Cellular"])
                                                 realm.write() {
                                                     realm.delete(pendingNotificationObject)
                                                 }
@@ -334,7 +339,6 @@ extension NotificationsViewController: UITableViewDataSource {
                 }
             } else { /* No connection at all */
                 SweetAlert().showAlert("No Connection.", subTitle: "Sorry, can't send a photo right now.", style: AlertStyle.None)
-                println("NOOOO")
             }
             
         }

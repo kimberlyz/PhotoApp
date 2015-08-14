@@ -12,6 +12,7 @@ import ConvenienceKit
 import Photos
 import RealmSwift
 import ReachabilitySwift
+import Mixpanel
 //import CTAssetsPickerController
 
 class ChooseFriendsViewController: UIViewController {
@@ -29,7 +30,7 @@ class ChooseFriendsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         reachability.startNotifier()
         
         friendUsers = [PFUser]()
@@ -43,6 +44,7 @@ class ChooseFriendsViewController: UIViewController {
     }
     
     func delaySend() {
+        Mixpanel.sharedInstance().track("Wi-Fi Choose Friends", properties: ["Method": "Wi-Fi Delay"])
         
         let realm = Realm()
         
@@ -68,6 +70,7 @@ class ChooseFriendsViewController: UIViewController {
     
     @IBAction func cancelButtonTapped(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
+        Mixpanel.sharedInstance().track("Wi-Fi Choose Friends", properties: ["Button": "Cancel"])
     }
 
     @IBAction func sendButtonTapped(sender: AnyObject) {
@@ -79,6 +82,7 @@ class ChooseFriendsViewController: UIViewController {
         // Initial reachability check
             if reachability.isReachable() {
                 if reachability.isReachableViaWiFi() {
+                    Mixpanel.sharedInstance().track("Wi-Fi Choose Friends", properties: ["Method": "Wi-Fi"])
                     
                     for var i = 0; i < self.assets.count; i++ {
                         let asset = self.assets[i] as! PHAsset
@@ -105,9 +109,10 @@ class ChooseFriendsViewController: UIViewController {
                                         }
                                         
                                         SweetAlert().showAlert("Upload failed.", subTitle: "Putting the photo in the pending section.", style: .Warning)
+                                        Mixpanel.sharedInstance().track("Failed send", properties: ["Method": "Wi-Fi"])
                                         
                                     } else {
-                                        println("success!")
+                                        Mixpanel.sharedInstance().track("Successful send", properties: ["Method": "Wi-Fi"])
                                     }
                                 }
                             }
@@ -117,13 +122,11 @@ class ChooseFriendsViewController: UIViewController {
                     SweetAlert().showAlert("Sending photos...", subTitle: "", style: AlertStyle.None)
                     self.dismissViewControllerAnimated(true, completion: nil)
                     //picker!.dismissViewControllerAnimated(false, completion: nil)
-                    println("Reachable via WiFi")
 
                 } else { /* If there is a cellular network */
                     delaySend()
                     SweetAlert().showAlert("No Wi-Fi connection.", subTitle: "Putting the photos in the pending section. Will notify you to send them once you get Wi-Fi.", style: AlertStyle.None)
                     self.dismissViewControllerAnimated(true, completion: nil)
-                    println("Reachable via Cellular Network")
                 }
             } else { /* Was able to select friends in time, but lost connection */
                 delaySend()

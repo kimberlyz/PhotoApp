@@ -12,6 +12,7 @@ import CTAssetsPickerController
 import ReachabilitySwift
 import RealmSwift
 import AMPopTip
+import Mixpanel
 
 class AlbumViewController: UIViewController, CTAssetsPickerControllerDelegate {
     
@@ -25,6 +26,7 @@ class AlbumViewController: UIViewController, CTAssetsPickerControllerDelegate {
     
     let infoPopTip = AMPopTip()
     let wiFiInfoPopTip = AMPopTip()
+    let mixpanel: Mixpanel = Mixpanel.sharedInstance()
     
     // checks whether you have been notified that you are on wi-fi when app launches
     var firstWarning = true
@@ -36,6 +38,9 @@ class AlbumViewController: UIViewController, CTAssetsPickerControllerDelegate {
         
         let realm = Realm()
         
+        self.mixpanel.track("TabBar", properties: ["Screen": "Home"])
+
+        
         if reachability.isReachableViaWiFi(){
             
             WiFiButton.setTitle("Wi-Fi", forState: .Normal)
@@ -45,6 +50,9 @@ class AlbumViewController: UIViewController, CTAssetsPickerControllerDelegate {
                 SweetAlert().showAlert("You have Wi-Fi!", subTitle: "Would you like to send your pending notifications now?", style: AlertStyle.None, buttonTitle:"No", buttonColor: UIColor.colorFromRGB(0x66B2FF) , otherButtonTitle:  "Yes", otherButtonColor: UIColor.colorFromRGB(0x66B2FF)) { (isOtherButton) -> Void in
                     if isOtherButton == false {
                         self.tabBarController!.selectedIndex = 1
+                        self.mixpanel.track("Pending Notifications Alert", properties: ["Selected": "Yes"])
+                    } else {
+                        self.mixpanel.track("Pending Notifications Alert", properties: ["Selected": "No"])
                     }
                 }
                 
@@ -62,6 +70,7 @@ class AlbumViewController: UIViewController, CTAssetsPickerControllerDelegate {
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
         let sendPhotoAction = UIAlertAction(title: "Send Photo", style: .Default) { (action) in
             self.showAlbum()
+            self.mixpanel.track("Home Screen", properties: ["Button": "Zap Send Photo"])
         }
         
         let receivePhotoAction = UIAlertAction(title: "Receive Photo", style: .Default) { (action) in
@@ -83,14 +92,15 @@ class AlbumViewController: UIViewController, CTAssetsPickerControllerDelegate {
                         
                         let receiveZap = mainStoryboard.instantiateViewControllerWithIdentifier("ReceiveZapNavigation") as! UINavigationController
                         self.presentViewController(receiveZap, animated: true, completion: nil)
+                        self.mixpanel.track("Home Screen", properties: ["Button": "Zap Receive Photo"])
                     }
                 }
             }
-            
-
         }
         
-        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
+            self.mixpanel.track("Home Screen", properties: ["Button": "Zap Cancel"])
+        }
         
         alertController.addAction(sendPhotoAction)
         alertController.addAction(receivePhotoAction)
@@ -102,6 +112,7 @@ class AlbumViewController: UIViewController, CTAssetsPickerControllerDelegate {
     
     @IBAction func wifiButtonTapped(sender: AnyObject) {
         if reachability.isReachable() {
+            self.mixpanel.track("Home Screen", properties: ["Button": "WiFi Send"])
             zapBool = false
             showAlbum()
         } else {
@@ -119,6 +130,7 @@ class AlbumViewController: UIViewController, CTAssetsPickerControllerDelegate {
         if infoPopTip.isVisible {
             infoPopTip.hide()
         } else {
+            self.mixpanel.track("Home Screen", properties: ["Info Button": "Zap"])
             infoPopTip.showText("Instantly send photos.\nSome setup required.", direction: .Right, maxWidth: 320, inView: self.view, fromFrame: infoButton.frame)
         }
 
@@ -131,6 +143,7 @@ class AlbumViewController: UIViewController, CTAssetsPickerControllerDelegate {
         if wiFiInfoPopTip.isVisible {
             wiFiInfoPopTip.hide()
         } else {
+            self.mixpanel.track("Home Screen", properties: ["Info Button": "WiFi"])
             wiFiInfoPopTip.showText("With Wi-Fi: No delay when sending photos.\nNo Wi-Fi, but with cellular connection: Delay.\nNo setup required.", direction: .Down, maxWidth: 320, inView: self.view, fromFrame: WiFiInfoButton.frame)
         }
 
@@ -174,6 +187,7 @@ extension AlbumViewController : CTAssetsPickerControllerDelegate {
         // If no photos were selected, dismiss CTAssetsPickerController
         if assets.count == 0 {
             picker.dismissViewControllerAnimated(true, completion: nil)
+            self.mixpanel.track("Album", properties: ["Button": "No Photos Selected"])
         }
         // If photos were selected, check for the method of sending
         else {
@@ -188,6 +202,7 @@ extension AlbumViewController : CTAssetsPickerControllerDelegate {
                     let nearbyFriends = mainStoryboard.instantiateViewControllerWithIdentifier("NearbyFriendsNavigation") as! UINavigationController
                     (nearbyFriends.visibleViewController as! NearbyFriendsViewController).assets = assets
                     self.presentViewController(nearbyFriends, animated: true, completion: nil)
+                    self.mixpanel.track("Album", properties: ["Button": "Zap Photos Selected"])
                     
                     //self.performSegueWithIdentifier("NearbyFriendsNavigation", sender: self)
                 }
@@ -197,6 +212,7 @@ extension AlbumViewController : CTAssetsPickerControllerDelegate {
                     let chooseFriends = mainStoryboard.instantiateViewControllerWithIdentifier("ChooseFriendsNavigation") as! UINavigationController
                     (chooseFriends.visibleViewController as! ChooseFriendsViewController).assets = assets
                     self.presentViewController(chooseFriends, animated: true, completion: nil)
+                    self.mixpanel.track("Album", properties: ["Button": "Wi-Fi Photos Selected"])
                     //(chooseFriends.visibleViewController as! ChooseFriendsViewController).picker = picker
                     //picker.dismissViewControllerAnimated(true, completion: nil)
                 }

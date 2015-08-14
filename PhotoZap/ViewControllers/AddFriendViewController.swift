@@ -9,6 +9,7 @@
 import UIKit
 import ConvenienceKit
 import Parse
+import Mixpanel
 
 class AddFriendViewController: UIViewController {
 
@@ -82,6 +83,8 @@ class AddFriendViewController: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        Mixpanel.sharedInstance().track("TabBar", properties: ["Screen": "Add Friend"])
+
         
         state = .DefaultMode
         
