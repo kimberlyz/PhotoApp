@@ -93,10 +93,29 @@ class AlbumViewController: UIViewController, CTAssetsPickerControllerDelegate {
         }
         
         let receivePhotoAction = UIAlertAction(title: "Receive Photo", style: .Default) { (action) in
-            let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+            PHPhotoLibrary.requestAuthorization() { (status:PHAuthorizationStatus) in
+                dispatch_async(dispatch_get_main_queue()) {
+                    
+                    switch (status)
+                    {
+                    case .NotDetermined:
+                        SweetAlert().showAlert("Can't access photos!", subTitle: "Please enable photo access in your settings.", style: AlertStyle.Warning)
+                        
+                    case .Restricted:
+                        SweetAlert().showAlert("Can't access photos!", subTitle: "Please enable photo access in your settings.", style: AlertStyle.Warning)
+                      
+                    case .Denied:
+                        SweetAlert().showAlert("Can't access photos!", subTitle: "Please enable photo access in your settings.", style: AlertStyle.Warning)
+                    case .Authorized:
+                        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                        
+                        let receiveZap = mainStoryboard.instantiateViewControllerWithIdentifier("ReceiveZapNavigation") as! UINavigationController
+                        self.presentViewController(receiveZap, animated: true, completion: nil)
+                    }
+                }
+            }
             
-            let receiveZap = mainStoryboard.instantiateViewControllerWithIdentifier("ReceiveZapNavigation") as! UINavigationController
-            self.presentViewController(receiveZap, animated: true, completion: nil)
+
         }
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
@@ -147,21 +166,6 @@ class AlbumViewController: UIViewController, CTAssetsPickerControllerDelegate {
         
         PHPhotoLibrary.requestAuthorization() { (status:PHAuthorizationStatus) in
             dispatch_async(dispatch_get_main_queue()) {
-                
-                switch (status)
-                {
-                case .Authorized:
-                    println("Authorized")
-                    
-                case .Denied:
-                    println("Denied")
-                case .Restricted:
-                    println("Restricted")
-                    
-                case .NotDetermined:
-                    println("Not determined")
-                    
-                }
                 
                 var picker = CTAssetsPickerController()
                 picker.delegate = self

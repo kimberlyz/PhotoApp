@@ -9,6 +9,7 @@
 import UIKit
 import MultipeerConnectivity
 import Bond
+import Photos
 
 class ReceiveZapViewController: UIViewController {
 
@@ -22,28 +23,10 @@ class ReceiveZapViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-
-        
         appDelegate.mpcManager.browser.startBrowsingForPeers()
         
         
         status = Bond<MCSessionState> () { value in
-            // println("State has changed \(value)")
-            
-                switch value {
-                case .Connected:
-                    //self.tableView.reloadData()
-                    println("value: Connected")
-                    
-                case .Connecting:
-                    println("value: Connecting")
-                    
-                case .NotConnected:
-                    println("Value: Not connected")
-                }
-            
-        
-            println(self.appDelegate.mpcManager.connectedPeers)
             self.tableView.reloadData()
         }
         

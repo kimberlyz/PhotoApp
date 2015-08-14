@@ -57,8 +57,6 @@ class AddFriendViewController: UIViewController {
             switch (state) {
             case .DefaultMode:
                 println("Default Mode")
-                //
-                //query = ParseHelper.allUsers(updateList)
                 
             case .SearchMode:
                 let searchText = searchBar?.text ?? ""

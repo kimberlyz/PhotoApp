@@ -202,9 +202,14 @@
                                     <action selector="wifiButtonTapped:" destination="StI-Ir-0gR" eventType="touchUpInside" id="k7E-m9-ExE"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qnI-0w-Cq7">
-                                <rect key="frame" x="15" y="286" width="66" height="30"/>
-                                <state key="normal" title="More Info">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qnI-0w-Cq7">
+                                <rect key="frame" x="0.0" y="276" width="44" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="44" id="Nkm-pe-OSK"/>
+                                    <constraint firstAttribute="height" constant="44" id="hEI-No-wrl"/>
+                                </constraints>
+                                <inset key="contentEdgeInsets" minX="9" minY="9" maxX="9" maxY="9"/>
+                                <state key="normal" image="InfoIcon">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -212,13 +217,25 @@
                                     <action selector="infoButton:" destination="StI-Ir-0gR" eventType="touchUpInside" id="L5M-hl-otc"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NuU-MI-Kg7">
+                                <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="44" id="9kT-Pb-xWb"/>
+                                    <constraint firstAttribute="height" constant="44" id="Bcz-wa-RNc"/>
+                                </constraints>
+                                <inset key="contentEdgeInsets" minX="9" minY="9" maxX="9" maxY="9"/>
+                                <state key="normal" image="InfoIcon">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="1h4-5D-ajU" firstAttribute="leading" secondItem="NDO-8t-qaJ" secondAttribute="leading" id="1Ge-uY-od2"/>
+                            <constraint firstItem="NuU-MI-Kg7" firstAttribute="top" secondItem="NDO-8t-qaJ" secondAttribute="top" id="4fu-LI-HId"/>
                             <constraint firstItem="bGo-5Q-piA" firstAttribute="top" secondItem="NDO-8t-qaJ" secondAttribute="top" id="Mp3-w4-BqR"/>
                             <constraint firstItem="1h4-5D-ajU" firstAttribute="top" secondItem="bGo-5Q-piA" secondAttribute="bottom" id="NCB-57-fa0"/>
-                            <constraint firstItem="qnI-0w-Cq7" firstAttribute="top" secondItem="1h4-5D-ajU" secondAttribute="bottom" constant="10" id="OAy-cd-rKa"/>
+                            <constraint firstItem="qnI-0w-Cq7" firstAttribute="top" secondItem="1h4-5D-ajU" secondAttribute="bottom" id="OAy-cd-rKa"/>
                             <constraint firstItem="bGo-5Q-piA" firstAttribute="height" secondItem="1h4-5D-ajU" secondAttribute="height" id="OMN-CH-BfI"/>
                             <constraint firstItem="bGo-5Q-piA" firstAttribute="top" secondItem="uKJ-HA-JGv" secondAttribute="bottom" id="Vud-nz-Ix7"/>
                             <constraint firstItem="bGo-5Q-piA" firstAttribute="leading" secondItem="NDO-8t-qaJ" secondAttribute="leading" id="Xo7-70-CtE"/>
@@ -227,17 +244,18 @@
                             <constraint firstAttribute="trailing" secondItem="1h4-5D-ajU" secondAttribute="trailing" id="jZ9-DL-uap"/>
                             <constraint firstItem="lwg-Bt-7fe" firstAttribute="top" secondItem="bGo-5Q-piA" secondAttribute="bottom" id="lxm-FJ-BGO"/>
                             <constraint firstItem="lwg-Bt-7fe" firstAttribute="top" secondItem="1h4-5D-ajU" secondAttribute="bottom" id="pTR-mK-B3N"/>
-                            <constraint firstItem="qnI-0w-Cq7" firstAttribute="leading" secondItem="NDO-8t-qaJ" secondAttribute="leading" constant="15" id="rHs-FT-YKy"/>
+                            <constraint firstItem="qnI-0w-Cq7" firstAttribute="leading" secondItem="NDO-8t-qaJ" secondAttribute="leading" id="rHs-FT-YKy"/>
                             <constraint firstAttribute="trailing" secondItem="bGo-5Q-piA" secondAttribute="trailing" id="rSV-Ag-SkX"/>
                             <constraint firstItem="1h4-5D-ajU" firstAttribute="top" secondItem="NDO-8t-qaJ" secondAttribute="topMargin" id="se8-MR-D78"/>
+                            <constraint firstItem="NuU-MI-Kg7" firstAttribute="leading" secondItem="NDO-8t-qaJ" secondAttribute="leading" id="wsi-pD-MtM"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
                                 <exclude reference="NCB-57-fa0"/>
                                 <exclude reference="Mp3-w4-BqR"/>
                                 <exclude reference="Vud-nz-Ix7"/>
-                                <exclude reference="pTR-mK-B3N"/>
                                 <exclude reference="bF4-Sk-k7l"/>
+                                <exclude reference="pTR-mK-B3N"/>
                             </mask>
                         </variation>
                     </view>
@@ -809,5 +827,6 @@
         <image name="Friends" width="42" height="42"/>
         <image name="Home" width="38" height="36"/>
         <image name="ImagePlaceholder" width="82" height="82"/>
+        <image name="InfoIcon" width="222" height="222"/>
     </resources>
 </document>
