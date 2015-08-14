@@ -17,12 +17,14 @@ class AlbumViewController: UIViewController, CTAssetsPickerControllerDelegate {
     
     @IBOutlet weak var WiFiButton: UIButton!
     @IBOutlet weak var infoButton: UIButton!
+    @IBOutlet weak var WiFiInfoButton: UIButton!
     
     let reachability = Reachability.reachabilityForInternetConnection()
 
     var zapBool : Bool?
     
     let infoPopTip = AMPopTip()
+    let wiFiInfoPopTip = AMPopTip()
     
     // checks whether you have been notified that you are on wi-fi when app launches
     var firstWarning = true
@@ -118,6 +120,18 @@ class AlbumViewController: UIViewController, CTAssetsPickerControllerDelegate {
             infoPopTip.hide()
         } else {
             infoPopTip.showText("Instantly send photos.\nSome setup required.", direction: .Right, maxWidth: 200, inView: self.view, fromFrame: infoButton.frame)
+        }
+
+    }
+    @IBAction func wiFiInfoButtonTapped(sender: AnyObject) {
+        wiFiInfoPopTip.shouldDismissOnTap = true
+        wiFiInfoPopTip.popoverColor = UIColor.colorFromRGB(0x2664C1)
+        wiFiInfoPopTip.borderColor = UIColor.colorFromRGB(0x2664C1)
+        
+        if wiFiInfoPopTip.isVisible {
+            wiFiInfoPopTip.hide()
+        } else {
+            wiFiInfoPopTip.showText("Possible delay when sending photos.\nNo setup required.", direction: .Right, maxWidth: 600, inView: self.view, fromFrame: WiFiInfoButton.frame)
         }
 
     }

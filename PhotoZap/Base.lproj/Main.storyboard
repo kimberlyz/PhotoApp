@@ -170,7 +170,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bGo-5Q-piA">
-                                <rect key="frame" x="0.0" y="276" width="600" height="275"/>
+                                <rect key="frame" x="0.0" y="308" width="600" height="243"/>
                                 <color key="backgroundColor" red="0.26568405890000002" green="0.61388871180000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="100" id="ci0-9i-wBm"/>
@@ -191,7 +191,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1h4-5D-ajU">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="276"/>
+                                <rect key="frame" x="0.0" y="64" width="600" height="244"/>
                                 <color key="backgroundColor" red="0.0" green="0.50196081399917603" blue="0.50196081399917603" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <state key="normal" title="Wi-Fi">
@@ -202,8 +202,8 @@
                                     <action selector="wifiButtonTapped:" destination="StI-Ir-0gR" eventType="touchUpInside" id="k7E-m9-ExE"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qnI-0w-Cq7">
-                                <rect key="frame" x="0.0" y="276" width="44" height="44"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qnI-0w-Cq7" userLabel="Zap Button">
+                                <rect key="frame" x="0.0" y="308" width="44" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="44" id="Nkm-pe-OSK"/>
                                     <constraint firstAttribute="height" constant="44" id="hEI-No-wrl"/>
@@ -217,41 +217,47 @@
                                     <action selector="infoButton:" destination="StI-Ir-0gR" eventType="touchUpInside" id="L5M-hl-otc"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NuU-MI-Kg7">
-                                <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="onQ-EF-wbA" userLabel="Wi-Fi Button">
+                                <rect key="frame" x="0.0" y="64" width="44" height="44"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="44" id="9kT-Pb-xWb"/>
-                                    <constraint firstAttribute="height" constant="44" id="Bcz-wa-RNc"/>
+                                    <constraint firstAttribute="height" constant="44" id="aa4-fv-Tw3"/>
+                                    <constraint firstAttribute="width" constant="44" id="voP-vw-cuJ"/>
                                 </constraints>
                                 <inset key="contentEdgeInsets" minX="9" minY="9" maxX="9" maxY="9"/>
                                 <state key="normal" image="InfoIcon">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="wiFiInfoButtonTapped:" destination="StI-Ir-0gR" eventType="touchUpInside" id="xBa-BM-vOO"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="1h4-5D-ajU" firstAttribute="leading" secondItem="NDO-8t-qaJ" secondAttribute="leading" id="1Ge-uY-od2"/>
-                            <constraint firstItem="NuU-MI-Kg7" firstAttribute="top" secondItem="NDO-8t-qaJ" secondAttribute="top" id="4fu-LI-HId"/>
+                            <constraint firstItem="onQ-EF-wbA" firstAttribute="top" secondItem="uKJ-HA-JGv" secondAttribute="bottom" id="4kd-eY-VXx"/>
                             <constraint firstItem="bGo-5Q-piA" firstAttribute="top" secondItem="NDO-8t-qaJ" secondAttribute="top" id="Mp3-w4-BqR"/>
                             <constraint firstItem="1h4-5D-ajU" firstAttribute="top" secondItem="bGo-5Q-piA" secondAttribute="bottom" id="NCB-57-fa0"/>
                             <constraint firstItem="qnI-0w-Cq7" firstAttribute="top" secondItem="1h4-5D-ajU" secondAttribute="bottom" id="OAy-cd-rKa"/>
                             <constraint firstItem="bGo-5Q-piA" firstAttribute="height" secondItem="1h4-5D-ajU" secondAttribute="height" id="OMN-CH-BfI"/>
+                            <constraint firstItem="1h4-5D-ajU" firstAttribute="top" secondItem="uKJ-HA-JGv" secondAttribute="bottom" id="VlT-Pu-pNt"/>
                             <constraint firstItem="bGo-5Q-piA" firstAttribute="top" secondItem="uKJ-HA-JGv" secondAttribute="bottom" id="Vud-nz-Ix7"/>
                             <constraint firstItem="bGo-5Q-piA" firstAttribute="leading" secondItem="NDO-8t-qaJ" secondAttribute="leading" id="Xo7-70-CtE"/>
                             <constraint firstItem="bGo-5Q-piA" firstAttribute="top" secondItem="1h4-5D-ajU" secondAttribute="bottom" id="aHl-I0-puY"/>
                             <constraint firstAttribute="trailing" secondItem="qnI-0w-Cq7" secondAttribute="trailing" constant="15" id="bF4-Sk-k7l"/>
+                            <constraint firstItem="onQ-EF-wbA" firstAttribute="leading" secondItem="NDO-8t-qaJ" secondAttribute="leading" id="grM-0E-dYm"/>
                             <constraint firstAttribute="trailing" secondItem="1h4-5D-ajU" secondAttribute="trailing" id="jZ9-DL-uap"/>
                             <constraint firstItem="lwg-Bt-7fe" firstAttribute="top" secondItem="bGo-5Q-piA" secondAttribute="bottom" id="lxm-FJ-BGO"/>
                             <constraint firstItem="lwg-Bt-7fe" firstAttribute="top" secondItem="1h4-5D-ajU" secondAttribute="bottom" id="pTR-mK-B3N"/>
                             <constraint firstItem="qnI-0w-Cq7" firstAttribute="leading" secondItem="NDO-8t-qaJ" secondAttribute="leading" id="rHs-FT-YKy"/>
                             <constraint firstAttribute="trailing" secondItem="bGo-5Q-piA" secondAttribute="trailing" id="rSV-Ag-SkX"/>
                             <constraint firstItem="1h4-5D-ajU" firstAttribute="top" secondItem="NDO-8t-qaJ" secondAttribute="topMargin" id="se8-MR-D78"/>
-                            <constraint firstItem="NuU-MI-Kg7" firstAttribute="leading" secondItem="NDO-8t-qaJ" secondAttribute="leading" id="wsi-pD-MtM"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
                                 <exclude reference="NCB-57-fa0"/>
+                                <exclude reference="se8-MR-D78"/>
                                 <exclude reference="Mp3-w4-BqR"/>
                                 <exclude reference="Vud-nz-Ix7"/>
                                 <exclude reference="bF4-Sk-k7l"/>
@@ -259,15 +265,16 @@
                             </mask>
                         </variation>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Home" image="Home" id="OUe-e8-is0"/>
+                    <navigationItem key="navigationItem" title="Home" id="eKR-pc-vwW"/>
                     <connections>
                         <outlet property="WiFiButton" destination="1h4-5D-ajU" id="nJj-Gh-Y4m"/>
+                        <outlet property="WiFiInfoButton" destination="onQ-EF-wbA" id="b61-Qv-iss"/>
                         <outlet property="infoButton" destination="qnI-0w-Cq7" id="fRH-OW-VO6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wq6-uh-y66" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="164" y="1579"/>
+            <point key="canvasLocation" x="976" y="1579"/>
         </scene>
         <!--Notifications-->
         <scene sceneID="frL-10-KWj">
@@ -371,15 +378,21 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Notifications" id="3HE-aj-AGr">
-                        <barButtonItem key="rightBarButtonItem" title="Settings" id="whA-To-Maj"/>
+                        <barButtonItem key="rightBarButtonItem" title="Settings" id="whA-To-Maj">
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="settingsButtonTapped:" destination="zAI-6q-dtg" id="0NY-8h-wqQ"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="settingsButton" destination="whA-To-Maj" id="vlD-XK-6d8"/>
                         <outlet property="tableView" destination="5eW-3D-hA9" id="2iM-Pi-Djh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cGB-Fc-Wee" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1688" y="1584"/>
+            <point key="canvasLocation" x="2500" y="1584"/>
         </scene>
         <!--Searching-->
         <scene sceneID="ySe-P6-w96">
@@ -489,7 +502,7 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="StI-Ir-0gR" kind="relationship" relationship="viewControllers" id="2MX-95-JSW"/>
+                        <segue destination="aKQ-p0-MDN" kind="relationship" relationship="viewControllers" id="2MX-95-JSW"/>
                         <segue destination="t3w-gD-c5p" kind="relationship" relationship="viewControllers" id="P5o-F1-k6d"/>
                         <segue destination="TUf-Br-kU1" kind="relationship" relationship="viewControllers" id="oh3-qR-FVF"/>
                     </connections>
@@ -741,7 +754,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="58F-jY-Nok" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2867" y="1564"/>
+            <point key="canvasLocation" x="3679" y="1564"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="txM-oa-qIT">
@@ -814,7 +827,26 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OjG-sF-jc3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="876" y="1584"/>
+            <point key="canvasLocation" x="1688" y="1584"/>
+        </scene>
+        <!--Home-->
+        <scene sceneID="k71-Zb-CyT">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="aKQ-p0-MDN" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Home" image="Home" id="OUe-e8-is0"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="kfQ-t4-VUn">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="StI-Ir-0gR" kind="relationship" relationship="rootViewController" id="ZJo-cD-Sde"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UiA-dp-6EN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="164" y="1579"/>
         </scene>
     </scenes>
     <resources>

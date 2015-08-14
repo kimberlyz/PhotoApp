@@ -18,6 +18,7 @@ import RealmSwift
 class NotificationsViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var settingsButton: UIBarButtonItem!
     
     let reachability = Reachability.reachabilityForInternetConnection()
     
@@ -47,6 +48,9 @@ class NotificationsViewController: UIViewController {
         getNotifications()
         
         self.zaps = appDelegate.mpcManager.zaps
+        
+        //self.navigationController!.navigationBar.barTintColor = UIColor.colorFromRGB(0x263A9F)
+        
     }
     
     
@@ -82,6 +86,10 @@ class NotificationsViewController: UIViewController {
             self.notifications = relations
             self.tableView.reloadData()
         }
+    }
+    
+    @IBAction func settingsButtonTapped(sender: AnyObject) {
+
     }
 }
 
