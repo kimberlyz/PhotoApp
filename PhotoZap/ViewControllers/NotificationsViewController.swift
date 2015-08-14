@@ -49,8 +49,6 @@ class NotificationsViewController: UIViewController {
         
         self.zaps = appDelegate.mpcManager.zaps
         
-        //self.navigationController!.navigationBar.barTintColor = UIColor.colorFromRGB(0x263A9F)
-        
     }
     
     

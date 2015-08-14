@@ -10,10 +10,14 @@ import UIKit
 import MultipeerConnectivity
 import Bond
 import Photos
+import AMPopTip
 
 class ReceiveZapViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var infoButton: UIButton!
+    
+    let infoPopTip = AMPopTip()
     
     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     var receiveCell : ReceiveZapTableViewCell?
@@ -45,6 +49,18 @@ class ReceiveZapViewController: UIViewController {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
 
+    @IBAction func infoButtonTapped(sender: AnyObject) {
+        infoPopTip.shouldDismissOnTap = true
+        infoPopTip.popoverColor = UIColor.colorFromRGB(0x2664C1)
+        infoPopTip.borderColor = UIColor.colorFromRGB(0x2664C1)
+        
+        if infoPopTip.isVisible {
+            infoPopTip.hide()
+        } else {
+            infoPopTip.showText("Wait for your friend to select a photo and arrive at the waiting screen.\nYour friend's username should now show up in this screen.\nTap on the row to start connecting with your friend.", direction: .Down, maxWidth: 320, inView: self.view, fromFrame: infoButton.frame)
+        }
+
+    }
 }
 
 extension ReceiveZapViewController: UITableViewDataSource {

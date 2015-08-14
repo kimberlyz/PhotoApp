@@ -31,6 +31,10 @@
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>UIStatusBarStyle</key>
+	<string>UIStatusBarStatusLightContent</string>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
 	<key>FacebookAppID</key>
 	<string>722763271190870</string>
 	<key>FacebookDisplayName</key>

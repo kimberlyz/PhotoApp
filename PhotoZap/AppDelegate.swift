@@ -66,6 +66,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Done in the background
         PFAnalytics.trackAppOpenedWithLaunchOptionsInBackground(launchOptions, block: nil)
         
+        UINavigationBar.appearance().barTintColor = UIColor.colorFromRGB(0x263A9F)
+        UINavigationBar.appearance().tintColor = UIColor.whiteColor()
+        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+        UINavigationBar.appearance().translucent = false
+        
+        UIToolbar.appearance().barTintColor = UIColor.colorFromRGB(0x263A9F)
+        UIToolbar.appearance().tintColor = UIColor.whiteColor()
+        UIToolbar.appearance().translucent = false
+        
+        UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent, animated: true)
+        
+        
         
         /*
         let notificationType = UIUserNotificationType.Alert | UIUserNotificationType.Badge

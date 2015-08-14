@@ -119,7 +119,7 @@ class AlbumViewController: UIViewController, CTAssetsPickerControllerDelegate {
         if infoPopTip.isVisible {
             infoPopTip.hide()
         } else {
-            infoPopTip.showText("Instantly send photos.\nSome setup required.", direction: .Right, maxWidth: 200, inView: self.view, fromFrame: infoButton.frame)
+            infoPopTip.showText("Instantly send photos.\nSome setup required.", direction: .Right, maxWidth: 320, inView: self.view, fromFrame: infoButton.frame)
         }
 
     }
@@ -131,7 +131,7 @@ class AlbumViewController: UIViewController, CTAssetsPickerControllerDelegate {
         if wiFiInfoPopTip.isVisible {
             wiFiInfoPopTip.hide()
         } else {
-            wiFiInfoPopTip.showText("Possible delay when sending photos.\nNo setup required.", direction: .Right, maxWidth: 600, inView: self.view, fromFrame: WiFiInfoButton.frame)
+            wiFiInfoPopTip.showText("With Wi-Fi: No delay when sending photos.\nNo Wi-Fi, but with cellular connection: Delay.\nNo setup required.", direction: .Down, maxWidth: 320, inView: self.view, fromFrame: WiFiInfoButton.frame)
         }
 
     }
@@ -154,7 +154,7 @@ class AlbumViewController: UIViewController, CTAssetsPickerControllerDelegate {
                 picker.assetsFetchOptions = fetchOptions;
 
                 // set default album (Camera Roll)
-                picker.defaultAssetCollection = PHAssetCollectionSubtype.SmartAlbumUserLibrary
+                //picker.defaultAssetCollection = PHAssetCollectionSubtype.SmartAlbumUserLibrary
                 
                 // make done button enable even without selection
                 picker.alwaysEnableDoneButton = true

@@ -41,12 +41,28 @@
                                     <outlet property="dataSource" destination="zSz-C2-EX4" id="O6a-h2-CWi"/>
                                 </connections>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="63V-8n-VsL">
+                                <rect key="frame" x="556" y="64" width="44" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="UeD-1M-E8I"/>
+                                    <constraint firstAttribute="width" constant="44" id="pG5-df-wtw"/>
+                                </constraints>
+                                <inset key="contentEdgeInsets" minX="9" minY="9" maxX="9" maxY="9"/>
+                                <state key="normal" image="InfoIcon">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="infoButtonTapped:" destination="zSz-C2-EX4" eventType="touchUpInside" id="piF-8L-jAP"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="63V-8n-VsL" secondAttribute="trailing" id="7dd-LT-SbH"/>
                             <constraint firstAttribute="bottom" secondItem="nt9-9x-hG1" secondAttribute="bottom" id="FCu-fe-Wd3"/>
                             <constraint firstItem="nt9-9x-hG1" firstAttribute="leading" secondItem="T3e-vg-dTZ" secondAttribute="leading" id="Fyn-0u-N8U"/>
                             <constraint firstAttribute="trailing" secondItem="nt9-9x-hG1" secondAttribute="trailing" id="W1F-8d-h1m"/>
+                            <constraint firstItem="63V-8n-VsL" firstAttribute="top" secondItem="xhK-uS-qrm" secondAttribute="bottom" id="pxG-5X-5Je"/>
                             <constraint firstItem="nt9-9x-hG1" firstAttribute="top" secondItem="xhK-uS-qrm" secondAttribute="bottom" id="xOR-uO-v6f"/>
                         </constraints>
                     </view>
@@ -63,6 +79,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="infoButton" destination="63V-8n-VsL" id="Ym7-9Y-VSH"/>
                         <outlet property="tableView" destination="nt9-9x-hG1" id="xxp-d8-h7W"/>
                     </connections>
                 </viewController>
@@ -461,10 +478,26 @@
                                     <outlet property="delegate" destination="tGg-BR-Uiu" id="FS4-4d-8Nl"/>
                                 </connections>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fom-xH-gt3">
+                                <rect key="frame" x="556" y="64" width="44" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="DD4-VT-uXq"/>
+                                    <constraint firstAttribute="width" constant="44" id="bCY-It-jPc"/>
+                                </constraints>
+                                <inset key="contentEdgeInsets" minX="9" minY="9" maxX="9" maxY="9"/>
+                                <state key="normal" image="InfoIcon">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="infoButtonTapped:" destination="tGg-BR-Uiu" eventType="touchUpInside" id="lUs-Fz-eC3"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="wp9-gt-HRA" firstAttribute="top" secondItem="76F-dc-zeZ" secondAttribute="top" id="0MS-a8-vHO"/>
+                            <constraint firstAttribute="trailing" secondItem="Fom-xH-gt3" secondAttribute="trailing" id="BGG-Lr-HAm"/>
+                            <constraint firstItem="Fom-xH-gt3" firstAttribute="top" secondItem="oIV-aL-fhC" secondAttribute="bottom" id="KlR-VI-mft"/>
                             <constraint firstItem="wp9-gt-HRA" firstAttribute="top" secondItem="oIV-aL-fhC" secondAttribute="bottom" id="X1W-2N-dAi"/>
                             <constraint firstAttribute="bottom" secondItem="wp9-gt-HRA" secondAttribute="bottom" id="apI-mu-EpO"/>
                             <constraint firstItem="wp9-gt-HRA" firstAttribute="leading" secondItem="76F-dc-zeZ" secondAttribute="leading" id="l78-q5-aTo"/>
@@ -484,6 +517,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="infoButton" destination="Fom-xH-gt3" id="fQe-Gl-xCf"/>
                         <outlet property="tableView" destination="wp9-gt-HRA" id="htc-Cu-jAg"/>
                     </connections>
                 </viewController>

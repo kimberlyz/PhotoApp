@@ -11,12 +11,15 @@ import MultipeerConnectivity
 import Photos
 import TSMessages
 import Bond
-
+import AMPopTip
 
 class NearbyFriendsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, MPCManagerDelegate {
 
     @IBOutlet weak var tableView: UITableView!
     
+    @IBOutlet weak var infoButton: UIButton!
+    
+    let infoPopTip = AMPopTip()
     var assets : [AnyObject] = []
     
     var isAdvertising: Bool!
@@ -78,6 +81,18 @@ class NearbyFriendsViewController: UIViewController, UITableViewDelegate, UITabl
 
     @IBAction func cancelButtonTapped(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    @IBAction func infoButtonTapped(sender: AnyObject) {
+        infoPopTip.shouldDismissOnTap = true
+        infoPopTip.popoverColor = UIColor.colorFromRGB(0x2664C1)
+        infoPopTip.borderColor = UIColor.colorFromRGB(0x2664C1)
+        
+        if infoPopTip.isVisible {
+            infoPopTip.hide()
+        } else {
+            infoPopTip.showText("Your friends need to:\n1. Be nearby\n2. Open the app\n3. Tap on the zap button\n4. Tap on the receive photo button\n5. Tap on your username to connect", direction: .Down, maxWidth: 320, inView: self.view, fromFrame: infoButton.frame)
+        }
     }
 
 }
