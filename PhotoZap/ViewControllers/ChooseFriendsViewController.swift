@@ -93,7 +93,19 @@ class ChooseFriendsViewController: UIViewController {
                             
                                 notification.uploadNotification { (success: Bool, error: NSError?) -> Void in
                                     if error != nil {
-                                        ParseErrorHandlingController.handleParseError(error!)
+                                        let realm = Realm()
+                                        
+                                        let pendingNotification = PendingNotification()
+                                        pendingNotification.toUserObjectId = friend.objectId!
+                                        pendingNotification.toUserUsername = friend.username!
+                                        pendingNotification.imageData = imageData
+                                        
+                                        realm.write() {
+                                            realm.add(pendingNotification)
+                                        }
+                                        
+                                        SweetAlert().showAlert("Upload failed.", subTitle: "Putting the photo in the pending section.", style: .Warning)
+                                        
                                     } else {
                                         println("success!")
                                     }

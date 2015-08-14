@@ -253,14 +253,19 @@ extension NotificationsViewController: UITableViewDataSource {
                                 notification.fromUser = PFUser.currentUser()!
                                 notification.imageFile = PFFile(data: pendingNotificationObject.imageData)
                             
-                                notification.uploadNotification()
-                            
-                                realm.write() {
-                                    realm.delete(pendingNotificationObject)
+                                notification.uploadNotification { (success: Bool, error: NSError?) -> Void in
+                                    if error != nil {
+                                        SweetAlert().showAlert("Upload failed.", subTitle: "Leaving photo in the pending section.", style: AlertStyle.Warning)
+                                    } else {
+                                        realm.write() {
+                                            realm.delete(pendingNotificationObject)
+                                        }
+                                        
+                                        self.pendingNotifications = realm.objects(PendingNotification)
+                                        self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+                                    }
                                 }
-                            
-                                self.pendingNotifications = realm.objects(PendingNotification)
-                                self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+
                             }
                         } else {
                             ParseErrorHandlingController.handleParseError(error!)
@@ -296,14 +301,18 @@ extension NotificationsViewController: UITableViewDataSource {
                                         notification.fromUser = PFUser.currentUser()!
                                         notification.imageFile = PFFile(data: pendingNotificationObject.imageData)
                                         
-                                        notification.uploadNotification()
-                                        
-                                        realm.write() {
-                                            realm.delete(pendingNotificationObject)
+                                        notification.uploadNotification { (success: Bool, error: NSError?) -> Void in
+                                            if error != nil {
+                                                SweetAlert().showAlert("Upload failed.", subTitle: "Leaving photo in the pending section.", style: AlertStyle.Warning)
+                                            } else {
+                                                realm.write() {
+                                                    realm.delete(pendingNotificationObject)
+                                                }
+                                                
+                                                self.pendingNotifications = realm.objects(PendingNotification)
+                                                self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+                                            }
                                         }
-                                        
-                                        self.pendingNotifications = realm.objects(PendingNotification)
-                                        self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
                                     }
                                 } else {
                                     ParseErrorHandlingController.handleParseError(error!)
