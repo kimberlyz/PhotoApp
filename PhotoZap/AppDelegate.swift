@@ -40,7 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 
                 if signUpController == nil {
                 
-                    println(self.window?.rootViewController)
+                    //println(self.window?.rootViewController)
                     self.window?.rootViewController!.presentViewController(tabBarController, animated:true, completion:nil)
                 } else {
                     signUpController!.presentViewController(tabBarController, animated: true, completion: nil)

@@ -365,7 +365,7 @@ extension NotificationsViewController: UITableViewDataSource {
                 query.getObjectInBackgroundWithId(notificationObjectId!) {
                     (notificationObj: PFObject?, error: NSError?) -> Void in
                     if error == nil && notificationObj != nil {
-                        println(notificationObj)
+                        //println(notificationObj)
                         notificationObj!.deleteInBackgroundWithBlock(nil)
                         self.notifications.removeAtIndex(indexPath.row)
                         self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
@@ -375,8 +375,18 @@ extension NotificationsViewController: UITableViewDataSource {
                 }
 
 
-            } else {
+            } else { /*Pending object cells */
+                let pendingNotificationObject = self.pendingNotifications[indexPath.row]
                 
+                let realm = Realm()
+
+                realm.write() {
+                    realm.delete(pendingNotificationObject)
+                }
+                                    
+                self.pendingNotifications = realm.objects(PendingNotification)
+                self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+
             }
         }
     }

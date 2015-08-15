@@ -19,9 +19,19 @@ class NotificationsTableViewCell: UITableViewCell {
     
     var fromUser: PFUser? {
         didSet {
+//            if let fromUser = fromUser {
+//                fromUser.fetchIfNeeded()
+//                usernameLabel.text = fromUser["username"] as? String
+//            }
             if let fromUser = fromUser {
-                fromUser.fetchIfNeeded()
-                usernameLabel.text = fromUser["username"] as? String
+                fromUser.fetchIfNeededInBackgroundWithBlock({ (userObject: PFObject?, error: NSError?) -> Void in
+                    if error != nil {
+                        ParseErrorHandlingController.handleParseError(error!)
+                    } else {
+                        let userPFObject = userObject as! PFUser
+                        self.usernameLabel.text = userPFObject["username"] as? String
+                    }
+                })
             }
         }
     }
@@ -29,9 +39,20 @@ class NotificationsTableViewCell: UITableViewCell {
     var toUser: PFUser? {
         didSet {
             if let toUser = toUser {
-                toUser.fetchIfNeeded()
-                usernameLabel.text = toUser["username"] as? String
+                toUser.fetchIfNeededInBackgroundWithBlock({ (userObject: PFObject?, error: NSError?) -> Void in
+                    if error != nil {
+                        ParseErrorHandlingController.handleParseError(error!)
+                    } else {
+                        let userPFObject = userObject as! PFUser
+                        self.usernameLabel.text = userPFObject["username"] as? String
+                    }
+                })
             }
+            
+//            if let toUser = toUser {
+//                toUser.fetchIfNeeded()
+//                usernameLabel.text = toUser["username"] as? String
+//            }
         }
     }
 
