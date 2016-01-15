@@ -17,10 +17,12 @@
 		DB4657871B6FCDB300F801A3 /* ReceiveZapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4657861B6FCDB300F801A3 /* ReceiveZapViewController.swift */; };
 		DB46578A1B6FCF7D00F801A3 /* ReceiveZapTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4657891B6FCF7D00F801A3 /* ReceiveZapTableViewCell.swift */; };
 		DB50B96F1B793E7A00AC3663 /* Zap.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB50B96E1B793E7A00AC3663 /* Zap.swift */; };
+		DB5140E71C48AD6C00AF367A /* SweetAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5140E61C48AD6C00AF367A /* SweetAlert.swift */; };
 		DB51CAA91B728B7E0024BBAC /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = DB51CAA81B728B7D0024BBAC /* libsqlite3.dylib */; };
 		DB51CAAD1B72F2A40024BBAC /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB51CAAC1B72F2A40024BBAC /* Notification.swift */; };
 		DB51E05B1B75837100CD04E4 /* PendingNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB51E05A1B75837100CD04E4 /* PendingNotification.swift */; };
 		DB51E05D1B758CBA00CD04E4 /* ZapTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB51E05C1B758CBA00CD04E4 /* ZapTableViewCell.swift */; };
+		DB6094621C48D0630046F280 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6094611C48D0630046F280 /* LoginViewController.swift */; };
 		DB6168D51B5576D800305D2E /* FriendListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6168D41B5576D800305D2E /* FriendListTableViewCell.swift */; };
 		DB6168D81B55879400305D2E /* ParseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6168D71B55879400305D2E /* ParseHelper.swift */; };
 		DB6168DA1B55B88E00305D2E /* AddFriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6168D91B55B88E00305D2E /* AddFriendViewController.swift */; };
@@ -36,7 +38,6 @@
 		DB6D6E431B6AD9200038F336 /* NearbyFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6D6E421B6AD9200038F336 /* NearbyFriendsViewController.swift */; };
 		DB90D8F21B7C759A00EB1EDE /* ParseErrorHandlingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB90D8F11B7C759A00EB1EDE /* ParseErrorHandlingController.swift */; };
 		DBA03C691B733D1B00E5D6BD /* ParseLoginHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA03C681B733D1B00E5D6BD /* ParseLoginHelper.swift */; };
-		DBA03C9D1B742D8B00E5D6BD /* SweetAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA03C9C1B742D8B00E5D6BD /* SweetAlert.swift */; };
 		DBAD5DF11B669E4C0076FE66 /* FriendRequestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBAD5DF01B669E4C0076FE66 /* FriendRequestTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -67,10 +68,12 @@
 		DB4657861B6FCDB300F801A3 /* ReceiveZapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReceiveZapViewController.swift; sourceTree = "<group>"; };
 		DB4657891B6FCF7D00F801A3 /* ReceiveZapTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReceiveZapTableViewCell.swift; sourceTree = "<group>"; };
 		DB50B96E1B793E7A00AC3663 /* Zap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Zap.swift; sourceTree = "<group>"; };
+		DB5140E61C48AD6C00AF367A /* SweetAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SweetAlert.swift; sourceTree = "<group>"; };
 		DB51CAA81B728B7D0024BBAC /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		DB51CAAC1B72F2A40024BBAC /* Notification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		DB51E05A1B75837100CD04E4 /* PendingNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PendingNotification.swift; sourceTree = "<group>"; };
 		DB51E05C1B758CBA00CD04E4 /* ZapTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZapTableViewCell.swift; sourceTree = "<group>"; };
+		DB6094611C48D0630046F280 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		DB6168D41B5576D800305D2E /* FriendListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendListTableViewCell.swift; sourceTree = "<group>"; };
 		DB6168D71B55879400305D2E /* ParseHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseHelper.swift; sourceTree = "<group>"; };
 		DB6168D91B55B88E00305D2E /* AddFriendViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFriendViewController.swift; sourceTree = "<group>"; };
@@ -88,7 +91,6 @@
 		DB90D8F11B7C759A00EB1EDE /* ParseErrorHandlingController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseErrorHandlingController.swift; sourceTree = "<group>"; };
 		DBA03C681B733D1B00E5D6BD /* ParseLoginHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseLoginHelper.swift; sourceTree = "<group>"; };
 		DBA03C6A1B733E5E00E5D6BD /* Bond.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bond.framework; path = "Pods/../build/Debug-iphoneos/Bond.framework"; sourceTree = "<group>"; };
-		DBA03C9C1B742D8B00E5D6BD /* SweetAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SweetAlert.swift; path = "../../../../../Downloads/SweetAlert-iOS-master/SweetAlert/SweetAlert.swift"; sourceTree = "<group>"; };
 		DBAD5DF01B669E4C0076FE66 /* FriendRequestTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendRequestTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -218,7 +220,7 @@
 		DB6168D61B55877400305D2E /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				DBA03C9C1B742D8B00E5D6BD /* SweetAlert.swift */,
+				DB5140E61C48AD6C00AF367A /* SweetAlert.swift */,
 				DB6168D71B55879400305D2E /* ParseHelper.swift */,
 				DB4657821B6C525A00F801A3 /* MPCManager.swift */,
 				DB67022A1B71E32A00908460 /* ErrorHandling.swift */,
@@ -263,6 +265,7 @@
 				DB4657861B6FCDB300F801A3 /* ReceiveZapViewController.swift */,
 				DB6702181B708DD400908460 /* ChooseFriendsViewController.swift */,
 				DB6702211B7164B100908460 /* NotificationsViewController.swift */,
+				DB6094611C48D0630046F280 /* LoginViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -443,9 +446,9 @@
 				DB6AC46E1B5467A90019C46E /* PhotoTakingHelper.swift in Sources */,
 				DB51CAAD1B72F2A40024BBAC /* Notification.swift in Sources */,
 				DB4657831B6C525A00F801A3 /* MPCManager.swift in Sources */,
+				DB5140E71C48AD6C00AF367A /* SweetAlert.swift in Sources */,
 				DB6168DD1B55BF6D00305D2E /* AddFriendTableViewCell.swift in Sources */,
 				DB50B96F1B793E7A00AC3663 /* Zap.swift in Sources */,
-				DBA03C9D1B742D8B00E5D6BD /* SweetAlert.swift in Sources */,
 				DB51E05D1B758CBA00CD04E4 /* ZapTableViewCell.swift in Sources */,
 				DB6168DA1B55B88E00305D2E /* AddFriendViewController.swift in Sources */,
 				DB6AC4691B5431430019C46E /* FriendListViewController.swift in Sources */,
@@ -461,6 +464,7 @@
 				DB6702191B708DD400908460 /* ChooseFriendsViewController.swift in Sources */,
 				DB6168D81B55879400305D2E /* ParseHelper.swift in Sources */,
 				DB46578A1B6FCF7D00F801A3 /* ReceiveZapTableViewCell.swift in Sources */,
+				DB6094621C48D0630046F280 /* LoginViewController.swift in Sources */,
 				DB6168D51B5576D800305D2E /* FriendListTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -598,6 +602,7 @@
 					"$(PROJECT_DIR)/build/Debug-iphoneos",
 				);
 				INFOPLIST_FILE = PhotoZap/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "93342615-0483-4d75-9351-26b09636aa0b";
@@ -618,6 +623,7 @@
 					"$(PROJECT_DIR)/build/Debug-iphoneos",
 				);
 				INFOPLIST_FILE = PhotoZap/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "93342615-0483-4d75-9351-26b09636aa0b";
